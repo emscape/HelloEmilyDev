@@ -11,7 +11,8 @@
 - Content populated from existing websites and integrated with dynamic loading
 - JavaScript path issues fixed to correctly load content
 - All content files (about-me.md, site-metadata.json, resume-data.json, projects-data.json) properly linked
-- Instructions7.md created with content integration steps
+- Instructions8.md created with project update steps
+- Middle project updated to Sean's website (https://www.sean-cameron.com/)
 - Image placeholders in place, awaiting manual image addition
 
 ## Personalization Context
