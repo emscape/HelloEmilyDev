@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emily's Personal Website</title>
+    <title>Emily | Software Developer & Creative Thinker</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23663399%22>E</text></svg>">
 </head>
 <body>
     <header>
@@ -14,6 +17,7 @@
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -23,37 +27,101 @@
 
     <section id="hero">
         <div class="container">
-            <h2>Welcome to My Personal Website</h2>
-            <p>Software Developer & Creative Thinker</p>
+            <h2>Hello, I'm Emily</h2>
+            <p>Software Developer & Creative Problem Solver</p>
+            <a href="#contact" class="btn">Get in Touch</a>
         </div>
     </section>
 
     <section id="about">
         <div class="container">
             <h2>About Me</h2>
-            <p>Hello! I'm Emily, a passionate software developer with a love for creating elegant solutions to complex problems.</p>
-            <p>I enjoy working with modern web technologies and am constantly learning new skills to improve my craft.</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! I'm Emily, a passionate software developer based in California. I specialize in creating user-friendly web applications and enjoy the process of turning complex problems into elegant solutions.</p>
+                    <p>With a background in both development and design, I bring a unique perspective to my projects. I'm particularly interested in creating accessible, responsive websites that provide excellent user experiences across all devices.</p>
+                    <p>When I'm not coding, you can find me hiking with my dogs, experimenting with new recipes, or contributing to open-source projects.</p>
+                </div>
+                <!-- Placeholder for future profile image -->
+                <div class="about-image-placeholder">
+                    <div class="profile-image-circle">
+                        <span>E</span>
+                        <p class="image-note">Add your photo here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Frontend Development</h3>
+                    <ul class="skill-list">
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>React</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend Development</h3>
+                    <ul class="skill-list">
+                        <li>Node.js</li>
+                        <li>Express</li>
+                        <li>API Development</li>
+                        <li>Database Design</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Practices</h3>
+                    <ul class="skill-list">
+                        <li>Git & GitHub</li>
+                        <li>VS Code</li>
+                        <li>Responsive Design</li>
+                        <li>Web Accessibility</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="projects">
         <div class="container">
-            <h2>Projects</h2>
+            <h2>My Projects</h2>
             <div class="project-grid">
                 <div class="project-card">
-                    <h3>Project 1</h3>
-                    <p>Description of project 1 goes here.</p>
-                    <a href="#" class="btn">View Project</a>
+                    <h3>HelloEmily.dev Website</h3>
+                    <p>My personal portfolio website built with HTML, CSS, and JavaScript. Hosted on GitHub Pages with a custom domain.</p>
+                    <div class="project-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>GitHub Pages</span>
+                    </div>
+                    <a href="https://github.com/emscape/HelloEmilyDev" class="btn" target="_blank">View Source</a>
                 </div>
                 <div class="project-card">
-                    <h3>Project 2</h3>
-                    <p>Description of project 2 goes here.</p>
-                    <a href="#" class="btn">View Project</a>
+                    <h3>Weather Dashboard</h3>
+                    <p>A responsive weather application that displays current weather and forecasts for any location using the OpenWeather API.</p>
+                    <div class="project-tags">
+                        <span>JavaScript</span>
+                        <span>API Integration</span>
+                        <span>CSS Grid</span>
+                    </div>
+                    <a href="#" class="btn">Coming Soon</a>
                 </div>
                 <div class="project-card">
-                    <h3>Project 3</h3>
-                    <p>Description of project 3 goes here.</p>
-                    <a href="#" class="btn">View Project</a>
+                    <h3>Task Manager App</h3>
+                    <p>A full-stack task management application with user authentication, task categories, and deadline notifications.</p>
+                    <div class="project-tags">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <a href="#" class="btn">Coming Soon</a>
                 </div>
             </div>
         </div>
@@ -61,10 +129,12 @@
 
     <section id="contact">
         <div class="container">
-            <h2>Contact Me</h2>
-            <p>Feel free to reach out to me at <a href="mailto:emily@theDapperFoxes.com">emily@theDapperFoxes.com</a></p>
+            <h2>Get In Touch</h2>
+            <p>I'm currently open to freelance opportunities and collaborations. Feel free to reach out if you'd like to work together or just say hello!</p>
+            <p class="contact-email">Email: <a href="mailto:emily@theDapperFoxes.com">emily@theDapperFoxes.com</a></p>
             <div class="social-links">
                 <a href="https://github.com/emscape" target="_blank">GitHub</a>
+                <!-- Add more social links as needed -->
             </div>
         </div>
     </section>
@@ -72,6 +142,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Emily. All rights reserved.</p>
+            <p>Built with ❤️ using HTML, CSS, and GitHub Pages</p>
         </div>
     </footer>
 </body>
