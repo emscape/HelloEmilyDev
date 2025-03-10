@@ -107,10 +107,29 @@ nav ul li a:hover::after {
 
 /* Hero Section */
 #hero {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background-image: url('images/background-hero.jpg');
+    background-size: cover;
+    background-position: center;
     color: #fff;
     text-align: center;
     padding: 150px 0 100px;
+    position: relative;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 128, 128, 0.7); /* Semi-transparent teal overlay */
+    z-index: 1;
+}
+
+#hero .container {
+    position: relative;
+    z-index: 2;
 }
 
 #hero h2 {
@@ -166,43 +185,26 @@ section h2::after {
     margin-bottom: 15px;
 }
 
-.about-image-placeholder {
+.about-image {
     flex: 0 0 300px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.profile-image-circle {
+.profile-image {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    background-color: #e0e0e0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #666;
-    border: 3px dashed #ccc;
-    position: relative;
-    overflow: hidden;
+    object-fit: cover;
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.profile-image-circle span {
-    font-size: 6rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    opacity: 0.7;
-    font-family: 'Raleway', sans-serif;
-}
-
-.profile-image-circle .image-note {
-    font-size: 0.9rem;
-    position: absolute;
-    bottom: 30px;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 5px 15px;
-    border-radius: 20px;
+.profile-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Skills Section */
@@ -269,8 +271,31 @@ section h2::after {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: var(--shadow);
-    padding: 25px;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.project-image {
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-card-content {
+    padding: 20px;
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -316,6 +341,23 @@ section h2::after {
 .btn:hover {
     background-color: var(--secondary-color);
     color: #fff;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.project-links {
+    display: flex;
+    margin-top: 15px;
 }
 
 /* Contact */

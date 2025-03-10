@@ -46,14 +46,17 @@ function displayProjects(projects) {
       
       // Build card HTML
       projectCard.innerHTML = `
-        <h3>${project.title}</h3>
-        <p>${project.shortDescription}</p>
-        <div class="project-tags">
-          ${tagsHTML}
-        </div>
-        <div class="project-links">
-          ${project.liveUrl ? `<a href="${project.liveUrl}" class="btn" target="_blank">View Project</a>` : ''}
-          ${project.githubUrl ? `<a href="${project.githubUrl}" class="btn btn-secondary" target="_blank">View Source</a>` : ''}
+        ${project.featuredImage ? `<div class="project-image"><img src="${project.featuredImage}" alt="${project.title}"></div>` : ''}
+        <div class="project-card-content">
+          <h3>${project.title}</h3>
+          <p>${project.shortDescription}</p>
+          <div class="project-tags">
+            ${tagsHTML}
+          </div>
+          <div class="project-links">
+            ${project.liveUrl ? `<a href="${project.liveUrl}" class="btn" target="_blank">View Project</a>` : ''}
+            ${project.githubUrl ? `<a href="${project.githubUrl}" class="btn btn-secondary" target="_blank">View Source</a>` : ''}
+          </div>
         </div>
       `;
       
@@ -73,15 +76,20 @@ function displayFallbackProjects() {
     if (projectsContainer.children.length === 0) {
       projectsContainer.innerHTML = `
         <div class="project-card">
-          <h3>HelloEmily.dev Website</h3>
-          <p>My personal portfolio website built with HTML, CSS, and JavaScript. Hosted on GitHub Pages with a custom domain.</p>
-          <div class="project-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>GitHub Pages</span>
+          <div class="project-card-content">
+            <h3>HelloEmily.dev Website</h3>
+            <p>My personal portfolio website built with HTML, CSS, and JavaScript. Hosted on GitHub Pages with a custom domain.</p>
+            <div class="project-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>GitHub Pages</span>
+            </div>
+            <div class="project-links">
+              <a href="https://helloemily.dev" class="btn" target="_blank">View Project</a>
+              <a href="https://github.com/emscape/HelloEmilyDev" class="btn btn-secondary" target="_blank">View Source</a>
+            </div>
           </div>
-          <a href="https://github.com/emscape/HelloEmilyDev" class="btn" target="_blank">View Source</a>
         </div>
       `;
     }
