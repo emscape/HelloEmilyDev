@@ -11,16 +11,18 @@
 - Content: Professional information from bold.pro profile integrated
 - Structure: All content files properly linked
 - Deployment: Manual GitHub Pages (GitHub Actions removed)
-- Design: Teal-based color palette implemented
+- Design: Teal-based color palette with improved contrast on hero section
 - Images: All project images displaying correctly with fixed paths
 - Blog: Functional with sample posts (no images currently)
 - Git Status: All changes pushed to GitHub (I/O puzzle fixes, all screenshots added)
+- Design Resources: Added design-inspiration folder for reference images
 
 ## Latest Updates
+- Fixed hero section text issues: improved contrast with semi-transparent backgrounds, enhanced shadows, and ensured proper line breaks (Instructions24.md)
+- Updated subtitle from "Software Developer" to "Innovation Engineer & Creative Problem Solver" (Instructions24.md)
+- Created design-inspiration folder in images directory for storing design references (Instructions23.md)
+- Improved hero section contrast by changing button color to orange and adding text shadows (Instructions22.md)
 - Fixed I/O puzzle project link to point to emilysueanderson.com, removed Source button, added all screenshots (Instructions21.md)
-- Added "author" before Sean Cameron's name and fixed I/O puzzle links (Instructions20.md)
-- Added new blog post about solving Google I/O 2025 puzzles dated 2.11.25 (Instructions20.md)
-- Pushed all changes to GitHub including blog functionality and image path fixes (Instructions19.md)
 
 ## Project Structure
 ```json
@@ -45,7 +47,8 @@
       "profile_photo": "implemented",
       "background_image": "implemented",
       "project_screenshots": "implemented",
-      "blog_images": "pending"
+      "blog_images": "pending",
+      "design_inspiration": "folder_created"
     }
   }
 }
