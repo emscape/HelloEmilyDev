@@ -6,12 +6,12 @@
       "shortDescription": "Solutions for the Google I/O 2025 puzzle challenges",
       "longDescription": "A comprehensive guide to solving the grid-based puzzles from Google I/O 2025. These puzzles involve connecting nodes in specific patterns to unlock achievements and rewards during the Google I/O event.",
       "technologies": ["Problem Solving", "Logical Reasoning", "Pattern Recognition"],
-      "featuredImage": "images/projects/io-puzzle-main.jpg",
+      "featuredImage": "images/projects/io-puzzle-1.jpeg",
       "images": [
-        "images/projects/io-puzzle-1.jpg",
-        "images/projects/io-puzzle-2.jpg",
-        "images/projects/io-puzzle-3.jpg",
-        "images/projects/io-puzzle-4.jpg"
+        "images/projects/io-puzzle-1.jpeg",
+        "images/projects/io-puzzle-2.jpeg",
+        "images/projects/io-puzzle-3.jpeg",
+        "images/projects/io-puzzle-4.jpeg"
       ],
       "githubUrl": "https://github.com/emscape/io-puzzle-2025",
       "liveUrl": "https://www.emilysueanderson.com/I/O%20Puzzle%202025%20Solutions",
@@ -42,7 +42,7 @@
       "featuredImage": "images/projects/website-main.jpg",
       "images": [
         "images/projects/website-main.jpg",
-        "images/projects/website-mobile.jpg"
+        "images/projects/website-mobile.png"
       ],
       "githubUrl": "https://github.com/emscape/HelloEmilyDev",
       "liveUrl": "https://helloemily.dev",
