@@ -1,0 +1,53 @@
+{
+  "projects": [
+    {
+      "id": "io-puzzle-2025",
+      "title": "I/O Puzzle 2025 Solutions",
+      "shortDescription": "Solutions for the Google I/O 2025 puzzle challenges",
+      "longDescription": "A comprehensive guide to solving the grid-based puzzles from Google I/O 2025. These puzzles involve connecting nodes in specific patterns to unlock achievements and rewards during the Google I/O event.",
+      "technologies": ["Problem Solving", "Logical Reasoning", "Pattern Recognition"],
+      "featuredImage": "images/projects/io-puzzle-main.jpg",
+      "images": [
+        "images/projects/io-puzzle-1.jpg",
+        "images/projects/io-puzzle-2.jpg",
+        "images/projects/io-puzzle-3.jpg",
+        "images/projects/io-puzzle-4.jpg"
+      ],
+      "githubUrl": "https://github.com/emscape/io-puzzle-2025",
+      "liveUrl": "https://www.emilysueanderson.com/I/O%20Puzzle%202025%20Solutions",
+      "featured": true,
+      "completionDate": "2025-03"
+    },
+    {
+      "id": "sean-cameron-website",
+      "title": "Sean's Website",
+      "shortDescription": "Professional website for Sean Cameron built with Wix",
+      "longDescription": "A professional website designed and built for Sean Cameron using the Wix platform. The site showcases Sean's professional background, portfolio, and contact information with a clean, modern design.",
+      "technologies": ["Wix", "Web Design", "Content Management"],
+      "featuredImage": "images/projects/sean-website-main.jpg",
+      "images": [
+        "images/projects/sean-website-main.jpg"
+      ],
+      "githubUrl": "",
+      "liveUrl": "https://www.sean-cameron.com/",
+      "featured": false,
+      "completionDate": "2025-02"
+    },
+    {
+      "id": "personal-website",
+      "title": "HelloEmily.dev Website",
+      "shortDescription": "My personal portfolio website built with HTML, CSS, and JavaScript",
+      "longDescription": "A responsive personal portfolio website showcasing my skills, projects, and professional experience. The site features a clean, modern design with sections for about me, skills, projects, and contact information. It's hosted on GitHub Pages with a custom domain.",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+      "featuredImage": "images/projects/website-main.jpg",
+      "images": [
+        "images/projects/website-main.jpg",
+        "images/projects/website-mobile.jpg"
+      ],
+      "githubUrl": "https://github.com/emscape/HelloEmilyDev",
+      "liveUrl": "https://helloemily.dev",
+      "featured": true,
+      "completionDate": "2025-03"
+    }
+  ]
+}
