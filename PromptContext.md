@@ -17,9 +17,10 @@
 - Git Status: All changes pushed to GitHub (blog functionality, image path fixes)
 
 ## Latest Updates
+- Added "author" before Sean Cameron's name and fixed I/O puzzle links (Instructions20.md)
+- Added new blog post about solving Google I/O 2025 puzzles dated 2.11.25 (Instructions20.md)
 - Pushed all changes to GitHub including blog functionality and image path fixes (Instructions19.md)
 - Fixed project image paths in projects-data.json (Instructions17.md)
-- Created mobile optimization and social links plan (Instructions18.md)
 
 ## Project Structure
 ```json
@@ -32,12 +33,12 @@
     "scripts": ["js/projects.js", "js/blog.js"]
   },
   "features": {
-    "blog": {"status": "implemented", "sample_posts": 3},
+    "blog": {"status": "implemented", "sample_posts": 4},
     "projects": {"status": "implemented", "count": 3}
   },
   "next_tasks": {
-    "current": ["implement_mobile_optimization", "add_more_social_links"],
-    "future": ["enhance_project_details", "add_real_blog_content", "implement_blog_pagination"]
+    "current": ["implement_mobile_optimization", "add_more_social_links", "add_blog_images"],
+    "future": ["enhance_project_details", "implement_blog_pagination", "improve_seo"]
   },
   "images": {
     "status": {
