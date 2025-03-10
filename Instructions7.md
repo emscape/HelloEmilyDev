@@ -24,21 +24,9 @@ The website now correctly loads:
 - Project information from `projects-data.json`
 - Detailed project descriptions from markdown files
 
-## Manual Steps Still Required
+## Next Steps for Image Integration
 
-As mentioned in Instructions6.md, you'll still need to:
-
-1. **Download Profile Images**:
-   - Follow instructions in `images/profile/image-sources.md`
-   - Save your professional headshot from emilysueanderson.com
-
-2. **Download Project Images**:
-   - Follow instructions in `images/projects/image-sources.md`
-   - Save screenshots of your I/O Puzzle solutions and Google Tutorials
-
-3. **Download Background Images**:
-   - Follow instructions in `images/backgrounds/image-sources.md`
-   - Save background images from your websites
+The image placeholders are still in place. When you're ready to add images to the website, refer to the instructions in the image source files located in each image directory.
 
 ## How to Test Your Website
 
