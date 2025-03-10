@@ -14,13 +14,13 @@
 - Design: Teal-based color palette implemented
 - Images: All project images displaying correctly with fixed paths
 - Blog: Functional with sample posts (no images currently)
-- Git Status: All changes pushed to GitHub (blog functionality, image path fixes)
+- Git Status: All changes pushed to GitHub (I/O puzzle fixes, all screenshots added)
 
 ## Latest Updates
+- Fixed I/O puzzle project link to point to emilysueanderson.com, removed Source button, added all screenshots (Instructions21.md)
 - Added "author" before Sean Cameron's name and fixed I/O puzzle links (Instructions20.md)
 - Added new blog post about solving Google I/O 2025 puzzles dated 2.11.25 (Instructions20.md)
 - Pushed all changes to GitHub including blog functionality and image path fixes (Instructions19.md)
-- Fixed project image paths in projects-data.json (Instructions17.md)
 
 ## Project Structure
 ```json
