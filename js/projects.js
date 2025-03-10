@@ -1,6 +1,7 @@
 /**
  * Projects loader script for HelloEmily.dev
  * Dynamically loads and displays project data from JSON
+ * Shows only top 3 projects on main page with link to full projects page
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Displays projects in the project grid
+ * Displays top 3 projects in the project grid
  * @param {Array} projects - Array of project objects
  */
 function displayProjects(projects) {
@@ -31,11 +32,18 @@ function displayProjects(projects) {
     const sortedProjects = [...projects].sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
-      return 0;
+      
+      // If both have same featured status, sort by completion date (newest first)
+      const dateA = new Date(a.completionDate);
+      const dateB = new Date(b.completionDate);
+      return dateB - dateA;
     });
     
+    // Get only the top 3 projects
+    const topProjects = sortedProjects.slice(0, 3);
+    
     // Create and append project cards
-    sortedProjects.forEach(project => {
+    topProjects.forEach(project => {
       const projectCard = document.createElement('div');
       projectCard.className = 'project-card';
       
@@ -62,6 +70,21 @@ function displayProjects(projects) {
       
       projectsContainer.appendChild(projectCard);
     });
+    
+    // Add "View More Projects" link
+    const viewMoreContainer = document.createElement('div');
+    viewMoreContainer.className = 'view-more-container';
+    viewMoreContainer.style.textAlign = 'center';
+    viewMoreContainer.style.marginTop = '30px';
+    viewMoreContainer.style.gridColumn = '1 / -1';
+    
+    const viewMoreLink = document.createElement('a');
+    viewMoreLink.href = './projects.html';
+    viewMoreLink.className = 'btn';
+    viewMoreLink.textContent = 'View More Projects';
+    
+    viewMoreContainer.appendChild(viewMoreLink);
+    projectsContainer.appendChild(viewMoreContainer);
   }
 }
 
