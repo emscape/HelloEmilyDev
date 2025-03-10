@@ -34,13 +34,11 @@
             position: relative;
             display: inline-block;
         }
-
-        .easter-egg-header h2::after {
-            content: "🥚";
-            position: absolute;
-            top: -15px;
-            right: -30px;
+        
+        .bouncing-egg {
+            display: block;
             font-size: 1.5rem;
+            margin: 10px auto;
             animation: bounce 2s infinite;
         }
 
@@ -227,6 +225,7 @@
                 <div class="hidden-trigger" id="secretTrigger"></div>
                 <div class="easter-egg-header">
                     <h2>You Found Me!</h2>
+                    <div class="bouncing-egg">🥚</div>
                     <p>Congratulations on discovering my secret contact page! Here's where you can connect with me across the digital universe.</p>
                 </div>
 
