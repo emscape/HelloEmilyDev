@@ -2,10 +2,11 @@
 
 This document provides step-by-step instructions for uploading the HelloEmily.dev website to GitHub and configuring GitHub Pages for deployment.
 
-## Prerequisites
-1. Git installed and configured on your local machine
-2. GitHub account (emscape) with access to create repositories
-3. Proper permissions to modify DNS settings for HelloEmily.dev domain
+## Current Status
+- Local Git repository initialized with main branch
+- Git global configuration set (user.name and user.email)
+- Remote origin added but GitHub repository doesn't exist yet
+- Files staged and committed locally
 
 ## Step 1: Create GitHub Repository
 1. Log in to GitHub (emscape account)
@@ -15,29 +16,13 @@ This document provides step-by-step instructions for uploading the HelloEmily.de
 5. Do not initialize with README, .gitignore, or license
 6. Click "Create repository"
 
-## Step 2: Configure Git (if not already configured)
-1. Set your Git username:
+## Step 2: Push Local Repository to GitHub
+1. After creating the repository on GitHub, push the local repository:
    ```
-   git config --global user.name "emscape"
-   ```
-2. Set your Git email:
-   ```
-   git config --global user.email "emily@theDapperFoxes.com"
+   git push -u origin main
    ```
 
-## Step 3: Connect Local Repository to GitHub
-1. Open terminal/command prompt in the local repository directory
-2. Run: `git remote add origin https://github.com/emscape/HelloEmilyDev.git`
-3. Verify connection with: `git remote -v`
-
-## Step 4: Push Local Repository to GitHub
-1. Ensure all changes are committed locally
-   - `git add .`
-   - `git commit -m "Initial commit of HelloEmily.dev website"`
-2. Push to GitHub:
-   - `git push -u origin main`
-
-## Step 5: Configure GitHub Pages
+## Step 3: Configure GitHub Pages
 1. Go to repository settings on GitHub
 2. Navigate to "Pages" section
 3. Set source to "Deploy from a branch"
@@ -46,7 +31,7 @@ This document provides step-by-step instructions for uploading the HelloEmily.de
 6. Under "Custom domain", enter "HelloEmily.dev"
 7. Check "Enforce HTTPS" option
 
-## Step 6: Verify DNS Configuration
+## Step 4: Verify DNS Configuration
 1. Ensure A records point to GitHub Pages IP addresses:
    - 185.199.108.153
    - 185.199.109.153
@@ -54,7 +39,7 @@ This document provides step-by-step instructions for uploading the HelloEmily.de
    - 185.199.111.153
 2. Ensure CNAME record for www.HelloEmily.dev points to emscape.github.io
 
-## Step 7: Test Website
+## Step 5: Test Website
 1. Wait for DNS propagation (may take up to 24 hours)
 2. Visit HelloEmily.dev to verify the website is working
 3. Check that HTTPS is working properly
@@ -66,28 +51,22 @@ This document provides step-by-step instructions for uploading the HelloEmily.de
 
 ## Command Reference
 ```bash
-# Configure Git
+# Commands already executed:
 git config --global user.name "emscape"
 git config --global user.email "emily@theDapperFoxes.com"
-
-# Connect to GitHub remote
 git remote add origin https://github.com/emscape/HelloEmilyDev.git
-
-# Verify remote connection
-git remote -v
-
-# Stage all files
+git checkout -b main
 git add .
-
-# Commit changes
 git commit -m "Initial commit of HelloEmily.dev website"
 
-# Push to GitHub
+# Commands to execute after creating GitHub repository:
 git push -u origin main
 ```
 
-## Completed Actions
-- ✅ Git global configuration set
-- ✅ Remote repository added
-- ✅ Files staged and committed
-- ✅ Repository pushed to GitHub
+## Error Encountered
+```
+remote: Repository not found.
+fatal: repository 'https://github.com/emscape/HelloEmilyDev.git/' not found
+```
+
+This error indicates that the repository doesn't exist on GitHub yet. You need to create it first by following Step 1 above.
