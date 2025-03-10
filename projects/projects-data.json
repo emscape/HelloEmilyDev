@@ -24,9 +24,9 @@
       "shortDescription": "Professional website for Sean Cameron built with Wix",
       "longDescription": "A professional website designed and built for Sean Cameron using the Wix platform. The site showcases Sean's professional background, portfolio, and contact information with a clean, modern design.",
       "technologies": ["Wix", "Web Design", "Content Management"],
-      "featuredImage": "images/projects/sean-website-main.jpg",
+      "featuredImage": "projects/sean-website-main.jpg",
       "images": [
-        "images/projects/sean-website-main.jpg"
+        "projects/sean-website-main.jpg"
       ],
       "githubUrl": "",
       "liveUrl": "https://www.sean-cameron.com/",
@@ -39,10 +39,10 @@
       "shortDescription": "My personal portfolio website built with HTML, CSS, and JavaScript",
       "longDescription": "A responsive personal portfolio website showcasing my skills, projects, and professional experience. The site features a clean, modern design with sections for about me, skills, projects, and contact information. It's hosted on GitHub Pages with a custom domain.",
       "technologies": ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
-      "featuredImage": "images/projects/website-main.jpg",
+      "featuredImage": "projects/website-main.jpg",
       "images": [
-        "images/projects/website-main.jpg",
-        "images/projects/website-mobile.png"
+        "projects/website-main.jpg",
+        "projects/website-mobile.png"
       ],
       "githubUrl": "https://github.com/emscape/HelloEmilyDev",
       "liveUrl": "https://helloemily.dev",
