@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23008080%22>E</text></svg>">
+    <style>
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -20,7 +26,7 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#blog">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -30,7 +36,7 @@
         <div class="container">
             <h2>Hello, I'm Emily</h2>
             <p>Innovation Engineer & Creative Problem Solver</p>
-            <a href="contact.html" class="btn">Get in Touch</a>
+            <a href="#contact" class="btn">Get in Touch</a>
         </div>
     </section>
 
@@ -145,6 +151,11 @@
     <section id="contact">
         <div class="container">
             <h2>Get In Touch</h2>
+            <div style="text-align: center; margin: 5px 0 20px;">
+                <a href="contact.html" style="text-decoration: none; display: inline-block;">
+                    <span style="font-size: 1.5rem; animation: bounce 2s infinite; display: inline-block;">🥚</span>
+                </a>
+            </div>
             <p>I'm currently open to freelance opportunities and collaborations. Feel free to reach out if you'd like to work together or just say hello!</p>
             <p class="contact-email">Email: <a href="mailto:emily@theDapperFoxes.com">emily@theDapperFoxes.com</a></p>
             <div class="social-links">
