@@ -1,66 +1,39 @@
-# HelloEmily.dev - GitHub Pages Website
+# HelloEmily.dev - Essential Project Info
 
-## Key Info
+## Core Details
 - Domain: HelloEmily.dev (Namecheap)
-- GitHub: emscape
-- Repository: HelloEmilyDev
+- GitHub: emscape/HelloEmilyDev
 - Email: emily@theDapperFoxes.com
 
-## Status
-- Website deployed to GitHub Pages with HTTPS and domain configured
-- Content populated from existing websites and integrated with dynamic loading
-- JavaScript path issues fixed to correctly load content
-- All content files (about-me.md, site-metadata.json, resume-data.json, projects-data.json) properly linked
-- Instructions8.md created with project update steps
-- Middle project updated to Sean's website (https://www.sean-cameron.com/)
-- Image placeholders in place, awaiting manual image addition
+## Current Status
+- Website: Live on GitHub Pages with custom domain
+- Content: Fully populated and dynamically loaded
+- Structure: All content files properly linked
+- Deployment: GitHub Actions removed (see Instructions9.md)
+- Manual deployment now required
+- Design: Updated to teal-based color palette (see Instructions10.md)
 
-## Personalization Context
-```
+## Project Structure
+```json
 {
-  "project": "HelloEmily.dev",
-  "status": {
-    "website": "live",
-    "github": "repository_created_and_pushed",
-    "domain": "configured_and_working",
-    "deployment": "successful",
-    "personalization": "in_progress",
-    "asset_organization": "complete",
-    "content_population": "complete",
-    "dynamic_loading": "implemented",
-    "content_integration": "fixed_and_working"
+  "website_status": "live",
+  "deployment": {
+    "method": "manual_github_pages",
+    "github_actions": "removed"
   },
-  "folder_structure": {
-    "images": {
-      "profile": "For profile photos",
-      "projects": "For project screenshots",
-      "backgrounds": "For background images",
-      "icons": "For icons and logos"
-    },
-    "content": "For text content and site data",
-    "resume": "For resume-related files",
-    "projects": "For detailed project information",
-    "js": "For JavaScript files"
+  "key_files": {
+    "content": ["about-me.md", "site-metadata.json", "resume-data.json", "projects-data.json"],
+    "project_details": "projects/io-puzzle-2025.md"
   },
-  "content_files": {
-    "about-me.md": "Professional bio",
-    "site-metadata.json": "Site configuration",
-    "resume-data.json": "Work history and skills",
-    "projects-data.json": "Project information",
-    "io-puzzle-2025.md": "Detailed project description"
-  },
-  "required_actions": [
-    "manually_download_images",
-    "customize_design",
-    "optimize_for_mobile",
-    "review_and_refine_content"
+  "next_steps": [
+    "manually_deploy_future_changes",
+    "add_missing_images",
+    "optimize_for_mobile"
   ],
-  "personalization_context": {
-    "github_username": "emscape",
-    "repository_name": "HelloEmilyDev",
+  "personalization": {
+    "github": "emscape",
     "domain": "HelloEmily.dev",
-    "current_design": "blue_theme_basic_layout",
-    "content_sources": ["emilysueanderson.com", "bold.pro/my/emily-s-anderson/102r"],
-    "cost_efficiency": "using_free_resources_and_own_assets"
+    "design": "teal_theme_basic_layout",
+    "content_sources": ["emilysueanderson.com", "bold.pro/my/emily-s-anderson/102r"]
   }
 }
