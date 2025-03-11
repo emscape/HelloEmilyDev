@@ -13,17 +13,17 @@
 - Deployment: Manual GitHub Pages (GitHub Actions removed)
 - Design: Teal-based color palette with improved contrast on hero section
 - Images: All project images displaying correctly with fixed paths
-- Blog: Functional with sample posts (no images currently)
+- Blog: Functional with sample posts and organized image folder structure
 - Git Status: All changes pushed to GitHub (project organization, resume page, projects page)
 - Design Resources: Analyzed design inspiration images and documented suggestions
 - Projects: Expanded with dedicated projects page and organized project assets
 
 ## Latest Updates
-- Created easter egg contact page with social media links and interactive elements (Instructions30.md)
-- Added hidden egg icon on main page that links to the easter egg contact page (Instructions30.md)
-- Pushed all changes to GitHub including project reorganization, resume page, and projects page (Instructions29.md)
-- Updated resume page with actual content from Emily Anderson's PDF resume including professional experience, education, skills, certifications, and community involvement (Instructions28.md)
-- Fixed resume page styling by correcting the CSS path to properly reference the main stylesheet (Instructions28.md)
+- Reorganized blog images into post-specific folders for better organization (Instructions33.md)
+- Updated blog templates and documentation to reflect the new image folder structure (Instructions33.md)
+- Added image support for blog posts with sample images for three posts (Instructions32.md)
+- Updated blog template and conversion scripts to support featured images (Instructions32.md)
+- Created blog-drafts folder with markdown template for writing blog posts (Instructions31.md)
 
 ## Project Structure
 ```json
@@ -33,10 +33,16 @@
   "key_files": {
     "content": ["index.html", "styles.css", "js/site-config.js", "projects.html", "resume/resume.html", "contact.html"],
     "data": ["projects/projects-data.json", "blog/blog-data.json"],
-    "scripts": ["js/projects.js", "js/blog.js", "js/projects-page.js"]
+    "scripts": ["js/projects.js", "js/blog.js", "js/projects-page.js", "js/md-to-blog.js"]
   },
   "features": {
-    "blog": {"status": "implemented", "sample_posts": 4},
+    "blog": {
+      "status": "implemented",
+      "sample_posts": 4,
+      "markdown_drafts": true,
+      "image_support": true,
+      "image_organization": "post_specific_folders"
+    },
     "projects": {"status": "expanded", "main_page_count": 3, "dedicated_page": true},
     "resume": {"status": "implemented", "dedicated_page": true},
     "easter_egg": {"status": "implemented", "type": "contact_page", "social_links": ["LinkedIn", "BlueSky", "Instagram", "LibraryThing", "Ravelry", "GitHub"]}
@@ -50,7 +56,7 @@
       "profile_photo": "implemented",
       "background_image": "implemented",
       "project_screenshots": "implemented",
-      "blog_images": "pending",
+      "blog_images": "organized_by_post",
       "design_inspiration": "analyzed"
     }
   },
@@ -59,11 +65,13 @@
       "instructions_folder": "created",
       "design_inspiration_folder": "created",
       "project_folders": "organized",
-      "resume_folder": "created"
+      "resume_folder": "created",
+      "blog_drafts_folder": "created",
+      "blog_image_folders": "organized_by_post"
     },
     "git": {
       "last_push": "2025-03-10",
-      "commit_message": "Update contact page: Add bouncing egg, make contact link point to main page, add easter egg link"
+      "commit_message": "Reorganize blog images into post-specific folders"
     }
   }
 }
