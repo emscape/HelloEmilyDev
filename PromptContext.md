@@ -20,11 +20,11 @@
 - Social Sharing: Added Open Graph and Twitter Card meta tags for improved social media previews
 
 ## Latest Updates
+- Updated blog post dates to spread them out (Instructions42.md)
+- Added new blog posts from drafts folder: personal-ai.md, knitting-tech.md, panel-facilitation.md (Instructions42.md)
 - Updated resume section with HTML resume and full Markdown resume (Instructions41.md)
 - Updated all pages to use site-preview.jpg for social media sharing (Instructions40.md)
 - Added social media preview image functionality using Open Graph and Twitter Card meta tags (Instructions39.md)
-- Added new blog draft for panel facilitation with images (Instructions38.md)
-- Created blog archive page and limited main page to show only latest 3 posts (Instructions37.md)
 
 ## Project Structure
 ```json
