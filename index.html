@@ -19,13 +19,18 @@
 <body>
     <header>
         <div class="container">
-            <h1>Emily</h1>
+            <h1><a href="index.html">Emily Anderson</a></h1>
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
-                    <li><a href="#blog">Blog</a></li>
+                    <li class="dropdown">
+                        <a href="#blog">Blog</a>
+                        <div class="dropdown-content">
+                            <a href="blog-archive.html">Blog Archive</a>
+                        </div>
+                    </li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -145,6 +150,10 @@
             <div class="blog-grid">
                 <!-- Blog posts will be loaded dynamically from blog-data.json -->
             </div>
+            
+            <div class="blog-archive-link" style="text-align: center; margin-top: 40px;">
+                <a href="blog-archive.html" class="btn">View All Blog Posts</a>
+            </div>
         </div>
     </section>
 
@@ -157,7 +166,9 @@
                 </a>
             </div>
             <p>I'm currently open to freelance opportunities and collaborations. Feel free to reach out if you'd like to work together or just say hello!</p>
-            <p class="contact-email">Email: <a href="mailto:emily@theDapperFoxes.com">emily@theDapperFoxes.com</a></p>
+            <div style="text-align: center;">
+                <p class="contact-email">Email: <a href="mailto:emily@theDapperFoxes.com">emily@theDapperFoxes.com</a></p>
+            </div>
             <div class="social-links">
                 <a href="https://github.com/emscape" target="_blank">GitHub</a>
                 <!-- Add more social links as needed -->
@@ -167,7 +178,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Emily. All rights reserved.</p>
+            <p>&copy; 2025 Emily Anderson. All rights reserved.</p>
             <p>Built with ❤️ using HTML, CSS, and GitHub Pages</p>
         </div>
     </footer>

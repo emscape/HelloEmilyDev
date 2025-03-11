@@ -19,11 +19,11 @@
 - Projects: Expanded with dedicated projects page and organized project assets
 
 ## Latest Updates
+- Created blog archive page and limited main page to show only latest 3 posts (Instructions37.md)
+- Added dropdown menu to header for blog archive navigation
+- Fixed email box centering and added surname to header (Instructions36.md)
 - Updated website styles with modern design elements based on design inspiration images (Instructions35.md)
 - Created a new branch 'design-update' for style changes with improved color palette and visual elements
-- Pushed all blog system updates to GitHub, including image organization, markdown drafts, and conversion scripts (Instructions34.md)
-- Reorganized blog images into post-specific folders for better organization (Instructions33.md)
-- Updated blog templates and documentation to reflect the new image folder structure (Instructions33.md)
 
 ## Project Structure
 ```json
@@ -38,7 +38,9 @@
   "features": {
     "blog": {
       "status": "implemented",
-      "sample_posts": 4,
+      "sample_posts": 6,
+      "main_page_count": 3,
+      "archive_page": true,
       "markdown_drafts": true,
       "image_support": true,
       "image_organization": "post_specific_folders"
@@ -49,7 +51,7 @@
   },
   "next_tasks": {
     "current": ["merge_design_update_branch", "add_more_social_links", "implement_dark_mode"],
-    "future": ["create_custom_logo", "enhance_project_details", "implement_blog_pagination"]
+    "future": ["create_custom_logo", "enhance_project_details", "implement_blog_search"]
   },
   "images": {
     "status": {

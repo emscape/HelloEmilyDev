@@ -1,6 +1,6 @@
 /**
- * Blog loader script for HelloEmily.dev
- * Dynamically loads and displays blog posts from JSON
+ * Blog archive script for HelloEmily.dev
+ * Loads and displays all blog posts from JSON
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Displays blog posts in the blog grid
+ * Displays all blog posts in the blog grid
  * @param {Array} posts - Array of blog post objects
  */
 function displayBlogPosts(posts) {
@@ -40,11 +40,8 @@ function displayBlogPosts(posts) {
       return post.date !== 'YYYY-MM-DD' && post.author !== 'Your Name';
     });
     
-    // Only show the latest 3 posts on the main page
-    const latestPosts = validPosts.slice(0, 3);
-    
     // Create and append blog post cards
-    latestPosts.forEach(post => {
+    validPosts.forEach(post => {
       const postCard = document.createElement('div');
       postCard.className = 'blog-card';
       if (post.featured) {
@@ -90,7 +87,7 @@ function displayBlogPosts(posts) {
       blogContainer.appendChild(postCard);
     });
     
-    // Extract all unique tags for filtering from all valid posts, not just the displayed ones
+    // Extract all unique tags for filtering
     populateTagFilters(validPosts);
   }
 }
