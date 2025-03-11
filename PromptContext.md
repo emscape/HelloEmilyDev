@@ -17,13 +17,14 @@
 - Git Status: All changes pushed to GitHub (project organization, resume page, projects page)
 - Design Resources: Analyzed design inspiration images and documented suggestions
 - Projects: Expanded with dedicated projects page and organized project assets
+- Social Sharing: Added Open Graph and Twitter Card meta tags for improved social media previews
 
 ## Latest Updates
+- Updated all pages to use site-preview.jpg for social media sharing (Instructions40.md)
+- Added social media preview image functionality using Open Graph and Twitter Card meta tags (Instructions39.md)
 - Added new blog draft for panel facilitation with images (Instructions38.md)
 - Created blog archive page and limited main page to show only latest 3 posts (Instructions37.md)
 - Added dropdown menu to header for blog archive navigation
-- Fixed email box centering and added surname to header (Instructions36.md)
-- Updated website styles with modern design elements based on design inspiration images (Instructions35.md)
 
 ## Project Structure
 ```json
