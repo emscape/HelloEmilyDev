@@ -20,11 +20,11 @@
 - Social Sharing: Added Open Graph and Twitter Card meta tags for improved social media previews
 
 ## Latest Updates
+- Updated resume section with HTML resume and full Markdown resume (Instructions41.md)
 - Updated all pages to use site-preview.jpg for social media sharing (Instructions40.md)
 - Added social media preview image functionality using Open Graph and Twitter Card meta tags (Instructions39.md)
 - Added new blog draft for panel facilitation with images (Instructions38.md)
 - Created blog archive page and limited main page to show only latest 3 posts (Instructions37.md)
-- Added dropdown menu to header for blog archive navigation
 
 ## Project Structure
 ```json
@@ -74,7 +74,7 @@
     },
     "git": {
       "last_push": "2025-03-11",
-      "commit_message": "Add blog archive page and panel facilitation draft",
+      "commit_message": "Update resume.html and add full-resume.md",
       "branches": ["main", "design-update"]
     }
   }
