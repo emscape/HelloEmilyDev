@@ -74,15 +74,9 @@ function displayBlogPosts(posts) {
           <div class="blog-tags">
             ${tagsHTML}
           </div>
-          <a href="#" class="btn blog-read-more" data-post-id="${post.id}">Read More</a>
+          <a href="blog-post.html?id=${post.id}" class="btn blog-read-more">Read More</a>
         </div>
       `;
-      
-      // Add event listener to "Read More" button
-      postCard.querySelector('.blog-read-more').addEventListener('click', function(e) {
-        e.preventDefault();
-        openBlogPost(post.id, validPosts);
-      });
       
       blogContainer.appendChild(postCard);
     });
@@ -165,86 +159,7 @@ function filterBlogPostsByTag(tag) {
   });
 }
 
-/**
- * Opens a blog post in a modal
- * @param {string} postId - ID of the post to open
- * @param {Array} posts - Array of all blog posts
- */
-function openBlogPost(postId, posts) {
-  const post = posts.find(p => p.id === postId);
-  if (!post) return;
-  
-  // Create modal if it doesn't exist
-  let modal = document.getElementById('blog-post-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'blog-post-modal';
-    modal.className = 'modal';
-    document.body.appendChild(modal);
-  }
-  
-  // Format date
-  const postDate = new Date(post.date);
-  const formattedDate = postDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-  
-  // Create tags HTML
-  const tagsHTML = post.tags
-    .map(tag => `<span class="blog-tag">${tag}</span>`)
-    .join('');
-  
-  // Populate modal content
-  modal.innerHTML = `
-    <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <article class="blog-post">
-        ${post.featuredImage ? `<div class="blog-post-image"><img src="${post.featuredImage}" alt="${post.title}"></div>` : ''}
-        <div class="blog-post-header">
-          <h2>${post.title}</h2>
-          <div class="blog-meta">
-            <span class="blog-date">${formattedDate}</span>
-            <span class="blog-author">By ${post.author}</span>
-          </div>
-          <div class="blog-tags">
-            ${tagsHTML}
-          </div>
-        </div>
-        <div class="blog-post-content">
-          ${post.content}
-        </div>
-      </article>
-    </div>
-  `;
-  
-  // Show modal
-  modal.style.display = 'block';
-  document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
-  
-  // Close modal when clicking X or outside the modal
-  const closeBtn = modal.querySelector('.close-modal');
-  closeBtn.addEventListener('click', closeModal);
-  
-  window.addEventListener('click', function(e) {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-  
-  // Close modal when pressing Escape key
-  window.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  });
-  
-  function closeModal() {
-    modal.style.display = 'none';
-    document.body.style.overflow = ''; // Restore scrolling
-  }
-}
+// Note: The openBlogPost function has been removed as we now use direct links to blog post pages
 
 /**
  * Displays fallback blog posts if JSON loading fails
@@ -268,7 +183,7 @@ function displayFallbackBlogPosts() {
               <span class="blog-tag">Artificial Intelligence</span>
               <span class="blog-tag">Technology</span>
             </div>
-            <a href="#" class="btn blog-read-more">Read More</a>
+            <a href="blog-post.html?id=getting-started-with-ai" class="btn blog-read-more">Read More</a>
           </div>
         </div>
       `;
