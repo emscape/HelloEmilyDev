@@ -18,13 +18,14 @@
 - Design Resources: Analyzed design inspiration images and documented suggestions
 - Projects: Expanded with dedicated projects page and organized project assets
 - Social Sharing: Added Open Graph and Twitter Card meta tags for improved social media previews
+- Presentations: Created presentations folder for storing PowerPoint/Google Slides
 
 ## Latest Updates
+- Enhanced "Getting Started with AI" blog post with detailed content from GDG Twin Cities presentation (Instructions46.md)
+- Updated "Getting Started with AI" blog post to include GDG Twin Cities presentation information and changed date to Sept 7, 2023 (Instructions45.md)
+- Created presentations folder for storing presentation materials (Instructions45.md)
 - Implemented individual blog post pages with unique URLs instead of modal dialogs (Instructions43.md)
 - Updated blog post dates to spread them out (Instructions42.md)
-- Added new blog posts from drafts folder: personal-ai.md, knitting-tech.md, panel-facilitation.md (Instructions42.md)
-- Updated resume section with HTML resume and full Markdown resume (Instructions41.md)
-- Updated all pages to use site-preview.jpg for social media sharing (Instructions40.md)
 
 ## Project Structure
 ```json
