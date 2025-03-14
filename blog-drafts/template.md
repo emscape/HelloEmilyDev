@@ -5,13 +5,16 @@
 - Date: YYYY-MM-DD
 - Tags: tag1, tag2, tag3
 - Featured: false
-- FeaturedImage: images/blog/your-post-folder/your-image-filename.jpg
+- FeaturedImage: images/blog/your-post-folder/your-post-folder-featured.jpg
 
 <!--
 Note on images:
 1. Create a folder for your blog post in images/blog/ (e.g., images/blog/your-post-folder/)
 2. Place all images for this post in that folder
-3. Reference images using the path: images/blog/your-post-folder/image-name.jpg
+3. Follow the naming convention:
+   - Featured image: your-post-folder-featured.jpg
+   - Additional images: your-post-folder-1.jpg, your-post-folder-2.jpg, etc.
+4. Reference images using the path: images/blog/your-post-folder/your-post-folder-featured.jpg
 -->
 
 ## Short Description

@@ -39,13 +39,27 @@ And more...
 4. Place all images for your blog post in the dedicated folder you created in step 2
 5. Once your draft is ready, it can be converted to the JSON format required by the blog system.
 
-## Image Organization
+## Image Organization and Naming Convention
 
 Each blog post should have its own dedicated folder for images in the `images/blog/` directory:
 
 - `images/blog/your-post-folder/` - Create a folder with a name that matches your blog post topic
 - Place all images for that post in the folder
-- Reference images using the path: `images/blog/your-post-folder/image-name.jpg`
+
+### Naming Convention
+
+All blog images must follow this strict naming convention:
+
+1. **Featured Image**: Each blog post folder must have one featured image named:
+   - `[folder-name]-featured.jpg` (e.g., `ai-ethics-featured.jpg`)
+   - In your markdown, reference it as: `images/blog/your-post-folder/your-post-folder-featured.jpg`
+
+2. **Additional Images**: Any additional images in the folder should be named:
+   - `[folder-name]-1.jpg`, `[folder-name]-2.jpg`, etc.
+   - Example: `gen-ai-enterprise-1.jpg`, `gen-ai-enterprise-2.jpg`
+   - In your markdown, reference them as: `images/blog/your-post-folder/your-post-folder-1.jpg`
+
+This naming convention ensures consistency across the blog and makes it easier to manage images.
 
 ## Converting to Blog Posts
 

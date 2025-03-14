@@ -55,10 +55,21 @@ function displayBlogPost(post) {
         .map(tag => `<span class="blog-tag">${tag}</span>`)
         .join('');
     
+    // Check for featured image - if none exists, use placeholder
+    let featuredImageHtml = '';
+    if (post.featuredImage && post.featuredImage.trim() !== '') {
+        featuredImageHtml = `<div class="blog-post-image"><img src="${post.featuredImage}" alt="${post.title}"></div>`;
+    } else {
+        // Use placeholder image based on post ID
+        const placeholderPath = `images/blog/placeholder.svg`;
+        featuredImageHtml = `<div class="blog-post-image"><img src="${placeholderPath}" alt="${post.title}"></div>`;
+        console.warn(`No featured image found for post: ${post.id}`);
+    }
+    
     // Build post HTML
     container.innerHTML = `
         <article class="blog-post">
-            ${post.featuredImage ? `<div class="blog-post-image"><img src="${post.featuredImage}" alt="${post.title}"></div>` : ''}
+            ${featuredImageHtml}
             <div class="blog-post-header">
                 <h2>${post.title}</h2>
                 <div class="blog-meta">
@@ -72,11 +83,37 @@ function displayBlogPost(post) {
             <div class="blog-post-content">
                 ${post.content}
             </div>
+            ${post.additionalImages && post.additionalImages.length > 0 ? renderAdditionalImages(post.additionalImages, post.title) : ''}
         </article>
     `;
     
     // Update document title
     document.title = `${post.title} | Emily Anderson`;
+}
+
+/**
+ * Renders additional images gallery for a blog post
+ * @param {Array} images - Array of image paths
+ * @param {String} postTitle - Title of the blog post for alt text
+ * @returns {String} HTML for the image gallery
+ */
+function renderAdditionalImages(images, postTitle) {
+    if (!images || images.length === 0) return '';
+    
+    const imagesHtml = images.map((img, index) =>
+        `<div class="gallery-item">
+            <img src="${img}" alt="${postTitle} - Image ${index + 1}" class="gallery-image">
+        </div>`
+    ).join('');
+    
+    return `
+        <div class="blog-image-gallery">
+            <h3>Image Gallery</h3>
+            <div class="gallery-container">
+                ${imagesHtml}
+            </div>
+        </div>
+    `;
 }
 
 /**
