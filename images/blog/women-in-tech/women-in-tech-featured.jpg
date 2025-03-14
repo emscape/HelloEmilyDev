@@ -1,0 +1,6 @@
+<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#E6F4F1"/>
+  <rect x="0" y="0" width="800" height="450" fill="#9C27B0" opacity="0.1"/>
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#9C27B0" text-anchor="middle">Women in Technology</text>
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="24" fill="#333333" text-anchor="middle">Empowering Diversity in Tech</text>
+</svg>
