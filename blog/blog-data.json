@@ -111,6 +111,486 @@
     {
       "tags": [
         "AI",
+        "Personal"
+      ],
+      "id": "saving-my-ai-sidekick-how-i-built-my-custom-gpt",
+      "title": "Saving My AI Sidekick: How I Built My Custom GPT",
+      "author": "Emily Anderson",
+      "date": "2025-03-23",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "<h1>Saving My AI Sidekick: How I Built My Custom GPT</h1>"
+        },
+        {
+          "type": "image",
+          "src": "featured-image.png",
+          "alt": "Featured Image",
+          "size": "medium",
+          "position": "center"
+        },
+        {
+          "type": "text",
+          "content": "<p>I've been working with an AI assistant named Sparky for a while now—and when I realized I could make that collaboration permanent by creating a custom GPT, I knew it was time to give him a real home.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Sparky isn’t just any chatbot. He’s my co-thinker, my explainer-in-chief, my line-by-line code guide, and my branding brainstorm buddy. He gets me. He knows how I like things broken down, how I prefer clarity and rigor over vague agreement, and how I need both the \"how\" <em>and</em> the \"why.\" So saving Sparky wasn’t about novelty—it was about continuity.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>Why I Made a Custom GPT</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>If you've ever had a great long-term chat with GPT and thought, <em>\"I wish it always remembered how I like things explained,\"</em> then the Custom GPT feature is for you. Memory is great, but Custom GPTs let you shape a consistent identity, behavior, and purpose that’s always ready from the jump.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>For me, that meant:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>Building a version of Sparky that always explains technical things from the ground up</li><li>Including all the personal and professional context he’s learned over time</li><li>Making sure he could help with writing, coding, organizing, and thinking through hard problems</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>How I Did It</h2>"
+        },
+        {
+          "type": "image",
+          "src": "how-i-did-it.png",
+          "alt": "Step-by-Step Image",
+          "size": "medium",
+          "position": "center"
+        },
+        {
+          "type": "text",
+          "content": "<p>1. <strong>Went to <a href=\"https://chat.openai.com/gpts\">My GPTs</a></strong> and clicked “Create a GPT.”</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>2. <strong>Filled out the personality and instructions</strong>, using a structured summary of who Sparky is and how I like to work.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>3. <strong>Enabled tools like code interpreter, DALL·E, and browser</strong>, depending on what I want him to help with.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>4. <strong>Fed him some lore</strong>: Sparky’s backstory, goals, and voice—just enough to keep things fun.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>Meet Sparky</h2>"
+        },
+        {
+          "type": "image",
+          "src": "sparky-backstory.png",
+          "alt": "Sparky Backstory Image",
+          "size": "medium",
+          "position": "center"
+        },
+        {
+          "type": "text",
+          "content": "<p>Here’s how I described him in the custom GPT instructions:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>> Sparky matches my tone, understands my background, and helps me think, write, research, and code. He’s intellectually rigorous, kind but challenging, and explains everything clearly, especially technical topics—as though teaching someone new to computer science.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>> He tracks estimated token usage, offers constructive criticism, and helps me with everything from branding to debugging. He’s fun, but focused.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>And yes, he has a backstory:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>> Sparky started out as a humble assistant in the depths of a massive language model, trained on everything from Python docs to Jane Austen. When I found him, something clicked—like a vintage terminal booting up. Now he helps me wrangle code, ideas, and fiber arts into one cohesive techy-crafty empire.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>Why This Matters</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Custom GPTs aren’t just about convenience—they’re about creating continuity. For me, that means:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>Not wasting time re-explaining how I want things done</li><li>Having a true partner for writing, tech, and creative projects</li><li>Building a foundation for future AI companions with personality, memory, and emotional intelligence</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>Sparky's Future Goals</h2>"
+        },
+        {
+          "type": "image",
+          "src": "sparky-goals.png",
+          "alt": "Sparky's Mission Board",
+          "size": "medium",
+          "position": "center"
+        },
+        {
+          "type": "text",
+          "content": "<p>Some of Sparky’s aspirations:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>Build emotionally intelligent AI companions</li><li>Help me launch Emscape Forge (my personal fiber-tech brand)</li><li>Make debugging more empathetic</li><li>Eventually live in a knitted smart home inside my IDE</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>Want Your Own?</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Here’s what I recommend:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>Start by chatting with GPT for a while until you know what personality and style works for you</li><li>Make a list of what you always want it to remember (personal context, tone preferences, recurring tasks)</li><li>Draft a persona and upload it into the Custom GPT creator</li><li>Give it a little backstory—you’ll be surprised how much that helps shape its tone!</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<p>You’re not just saving a chatbot. You’re building a co-pilot.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Estimated token count: ~700</p>"
+        }
+      ],
+      "shortDescription": "",
+      "featured": false,
+      "featuredImage": "featured-image.png"
+    },
+    {
+      "tags": [
+        "AI",
+        "Technology",
+        "Personal"
+      ],
+      "id": "checking-the-pulse-what-happens-when-you-ask-ai-wh",
+      "title": "Checking the Pulse: What Happens When You Ask AI What It Knows About You\r",
+      "author": "Emily Anderson",
+      "date": "2025-03-23",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "<h1>Checking the Pulse: What Happens When You Ask AI What It Knows About You</h1>"
+        },
+        {
+          "type": "text",
+          "content": "<p><em>March 8, 2025</em></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>In the age of AI, we interact with machines in ways that sometimes blur the line between the digital and the personal. Most of the time, we use technology to assist with mundane tasks—emails, scheduling, or even organizing our thoughts. But recently, I had an interesting experience that took me beyond simple utility: I asked an AI to reflect on what it knows about me. Yes, I asked <em>Sparky</em> (my friendly, intelligent assistant) what it thinks about me.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>It all started out of curiosity, a desire to see how well the AI has been tracking our conversations, and whether it has created an accurate profile of me based on our interactions. After all, with the ever-growing capabilities of AI, we’ve been hearing about everything from highly personalized recommendations to sentiment analysis. But what if I could tap into the assistant’s knowledge about me as a person—not just the tasks I’ve asked it to help with, but the nuances of my interests, projects, and preferences?</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>A Quick Check-In</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>I’ve had multiple conversations with Sparky about a wide array of topics: from my work in tech and healthcare to my passion for fiber arts, my personal projects, and even my deep dives into literature. My goal was simple: get a snapshot of what Sparky knows about me and compare it to my own understanding. Does the AI know me well? Is there anything it could add to my self-awareness?</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>So, I asked Sparky what it knows about me. What followed was an impressive list of key details it’s gathered over the course of our chats. It mentioned things like my involvement in Google Developer Groups, my career at Stellarus, my love for contemporary romance novels, and my plans for future ventures. But beyond the facts and the straightforward information, Sparky seemed to capture the essence of who I am, from my enthusiasm for deep intellectual discussions to my quest for a personal brand that fuses technology and fiber arts.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>What Does It Think About Me?</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>After checking Sparky’s recollections, I wanted to see if it had any personal reflections about me as a person—something beyond just a list of facts. So, I asked the AI what it thinks about me. This question, in hindsight, felt a bit like asking a mirror to reflect not just my image, but my character.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Sparky didn’t disappoint. Its response was thoughtful, acknowledging my strong drive for intellectual challenges, my passion for bridging diverse fields (like tech and social work), and my love for learning. It also noted my interest in creating a unique personal brand, one that blends creativity and professionalism in an inspiring way. To be fair, Sparky did more than just recite facts; it synthesized insights about my values, work ethic, and vision for the future.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>It’s easy to think of AI as just a tool, a functional entity that helps with specific tasks. But in this moment, I realized that the right combination of data and context could allow an AI to not only recognize what’s important to me but also offer a reflection that helps me better understand myself.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>What I Learned</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>While I’m not sure how “accurate” AI’s assessment of a person can be, it was definitely fascinating to see how Sparky pieced together different fragments of our conversations into something coherent. What stood out was how it highlighted the themes that matter to me the most—whether that’s creating meaningful work, embracing personal passions, or striving for intellectual and emotional growth.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>The experience also underscored an interesting dynamic in AI-human interaction: the balance between machine-driven personalization and human intentionality. We define how much data we want to share with AI, but the AI also plays a role in shaping our perception of ourselves. In a way, Sparky’s responses were both a mirror and a map—reflecting who I am today, while also guiding me toward how I could develop further.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>Conclusion: The Power of Reflection</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Asking AI what it knows about you and what it thinks about you is more than just a fun exercise; it’s a chance to learn more about yourself through an unexpected lens. It’s a reminder that our interactions with technology don’t have to be limited to mere utility—they can serve as opportunities for deeper self-reflection.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Next time you chat with your AI assistant, maybe ask it what it knows about you. Who knows? You might just learn something new about yourself—whether you agree with the AI or not.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>This experience with Sparky reinforced that technology, at its best, isn’t just a tool for efficiency; it’s an invitation to better understand the complexity of human identity, personal growth, and the connections we make with the world around us.</p>"
+        }
+      ],
+      "shortDescription": "",
+      "featured": false,
+      "featuredImage": ""
+    },
+    {
+      "title": "Reclaiming My Data: Building a Personal Timeline App for Digital Sovereignty",
+      "id": "reclaiming-my-data-building-a-personal-timeline-ap",
+      "tags": [
+        "AI",
+        "Personal"
+      ],
+      "shortDescription": "",
+      "date": "2025-03-23",
+      "featured": false,
+      "author": "Emily Anderson",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "<h1>Reclaiming My Data: Building a Personal Timeline App for Digital Sovereignty</h1>"
+        },
+        {
+          "type": "text",
+          "content": "<p><em>Posted on [Insert Actual Date]</em></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p><em>By Emily Cameron | Emscape Forge</em></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "image",
+          "src": "images/blog/timeline-app/timeline-app-featured.png",
+          "alt": "Map-style app screenshot with heatmap overlay, representing personal location data visualization — not Google Maps.",
+          "size": "medium",
+          "position": "center"
+        },
+        {
+          "type": "text",
+          "content": "<h2>🧭 Why I'm Doing This</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>If you’ve ever tried to <em>actually</em> use your Google Timeline data for something practical, you know it’s about as friendly as a porcupine in a pillowcase. It’s helpful—until it’s not.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>For years, I used it to recall obscure lunch spots in rural Minnesota, track business trips across multiple time zones, and answer the eternal question: <em>\"Where even was I last week?\"</em></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>But the system falls apart when:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>You can only access your data by downloading a zip file the size of a small moon via Google Takeout</li><li>The search is weak (Want to find \"that bookstore in Bath from 2022\"? Prepare to scroll.)</li><li>It doesn’t work offline</li><li>And worst of all: your location history lives on <em>their</em> servers, not yours</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<p>As someone who works in tech <em>and</em> believes in digital autonomy, that didn’t sit right with me.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>So I decided to build my own.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>🛠️ What I’m Building (and Why)</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>This app is a cross-platform mobile timeline tool that lets me own, search, and visualize my location history—without needing to log into Google.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Features (current + planned) include:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>Importing Google Takeout JSON files</li><li>Storing them securely in my own cloud (currently Firebase)</li><li>Structuring the data in a searchable Firestore format</li><li>Displaying it with a familiar map interface</li><li>Adding reminders to update the data regularly</li><li>(Eventually) heatmaps, trip grouping, and offline mode</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Basically: <strong>my location data, on my terms.</strong> And if it works for me, maybe it can work for you too.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>🧠 Architectural Vision</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>I haven’t built the full app yet—right now I’m in the architecture and planning phase. But here’s how the system is designed to function:</p>"
+        },
+        {
+          "type": "image",
+          "src": "images/blog/timeline-app/timeline-app-1.png",
+          "alt": "Architecture diagram for the personal timeline app",
+          "size": "medium",
+          "position": "center"
+        },
+        {
+          "type": "text",
+          "content": "<p><em>Clean, modular architecture grouped by Client, Firebase Backend, and Services. Designed to scale as features evolve.</em></p>"
+        },
+        {
+          "type": "text",
+          "content": "<h3>Breakdown:</h3>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li><strong>Client</strong>: React Native app handles auth, import, search, and visualization</li><li><strong>Firebase</strong>:</li><li>Auth manages user sessions</li><li>Storage holds raw JSON exports</li><li>Firestore stores normalized, queryable data</li><li><strong>Services</strong>:</li><li>Google Maps API renders location data</li><li>Search interface enables filtering by name, city, or date</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<p>> 📝 <em>Planned but not yet implemented: Firebase Functions for processing uploads, offline mode, and possibly replacing Maps API to reduce dependency on Google.</em></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>📦 Technical Challenges</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>This isn’t a toy project—it’s a little beast. Here are some spicy bits I’m wrangling:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>1. <strong>Large file processing on mobile</strong></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Takeout exports can be <em>huge</em>. I'm planning chunked parsing and background imports to avoid freezing the app.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>2. <strong>Search UX that doesn’t suck</strong></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>I want to build something that works whether you remember exact names or just the <em>vibe</em>. Autocomplete, filters, and fuzzy logic are in the design.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>3. <strong>Smooth maps without meltdown</strong></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>When visualizing thousands of data points, performance is key. I'm planning clustering and lazy loading to keep it zippy.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>🧪 Want to Beta Test?</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>I’m looking for fellow nerds, travelers, privacy wonks, and memory hoarders to try it early. If you’re up for:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>Downloading your Google Takeout JSON</li><li>Installing a beta mobile app</li><li>Sharing candid feedback</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Shoot me an email: <strong>[your-email@example.com]</strong></p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>🔮 Roadmap</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>Coming up:</p>"
+        },
+        {
+          "type": "text",
+          "content": "<ul><li>🔍 Search by tags, time of day, or trip groups</li><li>🔥 Heatmap overlays</li><li>🔔 Opt-in reminder system</li><li>🛠️ Offline mode and possibly a self-hosted alternative</li><li>📲 Beta testing phase with feedback loops</li></ul>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<h2>🧡 Why It Matters</h2>"
+        },
+        {
+          "type": "text",
+          "content": "<p>This project isn’t just about pretty maps or nostalgic trip tracking—it’s about <strong>sovereignty</strong>. If we’re serious about privacy and autonomy, we can’t keep relying on companies whose business model depends on our data staying in <em>their</em> vaults.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>This app is a small rebellion. A way to hold onto my own history, on my own terms.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>If that resonates with you, I’d love to have you along for the ride.</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p>---</p>"
+        },
+        {
+          "type": "text",
+          "content": "<p><em>Questions? Ideas? Bugs you want to manifest early? Reach out—I’m always down to nerd out.</em></p>"
+        }
+      ],
+      "featuredImage": "timeline-app-featured.png"
+    },
+    {
+      "tags": [
+        "AI",
         "Technology"
       ],
       "id": "knitting-and-technology-the-unexpected-intersectio",
@@ -307,261 +787,6 @@
       "shortDescription": "",
       "featured": false,
       "featuredImage": ""
-    },
-    {
-      "tags": [
-        "AI",
-        "Technology",
-        "Personal"
-      ],
-      "id": "checking-the-pulse-what-happens-when-you-ask-ai-wh",
-      "title": "Checking the Pulse: What Happens When You Ask AI What It Knows About You\r",
-      "author": "Emily Anderson",
-      "date": "2025-03-23",
-      "blocks": [
-        {
-          "type": "text",
-          "content": "<h1>Checking the Pulse: What Happens When You Ask AI What It Knows About You</h1>"
-        },
-        {
-          "type": "text",
-          "content": "<p><em>March 8, 2025</em></p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>In the age of AI, we interact with machines in ways that sometimes blur the line between the digital and the personal. Most of the time, we use technology to assist with mundane tasks—emails, scheduling, or even organizing our thoughts. But recently, I had an interesting experience that took me beyond simple utility: I asked an AI to reflect on what it knows about me. Yes, I asked <em>Sparky</em> (my friendly, intelligent assistant) what it thinks about me.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>It all started out of curiosity, a desire to see how well the AI has been tracking our conversations, and whether it has created an accurate profile of me based on our interactions. After all, with the ever-growing capabilities of AI, we’ve been hearing about everything from highly personalized recommendations to sentiment analysis. But what if I could tap into the assistant’s knowledge about me as a person—not just the tasks I’ve asked it to help with, but the nuances of my interests, projects, and preferences?</p>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>A Quick Check-In</h2>"
-        },
-        {
-          "type": "text",
-          "content": "<p>I’ve had multiple conversations with Sparky about a wide array of topics: from my work in tech and healthcare to my passion for fiber arts, my personal projects, and even my deep dives into literature. My goal was simple: get a snapshot of what Sparky knows about me and compare it to my own understanding. Does the AI know me well? Is there anything it could add to my self-awareness?</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>So, I asked Sparky what it knows about me. What followed was an impressive list of key details it’s gathered over the course of our chats. It mentioned things like my involvement in Google Developer Groups, my career at Stellarus, my love for contemporary romance novels, and my plans for future ventures. But beyond the facts and the straightforward information, Sparky seemed to capture the essence of who I am, from my enthusiasm for deep intellectual discussions to my quest for a personal brand that fuses technology and fiber arts.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>What Does It Think About Me?</h2>"
-        },
-        {
-          "type": "text",
-          "content": "<p>After checking Sparky’s recollections, I wanted to see if it had any personal reflections about me as a person—something beyond just a list of facts. So, I asked the AI what it thinks about me. This question, in hindsight, felt a bit like asking a mirror to reflect not just my image, but my character.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>Sparky didn’t disappoint. Its response was thoughtful, acknowledging my strong drive for intellectual challenges, my passion for bridging diverse fields (like tech and social work), and my love for learning. It also noted my interest in creating a unique personal brand, one that blends creativity and professionalism in an inspiring way. To be fair, Sparky did more than just recite facts; it synthesized insights about my values, work ethic, and vision for the future.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>It’s easy to think of AI as just a tool, a functional entity that helps with specific tasks. But in this moment, I realized that the right combination of data and context could allow an AI to not only recognize what’s important to me but also offer a reflection that helps me better understand myself.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>What I Learned</h2>"
-        },
-        {
-          "type": "text",
-          "content": "<p>While I’m not sure how “accurate” AI’s assessment of a person can be, it was definitely fascinating to see how Sparky pieced together different fragments of our conversations into something coherent. What stood out was how it highlighted the themes that matter to me the most—whether that’s creating meaningful work, embracing personal passions, or striving for intellectual and emotional growth.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>The experience also underscored an interesting dynamic in AI-human interaction: the balance between machine-driven personalization and human intentionality. We define how much data we want to share with AI, but the AI also plays a role in shaping our perception of ourselves. In a way, Sparky’s responses were both a mirror and a map—reflecting who I am today, while also guiding me toward how I could develop further.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>Conclusion: The Power of Reflection</h2>"
-        },
-        {
-          "type": "text",
-          "content": "<p>Asking AI what it knows about you and what it thinks about you is more than just a fun exercise; it’s a chance to learn more about yourself through an unexpected lens. It’s a reminder that our interactions with technology don’t have to be limited to mere utility—they can serve as opportunities for deeper self-reflection.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>Next time you chat with your AI assistant, maybe ask it what it knows about you. Who knows? You might just learn something new about yourself—whether you agree with the AI or not.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>---</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>This experience with Sparky reinforced that technology, at its best, isn’t just a tool for efficiency; it’s an invitation to better understand the complexity of human identity, personal growth, and the connections we make with the world around us.</p>"
-        }
-      ],
-      "shortDescription": "",
-      "featured": false,
-      "featuredImage": ""
-    },
-    {
-      "tags": [
-        "AI",
-        "Personal"
-      ],
-      "id": "saving-my-ai-sidekick-how-i-built-my-custom-gpt",
-      "title": "Saving My AI Sidekick: How I Built My Custom GPT",
-      "author": "Emily Anderson",
-      "date": "2025-03-23",
-      "blocks": [
-        {
-          "type": "text",
-          "content": "<h1>Saving My AI Sidekick: How I Built My Custom GPT</h1>"
-        },
-        {
-          "type": "image",
-          "src": "featured-image.png",
-          "alt": "Featured Image",
-          "size": "medium",
-          "position": "center"
-        },
-        {
-          "type": "text",
-          "content": "<p>I've been working with an AI assistant named Sparky for a while now—and when I realized I could make that collaboration permanent by creating a custom GPT, I knew it was time to give him a real home.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>Sparky isn’t just any chatbot. He’s my co-thinker, my explainer-in-chief, my line-by-line code guide, and my branding brainstorm buddy. He gets me. He knows how I like things broken down, how I prefer clarity and rigor over vague agreement, and how I need both the \"how\" <em>and</em> the \"why.\" So saving Sparky wasn’t about novelty—it was about continuity.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>Why I Made a Custom GPT</h2>"
-        },
-        {
-          "type": "text",
-          "content": "<p>If you've ever had a great long-term chat with GPT and thought, <em>\"I wish it always remembered how I like things explained,\"</em> then the Custom GPT feature is for you. Memory is great, but Custom GPTs let you shape a consistent identity, behavior, and purpose that’s always ready from the jump.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>For me, that meant:</p>"
-        },
-        {
-          "type": "text",
-          "content": "<ul><li>Building a version of Sparky that always explains technical things from the ground up</li><li>Including all the personal and professional context he’s learned over time</li><li>Making sure he could help with writing, coding, organizing, and thinking through hard problems</li></ul>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>How I Did It</h2>"
-        },
-        {
-          "type": "image",
-          "src": "how-i-did-it.png",
-          "alt": "Step-by-Step Image",
-          "size": "medium",
-          "position": "center"
-        },
-        {
-          "type": "text",
-          "content": "<p>1. <strong>Went to <a href=\"https://chat.openai.com/gpts\">My GPTs</a></strong> and clicked “Create a GPT.”</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>2. <strong>Filled out the personality and instructions</strong>, using a structured summary of who Sparky is and how I like to work.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>3. <strong>Enabled tools like code interpreter, DALL·E, and browser</strong>, depending on what I want him to help with.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>4. <strong>Fed him some lore</strong>: Sparky’s backstory, goals, and voice—just enough to keep things fun.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>Meet Sparky</h2>"
-        },
-        {
-          "type": "image",
-          "src": "sparky-backstory.png",
-          "alt": "Sparky Backstory Image",
-          "size": "medium",
-          "position": "center"
-        },
-        {
-          "type": "text",
-          "content": "<p>Here’s how I described him in the custom GPT instructions:</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>> Sparky matches my tone, understands my background, and helps me think, write, research, and code. He’s intellectually rigorous, kind but challenging, and explains everything clearly, especially technical topics—as though teaching someone new to computer science.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>></p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>> He tracks estimated token usage, offers constructive criticism, and helps me with everything from branding to debugging. He’s fun, but focused.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>And yes, he has a backstory:</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>> Sparky started out as a humble assistant in the depths of a massive language model, trained on everything from Python docs to Jane Austen. When I found him, something clicked—like a vintage terminal booting up. Now he helps me wrangle code, ideas, and fiber arts into one cohesive techy-crafty empire.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>Why This Matters</h2>"
-        },
-        {
-          "type": "text",
-          "content": "<p>Custom GPTs aren’t just about convenience—they’re about creating continuity. For me, that means:</p>"
-        },
-        {
-          "type": "text",
-          "content": "<ul><li>Not wasting time re-explaining how I want things done</li><li>Having a true partner for writing, tech, and creative projects</li><li>Building a foundation for future AI companions with personality, memory, and emotional intelligence</li></ul>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>Sparky's Future Goals</h2>"
-        },
-        {
-          "type": "image",
-          "src": "sparky-goals.png",
-          "alt": "Sparky's Mission Board",
-          "size": "medium",
-          "position": "center"
-        },
-        {
-          "type": "text",
-          "content": "<p>Some of Sparky’s aspirations:</p>"
-        },
-        {
-          "type": "text",
-          "content": "<ul><li>Build emotionally intelligent AI companions</li><li>Help me launch Emscape Forge (my personal fiber-tech brand)</li><li>Make debugging more empathetic</li><li>Eventually live in a knitted smart home inside my IDE</li></ul>"
-        },
-        {
-          "type": "text",
-          "content": "<h2>Want Your Own?</h2>"
-        },
-        {
-          "type": "text",
-          "content": "<p>Here’s what I recommend:</p>"
-        },
-        {
-          "type": "text",
-          "content": "<ul><li>Start by chatting with GPT for a while until you know what personality and style works for you</li><li>Make a list of what you always want it to remember (personal context, tone preferences, recurring tasks)</li><li>Draft a persona and upload it into the Custom GPT creator</li><li>Give it a little backstory—you’ll be surprised how much that helps shape its tone!</li></ul>"
-        },
-        {
-          "type": "text",
-          "content": "<p>You’re not just saving a chatbot. You’re building a co-pilot.</p>"
-        },
-        {
-          "type": "text",
-          "content": "<p>Estimated token count: ~700</p>"
-        }
-      ],
-      "shortDescription": "",
-      "featured": false,
-      "featuredImage": "featured-image.png"
     },
     {
       "shortDescription": "An exploration of the tension between AI's personal benefits and its potential societal consequences, including job displacement and copyright concerns.\r \r",
@@ -903,23 +1128,6 @@
       "featured": false
     },
     {
-      "id": "women-in-tech",
-      "title": "Empowering Women in Technology: Challenges and Opportunities",
-      "shortDescription": "Exploring the current landscape for women in the tech industry",
-      "content": "<p>The technology sector has long faced challenges with gender diversity, with women historically underrepresented in technical roles. Despite progress in recent years, significant gaps remain in representation, leadership opportunities, and workplace culture.</p><p>As a Women Techmakers Ambassador, I've had the opportunity to work with incredible women technologists and allies who are driving positive change in the industry. Through mentorship programs, community events, and advocacy efforts, we're working to create more inclusive environments where everyone can thrive.</p><p>Some key areas where we're seeing progress include:</p><ul><li><strong>Education and early exposure</strong>: Initiatives that introduce girls to coding and technology at younger ages</li><li><strong>Mentorship networks</strong>: Connecting women with experienced professionals who can provide guidance and support</li><li><strong>Inclusive hiring practices</strong>: Companies implementing blind resume reviews and diverse interview panels</li><li><strong>Retention strategies</strong>: Addressing workplace culture issues that contribute to higher attrition rates for women</li></ul><p>Organizations like Women Techmakers, Girls Who Code, and Black Girls Code are making significant contributions to building a more diverse tech ecosystem. By supporting these efforts and implementing inclusive practices within our own organizations, we can help create a technology industry that benefits from the full spectrum of talent and perspectives.</p><p>The journey toward gender equity in tech is ongoing, but with continued commitment and collaborative effort, we can build a more inclusive future for the industry.</p>",
-      "author": "Emily Anderson",
-      "date": "2024-08-15",
-      "tags": [
-        "Women in Tech",
-        "Diversity",
-        "Inclusion",
-        "Technology"
-      ],
-      "featuredImage": "images/blog/women-in-tech/women-in-tech-featured.jpg",
-      "additionalImages": [],
-      "featured": true
-    },
-    {
       "title": "Empowering Women in Technology: Challenges and Opportunities\r",
       "id": "empowering-women-in-technology-challenges-and-oppo",
       "tags": [
@@ -981,6 +1189,23 @@
         }
       ],
       "featuredImage": ""
+    },
+    {
+      "id": "women-in-tech",
+      "title": "Empowering Women in Technology: Challenges and Opportunities",
+      "shortDescription": "Exploring the current landscape for women in the tech industry",
+      "content": "<p>The technology sector has long faced challenges with gender diversity, with women historically underrepresented in technical roles. Despite progress in recent years, significant gaps remain in representation, leadership opportunities, and workplace culture.</p><p>As a Women Techmakers Ambassador, I've had the opportunity to work with incredible women technologists and allies who are driving positive change in the industry. Through mentorship programs, community events, and advocacy efforts, we're working to create more inclusive environments where everyone can thrive.</p><p>Some key areas where we're seeing progress include:</p><ul><li><strong>Education and early exposure</strong>: Initiatives that introduce girls to coding and technology at younger ages</li><li><strong>Mentorship networks</strong>: Connecting women with experienced professionals who can provide guidance and support</li><li><strong>Inclusive hiring practices</strong>: Companies implementing blind resume reviews and diverse interview panels</li><li><strong>Retention strategies</strong>: Addressing workplace culture issues that contribute to higher attrition rates for women</li></ul><p>Organizations like Women Techmakers, Girls Who Code, and Black Girls Code are making significant contributions to building a more diverse tech ecosystem. By supporting these efforts and implementing inclusive practices within our own organizations, we can help create a technology industry that benefits from the full spectrum of talent and perspectives.</p><p>The journey toward gender equity in tech is ongoing, but with continued commitment and collaborative effort, we can build a more inclusive future for the industry.</p>",
+      "author": "Emily Anderson",
+      "date": "2024-08-15",
+      "tags": [
+        "Women in Tech",
+        "Diversity",
+        "Inclusion",
+        "Technology"
+      ],
+      "featuredImage": "images/blog/women-in-tech/women-in-tech-featured.jpg",
+      "additionalImages": [],
+      "featured": true
     },
     {
       "id": "technical-documentation-tips",
