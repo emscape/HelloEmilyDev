@@ -150,14 +150,7 @@ function updateMetaTags(post) {
         document.querySelector('meta[property="og:image"]').setAttribute('content', `https://helloemily.dev/${post.featuredImage}`);
     }
     
-    // Update Twitter meta tags
-    document.querySelector('meta[property="twitter:url"]').setAttribute('content', canonicalURL);
-    document.querySelector('meta[property="twitter:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="twitter:description"]').setAttribute('content', post.shortDescription);
-    
-    if (post.featuredImage) {
-        document.querySelector('meta[property="twitter:image"]').setAttribute('content', `https://helloemily.dev/${post.featuredImage}`);
-    }
+    // Bluesky meta tags will be added here when standards are established
 }
 
 /**

@@ -1,0 +1,6 @@
+@echo off
+echo Publishing new blog posts...
+powershell -ExecutionPolicy Bypass -File "%~dp0..\js\publish-new-blog-posts.ps1"
+echo.
+echo Press any key to exit...
+pause > nul
