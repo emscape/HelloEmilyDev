@@ -1,6 +1,7 @@
 /**
  * Blog post script for HelloEmily.dev
  * Loads and displays a single blog post based on URL parameters
+ * Uses BlogContentParser for rendering content blocks
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -42,6 +43,9 @@ function displayBlogPost(post) {
     
     if (!container) return;
     
+    // Initialize content parser
+    const contentParser = new BlogContentParser();
+    
     // Format date
     const postDate = new Date(post.date);
     const formattedDate = postDate.toLocaleDateString('en-US', {
@@ -66,6 +70,19 @@ function displayBlogPost(post) {
         console.warn(`No featured image found for post: ${post.id}`);
     }
     
+    // Parse content based on format
+    let parsedContent;
+    if (post.blocks && Array.isArray(post.blocks)) {
+        // New format: content is stored as blocks
+        parsedContent = contentParser.parseBlocks(post.blocks);
+    } else if (post.content) {
+        // Legacy format: content is stored as HTML string
+        const legacyBlocks = contentParser.parseLegacyContent(post.content);
+        parsedContent = contentParser.parseBlocks(legacyBlocks);
+    } else {
+        parsedContent = '<p>No content available</p>';
+    }
+    
     // Build post HTML
     container.innerHTML = `
         <article class="blog-post">
@@ -81,7 +98,7 @@ function displayBlogPost(post) {
                 </div>
             </div>
             <div class="blog-post-content">
-                ${post.content}
+                ${parsedContent}
             </div>
             ${post.additionalImages && post.additionalImages.length > 0 ? renderAdditionalImages(post.additionalImages, post.title) : ''}
         </article>
