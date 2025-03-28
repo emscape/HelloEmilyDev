@@ -20,12 +20,10 @@ It is optional, but recommended to be updated as the project evolves.
 
 ## Architectural Patterns
 
-* Separation of concerns between HelloEmily.Dev and EmscapeForge.com
 * API-driven content generation for GitHub projects
 * Component-based UI structure
 * Client-side filtering and search functionality
 * Command-line automation for content publishing
-
 * Caching strategy for API responses
 
 ## Testing Patterns

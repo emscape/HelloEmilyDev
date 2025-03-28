@@ -1,4 +1,4 @@
-# EmscapeForge.com Rebranding Plan
+# EmscapeForge.com Rebranding Ideas
 
 ## Project Overview
 

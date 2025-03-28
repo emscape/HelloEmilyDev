@@ -7,23 +7,18 @@ This file provides a high-level overview of the project and the expected product
 
 ## Project Goal
 
-* Create a dedicated developer portfolio site at emscapeforge.com that showcases Emily's coding projects
-* Maintain HelloEmily.Dev as a personal portfolio site with a link to EmscapeForge
+* Maintain HelloEmily.Dev as a personal portfolio site
 * Implement better GitHub integration to showcase projects directly from GitHub repositories
-* Add specific projects like QuizInMyApp and SkolVikings from GitHub
+* Eventually, the "Projects" page will point to www.emscapeforge.com
 
 ## Key Features
 
-* Domain rebranding from HelloEmily.Dev projects page to EmscapeForge.com
-* Enhanced GitHub integration with repository statistics and activity visualization
-* Project categorization (Games, Apps, AI Experiments, etc.)
 * Social media integration with Facebook and Bluesky (excluding Twitter)
-* Automated project import from GitHub repositories
-* Detailed project pages with goals, challenges, and solutions
+* Responsive, modern design with filtering and search capabilities
+* Project data stored in JSON format
 
 ## Overall Architecture
 
-* Two separate but linked sites: HelloEmily.Dev (personal portfolio) and EmscapeForge.com (developer projects)
 * GitHub API integration for automatic repository data retrieval
 * Responsive, modern design with filtering and search capabilities
-* Project data stored in JSON format with enhanced fields for GitHub metadata
+* Project data stored in JSON format

@@ -7,14 +7,12 @@ This file tracks the project's current status, including recent changes, current
 
 ## Current Focus
 
-* Rebranding the projects page to emscapeforge.com
 * Setting up GitHub integration to showcase projects directly from repositories
-* Adding QuizInMyApp and SkolVikings projects from GitHub
 * Updating social media integration to include Facebook and Bluesky while removing Twitter
 
 ## Recent Changes
 
-* Created emscapeforge-rebranding-plan.md with detailed implementation plan
+* Created EmscapeForge ideas.md to store future ideas for the EmscapeForge.com site
 * Created blog-post-update-plan.md for removing Twitter meta tags and adding Facebook/Bluesky
 * Initialized Memory Bank to track project progress
 * [2025-03-22 21:00:00] - Prepared to begin implementation but switching to a new task
