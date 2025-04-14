@@ -1,0 +1,5 @@
+# Roo-specific files and directories
+.roomodes
+.roo/
+memory-bank/
+instructions/
