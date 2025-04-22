@@ -63,7 +63,7 @@ function displayBlogPosts(posts) {
       
       // Build card HTML
       postCard.innerHTML = `
-        ${post.featuredImage ? `<div class="blog-image"><img src="${post.featuredImage}" alt="${post.title}"></div>` : ''}
+        ${post.featuredImage ? `<div class="blog-card-image"><img src="${post.featuredImage}" alt="${post.title}"></div>` : ''}
         <div class="blog-card-content">
           <div class="blog-meta">
             <span class="blog-date">${formattedDate}</span>

@@ -64,6 +64,7 @@ function displayProjects(projects) {
           <div class="project-links">
             ${project.liveUrl ? `<a href="${project.liveUrl}" class="btn" target="_blank">View Project</a>` : ''}
             ${project.githubUrl ? `<a href="${project.githubUrl}" class="btn btn-secondary" target="_blank">View Source</a>` : ''}
+            ${project.blogPostUrl ? `<a href="${project.blogPostUrl}" class="btn btn-secondary">View Blog Post</a>` : ''}
           </div>
         </div>
       `;

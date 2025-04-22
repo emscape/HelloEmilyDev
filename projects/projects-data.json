@@ -1,11 +1,40 @@
 {
   "projects": [
     {
+      "id": "the-dapper-foxes-wedding-website",
+      "title": "Dapper Foxes Website",
+      "shortDescription": "A custom wedding site blending charm, tech, and personal storytelling.",
+      "longDescription": "We designed and built TheDapperFoxes.com to reflect not just our wedding plans, but our shared values in design, technology, and collaboration. The site features a guest photo gallery with approval workflow, a color-coded location poll, custom illustrations, and lovingly crafted UI elements. Built using Google Apps Script, GitHub Pages, and vanilla HTML/CSS/JS—this was as much a professional showcase as it was a personal project.",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Google Apps Script",
+        "GitHub Pages"
+      ],
+      "featuredImage": "projects/building-thedapperfoxes/building-thedapperfoxes-featured.jpg",
+      "images": [
+        "projects/building-thedapperfoxes/building-thedapperfoxes-featured.jpg",
+        "projects/building-thedapperfoxes/IMG_4277.jpg",
+        "projects/building-thedapperfoxes/IMG_4285.jpg",
+        "projects/building-thedapperfoxes/IMG_4352.jpg"
+      ],
+      "githubUrl": "https://github.com/emscape/DapperFoxes",
+      "liveUrl": "https://www.thedapperfoxes.com",
+      "blogPostUrl": "blog-post.html?id=building-thedapperfoxes",
+      "featured": true,
+      "completionDate": "2025-04"
+    },
+    {
       "id": "io-puzzle-2025",
       "title": "I/O Puzzle 2025 Solutions",
       "shortDescription": "Solutions for the Google I/O 2025 puzzle challenges",
       "longDescription": "A comprehensive guide to solving the grid-based puzzles from Google I/O 2025. These puzzles involve connecting nodes in specific patterns to unlock achievements and rewards during the Google I/O event.",
-      "technologies": ["Problem Solving", "Logical Reasoning", "Pattern Recognition"],
+      "technologies": [
+        "Problem Solving",
+        "Logical Reasoning",
+        "Pattern Recognition"
+      ],
       "featuredImage": "projects/io-puzzle-2025/io-puzzle-1.jpeg",
       "images": [
         "projects/io-puzzle-2025/io-puzzle-1.jpeg",
@@ -30,7 +59,8 @@
       ],
       "githubUrl": "",
       "liveUrl": "https://www.emilysueanderson.com/io-puzzle-2025-solutions",
-      "featured": true,
+      "blogPostUrl": "blog-post.html?id=solving-io-puzzles-2025",
+      "featured": false,
       "completionDate": "2025-03"
     },
     {
@@ -38,14 +68,20 @@
       "title": "Sean's Website",
       "shortDescription": "Professional website for author Sean Cameron built with Wix",
       "longDescription": "A professional website designed and built for Sean Cameron using the Wix platform. The site showcases Sean's professional background, portfolio, and contact information with a clean, modern design.",
-      "technologies": ["Wix", "Web Design", "Content Management"],
+      "technologies": [
+        "Wix",
+        "Web Design",
+        "Content Management",
+        "Custom Build"
+      ],
       "featuredImage": "projects/sean-cameron-website/sean-website-main.jpg",
       "images": [
         "projects/sean-cameron-website/sean-website-main.jpg"
       ],
       "githubUrl": "",
       "liveUrl": "https://www.sean-cameron.com/",
-      "featured": false,
+      "blogPostUrl": "blog-post.html?id=sean-website-case-study",
+      "featured": true,
       "completionDate": "2025-02"
     },
     {
@@ -53,7 +89,12 @@
       "title": "HelloEmily.dev Website",
       "shortDescription": "My personal portfolio website built with HTML, CSS, and JavaScript",
       "longDescription": "A responsive personal portfolio website showcasing my skills, projects, and professional experience. The site features a clean, modern design with sections for about me, skills, projects, and contact information. It's hosted on GitHub Pages with a custom domain.",
-      "technologies": ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "GitHub Pages"
+      ],
       "featuredImage": "projects/personal-website/website-main.jpg",
       "images": [
         "projects/personal-website/website-main.jpg",
