@@ -30,6 +30,18 @@ body {
     background-color: var(--light-color);
 }
 
+
+/* Global Image Styles (From Directive) */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  object-fit: contain;
+  border-radius: 12px; /* Default border-radius from directive */
+}
+
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
@@ -483,6 +495,43 @@ section h2::after {
     border-bottom: none;
 }
 
+/* Blog Image Optimization */
+.blog-post img {
+    max-width: 600px; /* Limit image width */
+    /* height: auto; /* Inherited from global img */
+    border-radius: var(--border-radius); /* Override global 12px */
+    margin: 2rem 0; /* Override global margin */
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.blog-post img:hover {
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .blog-post img {
+        margin: 1rem 0;
+    }
+}
+
+/* Responsive Image Containers */
+.image-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Projects */
 #projects {
     background-color: var(--light-color);
@@ -549,6 +598,41 @@ section h2::after {
     content: '';
     position: absolute;
     top: 0;
+
+
+/* Project Card Button Styling */
+.project-links {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on very small screens if needed */
+    gap: 10px; /* Space between buttons */
+    margin-top: 15px; /* Add some space above the buttons */
+    align-items: stretch; /* Ensure buttons have equal height */
+}
+
+.project-links .btn {
+    flex: 1 1 auto; /* Allow buttons to grow and shrink, but maintain base size */
+    text-align: center;
+    padding: 0 10px; /* Remove vertical padding, rely on height and flex alignment */
+    font-size: 0.9rem; /* Slightly smaller font */
+    min-width: 100px; /* Prevent buttons from becoming too small */
+    height: 32px; /* Explicit height */
+    display: inline-flex; /* Use flex for alignment */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    line-height: 1; /* Prevent extra space from line-height */
+}
+
+/* Ensure secondary buttons have consistent styling */
+.project-links .btn-secondary {
+    background-color: var(--light-accent);
+    color: var(--primary-dark);
+    border: 1px solid var(--primary-color);
+}
+
+.project-links .btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
     left: 0;
     right: 0;
     bottom: 0;
@@ -757,6 +841,134 @@ footer p {
 }
 
 /* Blog Section */
+
+/* Blog Card Styles */
+.blog-card {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack image and content vertically */
+    height: 100%; /* Ensure cards fill grid space */
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-strong);
+}
+
+.blog-card-image {
+    width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    overflow: hidden; /* Hide overflow if image aspect ratio differs */
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area, may crop */
+    /* display: block; /* Inherited from global img */
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.05);
+}
+
+.blog-card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow content to grow and push footer down */
+}
+
+.blog-card-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.blog-card-content p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    flex-grow: 1; /* Allow paragraph to take up space */
+}
+
+.blog-meta {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blog-tags {
+    margin-bottom: 20px;
+}
+
+.blog-tag {
+    display: inline-block;
+    background-color: var(--light-accent);
+    color: var(--primary-dark);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.blog-tag:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+.blog-read-more {
+    align-self: flex-start; /* Align button to the start */
+    margin-top: auto; /* Push button to the bottom */
+}
+
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Featured Blog Card */
+.blog-card.featured {
+    border-left: 5px solid var(--secondary-color);
+}
+
+/* Blog Filters */
+.blog-filters {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.blog-filter-tags button {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--primary-dark);
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.blog-filter-tags button:hover,
+.blog-filter-tags button.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
 #blog {
     background-color: var(--light-color);
     position: relative;
@@ -1040,13 +1252,7 @@ footer p {
     margin-bottom: 30px;
 }
 
-.blog-post-image img {
-    width: 100%;
-    max-height: 450px;
-    object-fit: cover;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-}
+/* Removed .blog-post-image img rule as banner/inline images have specific classes now */
 
 .blog-post-content {
     line-height: 1.9;
@@ -1082,6 +1288,246 @@ footer p {
 .blog-post-content a:hover {
     color: var(--secondary-color);
     border-bottom-color: var(--secondary-color);
+}
+
+
+/* Magazine-Style Blog Layout */
+.blog-post-content {
+    display: grid;
+    grid-template-columns: 1fr;
+
+/* Blog Post Banner */
+.blog-post-banner {
+    width: 100%;
+    height: 300px; /* Adjust height as needed */
+    overflow: hidden;
+    margin-bottom: 40px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-strong);
+}
+
+.blog-post-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the banner area */
+    /* display: block; /* Inherited from global img */
+}
+
+/* Blog Post Inline Image */
+.blog-post-inline-image {
+    max-width: 600px; /* Default max width, can be overridden */
+    /* height: auto; /* Inherited from global img */
+    margin: 20px auto 20px; /* Center by default, add vertical space */
+    /* display: block; /* Inherited from global img */
+    border-radius: var(--border-radius); /* Override global 12px */
+    box-shadow: var(--shadow);
+}
+
+.blog-post-inline-image.float-left {
+    float: left;
+    margin: 10px 25px 15px 0; /* Adjust margins for float */
+    max-width: 45%; /* Smaller max-width when floated */
+}
+
+.blog-post-inline-image.float-right {
+    float: right;
+    margin: 10px 0 15px 25px; /* Adjust margins for float */
+    max-width: 45%; /* Smaller max-width when floated */
+}
+
+/* Clearfix for floated images - apply to the parent container if needed */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+/* Featured Image Style (From Directive) */
+.featured-image {
+  max-height: 400px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 12px;
+}
+
+
+    gap: 30px;
+}
+
+/* Image Block Styling */
+.blog-image-block {
+    margin: 30px 0;
+    text-align: center; /* Default alignment */
+}
+
+.blog-image-block img {
+    /* max-width: 100%; /* Inherited from global img */
+    /* height: auto; /* Inherited from global img */
+    border-radius: var(--border-radius); /* Override global 12px */
+    box-shadow: var(--shadow);
+    /* display: block; /* Inherited from global img */
+    margin: 0 auto 10px; /* Override global margin */
+}
+
+.blog-image-block figcaption {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Image Sizes */
+.image-size-small img {
+    max-width: 33%;
+}
+
+.image-size-medium img {
+    max-width: 50%;
+}
+
+.image-size-large img {
+    max-width: 75%;
+}
+
+.image-size-full img {
+    max-width: 100%;
+}
+
+/* Image Positions with Text Wrap */
+.image-position-left {
+    float: left;
+    margin-right: 25px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+.image-position-left img {
+    margin: 0;
+}
+
+.image-position-right {
+    float: right;
+    margin-left: 25px;
+    margin-bottom: 15px;
+    text-align: right;
+}
+.image-position-right img {
+    margin: 0;
+}
+
+/* Clear floats after floated images */
+.blog-text-block::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Image Grid Styling (Basic - already partially styled) */
+.blog-image-grid {
+    margin: 30px 0;
+    display: grid;
+    gap: 15px;
+}
+
+.grid-layout-2-column {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-layout-3-column {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Add more grid layouts (e.g., masonry) if needed */
+
+.blog-image-grid .grid-item {
+    text-align: center;
+}
+
+.blog-image-grid .grid-item img {
+    /* max-width: 100%; /* Inherited from global img */
+    /* height: auto; /* Inherited from global img */
+    border-radius: var(--border-radius); /* Override global 12px */
+    box-shadow: var(--shadow);
+    margin-bottom: 5px; /* Override global margin */
+}
+
+.blog-image-grid .grid-item figcaption {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* Quote Block Styling (Basic - already partially styled) */
+.blog-quote-block {
+    margin: 30px auto;
+    padding: 25px;
+    border-left: 5px solid var(--primary-color);
+    background-color: var(--light-accent);
+    font-style: italic;
+    max-width: 80%;
+}
+
+.blog-quote-block p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.blog-quote-block cite {
+    display: block;
+    text-align: right;
+    font-style: normal;
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+/* Code Block Styling (Basic - already partially styled) */
+.blog-code-block {
+    margin: 30px 0;
+}
+
+.blog-code-block pre {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+}
+
+/* Add syntax highlighting styles if using a library like Prism.js or Highlight.js */
+
+/* Video Block Styling (Basic - already partially styled) */
+.blog-video-block {
+    margin: 30px 0;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-caption {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Responsive */
@@ -1154,4 +1600,10 @@ footer p {
         padding: 10px 20px;
         font-size: 0.95rem;
     }
+}
+
+
+/* Style for the separated blog post link */
+.project-blog-link {
+  margin-top: 10px; /* Add space above the blog post button */
 }

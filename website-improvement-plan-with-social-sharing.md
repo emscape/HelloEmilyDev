@@ -42,6 +42,25 @@ flowchart TD
 ### 1. Magazine-Style Blog Layout Implementation
 
 #### 1.1 Restructure Blog Data Format
+#### 🧠 Optional: Auto Image Positioning Helper
+- Add support for an `autoLayout` flag in image blocks.
+- If `autoLayout` is `true`, the system can infer appropriate `size` and `position` values using simple rules (see below).
+- Allow human overrides with a new `overrides` property.
+
+```json
+{
+  "type": "image",
+  "src": "path/to/image.jpg",
+  "alt": "Alt text here",
+  "caption": "Optional caption",
+  "autoLayout": true,
+  "overrides": {
+    "position": "left",
+    "size": "small"
+  }
+}
+```
+
 - Modify `blog-data.json` to support a block-based content structure
 - Replace the current HTML string content with a structured array of content blocks
 - Each block will have a type and associated data
@@ -86,6 +105,24 @@ flowchart TD
 ```
 
 #### 1.2 Create a Block Renderer System
+#### 🔧 Add Auto Layout Logic for Images
+- Create a helper function (e.g., `suggestImageLayout`) in `blog-content-parser.js` or as a separate utility module.
+- This function analyzes image dimensions and nearby text to assign a layout suggestion.
+
+```js
+function suggestImageLayout({ width, height, textLength }) {
+  const aspectRatio = width / height;
+  if (aspectRatio > 1.5 && width > 1000) return { size: "full", position: "center" };
+  if (aspectRatio < 0.8) return { size: "medium", position: "right" };
+  if (textLength < 300) return { size: "small", position: "center" };
+  return { size: "medium", position: "left" };
+}
+```
+
+- During blog rendering:
+  - If `autoLayout` is true, call this helper function and merge its result into the block’s final rendering props.
+  - Respect `overrides` as final values if provided.
+
 - Develop a JavaScript module to render different content block types
 - Implement specific renderers for each block type:
   - Text blocks
@@ -219,6 +256,10 @@ flowchart TD
 ## Implementation Approach
 
 ### Phase 1: Blog Structure Redesign
+- Implement image auto-layout helper and integrate with block parser
+- Add logic to check image file metadata (e.g., width/height) before rendering
+- Provide editor UI toggle for `autoLayout` to enable/disable per image
+
 1. Create the new content block structure
 2. Implement the block parser and renderers
 3. Update the blog post display logic
@@ -260,3 +301,113 @@ flowchart TD
 - Respect user preferences for reduced motion
 - Ensure animations don't interfere with screen readers
 - Maintain proper focus management during transitions
+
+### Phase 5: Social Sharing & Distribution
+
+#### 5.1 Add Social Meta Tags
+- Dynamically generate Open Graph (`og:*`) and Twitter meta tags for each blog post:
+  - `og:title` – Use the blog post title
+  - `og:description` – Use the first paragraph or meta description
+  - `og:image` – Use the featured image or a generated thumbnail
+  - `twitter:card` – Use `summary_large_image` if available
+
+Example in HTML:
+```html
+<meta property="og:title" content="My Blog Post Title" />
+<meta property="og:description" content="A quick look into modern blog design." />
+<meta property="og:image" content="/images/blog-post-featured.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+```
+
+#### 5.2 Implement Social Sharing Buttons
+- Add share buttons at the top and bottom of blog posts:
+  - Copy link
+  - Share to LinkedIn
+  - Share to Bluesky (via `bsky.app/intent/post`)
+  - Share to Threads, Mastodon, or Email
+- Ensure buttons are accessible (ARIA labels, keyboard-navigable)
+
+#### 5.3 Enable UTM Parameters or Share Tracking
+- Append UTM tags to outbound share URLs to track origin (optional, but useful for analytics):
+  ```js
+  const shareUrl = `${window.location.href}?utm_source=share&utm_medium=blog`;
+  ```
+
+#### 5.4 Optional: Auto-Generate Social Share Images
+- Use `html2canvas` or Puppeteer to create consistent, branded images for social sharing
+- Include blog title, subtitle, and blog logo in image template
+- Use fallback image if none is provided
+
+#### 5.5 Fallback and Accessibility
+- Ensure graceful fallback for platforms that don’t support rich previews
+
+
+## Blog Image Display Update Plan (2025-04-14)
+
+**Goal:** Improve how featured images are displayed on the blog archive and individual post pages.
+
+**Requirements:**
+
+1.  **Blog Archive Page (`blog-archive.html`):** Display posts in a "card" format with the full featured image (no cropping).
+2.  **Individual Blog Post Page (`blog-post.html`):**
+    *   Use a new, separate wide banner image at the top.
+    *   Place the original featured image inline next to the first paragraph.
+
+**Implementation Plan:**
+
+1.  **Update Data Structure (`blog-data.json`):**
+    *   Add a new field `bannerImage` to each post object to store the path for the wide banner image.
+    *   Continue using `featuredImage` for the card image (archive) and the inline image (post).
+
+2.  **Modify Blog Post Display (`js/blog-post.js` & `styles.css`):**
+    *   **JavaScript (`js/blog-post.js`):**
+        *   Fetch `bannerImage` path.
+        *   Create a new `.blog-post-banner` element for the banner image.
+        *   Remove the old top featured image display.
+        *   Implement logic to insert `featuredImage` inline next to the first paragraph.
+    *   **CSS (`styles.css`):**
+        *   Add styles for `.blog-post-banner`.
+        *   Remove/adjust old `.blog-post-image img` rules causing cropping.
+        *   Add styles for the inline `featuredImage` (e.g., float, margins).
+
+3.  **Modify Blog Archive Display (`js/blog-archive.js` & `styles.css`):**
+    *   **JavaScript (`js/blog-archive.js`):**
+        *   Generate HTML using a card structure.
+        *   Use `featuredImage` within each card.
+    *   **CSS (`styles.css`):**
+        *   Add styles for blog post cards (`.blog-card`, etc.).
+        *   Ensure `featuredImage` in cards displays fully.
+
+4.  **Content Update (Manual):**
+    *   Provide `bannerImage` paths for each post.
+    *   Add these paths to `blog-data.json`.
+
+**Diagram:**
+
+```mermaid
+graph TD
+    A[Start: Update Blog Images] --> B(Modify `blog-data.json`);
+    B --> C{Add `bannerImage` field};
+    C --> D(Update JS: `blog-post.js`);
+    D --> E{Display `bannerImage` at top};
+    D --> F{Insert `featuredImage` inline};
+    C --> G(Update JS: `blog-archive.js`);
+    G --> H{Generate Card Layout};
+    H --> I{Use `featuredImage` in card};
+    E & F & I --> J(Update CSS: `styles.css`);
+    J --> K{Style Banner};
+    J --> L{Style Inline Image};
+    J --> M{Style Archive Cards};
+    J --> N{Remove/Modify old image styles};
+    C --> O(Manual: Add banner image paths to JSON);
+    K & L & M & N & O --> P[End: Images Updated];
+
+    subgraph Data
+        B; C; O;
+    end
+    subgraph Code
+        D; E; F; G; H; I; J; K; L; M; N;
+    end
+```
+
+- Respect user privacy settings — avoid trackers unless explicitly opted in

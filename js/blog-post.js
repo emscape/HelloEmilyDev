@@ -8,23 +8,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get post ID from URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');
-    
+
     if (!postId) {
         displayError('No blog post ID specified');
         return;
     }
-    
+
     // Load blog data from JSON file
     fetch('./blog/blog-data.json')
         .then(response => response.json())
         .then(data => {
             const post = data.posts.find(p => p.id === postId);
-            
+
             if (!post) {
                 displayError('Blog post not found');
                 return;
             }
-            
+
             displayBlogPost(post);
             updateMetaTags(post);
         })
@@ -40,12 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function displayBlogPost(post) {
     const container = document.querySelector('.blog-post-content-container');
-    
+
     if (!container) return;
-    
+
     // Initialize content parser
     const contentParser = new BlogContentParser();
-    
+
     // Format date
     const postDate = new Date(post.date);
     const formattedDate = postDate.toLocaleDateString('en-US', {
@@ -53,40 +53,49 @@ function displayBlogPost(post) {
         month: 'long',
         day: 'numeric'
     });
-    
+
     // Create tags HTML
     const tagsHTML = post.tags
         .map(tag => `<span class="blog-tag">${tag}</span>`)
         .join('');
-    
-    // Check for featured image - if none exists, use placeholder
-    let featuredImageHtml = '';
-    if (post.featuredImage && post.featuredImage.trim() !== '') {
-        featuredImageHtml = `<div class="blog-post-image"><img src="${post.featuredImage}" alt="${post.title}"></div>`;
+
+    // --- NEW: Prepare Banner Image HTML ---
+    let bannerImageHtml = '';
+    if (post.bannerImage && post.bannerImage.trim() !== '') {
+        bannerImageHtml = `<div class="blog-post-banner"><img src="${post.bannerImage}" alt="${post.title} Banner"></div>`;
     } else {
-        // Use placeholder image based on post ID
-        const placeholderPath = `images/blog/placeholder.svg`;
-        featuredImageHtml = `<div class="blog-post-image"><img src="${placeholderPath}" alt="${post.title}"></div>`;
-        console.warn(`No featured image found for post: ${post.id}`);
+        // Optional: Add a default banner or leave empty
+        console.warn(`No banner image found for post: ${post.id}`);
+        // bannerImageHtml = `<div class="blog-post-banner blog-post-banner-default"></div>`; // Example default
     }
-    
+
+    // --- NEW: Prepare Inline Featured Image Source ---
+    let inlineImageSrc = '';
+    if (post.featuredImage && post.featuredImage.trim() !== '') {
+        inlineImageSrc = post.featuredImage;
+        // We'll create the element later for DOM insertion
+    } else {
+        console.warn(`No featured image found for inline placement for post: ${post.id}`);
+    }
+
     // Parse content based on format
     let parsedContent;
-    if (post.blocks && Array.isArray(post.blocks)) {
-        // New format: content is stored as blocks
-        parsedContent = contentParser.parseBlocks(post.blocks);
-    } else if (post.content) {
+    if (post.content && Array.isArray(post.content)) {
+        // New format: content is stored as an array of blocks
+        parsedContent = contentParser.parseBlocks(post.content);
+    } else if (typeof post.content === 'string') {
         // Legacy format: content is stored as HTML string
         const legacyBlocks = contentParser.parseLegacyContent(post.content);
         parsedContent = contentParser.parseBlocks(legacyBlocks);
     } else {
+        // Handle cases where content is missing or neither format
         parsedContent = '<p>No content available</p>';
     }
-    
-    // Build post HTML
+
+    // Build initial post HTML (without inline image yet)
     container.innerHTML = `
         <article class="blog-post">
-            ${featuredImageHtml}
+            ${bannerImageHtml}
             <div class="blog-post-header">
                 <h2>${post.title}</h2>
                 <div class="blog-meta">
@@ -103,7 +112,33 @@ function displayBlogPost(post) {
             ${post.additionalImages && post.additionalImages.length > 0 ? renderAdditionalImages(post.additionalImages, post.title) : ''}
         </article>
     `;
-    
+
+    // --- NEW: Inject Inline Featured Image using DOM manipulation ---
+    if (inlineImageSrc) {
+        const contentDiv = container.querySelector('.blog-post-content');
+        if (contentDiv) {
+            // Find the first element node (paragraph, heading, etc.) to insert before
+            const firstBlockElement = contentDiv.querySelector('p, h1, h2, h3, h4, h5, h6, ul, ol, table, blockquote, pre, div');
+
+            if (firstBlockElement) {
+                const imgElement = document.createElement('img');
+                imgElement.src = inlineImageSrc;
+                imgElement.alt = post.title; // Use post title for alt text, or could be more specific
+                imgElement.classList.add('blog-post-inline-image'); // Add class for styling
+                // Insert the image before the first block element
+                firstBlockElement.parentNode.insertBefore(imgElement, firstBlockElement);
+            } else {
+                 // Fallback: If no block element found, prepend to the content div itself
+                 const imgElement = document.createElement('img');
+                 imgElement.src = inlineImageSrc;
+                 imgElement.alt = post.title;
+                 imgElement.classList.add('blog-post-inline-image');
+                 contentDiv.insertBefore(imgElement, contentDiv.firstChild);
+            }
+        }
+    }
+
+
     // Update document title
     document.title = `${post.title} | Emily Anderson`;
 }
@@ -116,13 +151,13 @@ function displayBlogPost(post) {
  */
 function renderAdditionalImages(images, postTitle) {
     if (!images || images.length === 0) return '';
-    
+
     const imagesHtml = images.map((img, index) =>
         `<div class="gallery-item">
             <img src="${img}" alt="${postTitle} - Image ${index + 1}" class="gallery-image">
         </div>`
     ).join('');
-    
+
     return `
         <div class="blog-image-gallery">
             <h3>Image Gallery</h3>
@@ -140,24 +175,32 @@ function renderAdditionalImages(images, postTitle) {
 function updateMetaTags(post) {
     // Set canonical URL
     const canonicalURL = `https://helloemily.dev/blog-post.html?id=${post.id}`;
-    
+    const siteBaseUrl = 'https://helloemily.dev/'; // Define base URL
+
+    // Determine the image to use for social sharing (prioritize banner)
+    let socialImage = post.bannerImage && post.bannerImage.trim() !== ''
+        ? post.bannerImage
+        : (post.featuredImage && post.featuredImage.trim() !== '' ? post.featuredImage : 'images/site-preview.jpg'); // Fallback to featured, then default
+
+    // Ensure the social image URL is absolute
+    if (!socialImage.startsWith('http')) {
+        socialImage = siteBaseUrl + socialImage;
+    }
+
+
     // Update Open Graph meta tags
     document.querySelector('meta[property="og:url"]').setAttribute('content', canonicalURL);
     document.querySelector('meta[property="og:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', post.shortDescription);
-    
-    if (post.featuredImage) {
-        document.querySelector('meta[property="og:image"]').setAttribute('content', `https://helloemily.dev/${post.featuredImage}`);
-    }
-    
+    document.querySelector('meta[property="og:description"]').setAttribute('content', post.shortDescription || ''); // Ensure description exists
+    document.querySelector('meta[property="og:image"]').setAttribute('content', socialImage);
+
+
     // Update Twitter meta tags
     document.querySelector('meta[property="twitter:url"]').setAttribute('content', canonicalURL);
     document.querySelector('meta[property="twitter:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="twitter:description"]').setAttribute('content', post.shortDescription);
-    
-    if (post.featuredImage) {
-        document.querySelector('meta[property="twitter:image"]').setAttribute('content', `https://helloemily.dev/${post.featuredImage}`);
-    }
+    document.querySelector('meta[property="twitter:description"]').setAttribute('content', post.shortDescription || ''); // Ensure description exists
+    document.querySelector('meta[property="twitter:image"]').setAttribute('content', socialImage);
+
 }
 
 /**
@@ -166,7 +209,7 @@ function updateMetaTags(post) {
  */
 function displayError(message) {
     const container = document.querySelector('.blog-post-content-container');
-    
+
     if (container) {
         container.innerHTML = `
             <div class="error-message" style="text-align: center; padding: 50px 20px;">
@@ -178,7 +221,7 @@ function displayError(message) {
             </div>
         `;
     }
-    
+
     // Update document title
     document.title = 'Blog Post Not Found | Emily Anderson';
 }

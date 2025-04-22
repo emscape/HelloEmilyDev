@@ -45,8 +45,28 @@ class BlogContentParser {
      * @returns {string} - HTML content
      */
     renderTextBlock(block) {
-        return `<div class="blog-text-block">${block.content}</div>`;
+        // Add data-animation attribute for scroll reveal effect
+        return `<div class="blog-text-block" data-animation="fade-up">${block.content}</div>`;
     }
+
+    /**
+     * --- Image Rendering with WebP Fallback ---
+     * The image rendering functions (`renderImageBlock`, `renderImageGridBlock`)
+     * implement a <picture> element for modern image format support.
+     *
+     * WebP Source Logic:
+     * 1. Checks if an explicit `webpSrc` property exists in the image data object.
+     *    If yes, uses that path for the WebP <source> tag.
+     * 2. If `webpSrc` is not provided, it checks if the original `src` property
+     *    ends with a standard image extension (.jpg, .jpeg, .png, case-insensitive).
+     * 3. If it has a standard extension, it attempts to derive the WebP path by
+     *    replacing the original extension with `.webp`.
+     * 4. If the original `src` does not have a standard extension (e.g., CDN URL
+     *    without extension), the WebP <source> tag is skipped to avoid errors.
+     * 5. The original <img> tag is always included within the <picture> element
+     *    (or stands alone if WebP is skipped) as a fallback for older browsers
+     *    or if the WebP image fails to load. It retains the `loading="lazy"` attribute.
+     */
 
     /**
      * Render an image block
@@ -57,10 +77,28 @@ class BlogContentParser {
         const sizeClass = block.size ? `image-size-${block.size}` : 'image-size-medium';
         const positionClass = block.position ? `image-position-${block.position}` : 'image-position-center';
         const captionHtml = block.caption ? `<figcaption>${block.caption}</figcaption>` : '';
-        
+        const altText = block.alt || '';
+        const baseSrc = block.src;
+
+        // --- WebP Source Logic ---
+        // Use explicit webpSrc if provided, otherwise try to derive from baseSrc.
+        // Only derive if baseSrc ends with .jpg or .png (case-insensitive).
+        let webpSrc = block.webpSrc || null;
+        if (!webpSrc && baseSrc && /\.(jpe?g|png)$/i.test(baseSrc)) {
+            webpSrc = baseSrc.replace(/\.(jpe?g|png)$/i, '.webp');
+        }
+
+        const webpSourceHtml = webpSrc
+            ? `<source srcset="${webpSrc}" type="image/webp">`
+            : '';
+        // --- End WebP Source Logic ---
+
         return `
             <figure class="blog-image-block ${sizeClass} ${positionClass}" data-animation="fade-in">
-                <img src="${block.src}" alt="${block.alt || ''}" loading="lazy">
+                <picture>
+                    ${webpSourceHtml}
+                    <img src="${baseSrc}" alt="${altText}" loading="lazy">
+                </picture>
                 ${captionHtml}
             </figure>
         `;
@@ -77,12 +115,29 @@ class BlogContentParser {
         }
 
         const layoutClass = block.layout ? `grid-layout-${block.layout}` : 'grid-layout-2-column';
-        
+
         const imagesHtml = block.images.map((image, index) => {
             const captionHtml = image.caption ? `<figcaption>${image.caption}</figcaption>` : '';
+            const altText = image.alt || '';
+            const baseSrc = image.src;
+
+            // --- WebP Source Logic (same as renderImageBlock) ---
+            let webpSrc = image.webpSrc || null;
+            if (!webpSrc && baseSrc && /\.(jpe?g|png)$/i.test(baseSrc)) {
+                webpSrc = baseSrc.replace(/\.(jpe?g|png)$/i, '.webp');
+            }
+
+            const webpSourceHtml = webpSrc
+                ? `<source srcset="${webpSrc}" type="image/webp">`
+                : '';
+            // --- End WebP Source Logic ---
+
             return `
                 <figure class="grid-item" data-animation="fade-in" data-animation-delay="${index * 150}">
-                    <img src="${image.src}" alt="${image.alt || ''}" loading="lazy">
+                    <picture>
+                        ${webpSourceHtml}
+                        <img src="${baseSrc}" alt="${altText}" loading="lazy">
+                    </picture>
                     ${captionHtml}
                 </figure>
             `;
