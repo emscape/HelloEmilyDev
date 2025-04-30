@@ -46,8 +46,15 @@ export async function loadProjects(containerId) {
       return dateB - dateA;
     });
     
+    // Determine projects to display based on the page
+    let projectsToDisplay = sortedProjects;
+    // Limit to 3 most recent on the index page
+    if (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html')) {
+      projectsToDisplay = sortedProjects.slice(0, 3);
+    }
+
     // Create and append project cards
-    sortedProjects.forEach(project => {
+    projectsToDisplay.forEach(project => {
       const projectCard = createProjectCard(project);
       container.appendChild(projectCard);
     });
