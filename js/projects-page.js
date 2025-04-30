@@ -1,98 +1,21 @@
 /**
  * Projects page script for HelloEmily.dev
  * Loads and displays all projects with filtering capabilities
+ * Uses the shared project-loader module for consistent project display
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Load projects data from JSON file
-  fetch('../projects/projects-data.json')
-    .then(response => response.json())
-    .then(data => {
-      displayAllProjects(data.projects);
-      setupFilters(data.projects);
-    })
-    .catch(error => {
-      console.error('Error loading projects data:', error);
-      document.querySelector('.project-grid').innerHTML = `
-        <div style="text-align: center; padding: 50px;">
-          <h3>Unable to load projects</h3>
-          <p>Please try again later or contact me for more information.</p>
-        </div>
-      `;
-    });
+import { loadProjects } from './project-loader.js';
+
+document.addEventListener('DOMContentLoaded', async function() {
+  // Load projects using the shared module
+  // The container for projects is the div with class 'project-grid'
+  const projects = await loadProjects('project-grid');
+  
+  // If projects were loaded successfully, set up the filters
+  if (projects) {
+    setupFilters(projects);
+  }
 });
-
-/**
- * Displays all projects in the project grid
- * @param {Array} projects - Array of project objects
- */
-function displayAllProjects(projects) {
-  const projectsContainer = document.querySelector('.project-grid');
-  
-  if (projectsContainer) {
-    projectsContainer.innerHTML = '';
-    
-    // Sort projects by completion date (newest first)
-    const sortedProjects = [...projects].sort((a, b) => {
-      // First sort by featured status
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      
-      // Then sort by completion date
-      const dateA = new Date(a.completionDate);
-      const dateB = new Date(b.completionDate);
-      return dateB - dateA;
-    });
-    
-    // Create and append project cards
-    sortedProjects.forEach(project => {
-      const projectCard = createProjectCard(project);
-      projectsContainer.appendChild(projectCard);
-    });
-  }
-}
-
-/**
- * Creates a project card element
- * @param {Object} project - Project data object
- * @returns {HTMLElement} - Project card DOM element
- */
-function createProjectCard(project) {
-  const projectCard = document.createElement('div');
-  projectCard.className = 'project-card';
-  projectCard.dataset.id = project.id;
-  projectCard.dataset.featured = project.featured;
-  
-  // Add technology tags as data attributes for filtering
-  if (project.technologies && project.technologies.length) {
-    project.technologies.forEach(tech => {
-      projectCard.dataset[`tech${tech.toLowerCase().replace(/\s+/g, '')}`] = true;
-    });
-  }
-  
-  // Create tags HTML
-  const tagsHTML = project.technologies
-    .map(tech => `<span>${tech}</span>`)
-    .join('');
-  
-  // Build card HTML
-  projectCard.innerHTML = `
-    ${project.featuredImage ? `<div class="project-image"><img src="../${project.featuredImage}" alt="${project.title}"></div>` : ''}
-    <div class="project-card-content">
-      <h3>${project.title}</h3>
-      <p>${project.shortDescription}</p>
-      <div class="project-tags">
-        ${tagsHTML}
-      </div>
-      <div class="project-links">
-        ${project.liveUrl ? `<a href="${project.liveUrl}" class="btn" target="_blank">View Project</a>` : ''}
-        ${project.githubUrl ? `<a href="${project.githubUrl}" class="btn btn-secondary" target="_blank">View Source</a>` : ''}
-      </div>
-    </div>
-  `;
-  
-  return projectCard;
-}
 
 /**
  * Sets up project filtering functionality
