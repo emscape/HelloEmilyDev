@@ -4,8 +4,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Load blog data from JSON file
-  fetch('./blog/blog-data.json')
+  // Load blog index data from JSON file
+  fetch('./blog-index.json') // Changed path to blog-index.json
     .then(response => response.json())
     .then(data => {
       displayBlogPosts(data.posts);
@@ -61,22 +61,22 @@ function displayBlogPosts(posts) {
         .map(tag => `<span class="blog-tag" data-tag="${tag.toLowerCase().replace(/\s+/g, '-')}">${tag}</span>`)
         .join('');
       
-      // Build card HTML
+      // Build card HTML (added featuredImage back)
       postCard.innerHTML = `
-        ${post.featuredImage ? `<div class="blog-card-image"><img src="${post.featuredImage}" alt="${post.title}"></div>` : ''}
+        ${post.featuredImage ? `<img src="${post.featuredImage}" alt="${post.title} Featured Image" class="blog-card-image">` : ''}
         <div class="blog-card-content">
           <div class="blog-meta">
             <span class="blog-date">${formattedDate}</span>
-            <span class="blog-author">By ${post.author}</span>
+             ${post.featured ? '<span class="featured-tag">Featured</span>' : ''}
           </div>
           <h3>${post.title}</h3>
-          <p>${post.shortDescription}</p>
+          <p>${post.shortDescription || ''}</p> <!-- Added short description -->
           <div class="blog-tags">
             ${tagsHTML}
           </div>
-          <a href="blog-post.html?id=${post.id}" class="btn blog-read-more">Read More</a>
+          <a href="blog-post.html?slug=${post.slug}" class="btn blog-read-more">Read More</a>
         </div>
-      `;
+      `; // Use slug for link, removed author, shortDescription
       
       blogContainer.appendChild(postCard);
     });
@@ -170,20 +170,18 @@ function displayFallbackBlogPosts() {
   if (blogContainer) {
     // Keep any existing content as fallback
     if (blogContainer.children.length === 0) {
+      // Updated fallback content to match new structure
       blogContainer.innerHTML = `
         <div class="blog-card">
           <div class="blog-card-content">
             <div class="blog-meta">
-              <span class="blog-date">March 1, 2025</span>
-              <span class="blog-author">By Emily Anderson</span>
+              <span class="blog-date">April 30, 2025</span>
             </div>
-            <h3>Getting Started with AI: A Beginner's Guide</h3>
-            <p>An introduction to artificial intelligence concepts for beginners</p>
+            <h3>Could not load blog posts</h3>
+            <p>Please try refreshing the page or check back later.</p>
             <div class="blog-tags">
-              <span class="blog-tag">Artificial Intelligence</span>
-              <span class="blog-tag">Technology</span>
+              <span class="blog-tag">Error</span>
             </div>
-            <a href="blog-post.html?id=getting-started-with-ai" class="btn blog-read-more">Read More</a>
           </div>
         </div>
       `;

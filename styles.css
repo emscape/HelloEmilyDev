@@ -900,7 +900,7 @@ footer p {
 .blog-card-content p {
     color: var(--text-light);
     margin-bottom: 20px;
-    flex-grow: 1; /* Allow paragraph to take up space */
+    /* flex-grow: 1; */ /* This was confirmed not to be the issue, but might affect layout if uncommented. Keeping commented for now. */
 }
 
 .blog-meta {

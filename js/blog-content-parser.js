@@ -10,6 +10,7 @@ class BlogContentParser {
     constructor() {
         this.blockRenderers = {
             'text': this.renderTextBlock,
+            'html': this.renderHtmlBlock, // Added HTML renderer
             'image': this.renderImageBlock,
             'image-grid': this.renderImageGridBlock,
             'quote': this.renderQuoteBlock,
@@ -47,6 +48,16 @@ class BlogContentParser {
     renderTextBlock(block) {
         // Add data-animation attribute for scroll reveal effect
         return `<div class="blog-text-block" data-animation="fade-up">${block.content}</div>`;
+    }
+
+    /**
+     * Render an HTML block
+     * @param {Object} block - HTML block data
+     * @returns {string} - HTML content
+     */
+    renderHtmlBlock(block) {
+        // Directly return the HTML content, optionally wrap if needed for styling/animation
+        return `<div class="blog-html-block" data-animation="fade-up">${block.content}</div>`;
     }
 
     /**
