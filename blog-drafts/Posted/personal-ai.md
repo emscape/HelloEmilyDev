@@ -1,3 +1,15 @@
+---
+ 
+title: "Checking the Pulse: What Happens When You Ask AI What It Knows About You"
+shortDescription: "An exploration of AI's ability to form a coherent understanding of users through interactions, and what this reveals about machine-driven personalization."
+author: Emily Anderson
+date: 2025-03-08
+tags: [Artificial Intelligence, Personal Growth, Technology, Self-Reflection]
+featuredImage: /images/blog/personal-ai/personal-ai-featured.jpg
+bannerImage: ""
+additionalImages: [images/blog/personal-ai/personal-ai-1.jpg, images/blog/personal-ai/personal-ai-2.jpg, images/blog/personal-ai/personal-ai-3.jpg]
+featured: true
+---
 # Checking the Pulse: What Happens When You Ask AI What It Knows About You
 
 *March 8, 2025*

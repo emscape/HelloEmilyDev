@@ -5,23 +5,29 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get post ID from URL parameter
+    // Get post slug from URL parameter
     const urlParams = new URLSearchParams(window.location.search);
-    const postId = urlParams.get('id');
+    const postSlug = urlParams.get('slug'); // Changed 'id' to 'slug'
 
-    if (!postId) {
-        displayError('No blog post ID specified');
+    if (!postSlug) {
+        displayError('No blog post slug specified'); // Updated error message
         return;
     }
 
-    // Load blog data from JSON file
-    fetch('./blog/blog-data.json')
-        .then(response => response.json())
-        .then(data => {
-            const post = data.posts.find(p => p.id === postId);
+    // Construct the path to the individual post JSON file
+    const postJsonPath = `./blog-data/${postSlug}.json`;
 
-            if (!post) {
-                displayError('Blog post not found');
+    // Load specific post data from its JSON file
+    fetch(postJsonPath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(post => { // The fetched data is the post object directly
+            if (!post) { // Basic check if JSON is empty/invalid
+                displayError('Blog post data is invalid');
                 return;
             }
 
@@ -29,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
             updateMetaTags(post);
         })
         .catch(error => {
-            console.error('Error loading blog data:', error);
-            displayError('Error loading blog post');
+            console.error('Error loading blog post data:', error);
+            displayError(`Error loading blog post: ${postSlug}`); // Updated error message
         });
 });
 
@@ -173,8 +179,8 @@ function renderAdditionalImages(images, postTitle) {
  * @param {Object} post - Blog post object
  */
 function updateMetaTags(post) {
-    // Set canonical URL
-    const canonicalURL = `https://helloemily.dev/blog-post.html?id=${post.id}`;
+    // Set canonical URL using slug
+    const canonicalURL = `https://helloemily.dev/blog-post.html?slug=${post.id}`; // Use post.id which is the slug here
     const siteBaseUrl = 'https://helloemily.dev/'; // Define base URL
 
     // Determine the image to use for social sharing (prioritize banner)
@@ -191,14 +197,14 @@ function updateMetaTags(post) {
     // Update Open Graph meta tags
     document.querySelector('meta[property="og:url"]').setAttribute('content', canonicalURL);
     document.querySelector('meta[property="og:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', post.shortDescription || ''); // Ensure description exists
+    document.querySelector('meta[property="og:description"]').setAttribute('content', post.shortDescription || 'Read this blog post by Emily Anderson.'); // Provide a fallback description
     document.querySelector('meta[property="og:image"]').setAttribute('content', socialImage);
 
 
     // Update Twitter meta tags
     document.querySelector('meta[property="twitter:url"]').setAttribute('content', canonicalURL);
     document.querySelector('meta[property="twitter:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="twitter:description"]').setAttribute('content', post.shortDescription || ''); // Ensure description exists
+    document.querySelector('meta[property="twitter:description"]').setAttribute('content', post.shortDescription || 'Read this blog post by Emily Anderson.'); // Provide a fallback description
     document.querySelector('meta[property="twitter:image"]').setAttribute('content', socialImage);
 
 }

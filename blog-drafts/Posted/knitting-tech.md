@@ -1,3 +1,15 @@
+---
+title: "Knitting and Technology: The Unexpected Intersection of Patterns and Precision"
+date: 2025-01-15
+author: Emily Anderson
+tags: [Knitting, Technology, Creativity, Problem Solving, Patterns]
+featuredImage: /images/blog/knitting-tech/knitting-tech-featured.jpg
+bannerImage: ""
+featured: false
+shortDescription: "Exploring the surprising parallels between knitting and software development, where binary systems, pattern recognition, and iterative problem-solving connect these seemingly different worlds."
+additionalImages: []
+---
+
 # Knitting and Technology: The Unexpected Intersection of Patterns and Precision
 
 At first glance, knitting and technology might seem like worlds apart. One is a craft passed down through generations, while the other is a constantly evolving field driven by innovation and digital advancements. But for me, the connection between the two is clear, and it’s something that deeply shapes both my creative process and my professional work.

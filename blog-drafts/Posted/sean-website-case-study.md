@@ -1,16 +1,17 @@
+---
+title: "Building Sean's Website with Wix: A Balance of Customization and Ease"
+author: Emily Anderson
+date: 2025-03-10
+tags: [Web Development, Case Study, Wix, Website Design]
+featured: false
+featuredImage: /images/blog/sean-website-case-study/sean-website-case-study-featured.jpg
+shortDescription: "A case study on rebuilding Sean's website using Wix, balancing developer customization needs with client-friendly maintenance."
+bannerImage: ""
+additionalImages: []
+---
+
 # Building Sean's Website with Wix: A Balance of Customization and Ease
 
-## Metadata
-- Author: Emily Anderson
-- Date: 2025-03-10
-- Tags: Web Development, Case Study, Wix, Website Design
-- Featured: false
-- FeaturedImage: images/blog/sean-website/sean-website-featured.jpg
-
-## Short Description
-A case study on rebuilding Sean's website using Wix, balancing developer customization needs with client-friendly maintenance.
-
-## Content
 Sean's website needed an overhaul. His previous WordPress setup had been broken for months, and with his hosting renewal approaching, it was the perfect time to reassess his domain registration, hosting, and building tools. The goal? A cost-effective, high-performing solution that was customizable enough for me as a developer but easy enough for him to maintain and update in the future.
 
 ### Evaluating Domain Registrars

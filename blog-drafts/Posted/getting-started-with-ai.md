@@ -1,3 +1,14 @@
+---
+title: "Getting Started with AI: A Beginner's Guide"
+date: 2023-09-08
+author: Emily Anderson
+tags: [Artificial Intelligence, Machine Learning, Technology, Beginners, Enterprise AI, Generative AI Enterprise, GDG Twin Cities]
+featuredImage: /images/blog/getting-started-with-ai/getting-started-with-ai-featured.jpg
+bannerImage: ""
+featured: false
+shortDescription: "An introduction to artificial intelligence concepts for beginners, including insights from my GDG Twin Cities presentation on enterprise AI adoption"
+additionalImages: []
+---
 Artificial Intelligence (AI) has become an integral part of our digital landscape, transforming industries and reshaping how we interact with technology. For beginners looking to understand this revolutionary field, it's important to start with the fundamentals.
 
 At its core, AI refers to computer systems designed to perform tasks that typically require human intelligence. These include problem-solving, recognizing speech, understanding natural language, making decisions, and even learning from experience.

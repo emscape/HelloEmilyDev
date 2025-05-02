@@ -1,8 +1,13 @@
 ---
 title: "Humans Have Ideas. AIs Do Execution. I’ve Decided."
 date: 2025-03-28
-description: "Why I've decided to let AIs handle the grunt work while I focus on creativity, strategy, and innovation."
-image: "humans-have-ideas-featured.png"
+author: Emily Anderson
+tags: [AI, Productivity, Creativity, Technology, Personal]
+featuredImage: /images/blog/humans-have-ideas-featured.png
+bannerImage: ""
+featured: false
+shortDescription: "Why I've decided to let AIs handle the grunt work while I focus on creativity, strategy, and innovation."
+additionalImages: []
 ---
 
 # Humans Have Ideas. AIs Do Execution. I’ve Decided. 🤖✨

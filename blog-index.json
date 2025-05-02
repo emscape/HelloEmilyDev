@@ -1,0 +1,191 @@
+﻿{
+    "posts":  [
+                  {
+                      "featured":  true,
+                      "slug":  "building-thedapperfoxes",
+                      "tags":  [
+                                   "Wedding",
+                                   "Web Design",
+                                   "Custom Development",
+                                   "Apps Script",
+                                   "Google Forms",
+                                   "AI Assistant",
+                                   "Agentic AI",
+                                   "Event Tech"
+                               ],
+                      "featuredImage":  "images/blog/building-thedapperfoxes/building-thedapperfoxes-featured-image.png",
+                      "shortDescription":  "How we designed and built a wedding website that reflects our personalities, aesthetics, and engineering strengths.",
+                      "date":  "2025-04-19",
+                      "title":  "Building TheDapperFoxes.com: A Website Worthy of a Love Story"
+                  },
+                  {
+                      "featured":  true,
+                      "slug":  "go-to-the-store-and-buy-bread",
+                      "tags":  [
+                                   "Learning",
+                                   "Tech-Education",
+                                   "Documentation",
+                                   "Beginner-Friendly",
+                                   "AI-Companion",
+                                   "Sparky",
+                                   "Developer-Experience",
+                                   "Empathy-In-Tech",
+                                   "Tutorials",
+                                   "Blog-Series"
+                               ],
+                      "featuredImage":  "images/blog/go-to-the-store-and-buy-bread/go-to-the-store-and-buy-bread-featured.png",
+                      "shortDescription":  "How one simple shift in how I learn tech changed everything.",
+                      "date":  "2025-04-14",
+                      "title":  "Go to the Store and Buy Bread: Why Tech Docs Fail (and How Sparky Fixed It)"
+                  },
+                  {
+                      "featured":  true,
+                      "slug":  "ai-guardrails",
+                      "tags":  [
+                                   "AI",
+                                   "Prompt Engineering",
+                                   "Guardrails",
+                                   "Ethics",
+                                   "Machine Learning",
+                                   "Artificial Intelligence",
+                                   "Responsible AI",
+                                   "Future Skills"
+                               ],
+                      "featuredImage":  "/images/blog/ai-guardrails/ai-guardrails-featured.jpg",
+                      "shortDescription":  "In an AI-driven world, the ability to shape intelligent systems responsibly is no longer optional—it\u0027s essential. This post explores the critical skills of prompt engineering and establishing AI guardrails to ensure ethical and effective AI use.",
+                      "date":  "2025-03-30",
+                      "title":  "Prompt Engineering and AI Guardrails: The Skills of the Future"
+                  },
+                  {
+                      "featured":  false,
+                      "slug":  "humans-have-ideas",
+                      "tags":  [
+                                   "AI",
+                                   "Productivity",
+                                   "Creativity",
+                                   "Technology",
+                                   "Personal"
+                               ],
+                      "featuredImage":  "images/blog/humans-have-ideas/humans-have-ideas-featured.png",
+                      "shortDescription":  "Why I\u0027ve decided to let AIs handle the grunt work while I focus on creativity, strategy, and innovation.",
+                      "date":  "2025-03-28",
+                      "title":  "Humans Have Ideas. AIs Do Execution. I’ve Decided."
+                  },
+                  {
+                      "featured":  false,
+                      "slug":  "ethics-and-ai",
+                      "tags":  [
+                                   "Artificial Intelligence",
+                                   "Ethics",
+                                   "Technology"
+                               ],
+                      "featuredImage":  "/images/blog/ethics-and-ai/ethics-and-ai-featured.jpg",
+                      "shortDescription":  "An exploration of the tension between AI\u0027s personal benefits and its potential societal consequences, including job displacement and copyright concerns.",
+                      "date":  "2025-03-10",
+                      "title":  "The Ethics and Impact of AI: Personal Benefits vs. Societal Concerns"
+                  },
+                  {
+                      "featured":  false,
+                      "slug":  "sean-website-case-study",
+                      "tags":  [
+                                   "Web Development",
+                                   "Case Study",
+                                   "Wix",
+                                   "Website Design"
+                               ],
+                      "featuredImage":  "/images/blog/sean-website-case-study/sean-website-case-study-featured.jpg",
+                      "shortDescription":  "A case study on rebuilding Sean\u0027s website using Wix, balancing developer customization needs with client-friendly maintenance.",
+                      "date":  "2025-03-10",
+                      "title":  "Building Sean\u0027s Website with Wix: A Balance of Customization and Ease"
+                  },
+                  {
+                      "featured":  true,
+                      "slug":  "personal-ai",
+                      "tags":  [
+                                   "Artificial Intelligence",
+                                   "Personal Growth",
+                                   "Technology",
+                                   "Self-Reflection"
+                               ],
+                      "featuredImage":  "/images/blog/personal-ai/personal-ai-featured.jpg",
+                      "shortDescription":  "An exploration of AI\u0027s ability to form a coherent understanding of users through interactions, and what this reveals about machine-driven personalization.",
+                      "date":  "2025-03-08",
+                      "title":  "Checking the Pulse: What Happens When You Ask AI What It Knows About You"
+                  },
+                  {
+                      "featured":  true,
+                      "slug":  "solving-io-puzzles-2025",
+                      "tags":  [
+                                   "Google I/O",
+                                   "Puzzles",
+                                   "Problem Solving",
+                                   "Logical Reasoning",
+                                   "Pattern Recognition"
+                               ],
+                      "featuredImage":  "/images/blog/solving-io-puzzles-2025/solving-io-puzzles-2025-featured.jpg",
+                      "shortDescription":  "A detailed walkthrough of solving the challenging grid-based puzzles from Google I/O 2025",
+                      "date":  "2025-02-11",
+                      "title":  "Cracking the Code: My Journey Through Google I/O 2025 Puzzles"
+                  },
+                  {
+                      "featured":  false,
+                      "slug":  "knitting-tech",
+                      "tags":  [
+                                   "Knitting",
+                                   "Technology",
+                                   "Creativity",
+                                   "Problem Solving",
+                                   "Patterns"
+                               ],
+                      "featuredImage":  "/images/blog/knitting-tech/knitting-tech-featured.jpg",
+                      "shortDescription":  "Exploring the surprising parallels between knitting and software development, where binary systems, pattern recognition, and iterative problem-solving connect these seemingly different worlds.",
+                      "date":  "2025-01-15",
+                      "title":  "Knitting and Technology: The Unexpected Intersection of Patterns and Precision"
+                  },
+                  {
+                      "featured":  true,
+                      "slug":  "panel-facilitation",
+                      "tags":  [
+                                   "Women in Tech",
+                                   "Diversity",
+                                   "Inclusion",
+                                   "Technology"
+                               ],
+                      "featuredImage":  "/images/blog/women-in-tech/women-in-tech-featured.jpg",
+                      "shortDescription":  "Exploring the current landscape for women in the tech industry",
+                      "date":  "2024-08-15",
+                      "title":  "Empowering Women in Technology: Challenges and Opportunities"
+                  },
+                  {
+                      "featured":  false,
+                      "slug":  "technical-documentation-tips",
+                      "tags":  [
+                                   "Technical Writing",
+                                   "Documentation",
+                                   "Best Practices",
+                                   "User Experience"
+                               ],
+                      "featuredImage":  "/images/blog/technical-documentation-tips/technical-documentation-tips-featured.jpg",
+                      "shortDescription":  "Tips for creating effective technical documentation that users will actually read",
+                      "date":  "2024-06-27",
+                      "title":  "The Art of Technical Documentation: Best Practices"
+                  },
+                  {
+                      "featured":  false,
+                      "slug":  "getting-started-with-ai",
+                      "tags":  [
+                                   "Artificial Intelligence",
+                                   "Machine Learning",
+                                   "Technology",
+                                   "Beginners",
+                                   "Enterprise AI",
+                                   "Generative AI Enterprise",
+                                   "GDG Twin Cities"
+                               ],
+                      "featuredImage":  "/images/blog/getting-started-with-ai/getting-started-with-ai-featured.jpg",
+                      "shortDescription":  "An introduction to artificial intelligence concepts for beginners, including insights from my GDG Twin Cities presentation on enterprise AI adoption",
+                      "date":  "2023-09-08",
+                      "title":  "Getting Started with AI: A Beginner\u0027s Guide"
+                  }
+              ]
+}

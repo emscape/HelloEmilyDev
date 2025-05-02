@@ -1,16 +1,15 @@
-# The Ethics and Impact of AI: Personal Benefits vs. Societal Concerns
+---
+title: "The Ethics and Impact of AI: Personal Benefits vs. Societal Concerns"
+date: 2025-03-10
+author: Emily Anderson
+tags: [Artificial Intelligence, Ethics, Technology]
+featuredImage: /images/blog/ethics-and-ai/ethics-and-ai-featured.jpg
+bannerImage: ""
+featured: false
+shortDescription: "An exploration of the tension between AI's personal benefits and its potential societal consequences, including job displacement and copyright concerns."
+additionalImages: []
+---
 
-## Metadata
-- Author: Emily Anderson
-- Date: 2025-03-10
-- Tags: Artificial Intelligence, Ethics, Technology, Society
-- Featured: true
-- FeaturedImage: images/blog/ai-ethics/ai-ethics-featured.jpg
-
-## Short Description
-An exploration of the tension between AI's personal benefits and its potential societal consequences, including job displacement and copyright concerns.
-
-## Content
 As AI technology continues to evolve, a debate has emerged surrounding its potential benefits and the concerns it raises. On one hand, AI can empower individuals to achieve things they've always wanted to do or struggled to do. On the other hand, there are growing fears that AI will take jobs from everyday workers and infringe on copyright protections. This tension between personal benefit and societal impact is at the heart of the conversation around AI's future.
 
 ### 1. Personal Benefit vs. Societal Impact

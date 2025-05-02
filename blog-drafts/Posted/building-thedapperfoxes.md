@@ -1,11 +1,15 @@
+---
 title: "Building TheDapperFoxes.com: A Website Worthy of a Love Story"
-author: "Emily"
-description: "How we designed and built a wedding website that reflects our personalities, aesthetics, and engineering strengths."
+author: Emily Anderson
+shortDescription: "How we designed and built a wedding website that reflects our personalities, aesthetics, and engineering strengths."
 date: 2025-04-19
-tags: ["wedding", "web design", "custom development", "apps script", "google forms", "AI assistant", "agentic AI", "event tech"]
-featured_image: "building-thedapperfoxes-featured-image.png"
-layout: "post"
-slug: "building-thedapperfoxes"
+tags: [Wedding, Web Design, Custom Development, Apps Script, Google Forms, AI Assistant, Agentic AI, Event Tech]
+featuredImage: /images/blog/building-thedapperfoxes/building-thedapperfoxes-featured-image.png
+featured: true
+bannerImage: ""
+additionalImages: []
+---
+
 ## 🦊 Building TheDapperFoxes.com: A Website Worthy of a Love Story
 
 When we set out to build our wedding website, we knew we wanted it to reflect *us*—not just the event, but the vibe. Something charming, a little cheeky, visually cohesive, and flexible enough to hold everything from heartfelt backstory to guest-uploaded chaos. Enter: **TheDapperFoxes.com**.

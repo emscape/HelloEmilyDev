@@ -1,0 +1,29 @@
+﻿{
+    "additionalImages":  {
+
+                         },
+    "slug":  "getting-started-with-ai",
+    "id":  "getting-started-with-ai",
+    "shortDescription":  "An introduction to artificial intelligence concepts for beginners, including insights from my GDG Twin Cities presentation on enterprise AI adoption",
+    "featuredImage":  "/images/blog/getting-started-with-ai/getting-started-with-ai-featured.jpg",
+    "content":  [
+                    {
+                        "content":  "\u003cp\u003eArtificial Intelligence (AI) has become an integral part of our digital landscape, transforming industries and reshaping how we interact with technology. For beginners looking to understand this revolutionary field, it\u0027s important to start with the fundamentals.\u003c/p\u003e\n\n\u003cp\u003eAt its core, AI refers to computer systems designed to perform tasks that typically require human intelligence. These include problem-solving, recognizing speech, understanding natural language, making decisions, and even learning from experience.\u003c/p\u003e\n\n\u003ch3\u003eUnderstanding AI Terminology\r\u003c/h3\u003e\n\n\u003cp\u003eThe field of AI encompasses several key concepts and subfields:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eRobotics\u003c/strong\u003e: Machines that can perform tasks in the physical world\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003cp\u003eFor those interested in exploring AI, there are numerous resources available online, from interactive courses to open-source libraries. Platforms like TensorFlow and PyTorch offer accessible entry points for beginners to experiment with machine learning models.\u003c/p\u003e\n\n\u003ch3\u003eGenerative AI in Enterprise: Insights from GDG Twin Cities\r\u003c/h3\u003e\n\n\u003cp\u003eOn September 7, 2023, I had the privilege of presenting at the Google Developer Group Twin Cities event on \u003ca href=\"https://gdg.community.dev/events/details/google-gdg-twin-cities-presents-generative-ai-considerations-for-use-in-corporate-enterprises/\"\u003e\"Generative AI: Considerations for Use in Corporate Enterprises\"\u003c/a\u003e. This presentation focused on the practical aspects of implementing AI solutions in enterprise environments.\u003c/p\u003e\n\n\u003cp\u003e!\u003ca href=\"images/blog/gen-ai-enterprise/gen-ai-enterprise-featured.jpg\"\u003eGDG Twin Cities Presentation on Generative AI in Enterprise\u003c/a\u003e\u003c/p\u003e\n\n\u003ch3\u003eKey Topics Covered in the Presentation\r\u003c/h3\u003e\n\n\u003cp\u003eDuring the session, we explored several important aspects of enterprise AI adoption:\u003c/p\u003e\n\n\u003cp\u003e#### Security Considerations\u003c/p\u003e\n\n\u003cp\u003eImplementing AI in enterprise environments requires careful attention to security risks:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eUser Risk\u003c/strong\u003e: Unintended consequences when users unknowingly contribute to misinformation\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003cp\u003eWe discussed security safeguards such as automating cyber countermeasures, preparing for advanced threat models, implementing data loss prevention controls, and protecting internal AI models.\u003c/p\u003e\n\n\u003cp\u003e#### Real-World Applications\u003c/p\u003e\n\n\u003cp\u003eMany companies are already incorporating foundation models into their business operations:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eDuolingo\u003c/strong\u003e: Implementing GPT-4 to enhance language learning experiences\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003cp\u003eIn healthcare specifically, AI applications include improved diagnosis and treatment, personalized medicine, healthcare administration automation, enhanced patient education, cost reduction, and improved patient experiences.\u003c/p\u003e\n\n\u003ch3\u003eEnterprise Implementation Considerations\r\u003c/h3\u003e\n\n\u003cp\u003eFor organizations looking to adopt generative AI, we discussed several key considerations:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eChange Management\u003c/strong\u003e: Preparing teams for the adoption of AI tools and processes\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003cp\u003eThe event brought together professionals from various industries, sparking valuable discussions about the practical challenges and opportunities of AI adoption in corporate settings. Attendees shared their experiences with early AI implementations, highlighting both successes and lessons learned.\u003c/p\u003e\n\n\u003cp\u003eFor those who couldn\u0027t attend, I\u0027ve created a presentations folder in my repository where I\u0027ll be sharing the slides and additional resources from this and future talks. Feel free to explore these materials for deeper insights into enterprise AI adoption strategies.\u003c/p\u003e\n\n\u003cp\u003eAs AI continues to evolve, staying informed about its capabilities, limitations, and ethical considerations becomes increasingly important for everyone, regardless of technical background. Whether you\u0027re just beginning your AI journey or looking to implement these technologies in an enterprise environment, understanding the fundamentals is the first step toward successful adoption.\u003c/p\u003e",
+                        "type":  "html"
+                    }
+                ],
+    "tags":  [
+                 "Artificial Intelligence",
+                 "Machine Learning",
+                 "Technology",
+                 "Beginners",
+                 "Enterprise AI",
+                 "Generative AI Enterprise",
+                 "GDG Twin Cities"
+             ],
+    "author":  "Emily Anderson",
+    "date":  "2023-09-08",
+    "bannerImage":  "",
+    "title":  "Getting Started with AI: A Beginner\u0027s Guide",
+    "featured":  false
+}

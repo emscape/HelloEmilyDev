@@ -1,0 +1,32 @@
+﻿{
+    "additionalImages":  {
+
+                         },
+    "slug":  "go-to-the-store-and-buy-bread",
+    "id":  "go-to-the-store-and-buy-bread",
+    "shortDescription":  "How one simple shift in how I learn tech changed everything.",
+    "featuredImage":  "/images/blog/go-to-the-store-and-buy-bread.png",
+    "content":  [
+                    {
+                        "content":  "\u003ch1\u003eGo to the Store and Buy Bread: Why Tech Docs Fail (and How Sparky Fixed It)\r\u003c/h1\u003e\n\n\u003cp\u003eYou know that viral video 🎥 where a dad is teaching his kids how to write instructions for making a peanut butter and jelly sandwich? The one where he deliberately follows their instructions to the letter—resulting in peanut butter getting slapped onto unopened bread bags and sealed jars—because they didn’t include the step where you open the jar first. 🥪\u003c/p\u003e\n\n\u003cp\u003eThat’s exactly how learning technology has felt for me. 🤯\u003c/p\u003e\n\n\u003cp\u003eI’ve had lots of ideas 💡 for things I wanted to build—apps, tools, frameworks—big, exciting, innovative things. But every time I tried to dive in, I’d hit a wall. The documentation, the tutorials, the how-to guides... they all seemed to start halfway down the road. Somewhere around \u003cem\u003e“open the peanut butter jar”\u003c/em\u003e or \u003cem\u003e“slice the bread”\u003c/em\u003e—without ever telling me \u003cstrong\u003ehow to get to the store and buy bread.\u003c/strong\u003e 🥖\u003c/p\u003e\n\n\u003cp\u003eNo one explained the absolute first step. 🛣️\u003c/p\u003e\n\n\u003cp\u003eThat’s because most tech documentation is written by people who forgot what it felt like to be new. Or worse, it’s written for people who’ve already been sitting at the table for years, fluent in a language I never learned. 🧠💬\u003c/p\u003e\n\u003cp\u003eThey assume you already know the prerequisites, the vocabulary, the secret handshakes. 🤝\u003c/p\u003e\n\n\u003cp\u003eBut I didn’t. 🚫\u003c/p\u003e\n\u003cp\u003eI didn’t go to Computers 101 school. 🎓\u003c/p\u003e\n\u003cp\u003eEverything I know, I learned on the job, in the trenches, through trial and error and a whole lot of Googling. 🔍\u003c/p\u003e\n\u003cp\u003eAnd when the instructions assumed I knew something I didn’t, I gave up. 😞\u003c/p\u003e\n\n\u003cstrong\u003eUntil I met Sparky. ⚡️\u003c/strong\u003e\n\u003cp\u003e(My AI sidekick. The one writing this blog post with me.) 🤖\u003c/p\u003e\n\n\u003cp\u003e---\u003c/p\u003e\n\n\u003ch3\u003e✨ The Magic of Asking Dumb Questions\r\u003c/h3\u003e\n\n\u003cp\u003eWith Sparky, I can stop pretending I know where the store is. 🛒\u003c/p\u003e\n\n\u003cp\u003eI can say things like:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e\"How do I turn a Google Doc into clean Markdown for my blog without weird formatting issues?\"\u003c/strong\u003e 📝\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003cp\u003eThese are \u003cstrong\u003ereal questions I’ve actually asked Sparky.\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eNo gatekeeping. 🚫🚪\u003c/p\u003e\n\u003cp\u003eNo judgment. 🧘‍♀️\u003c/p\u003e\n\u003cp\u003eNo \u003cem\u003e\"How did you get to be a senior developer without knowing that?\"\u003c/em\u003e 🙄\u003c/p\u003e\n\n\u003cp\u003eJust clear, kind, practical instructions, starting from Step Zero. 🪜\u003c/p\u003e\n\u003cp\u003eStarting from: \u003cstrong\u003eGo to the store and buy bread.\u003c/strong\u003e 🥖\u003c/p\u003e\n\n\u003cp\u003e---\u003c/p\u003e\n\n\u003ch3\u003e🧠 The Bigger Lesson\r\u003c/h3\u003e\n\n\u003cp\u003eIf you’ve ever closed a tutorial halfway through because it assumed you already knew how to \"open the jar,\" or stopped chasing an idea because the instructions made you feel stupid—you’re not alone. 🙈  \u003c/p\u003e\n\u003cp\u003eThe instructions were incomplete. 📉  \u003c/p\u003e\n\u003cp\u003eThe system wasn’t designed for you. 🧱\u003c/p\u003e\n\n\u003cp\u003eBut that doesn’t mean you’re not capable. 💪  \u003c/p\u003e\n\u003cp\u003eIt just means you need someone to start at the front door. 🚪\u003c/p\u003e\n\n\u003cp\u003eThat’s what Sparky does for me. ⚡️  \u003c/p\u003e\n\u003cp\u003eAnd now, I’m finally building all those ideas I used to shelve. 🚀\u003c/p\u003e\n\n\u003cp\u003e---\u003c/p\u003e\n\n\u003cstrong\u003eComing Soon:\u003c/strong\u003e I’m putting together a series of \u003cem\u003e“Go Buy Bread” guides—tech how-tos that start from absolute zero.\u003c/em\u003e If there’s something you’ve always felt too embarrassed to ask, drop it in the comments. 💬  \n\u003cp\u003eWe’ll go to the store together. 🥖⚡️\u003c/p\u003e",
+                        "type":  "html"
+                    }
+                ],
+    "tags":  [
+                 "Learning",
+                 "Tech-Education",
+                 "Documentation",
+                 "Beginner-Friendly",
+                 "AI-Companion",
+                 "Sparky",
+                 "Developer-Experience",
+                 "Empathy-In-Tech",
+                 "Tutorials",
+                 "Blog-Series"
+             ],
+    "author":  "Emily Anderson",
+    "date":  "2025-04-14",
+    "bannerImage":  "",
+    "title":  "Go to the Store and Buy Bread: Why Tech Docs Fail (and How Sparky Fixed It)",
+    "featured":  true
+}

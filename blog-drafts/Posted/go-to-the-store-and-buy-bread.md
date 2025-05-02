@@ -1,9 +1,16 @@
 ---
 title: "Go to the Store and Buy Bread: Why Tech Docs Fail (and How Sparky Fixed It)"
-author: "Emily Anderson"
-description: "How one simple shift in how I learn tech changed everything."
-featured_image: "go-buy-bread-featured"
+date: 2025-04-14
+author: Emily Anderson
+tags: [Learning, Tech-Education, Documentation, Beginner-Friendly, AI-Companion, Sparky, Developer-Experience, Empathy-In-Tech, Tutorials, Blog-Series]
+featuredImage: /images/blog/go-to-the-store-and-buy-bread.png
+bannerImage: ""
+featured: true
+shortDescription: "How one simple shift in how I learn tech changed everything."
+additionalImages: []
 ---
+
+# Go to the Store and Buy Bread: Why Tech Docs Fail (and How Sparky Fixed It)
 
 You know that viral video 🎥 where a dad is teaching his kids how to write instructions for making a peanut butter and jelly sandwich? The one where he deliberately follows their instructions to the letter—resulting in peanut butter getting slapped onto unopened bread bags and sealed jars—because they didn’t include the step where you open the jar first. 🥪
 

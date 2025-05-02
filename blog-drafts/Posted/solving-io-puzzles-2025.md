@@ -1,3 +1,16 @@
+---
+title: "Cracking the Code: My Journey Through Google I/O 2025 Puzzles"
+shortDescription: "A detailed walkthrough of solving the challenging grid-based puzzles from Google I/O 2025"
+author: Emily Anderson
+date: 2025-02-11
+tags: [Google I/O, Puzzles, Problem Solving, Logical Reasoning, Pattern Recognition]
+featuredImage: /images/blog/solving-io-puzzles-2025/solving-io-puzzles-2025-featured.jpg
+bannerImage: ""
+featured: true
+additionalImages: []
+---
+# Cracking the Code: My Journey Through Google I/O 2025 Puzzles
+
 Google I/O has always been known for its innovative approach to engaging developers, and the 2025 event was no exception. This year's puzzle challenge featured a series of increasingly complex grid-based puzzles that tested logical thinking, pattern recognition, and problem-solving skills.
 
 ### The Challenge
