@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
       displayFallbackBlogPosts();
     });
     
-  // Set up event listeners for blog post filtering
-  setupBlogFilters();
 });
 
 /**
@@ -84,82 +82,7 @@ function displayBlogPosts(posts) {
       blogContainer.appendChild(postCard);
     });
     
-    // Extract all unique tags for filtering from all valid posts, not just the displayed ones
-    populateTagFilters(validPosts);
   }
-}
-
-/**
- * Populates the tag filter dropdown with unique tags from all posts
- * @param {Array} posts - Array of blog post objects
- */
-function populateTagFilters(posts) {
-  const tagFilterContainer = document.querySelector('.blog-filter-tags');
-  if (!tagFilterContainer) return;
-  
-  // Extract all unique tags
-  const allTags = new Set();
-  posts.forEach(post => {
-    post.tags.forEach(tag => {
-      allTags.add(tag);
-    });
-  });
-  
-  // Sort tags alphabetically
-  const sortedTags = Array.from(allTags).sort();
-  
-  // Create tag filter buttons
-  tagFilterContainer.innerHTML = '<button class="tag-filter active" data-tag="all">All</button>';
-  sortedTags.forEach(tag => {
-    const tagSlug = tag.toLowerCase().replace(/\s+/g, '-');
-    tagFilterContainer.innerHTML += `<button class="tag-filter" data-tag="${tagSlug}">${tag}</button>`;
-  });
-}
-
-/**
- * Sets up event listeners for blog filtering
- */
-function setupBlogFilters() {
-  // Tag filtering
-  document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('tag-filter')) {
-      const selectedTag = e.target.getAttribute('data-tag');
-      
-      // Update active state on filter buttons
-      document.querySelectorAll('.tag-filter').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      e.target.classList.add('active');
-      
-      // Filter blog posts
-      filterBlogPostsByTag(selectedTag);
-    }
-  });
-}
-
-/**
- * Filters blog posts by selected tag
- * @param {string} tag - Tag to filter by
- */
-function filterBlogPostsByTag(tag) {
-  const blogCards = document.querySelectorAll('.blog-card');
-  
-  blogCards.forEach(card => {
-    if (tag === 'all') {
-      card.style.display = 'block';
-    } else {
-      const cardTags = card.querySelectorAll('.blog-tag');
-      let hasTag = false;
-      
-      cardTags.forEach(cardTag => {
-        if (cardTag.getAttribute('data-tag') === tag) {
-          hasTag = true;
-        }
-      });
-      
-      card.style.display = hasTag ? 'block' : 'none';
-    }
-  });
 }
 
 // Note: The openBlogPost function has been removed as we now use direct links to blog post pages
