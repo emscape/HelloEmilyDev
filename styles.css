@@ -1618,3 +1618,35 @@ footer p {
 .project-blog-link {
   margin-top: 10px; /* Add space above the blog post button */
 }
+/* Blog Archive Tag Filtering Enhancements */
+.blog-filter-tags .all-tags-wrapper {
+  display: inline; /* Allows tags to wrap naturally */
+  overflow: hidden; /* Hides tags exceeding max-height */
+  transition: max-height 0.4s ease-out; /* Smooth expand/collapse */
+  /* max-height will be set by JS */
+}
+
+/* Ensure tags inside the wrapper have spacing */
+.blog-filter-tags .all-tags-wrapper .tag-filter {
+    /* Inherits .tag-filter styles, add specific overrides if needed */
+    margin: 5px 2px; /* Ensure consistent margin */
+}
+
+.blog-filter-tags .see-more-tags {
+  display: none; /* Hidden by default, shown by JS if needed */
+  background: none;
+  border: none;
+  color: var(--primary-color); /* Use existing variable */
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 8px 12px; /* Match .tag-filter padding */
+  margin: 5px 2px; /* Match .tag-filter margin */
+  font-size: 0.9em; /* Slightly smaller or match tag font */
+  vertical-align: middle; /* Align with tags */
+}
+
+.blog-filter-tags .see-more-tags:hover {
+  color: var(--secondary-color); /* Use existing variable */
+}
+
+/* No specific styles needed for tags inside remaining container anymore */

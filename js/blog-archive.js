@@ -93,37 +93,142 @@ function displayBlogPosts(posts) {
 function populateTagFilters(posts) {
   const tagFilterContainer = document.querySelector('.blog-filter-tags');
   if (!tagFilterContainer) return;
-  
-  // Extract all unique tags
-  const allTags = new Set();
+
+  // Calculate tag frequencies
+  const tagCounts = {};
   posts.forEach(post => {
     post.tags.forEach(tag => {
-      allTags.add(tag);
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
     });
   });
+
+  // Sort tags by frequency (descending), then alphabetically for ties
+  const sortedTags = Object.entries(tagCounts)
+    .sort(([, countA, tagA], [, countB, tagB]) => {
+      if (countB !== countA) {
+        return countB - countA;
+      }
+      const tagAStr = String(tagA);
+      const tagBStr = String(tagB);
+      return tagAStr.localeCompare(tagBStr);
+    })
+    .map(([tag]) => tag);
+
+  // Start with the 'All' button
+  let tagsHTML = '<button class="tag-filter active" data-tag="all">All</button>';
   
-  // Sort tags alphabetically
-  const sortedTags = Array.from(allTags).sort();
-  
-  // Create tag filter buttons
-  tagFilterContainer.innerHTML = '<button class="tag-filter active" data-tag="all">All</button>';
+  // Add a wrapper for all other tags
+  tagsHTML += '<div class="all-tags-wrapper">';
   sortedTags.forEach(tag => {
     const tagSlug = tag.toLowerCase().replace(/\s+/g, '-');
-    tagFilterContainer.innerHTML += `<button class="tag-filter" data-tag="${tagSlug}">${tag}</button>`;
+    tagsHTML += `<button class="tag-filter" data-tag="${tagSlug}">${tag}</button>`;
   });
+  tagsHTML += '</div>'; // Close wrapper
+  
+  // Add "See more" button after the wrapper, initially hidden
+  tagsHTML += '<button class="see-more-tags" data-state="more" style="display: none;">See more</button>';
+
+  tagFilterContainer.innerHTML = tagsHTML;
+
+  // Adjust visibility after tags are rendered
+  // Use setTimeout to ensure layout calculation happens after render
+  setTimeout(adjustVisibleTags, 0);
 }
+
+/**
+ * Adjusts the visibility of tags based on available width, showing only two rows initially.
+ */
+function adjustVisibleTags() {
+  const tagFilterContainer = document.querySelector('.blog-filter-tags');
+  if (!tagFilterContainer) return;
+  
+  const tagsWrapper = tagFilterContainer.querySelector('.all-tags-wrapper');
+  const seeMoreButton = tagFilterContainer.querySelector('.see-more-tags');
+  const allTagButtons = tagsWrapper ? Array.from(tagsWrapper.querySelectorAll('.tag-filter')) : [];
+
+  if (!tagsWrapper || !seeMoreButton || allTagButtons.length === 0) {
+    if (seeMoreButton) seeMoreButton.style.display = 'none'; // Hide if no tags
+    return;
+  }
+
+  // Reset styles to calculate natural layout
+  tagsWrapper.style.maxHeight = '';
+  tagsWrapper.style.overflow = '';
+  seeMoreButton.style.display = 'none'; // Hide button initially
+
+  const firstTag = allTagButtons[0];
+  const firstTagOffsetTop = firstTag.offsetTop;
+  let thirdRowOffsetTop = -1;
+  let secondRowFound = false;
+
+  // Find the offsetTop of the start of the third row
+  for (const tag of allTagButtons) {
+    if (!secondRowFound && tag.offsetTop > firstTagOffsetTop) {
+      secondRowFound = true;
+    }
+    if (secondRowFound && tag.offsetTop > tag.previousElementSibling?.offsetTop && tag.offsetTop !== firstTagOffsetTop) {
+       // Check if this tag starts a new row *after* the second row started
+       const previousTag = tag.previousElementSibling;
+       if (previousTag && tag.offsetTop > previousTag.offsetTop) {
+           thirdRowOffsetTop = tag.offsetTop;
+           break; // Found the start of the third row
+       }
+    }
+  }
+  
+  // Check if the container itself is taller than the start of the third row (handles wrapping)
+  const containerScrollHeight = tagsWrapper.scrollHeight;
+  const containerClientHeight = tagsWrapper.clientHeight; // Height when not constrained
+
+  if (thirdRowOffsetTop !== -1 && containerScrollHeight > (thirdRowOffsetTop - firstTagOffsetTop)) {
+    // Calculate height for two rows. Use the offsetTop of the start of the third row.
+    const twoRowsHeight = thirdRowOffsetTop - firstTagOffsetTop;
+    
+    // Apply max-height and overflow
+    tagsWrapper.style.maxHeight = `${twoRowsHeight - 1}px`; // Subtract 1px to ensure cutoff
+    tagsWrapper.style.overflow = 'hidden';
+    seeMoreButton.style.display = 'inline-block'; // Show the button
+    seeMoreButton.textContent = 'See more';
+    seeMoreButton.setAttribute('data-state', 'more');
+  } else {
+    // All tags fit within two rows or less
+    tagsWrapper.style.maxHeight = '';
+    tagsWrapper.style.overflow = '';
+    seeMoreButton.style.display = 'none'; // Hide the button
+  }
+}
+
 
 /**
  * Sets up event listeners for blog filtering
  */
+// Debounce function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+let isInitialLoad = true; // Flag to prevent immediate execution on load for resize
+
 function setupBlogFilters() {
-  // Tag filtering
-  document.addEventListener('click', function(e) {
+  const tagFilterContainer = document.querySelector('.blog-filter-tags');
+  if (!tagFilterContainer) return;
+
+  // --- Event Listener for Clicks ---
+  tagFilterContainer.addEventListener('click', function(e) {
+    // Handle tag filter clicks (applies to 'All' button and tags inside wrapper)
     if (e.target.classList.contains('tag-filter')) {
       const selectedTag = e.target.getAttribute('data-tag');
       
-      // Update active state on filter buttons
-      document.querySelectorAll('.tag-filter').forEach(btn => {
+      // Update active state on ALL filter buttons (incl. 'All')
+      tagFilterContainer.querySelectorAll('.tag-filter').forEach(btn => {
         btn.classList.remove('active');
       });
       e.target.classList.add('active');
@@ -131,7 +236,62 @@ function setupBlogFilters() {
       // Filter blog posts
       filterBlogPostsByTag(selectedTag);
     }
+
+    // Handle "See more/less" clicks
+    if (e.target.classList.contains('see-more-tags')) {
+      const button = e.target;
+      const tagsWrapper = tagFilterContainer.querySelector('.all-tags-wrapper');
+      const currentState = button.getAttribute('data-state');
+
+      if (currentState === 'more') {
+        // Expand: Remove max-height and overflow
+        tagsWrapper.style.maxHeight = '';
+        tagsWrapper.style.overflow = '';
+        button.textContent = 'See less';
+        button.setAttribute('data-state', 'less');
+      } else {
+        // Collapse: Re-apply the two-row limit
+        adjustVisibleTags(); // Recalculate and apply the correct max-height
+        button.textContent = 'See more'; // adjustVisibleTags will set this if needed
+        button.setAttribute('data-state', 'more'); // adjustVisibleTags will set this if needed
+
+        // Optional: If active tag is now hidden, scroll it into view or switch to 'All'
+        const activeTag = tagsWrapper.querySelector('.tag-filter.active');
+        if (activeTag && tagsWrapper.scrollHeight > tagsWrapper.clientHeight) {
+           // Check if the active tag is actually hidden (offsetTop > wrapper visible height)
+           const wrapperRect = tagsWrapper.getBoundingClientRect();
+           const activeTagRect = activeTag.getBoundingClientRect();
+           if (activeTagRect.bottom > wrapperRect.bottom) {
+               // Option 1: Scroll active tag into view (might be slightly off due to overflow hidden)
+               // activeTag.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+               
+               // Option 2: Switch back to 'All' filter
+               const allButton = tagFilterContainer.querySelector('.tag-filter[data-tag="all"]');
+               if (allButton) {
+                   tagFilterContainer.querySelectorAll('.tag-filter').forEach(btn => btn.classList.remove('active'));
+                   allButton.classList.add('active');
+                   filterBlogPostsByTag('all');
+               }
+           }
+        }
+      }
+    }
   });
+
+  // --- Event Listener for Resize ---
+  // Debounce the resize handler
+  const debouncedAdjustTags = debounce(adjustVisibleTags, 250);
+
+  window.addEventListener('resize', () => {
+      // Don't run immediately on load if adjustVisibleTags is already called
+      if (!isInitialLoad) {
+          debouncedAdjustTags();
+      }
+      isInitialLoad = false; // Set flag after first potential resize event
+  });
+
+  // Reset flag after initial setup allows resize to work
+  setTimeout(() => { isInitialLoad = false; }, 100);
 }
 
 /**
