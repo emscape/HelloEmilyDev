@@ -1,0 +1,26 @@
+{
+  "name": "helloemilydev",
+  "version": "1.0.0",
+  "description": "This repository contains the source code for my personal website hosted at [HelloEmily.dev](https://HelloEmily.dev).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emscape/HelloEmilyDev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/emscape/HelloEmilyDev/issues"
+  },
+  "homepage": "https://github.com/emscape/HelloEmilyDev#readme",
+  "dependencies": {
+    "fs-extra": "^11.3.0",
+    "js-yaml": "^4.1.0",
+    "marked": "^15.0.11"
+  }
+}

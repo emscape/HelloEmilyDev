@@ -1,26 +1,22 @@
-﻿{
-    "additionalImages":  {
-
-                         },
-    "slug":  "sean-website-case-study",
-    "id":  "sean-website-case-study",
-    "shortDescription":  "A case study on rebuilding Sean\u0027s website using Wix, balancing developer customization needs with client-friendly maintenance.",
-    "featuredImage":  "/images/blog/sean-website-case-study/sean-website-case-study-featured.jpg",
-    "content":  [
-                    {
-                        "content":  "\u003ch1\u003eBuilding Sean\u0027s Website with Wix: A Balance of Customization and Ease\r\u003c/h1\u003e\n\n\u003cp\u003eSean\u0027s website needed an overhaul. His previous WordPress setup had been broken for months, and with his hosting renewal approaching, it was the perfect time to reassess his domain registration, hosting, and building tools. The goal? A cost-effective, high-performing solution that was customizable enough for me as a developer but easy enough for him to maintain and update in the future.\u003c/p\u003e\n\n\u003ch3\u003eEvaluating Domain Registrars\r\u003c/h3\u003e\n\u003cp\u003eWe considered several domain registrars for cost, reliability, and ease of use:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eNamecheap\u003c/strong\u003e: A cost-effective alternative, but switching would require additional effort.\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003cp\u003eSince GoDaddy had already renewed, we opted to keep the domain registered there and re-evaluate before the next renewal period.\u003c/p\u003e\n\n\u003ch3\u003eChoosing a Website Builder\r\u003c/h3\u003e\n\u003cp\u003eThe website builder needed to strike a balance between flexibility and usability. We explored several options:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eWix\u003c/strong\u003e: Offered the best balance—customizable enough for me, yet simple enough for Sean to maintain.\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003ch3\u003eHosting Considerations\r\u003c/h3\u003e\n\u003cp\u003eWith GoDaddy already renewed, we chose to continue using its hosting for now. However, this will be re-evaluated closer to the next renewal to ensure it remains the best choice for cost and performance.\u003c/p\u003e\n\n\u003ch3\u003eThe Verdict: Wix + GoDaddy (For Now)\r\u003c/h3\u003e\n\u003cp\u003eBy building Sean\u0027s website with Wix and keeping GoDaddy for domain registration and hosting (for the time being), we achieved:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eCost-effectiveness without unnecessary complexity.\r\u003c/li\u003e\n\n\u003c/ul\u003e\n\u003cp\u003eFuture considerations include monitoring Wix\u0027s performance and re-evaluating GoDaddy\u0027s hosting closer to the next renewal. For now, this setup provides the right mix of flexibility and ease of use.\u003c/p\u003e",
-                        "type":  "html"
-                    }
-                ],
-    "tags":  [
-                 "Web Development",
-                 "Case Study",
-                 "Wix",
-                 "Web Design"
-             ],
-    "author":  "Emily Anderson",
-    "date":  "2025-03-10",
-    "bannerImage":  "",
-    "title":  "Building Sean\u0027s Website with Wix: A Balance of Customization and Ease",
-    "featured":  false
+{
+  "id": "sean-website-case-study",
+  "slug": "sean-website-case-study",
+  "title": "Building Sean's Website with Wix: A Balance of Customization and Ease",
+  "date": "2025-03-10T00:00:00.000Z",
+  "author": "Emily Anderson",
+  "tags": [
+    "Web Development",
+    "Case Study",
+    "Wix",
+    "Web Design"
+  ],
+  "shortDescription": "A case study on rebuilding Sean's website using Wix, balancing developer customization needs with client-friendly maintenance.",
+  "featuredImage": "/images/blog/sean-website-case-study/sean-website-case-study-featured.jpg",
+  "content": [
+    {
+      "type": "html",
+      "content": "<h1>Building Sean&#39;s Website with Wix: A Balance of Customization and Ease</h1>\n<p>Sean&#39;s website needed an overhaul. His previous WordPress setup had been broken for months, and with his hosting renewal approaching, it was the perfect time to reassess his domain registration, hosting, and building tools. The goal? A cost-effective, high-performing solution that was customizable enough for me as a developer but easy enough for him to maintain and update in the future.</p>\n<h3>Evaluating Domain Registrars</h3>\n<p>We considered several domain registrars for cost, reliability, and ease of use:</p>\n<ul>\n<li><strong>GoDaddy</strong>: Sean&#39;s current provider, already set to renew.</li>\n<li><strong>Squarespace</strong>: Tied to their website builder, which was too limited for our needs.</li>\n<li><strong>Namecheap</strong>: A cost-effective alternative, but switching would require additional effort.</li>\n</ul>\n<p>Since GoDaddy had already renewed, we opted to keep the domain registered there and re-evaluate before the next renewal period.</p>\n<h3>Choosing a Website Builder</h3>\n<p>The website builder needed to strike a balance between flexibility and usability. We explored several options:</p>\n<ul>\n<li><strong>Google Sites</strong>: Too basic and restrictive for customization.</li>\n<li><strong>Squarespace</strong>: Limited design flexibility, not ideal for a developer&#39;s needs.</li>\n<li><strong>GitHub Pages</strong>: A great developer tool, but too complex for Sean to manage without ongoing assistance.</li>\n<li><strong>Wix</strong>: Offered the best balance—customizable enough for me, yet simple enough for Sean to maintain.</li>\n</ul>\n<h3>Hosting Considerations</h3>\n<p>With GoDaddy already renewed, we chose to continue using its hosting for now. However, this will be re-evaluated closer to the next renewal to ensure it remains the best choice for cost and performance.</p>\n<h3>The Verdict: Wix + GoDaddy (For Now)</h3>\n<p>By building Sean&#39;s website with Wix and keeping GoDaddy for domain registration and hosting (for the time being), we achieved:</p>\n<ul>\n<li>A visually appealing, functional site without technical limitations.</li>\n<li>A platform Sean can easily update with new content.</li>\n<li>Cost-effectiveness without unnecessary complexity.</li>\n</ul>\n<p>Future considerations include monitoring Wix&#39;s performance and re-evaluating GoDaddy&#39;s hosting closer to the next renewal. For now, this setup provides the right mix of flexibility and ease of use.</p>\n"
+    }
+  ],
+  "featured": false
 }
