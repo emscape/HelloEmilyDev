@@ -2,7 +2,7 @@
 title: "Prompt Engineering and AI Guardrails: The Skills of the Future"
 date: 2025-03-30
 author: Emily Anderson
-tags: [AI, Prompt Engineering, Guardrails, Ethics, Machine Learning, Artificial Intelligence, Responsible AI, Future Skills]
+tags: [Artificial Intelligence, Prompt Engineering, Guardrails, Ethics, Machine Learning, Responsible AI, Future Skills]
 featuredImage: /images/blog/ai-guardrails/ai-guardrails-featured.jpg
 bannerImage: ""
 featured: true

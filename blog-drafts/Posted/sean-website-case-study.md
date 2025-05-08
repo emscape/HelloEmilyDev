@@ -2,7 +2,7 @@
 title: "Building Sean's Website with Wix: A Balance of Customization and Ease"
 author: Emily Anderson
 date: 2025-03-10
-tags: [Web Development, Case Study, Wix, Website Design]
+tags: [Web Development, Case Study, Wix, Web Design]
 featured: false
 featuredImage: /images/blog/sean-website-case-study/sean-website-case-study-featured.jpg
 shortDescription: "A case study on rebuilding Sean's website using Wix, balancing developer customization needs with client-friendly maintenance."

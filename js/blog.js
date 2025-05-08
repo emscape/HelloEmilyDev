@@ -57,11 +57,6 @@ function displayBlogPosts(posts) {
         day: 'numeric'
       });
       
-      // Create tags HTML
-      const tagsHTML = post.tags
-        .map(tag => `<span class="blog-tag" data-tag="${tag.toLowerCase().replace(/\s+/g, '-')}">${tag}</span>`)
-        .join('');
-      
       // Build card HTML (added featuredImage back)
       postCard.innerHTML = `
         ${post.featuredImage ? `<img src="${post.featuredImage}" alt="${post.title} Featured Image" class="blog-card-image">` : ''}
@@ -72,9 +67,6 @@ function displayBlogPosts(posts) {
           </div>
           <h3>${post.title}</h3>
           <p>${post.shortDescription || ''}</p> <!-- Added short description -->
-          <div class="blog-tags">
-            ${tagsHTML}
-          </div>
           <a href="blog-post.html?slug=${post.slug}" class="btn blog-read-more">Read More</a>
         </div>
       `; // Use slug for link
