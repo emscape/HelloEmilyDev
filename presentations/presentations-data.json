@@ -1,0 +1,14 @@
+[
+  {
+    "title": "A Journey Through The Cosmos: My Visit to JPL",
+    "pdfPath": "presentations/A Journey Through The Cosmos_ My Visit to JPL.pdf",
+    "thumbnail": "images/presentations/jpl_placeholder.png",
+    "description": "An overview of my visit to the Jet Propulsion Laboratory."
+  },
+  {
+    "title": "Generative AI - GDG",
+    "pdfPath": "presentations/Generative AI - GDG .pdf",
+    "thumbnail": "images/presentations/placeholder_thumbnail.png",
+    "description": "A presentation on Generative AI for GDG."
+  }
+]
