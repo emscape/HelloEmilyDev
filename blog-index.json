@@ -156,22 +156,8 @@
       "featured": false
     },
     {
-      "slug": "panel-facilitation",
-      "title": "Empowering Women in Technology: Challenges and Opportunities",
-      "date": "2024-08-15T00:00:00.000Z",
-      "tags": [
-        "Women in Tech",
-        "Diversity",
-        "Inclusion",
-        "Technology"
-      ],
-      "shortDescription": "Exploring the current landscape for women in the tech industry",
-      "featuredImage": "/images/blog/panel-facilitation/women-in-tech-featured.jpg",
-      "featured": true
-    },
-    {
       "slug": "women-in-tech",
-      "title": "Empowering Women in Technology: Challenges and Opportunities",
+      "title": "Empowering Women in Tech: Highlights from DevFest & IWD Panels",
       "date": "2024-08-15T00:00:00.000Z",
       "tags": [
         "Women in Tech",
