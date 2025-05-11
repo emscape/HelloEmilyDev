@@ -27,25 +27,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23008080%22>E</text></svg>">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><a href="index.html">Emily Anderson</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#skills">Skills</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
-                    <li class="dropdown">
-                        <a href="index.html#blog">Blog</a>
-                        <div class="dropdown-content">
-                            <a href="blog-archive.html">Blog Archive</a>
-                        </div>
-                    </li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <section id="blog-post-container" style="padding-top: 150px;">
         <div class="container">
@@ -70,6 +52,7 @@
     </footer>
     
     <!-- Scripts -->
+    <script src="js/load-header.js" defer></script>
     <script src="js/blog-content-parser.js"></script>
     <script src="js/blog-post.js"></script>
 </body>

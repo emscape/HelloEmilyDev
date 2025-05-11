@@ -1,0 +1,206 @@
+/* Presentations Page Specific Styles */
+
+/* Inherit global styles and variables by linking styles.css in presentations.html */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+    /* margin-top: 80px; REMOVED - main site header handles its own spacing */
+}
+
+/* REMOVE old header styles as they are replaced by site-wide header and .page-header-title */
+/* header { ... } */
+/* header h1 { ... } */
+
+/* Section styling for the presentations page */
+#presentations-page {
+    padding-top: 120px; /* Adjust to clear fixed header, consistent with other pages */
+    padding-bottom: 60px;
+}
+
+/* Styling for the page title container */
+.page-header-title {
+    text-align: center;
+    margin-bottom: 50px; /* Matches section h2 margin-bottom from styles.css */
+}
+
+.page-header-title h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2.4rem; /* Matches section h2 font-size */
+    color: var(--primary-color); /* Matches section h2 color */
+    position: relative;
+    letter-spacing: 0.5px; /* Matches section h2 letter-spacing */
+    display: inline-block; /* Allows ::after to be positioned correctly */
+    margin-bottom: 0; /* Reset margin as parent div handles bottom margin */
+}
+
+.page-header-title h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); /* Matches section h2::after */
+    margin: 15px auto 0;
+    border-radius: 3px;
+}
+
+/* Optional: If a subtitle paragraph is added under .page-header-title */
+.page-header-title p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 15px auto 0;
+}
+
+main { /* main tag is no longer used as direct child for content, section is */
+    padding: 0; /* Reset padding if any was previously set */
+}
+
+#presentations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.presentation-item {
+    background-color: #fff;
+    border-radius: var(--border-radius-lg, 12px);
+    box-shadow: var(--shadow, 0 4px 12px rgba(0, 0, 0, 0.08));
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.presentation-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-strong, 0 8px 20px rgba(0, 0, 0, 0.15));
+}
+
+.presentation-item img {
+    width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Cover to fill, might crop */
+    border-top-left-radius: var(--border-radius-lg, 12px); /* Match card radius */
+    border-top-right-radius: var(--border-radius-lg, 12px); /* Match card radius */
+    border-bottom: 1px solid var(--light-accent, #E6F4F1); /* Subtle separator */
+    margin: 0; /* Override global img margin */
+    border-radius: 0; /* Override global img border-radius */
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+}
+
+.presentation-item-content { /* Added a wrapper for text content */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows content to fill space */
+}
+
+.presentation-item h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.4rem;
+    color: var(--primary-dark, #007A7C);
+    margin-bottom: 10px;
+}
+
+.presentation-item p {
+    font-size: 0.95rem;
+    color: var(--text-light, #666666);
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Pushes link to bottom */
+}
+
+.presentation-item a {
+    display: inline-block;
+    background-color: var(--primary-color, #00B5B8);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: var(--border-radius, 8px);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-top: auto; /* Pushes link to bottom of flex container */
+}
+
+.presentation-item a:hover {
+    background-color: var(--secondary-color, #FF8C42);
+    color: #fff;
+}
+
+/* Styles for new elements: Tags and Blog Post Button */
+.presentation-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px; /* Add some space before the links */
+}
+
+.tag {
+    background-color: #eee;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    color: #333;
+}
+
+.blog-post-btn {
+    /* Inherits some styles from .presentation-item a */
+    /* Specific styles for blog post button if needed, e.g., different color */
+    background-color: var(--secondary-color, #FF8C42); /* Example: different color */
+    margin-top: 10px; /* Ensure spacing if PDF link is also present */
+}
+
+.blog-post-btn:hover {
+    background-color: var(--primary-color, #00B5B8); /* Example: different hover color */
+}
+
+/* Adjustments for multiple links/buttons in the card */
+.presentation-item-content .presentation-link + .blog-post-btn,
+.presentation-item-content .presentation-tags + .presentation-link {
+    margin-top: 10px; /* Ensure spacing between elements */
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #presentations-list {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    #presentations-page { /* Adjust padding for smaller screens */
+        padding-top: 100px; /* Less padding for smaller screens */
+        padding-bottom: 40px;
+    }
+
+    .page-header-title h2 { /* Adjust title size for smaller screens */
+        font-size: 2rem;
+    }
+    .page-header-title p { /* Adjust subtitle size */
+        font-size: 1rem;
+    }
+
+    .presentation-item h3 {
+        font-size: 1.3rem;
+    }
+
+    .presentation-item p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #presentations-list {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+    .presentation-item img {
+        height: 180px;
+    }
+}
