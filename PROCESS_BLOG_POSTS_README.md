@@ -48,16 +48,16 @@ Here's an example of the YAML front matter to include at the top of your markdow
 
 ```yaml
 ---
-title: "My Awesome New Blog Post"
-date: "2025-05-06" # Use YYYY-MM-DD format
-author: "Emily Anderson"
-tags:
-  - "Technology"
-  - "JavaScript"
-  - "Web Development"
-description: "A brief and engaging summary of what this blog post is about. This will be used for previews."
-# featured: true # Optional: set to true if this post should be marked as featured. Defaults to false.
-# bannerImage: "/images/blog/my-awesome-post/optional-banner.jpg" # Optional: if you have a specific banner image different from featured.
+title: "Your Blog Post Title"
+date: "YYYY-MM-DD" # (Required) Format: Year-Month-Day
+author: "Author Name" # (Required)
+tags: # (Required) Must be a list, even if only one tag.
+  - "Tag1"
+  - "Tag2"
+  - "Another Tag"
+shortDescription: "A concise summary of your blog post, appearing in listings." # (Required)
+featuredImage: "your-featured-image-filename.png" # (Required) Filename of the main image for this post (e.g., image.jpg, image.png). This file should be placed in the 'blog-drafts/new/' directory alongside the .md file. The script will move it to 'images/blog/[slug]/'.
+featured: false # (Optional) Boolean (true/false). Set to true to mark as a featured post. Defaults to false if omitted.
 ---
 
 Your markdown content starts here...
@@ -66,10 +66,12 @@ Your markdown content starts here...
 
 **Required YAML Fields:**
 
-*   `title`: The title of your blog post.
-*   `date`: The publication date (YYYY-MM-DD).
-*   `author`: The author's name.
-*   `tags`: A list of relevant tags.
-*   `description`: A short summary of the post.
+*   `title`: "Your Blog Post Title"
+*   `date`: "YYYY-MM-DD" # (Required) Format: Year-Month-Day
+*   `author`: "Author Name" # (Required)
+*   `tags`: # (Required) Must be a list, even if only one tag.
+*   `shortDescription`: "A concise summary of your blog post, appearing in listings." # (Required)
+*   `featuredImage`: "your-featured-image-filename.png" # (Required) Filename of the main image for this post.
+*   `featured`: false # (Optional) Boolean (true/false). Defaults to false if omitted.
 
 The script will use the markdown filename (without the `.md` extension) as the `slug` for the post (e.g., `my-awesome-post.md` becomes slug `my-awesome-post`).

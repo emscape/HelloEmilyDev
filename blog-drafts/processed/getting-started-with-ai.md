@@ -74,6 +74,6 @@ For organizations looking to adopt generative AI, we discussed several key consi
 
 The event brought together professionals from various industries, sparking valuable discussions about the practical challenges and opportunities of AI adoption in corporate settings. Attendees shared their experiences with early AI implementations, highlighting both successes and lessons learned.
 
-For those who couldn't attend, I've created a presentations folder in my repository where I'll be sharing the slides and additional resources from this and future talks. Feel free to explore these materials for deeper insights into enterprise AI adoption strategies.
+For those who couldn't attend, I've created a [presentations page](/presentations.html) where I'll be sharing the slides and additional resources from this and future talks. Feel free to explore these materials for deeper insights into enterprise AI adoption strategies.
 
 As AI continues to evolve, staying informed about its capabilities, limitations, and ethical considerations becomes increasingly important for everyone, regardless of technical background. Whether you're just beginning your AI journey or looking to implement these technologies in an enterprise environment, understanding the fundamentals is the first step toward successful adoption.

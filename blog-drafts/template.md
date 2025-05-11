@@ -1,12 +1,17 @@
-# Your Blog Post Title Here
+---
+title: "Your Blog Post Title"
+date: "YYYY-MM-DD" # (Required) Format: Year-Month-Day
+author: "Author Name" # (Required)
+tags: # (Required) Must be a list, even if only one tag.
+  - "Tag1"
+  - "Tag2"
+  - "Another Tag"
+shortDescription: "A concise summary of your blog post, appearing in listings." # (Required)
+featuredImage: "your-featured-image-filename.png" # (Required) Filename of the main image for this post (e.g., image.jpg, image.png). This file should be placed in the 'blog-drafts/new/' directory alongside the .md file. The script will move it to 'images/blog/[slug]/'.
+featured: false # (Optional) Boolean (true/false). Set to true to mark as a featured post. Defaults to false if omitted.
+---
 
-## Metadata
-- Author: Your Name
-- Date: YYYY-MM-DD
-- Tags: tag1, tag2, tag3
-- Featured: false
-- FeaturedImage: images/blog/your-post-folder/your-post-folder-featured.jpg
-
+(Your Markdown content starts here...)
 <!--
 Note on images:
 1. Create a folder for your blog post in images/blog/ (e.g., images/blog/your-post-folder/)
@@ -17,8 +22,6 @@ Note on images:
 4. Reference images using the path: images/blog/your-post-folder/your-post-folder-featured.jpg
 -->
 
-## Short Description
-Write a brief one or two sentence description of your blog post here. This will appear in the blog card preview.
 
 ## Content
 Your full blog post content goes here. You can use markdown formatting for rich text.

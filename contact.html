@@ -220,20 +220,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><a href="index.html">Emily Anderson</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#skills">Skills</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
-                    <li><a href="index.html#blog">Blog</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <section style="padding-top: 120px; padding-bottom: 60px;">
         <div class="container">
@@ -314,6 +301,7 @@
         </div>
     </footer>
 
+    <script src="js/load-header.js" defer></script>
     <script>
         // Show secret message after visiting all social cards
         const socialCards = document.querySelectorAll('.social-card');
