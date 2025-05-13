@@ -10,13 +10,14 @@
     "pdfPath": "presentations/posted/Generative AI - GDG .pdf",
     "thumbnail": "images/presentations/getting-started-with-ai-featured.jpg",
     "relatedBlogPostUrl": "/blog-post.html?slug=getting-started-with-ai",
-    "cardMarkdownPath": "presentations/posted/generative-ai-gdg-card.md"
+    "cardMarkdownPath": "presentations/posted/generative-ai-gdg-card.md",
+    "longDescriptionMarkdown": "---\ntitle: \"Getting Started with Generative AI (GDG)\"\ntags: [AI, Generative AI, GDG, Workshop]\ndescription: \"An introductory workshop on Generative AI concepts and tools.\"\n---\n\nThis presentation provides an overview of Generative AI, its applications, and how to get started with various tools and platforms. Ideal for developers and tech enthusiasts looking to explore the creative potential of AI.\n\n(Please replace this with the actual markdown content for the 'Generative AI - GDG' presentation card.)"
   },
   {
     "pdfPath": "presentations/posted/ai-empathy-iwd.pdf",
     "thumbnail": "images/presentations/empathy-ai-featured.png",
     "cardMarkdownPath": "presentations/posted/empathy-ai-presentation-card.md",
     "relatedBlogPostUrl": null,
-    "longDescriptionMarkdown": ""
+    "longDescriptionMarkdown": "---\ntitle: \"AI and Empathy (IWD)\"\ntags: [AI, Empathy, Ethics, IWD]\ndescription: \"Exploring the intersection of Artificial Intelligence and human empathy.\"\n---\n\nThis presentation discusses the role of empathy in the development and application of AI technologies, highlighting ethical considerations and future possibilities.\n\n(Please replace this with the actual markdown content for the 'AI and Empathy - IWD' presentation card.)"
   }
 ]
