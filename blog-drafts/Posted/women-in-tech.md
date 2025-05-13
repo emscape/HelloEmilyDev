@@ -2,7 +2,7 @@
 title: "Empowering Women in Technology: Challenges and Opportunities"
 shortDescription: "Exploring the current landscape for women in the tech industry"
 author: Emily Anderson
-date: 2024-08-15
+date: "2024-08-15"
 tags: [Women in Tech, Diversity, Inclusion, Technology]
 featuredImage: /images/blog/women-in-tech/women-in-tech-featured.jpg
 bannerImage: ""

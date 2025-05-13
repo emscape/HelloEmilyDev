@@ -1,6 +1,6 @@
 ---
 title: "The Ethics and Impact of AI: Personal Benefits vs. Societal Concerns"
-date: 2025-03-10
+date: "2025-03-10"
 author: Emily Anderson
 tags: [Artificial Intelligence, Ethics, Technology]
 featuredImage: /images/blog/ethics-and-ai/ethics-and-ai-featured.jpg

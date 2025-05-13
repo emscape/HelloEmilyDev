@@ -1,6 +1,6 @@
 ---
 title: "Go to the Store and Buy Bread: Why Tech Docs Fail (and How Sparky Fixed It)"
-date: 2025-04-14
+date: "2025-04-14"
 author: Emily Anderson
 tags: [Learning, Tech Education, Documentation, Beginner Friendly, AI Assistant, Sparky, Developer Experience, Empathy in Tech, Tutorials, Blog Series]
 featuredImage: /images/blog/go-to-the-store-and-buy-bread.png

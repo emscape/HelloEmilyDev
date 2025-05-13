@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with AI: A Beginner's Guide"
-date: 2023-09-08
+date: "2023-09-08"
 author: Emily Anderson
 tags: [Artificial Intelligence, Machine Learning, Technology, Beginner Friendly, Enterprise AI, Generative AI Enterprise, GDG Twin Cities]
 featuredImage: /images/blog/getting-started-with-ai/getting-started-with-ai-featured.jpg

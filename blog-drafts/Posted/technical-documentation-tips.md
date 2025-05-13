@@ -2,7 +2,7 @@
 title: "The Art of Technical Documentation: Best Practices"
 shortDescription: "Tips for creating effective technical documentation that users will actually read"
 author: Emily Anderson
-date: 2024-06-27
+date: "2024-06-27"
 tags: [Technical Writing, Documentation, Best Practices, User Experience]
 featuredImage: /images/blog/technical-documentation-tips/technical-documentation-tips-featured.jpg
 bannerImage: ""

@@ -1,6 +1,6 @@
 ---
 title: "Knitting and Technology: The Unexpected Intersection of Patterns and Precision"
-date: 2025-01-15
+date: "2025-01-15"
 author: Emily Anderson
 tags: [Knitting, Technology, Creativity, Problem Solving, Patterns]
 featuredImage: /images/blog/knitting-tech/knitting-tech-featured.jpg

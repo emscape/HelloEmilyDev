@@ -1,6 +1,6 @@
 ---
 title: "Humans Have Ideas. AIs Do Execution. I’ve Decided."
-date: 2025-03-28
+date: "2025-03-28"
 author: Emily Anderson
 tags: [Artificial Intelligence, Productivity, Creativity, Technology, Personal]
 featuredImage: /images/blog/humans-have-ideas-featured.png
