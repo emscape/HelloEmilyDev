@@ -1,26 +1,22 @@
 [
   {
-    "title": "A Journey Through The Cosmos: My Visit to JPL",
-    "pdfPath": "presentations/A Journey Through The Cosmos_ My Visit to JPL.pdf",
+    "pdfPath": "presentations/posted/A Journey Through The Cosmos_ My Visit to JPL.pdf",
     "thumbnail": "images/presentations/jpl-visit.png",
-    "description": "An overview of my visit to the Jet Propulsion Laboratory.",
-    "tags": [],
-    "relatedBlogPostUrl": null
+    "relatedBlogPostUrl": "blog-post.html?id=jpl-ai-blog",
+    "longDescriptionMarkdown": "---\ntitle: \"A Journey Through the Cosmos: My First AI-Generated Slide Adventure 🚀\"\nauthor: Emily Anderson\ntags: [JPL, AI, Presentation, Space Exploration, NASA]\ndescription: \"Reflections on visiting NASA's Jet Propulsion Laboratory and using AI to create a presentation.\"\n---\n\nI recently had the opportunity to visit NASA’s Jet Propulsion Laboratory (JPL)—a behind-the-scenes glimpse into some of the most iconic space exploration missions of our time. From the Mars Yard and Mission Control to the Europa Clipper and Mars Sample Return plans, the experience was unforgettable.\n\nTo commemorate the trip, I put together a presentation using an AI slide generator—my first time leveraging generative tools to build a deck. While I added my own context and commentary throughout, the majority of the structure and visuals came straight from the AI. It turned out to be a fun experiment in letting technology help tell the story of... technology.\n\nCheck out the highlights from my visit, learn more about the incredible work happening at JPL, and follow along as I continue to explore how AI can streamline storytelling—on Earth and beyond. 🌌",
+    "cardMarkdownPath": "presentations/posted/jpl-visit-presentation.md"
   },
   {
-    "title": "Generative AI - GDG",
-    "pdfPath": "presentations/Generative AI - GDG .pdf",
+    "pdfPath": "presentations/posted/Generative AI - GDG .pdf",
     "thumbnail": "images/presentations/getting-started-with-ai-featured.jpg",
-    "description": "A presentation on Generative AI for GDG.",
-    "tags": [
-      "Artificial Intelligence",
-      "Machine Learning",
-      "Technology",
-      "Beginner Friendly",
-      "Enterprise AI",
-      "Generative AI Enterprise",
-      "GDG Twin Cities"
-    ],
-    "relatedBlogPostUrl": "/blog-post.html?slug=getting-started-with-ai"
+    "relatedBlogPostUrl": "/blog-post.html?slug=getting-started-with-ai",
+    "cardMarkdownPath": "presentations/posted/generative-ai-gdg-card.md"
+  },
+  {
+    "pdfPath": "presentations/posted/ai-empathy-iwd.pdf",
+    "thumbnail": "images/presentations/empathy-ai-featured.png",
+    "cardMarkdownPath": "presentations/posted/empathy-ai-presentation-card.md",
+    "relatedBlogPostUrl": null,
+    "longDescriptionMarkdown": ""
   }
 ]
