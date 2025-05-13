@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('load-header.js: Script started.');
-    const headerPath = '/_includes/header.html';
+    const headerPath = '/header.html';
     const fullUrl = window.location.origin + headerPath;
     console.log('load-header.js: Attempting to fetch header from:', fullUrl);
 
