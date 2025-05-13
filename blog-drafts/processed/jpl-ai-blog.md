@@ -1,6 +1,6 @@
 ---
 title: "A Journey Through the Cosmos: Visiting JPL with Dr. Eric Huff"
-date: "2025-05-10"
+date: "2023-09-28"
 author: "Emily Anderson"
 tags:
   - "JPL"
@@ -8,7 +8,7 @@ tags:
   - "AI Tools"
   - "Space Exploration"
 shortDescription: "A behind-the-scenes visit to NASA's JPL, guided by Dr. Eric Huff, and how I used AI to generate presentation slides infused with my personal photos."
-featuredImage: "jpl-visit-featured.jpg"
+featuredImage: "jpl-ai-blog-featured.png"
 featured: false
 ---
 
