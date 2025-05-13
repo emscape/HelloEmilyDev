@@ -1,6 +1,6 @@
 ---
 title: "Your Blog Post Title"
-date: "YYYY-MM-DD" # (Required) Format: Year-Month-Day
+date: "2222-22-22" # (Required) Format: Year-Month-Day
 author: "Author Name" # (Required)
 tags: # (Required) Must be a list, even if only one tag.
   - "Tag1"
