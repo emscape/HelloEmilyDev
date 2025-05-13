@@ -11,13 +11,13 @@
     "thumbnail": "images/presentations/getting-started-with-ai-featured.jpg",
     "relatedBlogPostUrl": "/blog-post.html?slug=getting-started-with-ai",
     "cardMarkdownPath": "presentations/posted/generative-ai-gdg-card.md",
-    "longDescriptionMarkdown": "---\ntitle: \"Getting Started with Generative AI (GDG)\"\ntags: [AI, Generative AI, GDG, Workshop]\ndescription: \"An introductory workshop on Generative AI concepts and tools.\"\n---\n\nThis presentation provides an overview of Generative AI, its applications, and how to get started with various tools and platforms. Ideal for developers and tech enthusiasts looking to explore the creative potential of AI.\n\n(Please replace this with the actual markdown content for the 'Generative AI - GDG' presentation card.)"
+    "longDescriptionMarkdown": "---\ntitle: \"Generative AI: Considerations for Use in Corporate Enterprises\"\ntags: [AI, Generative AI, GDG, Enterprise AI, Machine Learning, Security, Ethics]\n---\n\nPresented at GDG Twin Cities, this session explores the evolution of generative AI, practical industry applications, and critical security and ethical considerations enterprises must address."
   },
   {
     "pdfPath": "presentations/posted/ai-empathy-iwd.pdf",
     "thumbnail": "images/presentations/empathy-ai-featured.png",
     "cardMarkdownPath": "presentations/posted/empathy-ai-presentation-card.md",
     "relatedBlogPostUrl": null,
-    "longDescriptionMarkdown": "---\ntitle: \"AI and Empathy (IWD)\"\ntags: [AI, Empathy, Ethics, IWD]\ndescription: \"Exploring the intersection of Artificial Intelligence and human empathy.\"\n---\n\nThis presentation discusses the role of empathy in the development and application of AI technologies, highlighting ethical considerations and future possibilities.\n\n(Please replace this with the actual markdown content for the 'AI and Empathy - IWD' presentation card.)"
+    "longDescriptionMarkdown": "---\ntitle: \"Empathy & AI: Building Emotional Intelligence into Technology\"\ntags: [AI, Empathy, Ethics, Sentiment Analysis, Diversity, Human-Centered Design]\n---\n\nExplore how emotional nuance, inclusive design, and a social work lens can help build more empathetic AI systems. This talk delves into what happens when social work meets machine learning, covering why AI often misreads human emotion, real-world examples from emotional AI design, and strategies for building empathy into systems using inclusive datasets and user testing. Learn how emotionally intelligent AI can create more human-centered technology. (This presentation also marks a second experiment using generative AI for slide creation.)"
   }
 ]
