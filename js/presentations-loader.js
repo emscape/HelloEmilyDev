@@ -63,42 +63,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Use Promise.all to handle all fetches concurrently
             const presentationPromises = data.map(presentation => {
-                // Basic validation of JSON entry
-                if (!presentation.cardMarkdownPath || !presentation.pdfPath || !presentation.thumbnail) {
-                    console.error('Skipping presentation due to missing required JSON fields (cardMarkdownPath, pdfPath, thumbnail):', presentation);
+                // Basic validation of JSON entry: ensure longDescriptionMarkdown, pdfPath, and thumbnail exist
+                if (!presentation.longDescriptionMarkdown || !presentation.pdfPath || !presentation.thumbnail) {
+                    console.error('Skipping presentation due to missing required JSON fields (longDescriptionMarkdown, pdfPath, thumbnail):', presentation.title || 'Unknown Title');
                     return Promise.resolve(null); // Resolve with null to filter out later
                 }
 
-                return fetch(presentation.cardMarkdownPath)
-                    .then(res => {
-                        if (!res.ok) {
-                            console.error(`Error fetching Markdown for ${presentation.cardMarkdownPath}: ${res.status}. Skipping this presentation.`);
-                            // Return null or a specific error object if needed downstream
-                            return Promise.resolve(null); // Resolve with null to filter out
-                        }
-                        return res.text();
-                    })
-                    .then(mdText => {
-                        if (mdText === null) return null; // Skip if fetch failed
+                try {
+                    const mdText = presentation.longDescriptionMarkdown;
+                    // Ensure mdText is a string, as parseFrontmatterAndBody expects it.
+                    if (typeof mdText !== 'string') {
+                        console.error('Skipping presentation due to longDescriptionMarkdown not being a string:', presentation.title || 'Unknown Title');
+                        return Promise.resolve(null);
+                    }
 
-                        const parsed = parseFrontmatterAndBody(mdText);
-                        
-                        // Combine parsed data with essential JSON data
-                        return {
-                            // Data primarily from Markdown
-                            title: parsed.frontmatter.title || 'Untitled Presentation', // Fallback title
-                            descriptionHTML: parsed.body || '<p>Description not available.</p>', // Fallback description
-                            tags: parsed.frontmatter.tags || [], // Fallback empty tags array
-                            // Data from JSON
-                            thumbnail: presentation.thumbnail,
-                            pdfPath: presentation.pdfPath,
-                            relatedBlogPostUrl: presentation.relatedBlogPostUrl 
-                        };
-                    })
-                    .catch(error => {
-                        console.error(`Error processing presentation defined by ${presentation.cardMarkdownPath}:`, error);
-                        return null; // Resolve with null on error to filter out
+                    const parsed = parseFrontmatterAndBody(mdText); // This function extracts title, tags, and body from the mdText string
+                    
+                    // Combine parsed data with essential JSON data
+                    return Promise.resolve({ // Still return a promise to fit Promise.all
+                        // Data primarily from the parsed Markdown (embedded in longDescriptionMarkdown)
+                        title: parsed.frontmatter.title || 'Untitled Presentation', // Fallback title
+                        descriptionHTML: parsed.body || '<p>Description not available.</p>', // Fallback description
+                        tags: parsed.frontmatter.tags || [], // Fallback empty tags array
+                        // Data from other JSON fields
+                        thumbnail: presentation.thumbnail,
+                        pdfPath: presentation.pdfPath,
+                        relatedBlogPostUrl: presentation.relatedBlogPostUrl
                     });
+                } catch (error) {
+                    console.error(`Error parsing embedded markdown for presentation (Title: ${presentation.title || 'N/A'}):`, error);
+                    return Promise.resolve(null); // Resolve with null on error to filter out
+                }
             });
 
             return Promise.all(presentationPromises);
