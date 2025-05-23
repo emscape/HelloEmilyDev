@@ -15,7 +15,9 @@ const crypto = require('crypto');
 
 // Directories
 const DRAFTS_DIR = path.join(__dirname, '..', 'blog-drafts');
-const BLOG_DATA_PATH = path.join(__dirname, '..', 'blog', 'blog-data.json');
+const BLOG_INDEX_PATH = path.join(__dirname, '..', 'blog-index.json'); // Corrected path for the main index
+const POST_FILES_DIR = path.join(__dirname, '..', 'blog-data'); // Path for individual post JSON files
+const PROCESSED_DRAFTS_DIR = path.join(DRAFTS_DIR, 'processed'); // Directory for processed markdown files
 
 /**
  * Parses a markdown file and extracts the metadata and content
@@ -138,31 +140,64 @@ function convertMarkdownToHtml(markdown) {
 /**
  * Processes a single markdown file and adds it to the blog data
  * @param {string} filePath - Path to the markdown file
- * @param {Object} blogData - Current blog data
- * @returns {Object} - Updated blog data
+ * @param {Object} indexData - Current blog index data
+ * @returns {Object} - Updated blog index data
  */
-function processMarkdownFile(filePath, blogData) {
+function processMarkdownFile(filePath, indexData) {
   try {
     console.log(`Processing ${filePath}...`);
-    const post = parseMarkdownFile(filePath);
+    const fullPostData = parseMarkdownFile(filePath); // This contains the full post, including content
+
+    // Ensure POST_FILES_DIR exists
+    if (!fs.existsSync(POST_FILES_DIR)) {
+      fs.mkdirSync(POST_FILES_DIR, { recursive: true });
+      console.log(`Created directory: ${POST_FILES_DIR}`);
+    }
+
+    // Save the full post data to its individual JSON file in blog-data/
+    const individualPostPath = path.join(POST_FILES_DIR, `${fullPostData.id}.json`);
+    fs.writeFileSync(individualPostPath, JSON.stringify(fullPostData, null, 2));
+    console.log(`Saved full post to: ${individualPostPath}`);
+
+    // Prepare metadata for the blog-index.json
+    const postMetadata = {
+      slug: fullPostData.id, // 'id' from parseMarkdownFile is the slug
+      title: fullPostData.title,
+      shortDescription: fullPostData.shortDescription,
+      // author: fullPostData.author, // blog-index.json doesn't currently store author
+      date: fullPostData.date,
+      tags: fullPostData.tags,
+      featuredImage: fullPostData.featuredImage,
+      featured: fullPostData.featured
+    };
     
-    // Check if post with same ID already exists
-    const existingPostIndex = blogData.posts.findIndex(p => p.id === post.id);
+    // Check if post with same slug already exists in the index
+    const existingPostIndex = indexData.posts.findIndex(p => p.slug === postMetadata.slug);
     
     if (existingPostIndex !== -1) {
-      // Update existing post
-      blogData.posts[existingPostIndex] = post;
-      console.log(`Updated existing post: ${post.title}`);
+      // Update existing post metadata in the index
+      indexData.posts[existingPostIndex] = postMetadata;
+      console.log(`Updated post metadata in index: ${postMetadata.title}`);
     } else {
-      // Add new post
-      blogData.posts.push(post);
-      console.log(`Added new post: ${post.title}`);
+      // Add new post metadata to the index
+      indexData.posts.push(postMetadata);
+      console.log(`Added new post metadata to index: ${postMetadata.title}`);
     }
     
-    return blogData;
+    // Move the processed markdown file
+    if (!fs.existsSync(PROCESSED_DRAFTS_DIR)) {
+      fs.mkdirSync(PROCESSED_DRAFTS_DIR, { recursive: true });
+      console.log(`Created directory: ${PROCESSED_DRAFTS_DIR}`);
+    }
+    const processedFilePath = path.join(PROCESSED_DRAFTS_DIR, path.basename(filePath));
+    fs.renameSync(filePath, processedFilePath);
+    console.log(`Moved processed markdown file to: ${processedFilePath}`);
+
+    return indexData;
   } catch (error) {
     console.error(`Error processing ${filePath}:`, error.message);
-    return blogData;
+    // If there was an error, do not move the file, return original indexData
+    return indexData;
   }
 }
 
@@ -172,20 +207,20 @@ function processMarkdownFile(filePath, blogData) {
  */
 function main(specificFile) {
   // Load existing blog data
-  let blogData;
+  let indexData;
   try {
-    const data = fs.readFileSync(BLOG_DATA_PATH, 'utf8');
-    blogData = JSON.parse(data);
+    const data = fs.readFileSync(BLOG_INDEX_PATH, 'utf8');
+    indexData = JSON.parse(data);
   } catch (error) {
-    console.log('Creating new blog data file...');
-    blogData = { posts: [] };
+    console.log(`Creating new blog index file at ${BLOG_INDEX_PATH}...`);
+    indexData = { posts: [] };
   }
   
   if (specificFile) {
     // Process specific file
     const filePath = path.join(DRAFTS_DIR, specificFile);
     if (fs.existsSync(filePath)) {
-      blogData = processMarkdownFile(filePath, blogData);
+      indexData = processMarkdownFile(filePath, indexData);
     } else {
       console.error(`File not found: ${filePath}`);
       return;
@@ -195,20 +230,20 @@ function main(specificFile) {
     const files = fs.readdirSync(DRAFTS_DIR);
     
     for (const file of files) {
-      if (file.endsWith('.md') && file !== 'README.md') {
+      if (file.endsWith('.md') && file !== 'README.md' && file !== 'blog-post-template.md') { // Exclude template
         const filePath = path.join(DRAFTS_DIR, file);
-        blogData = processMarkdownFile(filePath, blogData);
+        indexData = processMarkdownFile(filePath, indexData);
       }
     }
   }
   
-  // Sort posts by date (newest first)
-  blogData.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  // Sort posts by date (newest first) in the index
+  indexData.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
   
-  // Save updated blog data
-  fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify(blogData, null, 2));
-  console.log(`Blog data saved to ${BLOG_DATA_PATH}`);
-  console.log(`Total posts: ${blogData.posts.length}`);
+  // Save updated blog index
+  fs.writeFileSync(BLOG_INDEX_PATH, JSON.stringify(indexData, null, 2));
+  console.log(`Blog index saved to ${BLOG_INDEX_PATH}`);
+  console.log(`Total posts in index: ${indexData.posts.length}`);
 }
 
 // Check if a specific file was provided as an argument
