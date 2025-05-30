@@ -8,7 +8,7 @@ tags:
   - "AI Tools"
   - "Space Exploration"
 shortDescription: "A behind-the-scenes visit to NASA's JPL, guided by Dr. Eric Huff, and how I used AI to generate presentation slides infused with my personal photos."
-featuredImage: "jpl-ai-blog-featured.png"
+featuredImage: /images/blog/jpl-ai-blog/jpl-ai-blog-featured.png
 featured: false
 ---
 

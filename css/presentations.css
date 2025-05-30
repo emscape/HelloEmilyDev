@@ -105,7 +105,7 @@ main { /* main tag is no longer used as direct child for content, section is */
 .presentation-item h3 {
     font-family: 'Raleway', sans-serif;
     font-size: 1.4rem;
-    color: var(--primary-dark, #007A7C);
+    color: var(--primary-color);
     margin-bottom: 10px;
 }
 
@@ -145,11 +145,19 @@ main { /* main tag is no longer used as direct child for content, section is */
 }
 
 .tag {
-    background-color: #eee;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.85em;
-    color: #333;
+    background-color: var(--light-accent);
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer; /* Added for consistency if tags become interactive */
+    transition: background-color 0.2s ease, color 0.2s ease; /* Added for consistency */
+}
+
+.tag:hover {
+    background-color: var(--accent-color);
+    color: #fff;
 }
 
 .blog-post-btn {

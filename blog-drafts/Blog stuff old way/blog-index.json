@@ -1,0 +1,233 @@
+{
+  "posts": [
+    {
+      "slug": "augment-me-not-when-ai-help-trashed-my-codebase",
+      "title": "\"Augment\" Me Not: When AI 'Help' Trashed My Codebase",
+      "shortDescription": "When an AI tool tried to 'optimize' my personal site, it added over 8,000 files, broke the build, and left me wondering if it thought it was helping. Here's how I cleaned up the mess—and what I'm doing differently next time.",
+      "date": "2025-05-19",
+      "tags": [
+        "AI",
+        "Developer Tools",
+        "Debugging",
+        "VS Code",
+        "Augment"
+      ],
+      "featuredImage": "images/augment-fail-bot.png",
+      "featured": true
+    },
+    {
+      "slug": "when-your-ai-becomes-your-project-manager",
+      "title": "When Your AI Becomes Your Project Manager",
+      "date": "2025-05-06",
+      "tags": [
+        "AI",
+        "Emotional Labor",
+        "Side Projects",
+        "Tech Humor"
+      ],
+      "shortDescription": "What started as code generation and dental hygiene reminders turned into something more—a late-night confidant, a project manager, and a weirdly supportive friend.",
+      "featuredImage": "/images/blog/when-your-ai-becomes-your-project-manager/when-your-ai-becomes-your-project-manager-featured.png",
+      "featured": true
+    },
+    {
+      "slug": "building-thedapperfoxes",
+      "title": "Building TheDapperFoxes.com: A Website Worthy of a Love Story",
+      "date": "2025-04-19T00:00:00.000Z",
+      "tags": [
+        "Wedding",
+        "Web Design",
+        "Custom Development",
+        "Apps Script",
+        "Google Forms",
+        "AI Assistant",
+        "Agentic AI",
+        "Event Tech"
+      ],
+      "shortDescription": "How we designed and built a wedding website that reflects our personalities, aesthetics, and engineering strengths.",
+      "featuredImage": "/images/blog/building-thedapperfoxes/building-thedapperfoxes-featured-image.png",
+      "featured": true
+    },
+    {
+      "slug": "go-to-the-store-and-buy-bread",
+      "title": "Go to the Store and Buy Bread: Why Tech Docs Fail (and How Sparky Fixed It)",
+      "date": "2025-04-14T00:00:00.000Z",
+      "tags": [
+        "Learning",
+        "Tech Education",
+        "Documentation",
+        "Beginner Friendly",
+        "AI Assistant",
+        "Sparky",
+        "Developer Experience",
+        "Empathy in Tech",
+        "Tutorials",
+        "Blog Series"
+      ],
+      "shortDescription": "How one simple shift in how I learn tech changed everything.",
+      "featuredImage": "/images/blog/go-to-the-store-and-buy-bread/go-to-the-store-and-buy-bread-featured.png",
+      "featured": true
+    },
+    {
+      "slug": "ai-guardrails",
+      "title": "Prompt Engineering and AI Guardrails: The Skills of the Future",
+      "date": "2025-03-30T00:00:00.000Z",
+      "tags": [
+        "Artificial Intelligence",
+        "Prompt Engineering",
+        "Guardrails",
+        "Ethics",
+        "Machine Learning",
+        "Responsible AI",
+        "Future Skills"
+      ],
+      "shortDescription": "In an AI-driven world, the ability to shape intelligent systems responsibly is no longer optional—it's essential. This post explores the critical skills of prompt engineering and establishing AI guardrails to ensure ethical and effective AI use.",
+      "featuredImage": "/images/blog/ai-guardrails/ai-guardrails-featured.jpg",
+      "featured": true
+    },
+    {
+      "slug": "humans-have-ideas",
+      "title": "Humans Have Ideas. AIs Do Execution. I’ve Decided.",
+      "date": "2025-03-28T00:00:00.000Z",
+      "tags": [
+        "Artificial Intelligence",
+        "Productivity",
+        "Creativity",
+        "Technology",
+        "Personal"
+      ],
+      "shortDescription": "Why I've decided to let AIs handle the grunt work while I focus on creativity, strategy, and innovation.",
+      "featuredImage": "/images/blog/humans-have-ideas/humans-have-ideas-featured.png",
+      "featured": false
+    },
+    {
+      "slug": "ethics-and-ai",
+      "title": "The Ethics and Impact of AI: Personal Benefits vs. Societal Concerns",
+      "date": "2025-03-10T00:00:00.000Z",
+      "tags": [
+        "Artificial Intelligence",
+        "Ethics",
+        "Technology"
+      ],
+      "shortDescription": "An exploration of the tension between AI's personal benefits and its potential societal consequences, including job displacement and copyright concerns.",
+      "featuredImage": "/images/blog/ethics-and-ai/ethics-and-ai-featured.jpg",
+      "featured": false
+    },
+    {
+      "slug": "sean-website-case-study",
+      "title": "Building Sean's Website with Wix: A Balance of Customization and Ease",
+      "date": "2025-03-10T00:00:00.000Z",
+      "tags": [
+        "Web Development",
+        "Case Study",
+        "Wix",
+        "Web Design"
+      ],
+      "shortDescription": "A case study on rebuilding Sean's website using Wix, balancing developer customization needs with client-friendly maintenance.",
+      "featuredImage": "/images/blog/sean-website-case-study/sean-website-case-study-featured.jpg",
+      "featured": false
+    },
+    {
+      "slug": "personal-ai",
+      "title": "Checking the Pulse: What Happens When You Ask AI What It Knows About You",
+      "date": "2025-03-08T00:00:00.000Z",
+      "tags": [
+        "Artificial Intelligence",
+        "Personal Growth",
+        "Technology",
+        "Self-Reflection"
+      ],
+      "shortDescription": "An exploration of AI's ability to form a coherent understanding of users through interactions, and what this reveals about machine-driven personalization.",
+      "featuredImage": "/images/blog/personal-ai/personal-ai-featured.jpg",
+      "featured": true
+    },
+    {
+      "slug": "solving-io-puzzles-2025",
+      "title": "Cracking the Code: My Journey Through Google I/O 2025 Puzzles",
+      "date": "2025-02-11T00:00:00.000Z",
+      "tags": [
+        "Google I/O",
+        "Puzzles",
+        "Problem Solving",
+        "Logical Reasoning",
+        "Pattern Recognition"
+      ],
+      "shortDescription": "A detailed walkthrough of solving the challenging grid-based puzzles from Google I/O 2025",
+      "featuredImage": "/images/blog/solving-io-puzzles-2025/solving-io-puzzles-2025-featured.jpg",
+      "featured": false
+    },
+    {
+      "slug": "knitting-tech",
+      "title": "Knitting and Technology: The Unexpected Intersection of Patterns and Precision",
+      "date": "2025-01-15T00:00:00.000Z",
+      "tags": [
+        "Knitting",
+        "Technology",
+        "Creativity",
+        "Problem Solving",
+        "Patterns"
+      ],
+      "shortDescription": "Exploring the surprising parallels between knitting and software development, where binary systems, pattern recognition, and iterative problem-solving connect these seemingly different worlds.",
+      "featuredImage": "/images/blog/knitting-tech/knitting-tech-featured.jpg",
+      "featured": false
+    },
+    {
+      "slug": "women-in-tech",
+      "title": "Empowering Women in Tech: Highlights from DevFest & IWD Panels",
+      "date": "2024-08-15T00:00:00.000Z",
+      "tags": [
+        "Women in Tech",
+        "Diversity",
+        "Inclusion",
+        "Technology"
+      ],
+      "shortDescription": "Exploring the current landscape for women in the tech industry",
+      "featuredImage": "/images/blog/women-in-tech/women-in-tech-featured.png",
+      "featured": true
+    },
+    {
+      "slug": "technical-documentation-tips",
+      "title": "The Art of Technical Documentation: Best Practices",
+      "date": "2024-06-27T00:00:00.000Z",
+      "tags": [
+        "Technical Writing",
+        "Documentation",
+        "Best Practices",
+        "User Experience"
+      ],
+      "shortDescription": "Tips for creating effective technical documentation that users will actually read",
+      "featuredImage": "/images/blog/technical-documentation-tips/technical-documentation-tips-featured.jpg",
+      "featured": false
+    },
+    {
+      "slug": "jpl-ai-blog",
+      "title": "A Journey Through the Cosmos: Visiting JPL with Dr. Eric Huff",
+      "date": "2023-09-28",
+      "tags": [
+        "JPL",
+        "NASA",
+        "AI Tools",
+        "Space Exploration"
+      ],
+      "shortDescription": "A behind-the-scenes visit to NASA's JPL, guided by Dr. Eric Huff, and how I used AI to generate presentation slides infused with my personal photos.",
+      "featuredImage": "/images/blog/jpl-ai-blog/jpl-ai-blog-featured.png",
+      "featured": false
+    },
+    {
+      "slug": "getting-started-with-ai",
+      "title": "Getting Started with AI: A Beginner's Guide",
+      "date": "2023-09-08T00:00:00.000Z",
+      "tags": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Technology",
+        "Beginner Friendly",
+        "Enterprise AI",
+        "Generative AI Enterprise",
+        "GDG Twin Cities"
+      ],
+      "shortDescription": "An introduction to artificial intelligence concepts for beginners, including insights from my GDG Twin Cities presentation on enterprise AI adoption",
+      "featuredImage": "/images/blog/getting-started-with-ai/getting-started-with-ai-featured.jpg",
+      "featured": false
+    }
+  ]
+}

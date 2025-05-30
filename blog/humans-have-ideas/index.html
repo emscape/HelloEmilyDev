@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title> <!-- Title will be updated by js/blog-post.js -->
+    <!-- Standard Meta Tags -->
+    <meta name="description" content="A blog post on HelloEmily.dev">
+    <meta name="author" content="Emily Anderson">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content=""> <!-- Will be updated by js/blog-post.js -->
+    <meta property="og:title" content="Blog Post"> <!-- Will be updated by js/blog-post.js -->
+    <meta property="og:description" content=""> <!-- Will be updated by js/blog-post.js -->
+    <meta property="og:image" content="../../images/site-preview.jpg"> <!-- Default, will be updated -->
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content=""> <!-- Will be updated by js/blog-post.js -->
+    <meta property="twitter:title" content="Blog Post"> <!-- Will be updated by js/blog-post.js -->
+    <meta property="twitter:description" content=""> <!-- Will be updated by js/blog-post.js -->
+    <meta property="twitter:image" content="../../images/site-preview.jpg"> <!-- Default, will be updated -->
+
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjust if you have a different main CSS file -->
+    <link rel="stylesheet" href="/css/blog-post.css"> <!-- Specific CSS for blog posts -->
+    <!-- Add other global CSS files if necessary -->
+</head>
+<body>
+    <header id="header-placeholder"></header>
+
+    <main>
+        <section class="blog-post-container">
+            <div class="blog-post-content-container">
+                <!-- Blog post content will be loaded here by js/blog-post.js -->
+                <p>Loading post...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Your site footer content -->
+        <p>&copy; <span id="current-year"></span> Emily Anderson. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/load-header.js"></script>
+    <script src="/js/blog-content-parser.js"></script>
+    <script src="/js/blog-post.js"></script>
+    <script>
+        // Simple script for current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

@@ -1,16 +1,12 @@
-# "Augment" Me Not: When AI 'Help' Trashed My Codebase
-
-## Metadata
-- Author: Emily Anderson
-- Date: 2025-05-19
-- Tags: AI, Developer Tools, Debugging, VS Code, Augment
-- FeaturedImage: images/augment-fail-bot.png
-- Featured: true
-
-## Short Description
-When an AI tool tried to 'optimize' my personal site, it added over 8,000 files, broke the build, and left me wondering if it thought it was helping. Here's how I cleaned up the mess—and what I'm doing differently next time.
-
-## Content
+---
+title: "\"Augment\" Me Not: When AI 'Help' Trashed My Codebase"
+author: Emily Anderson
+date: "2025-05-19"
+tags: [AI, Developer Tools, Debugging, VS Code, Augment]
+featuredImage: /images/blog/augment-broke-my-site/augment-broke-my-site.png
+featured: true
+shortDescription: "When an AI tool tried to 'optimize' my personal site, it added over 8,000 files, broke the build, and left me wondering if it thought it was helping. Here's how I cleaned up the mess—and what I'm doing differently next time."
+---
 
 There are bad days.  
 There are worse days.  

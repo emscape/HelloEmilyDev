@@ -1,0 +1,244 @@
+/* Additional styles specific to the projects page */
+.projects-header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 100px 0 50px;
+    margin-bottom: 0;
+}
+
+.projects-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.projects-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.projects-container {
+    padding: 60px 0;
+}
+
+.back-to-home {
+    display: inline-block;
+    margin-top: 40px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.back-to-home:hover {
+    color: var(--secondary-color);
+}
+
+.project-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+/* Styles for #projects section, project grid and cards, moved from style.css */
+#projects {
+    background-color: var(--light-color);
+    position: relative;
+    overflow: hidden;
+}
+
+#projects::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300b5b8' fill-opacity='0.05'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.7;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 35px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-card {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 181, 184, 0.1);
+    position: relative;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover::before {
+    transform: scaleX(1);
+}
+
+.project-image {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.2));
+    z-index: 1;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.08);
+}
+
+.project-card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 380px; /* Added for consistent card height */
+    padding: 25px; /* Preserved existing padding */
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-strong);
+}
+
+.project-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.project-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--secondary-color);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.project-tags span {
+    background-color: var(--light-accent);
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Project Card Button Styling (already in style.css, but good to have with project card) */
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto; /* Keep bottom alignment */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Align items vertically in the center */
+}
+
+.project-links .btn {
+    height: 40px; /* Keep height */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 20px; /* Keep padding */
+    flex: 1 1 auto; /* Allow buttons to grow and shrink */
+    max-width: calc(50% - 5px); /* Max width for 2 buttons per row (adjusting for 10px gap) */
+    min-width: 120px; /* Minimum width for buttons */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Target the 3rd button ONLY when it is the LAST button */
+.project-links .btn:nth-child(3):last-child {
+    flex-basis: 100%; /* Force to a new line */
+    max-width: 60%; /* Limit width for centering */
+    margin-left: auto;
+    margin-right: auto; /* Add missing margin */
+    margin-top: 5px; /* Add slight top margin */
+}
+
+/* Ensure secondary buttons have consistent styling */
+.project-links .btn-secondary {
+    background-color: var(--light-accent);
+    color: var(--primary-dark);
+    border: 1px solid var(--primary-color);
+}
+
+.project-links .btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Style for the separated blog post link */
+.project-blog-link {
+  margin-top: 10px; /* Add space above the blog post button */
+}
+
+/* Responsive styles for project elements */
+@media (max-width: 768px) {
+    .project-links {
+        flex-direction: column;
+    }
+}

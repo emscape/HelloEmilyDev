@@ -28,21 +28,21 @@ function displayBlogPosts(posts) {
     // Clear any existing content
     blogContainer.innerHTML = '';
     
-    // Sort posts by date (newest first)
-    const sortedPosts = [...posts].sort((a, b) => {
+    // Filter out template posts or incomplete posts and ensure they are featured
+    const validAndFeaturedPosts = posts.filter(post => {
+      return post.date !== 'YYYY-MM-DD' && post.author !== 'Your Name' && post.featured === true;
+    });
+
+    // Sort featured posts by date (newest first)
+    const sortedFeaturedPosts = [...validAndFeaturedPosts].sort((a, b) => {
       return new Date(b.date) - new Date(a.date);
     });
     
-    // Filter out template posts or incomplete posts
-    const validPosts = sortedPosts.filter(post => {
-      return post.date !== 'YYYY-MM-DD' && post.author !== 'Your Name';
-    });
-    
-    // Only show the latest 3 posts on the main page
-    const latestPosts = validPosts.slice(0, 3);
+    // Only show the latest 3 featured posts on the main page
+    const latestFeaturedPosts = sortedFeaturedPosts.slice(0, 3);
     
     // Create and append blog post cards
-    latestPosts.forEach(post => {
+    latestFeaturedPosts.forEach(post => {
       const postCard = document.createElement('div');
       postCard.className = 'blog-card';
       if (post.featured) {
@@ -67,7 +67,7 @@ function displayBlogPosts(posts) {
           </div>
           <h3>${post.title}</h3>
           <p>${post.shortDescription || ''}</p> <!-- Added short description -->
-          <a href="blog-post.html?slug=${post.slug}" class="btn blog-read-more">Read More</a>
+          <a href="${post.slug}" class="btn blog-read-more">Read More</a>
         </div>
       `; // Use slug for link
       
