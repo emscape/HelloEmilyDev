@@ -1,0 +1,269 @@
+/* Styles for the main blog listing page (blog.html) */
+
+/* Blog Section Container */
+#blog {
+    background-color: var(--light-color);
+    position: relative;
+    overflow: hidden;
+}
+
+#blog::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2300b5b8' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Blog Filters */
+.blog-filters { /* This is the main container for filter controls */
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.blog-filter { /* This seems to be a duplicate or alternative naming for blog-filters, consolidating */
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.blog-filter-tags { /* Container for tag buttons */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Individual filter tag buttons */
+.tag-filter {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 18px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.tag-filter:hover, .tag-filter.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Legacy .blog-filter-tags button styling - will be superseded by .tag-filter but kept for reference if needed */
+.blog-filter-tags button {
+    background-color: transparent;
+    border: 1px solid var(--accent-color); /* Note: uses accent-color, .tag-filter uses primary-color */
+    color: var(--primary-dark);
+    padding: 8px 15px;
+    margin: 5px; /* .tag-filter uses gap */
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.blog-filter-tags button:hover,
+.blog-filter-tags button.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* First definition */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Second definition, preferred */
+    /* gap: 30px; */ /* First definition */
+    gap: 35px; /* Second definition, preferred */
+    margin-top: 50px; /* Consistent with second definition, first was 40px */
+}
+
+/* Blog Card Styles */
+.blog-card {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition); /* First definition */
+    /* transition: all 0.4s ease; */ /* Second definition, slightly different */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards fill grid space (from first definition) */
+    border: 1px solid rgba(0, 181, 184, 0.1); /* From second definition */
+}
+
+.blog-card:hover {
+    transform: translateY(-5px); /* First definition */
+    /* transform: translateY(-8px); */ /* Second definition, slightly different */
+    box-shadow: var(--shadow-strong);
+}
+
+.blog-card.featured {
+    border-left: 5px solid var(--secondary-color); /* First definition */
+    position: relative; /* From second definition for ::before */
+}
+
+.blog-card.featured::before { /* From second definition */
+    content: 'Featured';
+    position: absolute;
+    top: 15px;
+    right: 0;
+    background: linear-gradient(90deg, var(--secondary-color), #FF6B1A);
+    color: white;
+    padding: 5px 15px 5px 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 10;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card-image { /* From first definition */
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+/* .blog-image is used in the second definition, seems to be the same concept */
+.blog-image { /* From second definition */
+    height: 220px; /* Slightly different height */
+    overflow: hidden;
+    position: relative;
+}
+
+.blog-image::after { /* From second definition */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.2));
+    z-index: 1;
+}
+
+.blog-card-image img, .blog-image img { /* Combined from both */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease; /* First definition */
+    /* transition: transform 0.6s ease; */ /* Second definition, slightly different */
+}
+
+.blog-card:hover .blog-card-image img, .blog-card:hover .blog-image img { /* Combined */
+    transform: scale(1.05); /* First definition */
+    /* transform: scale(1.08); */ /* Second definition, slightly different */
+}
+
+.blog-card-content { /* Consistent in both definitions */
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-card-content h3, .blog-card h3 { /* Combined */
+    font-size: 1.4rem; /* First definition */
+    /* font-size: 1.5rem; */ /* Second definition */
+    margin-bottom: 15px;
+    color: var(--primary-color); /* First definition */
+    /* color: var(--primary-color); */ /* Second definition */
+    line-height: 1.3; /* From second definition */
+}
+
+.blog-card-content p { /* From first definition */
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.blog-meta { /* Consistent in both definitions */
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 10px; /* First definition */
+    /* margin-bottom: 15px; */ /* Second definition */
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #f0f0f0; /* From second definition */
+    padding-bottom: 10px; /* From second definition */
+}
+
+.blog-tags { /* Consistent in both definitions */
+    margin-bottom: 20px; /* First definition */
+    /* margin: 15px 0; */ /* Second definition */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* From second definition */
+}
+
+.blog-tag { /* Consistent in both definitions */
+    display: inline-block; /* From first definition */
+    background-color: var(--light-accent);
+    color: var(--primary-dark);
+    padding: 4px 10px; /* First definition */
+    /* padding: 5px 12px; */ /* Second definition */
+    border-radius: 4px; /* First definition */
+    /* border-radius: 20px; */ /* Second definition */
+    font-size: 0.8rem;
+    margin-right: 5px; /* From first definition, second uses gap */
+    margin-bottom: 5px; /* From first definition, second uses gap */
+    cursor: pointer; /* From first definition */
+    transition: background-color 0.2s ease; /* From first definition */
+    font-weight: 500; /* From second definition */
+}
+
+.blog-tag:hover { /* From first definition */
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+.blog-read-more { /* Consistent in both definitions */
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+/* Blog Archive Tag Filtering Enhancements */
+.blog-filter-tags .all-tags-wrapper {
+  display: inline; /* Allows tags to wrap naturally */
+  overflow: hidden; /* Hides tags exceeding max-height */
+  transition: max-height 0.4s ease-out; /* Smooth expand/collapse */
+  /* max-height will be set by JS */
+}
+
+/* Ensure tags inside the wrapper have spacing */
+.blog-filter-tags .all-tags-wrapper .tag-filter {
+    /* Inherits .tag-filter styles, add specific overrides if needed */
+    margin: 5px 2px; /* Ensure consistent margin */
+}
+
+.blog-filter-tags .see-more-tags {
+  display: none; /* Hidden by default, shown by JS if needed */
+  background: none;
+  border: none;
+  color: var(--primary-color); /* Use existing variable */
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 8px 12px; /* Match .tag-filter padding */
+  margin: 5px 2px; /* Match .tag-filter margin */
+  font-size: 0.9em; /* Slightly smaller or match tag font */
+  vertical-align: middle; /* Align with tags */
+}
+
+.blog-filter-tags .see-more-tags:hover {
+  color: var(--secondary-color); /* Use existing variable */
+}
+
+/* Responsive adjustments for blog grid (from style.css media queries) */
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+}

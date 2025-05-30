@@ -74,9 +74,9 @@ function displayBlogPosts(posts) {
           <div class="blog-tags">
             ${tagsHTML}
           </div>
-          <a href="blog-post.html?slug=${post.slug}" class="btn blog-read-more">Read More</a>
+          <a href="${post.slug}" class="btn blog-read-more">Read More</a>
         </div>
-      `; // Use slug for link, removed author, shortDescription
+      `; // Use slug (which is now the full path) for link
       
       blogContainer.appendChild(postCard);
     });
