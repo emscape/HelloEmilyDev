@@ -325,15 +325,49 @@ function processMarkdownFile(filePath, indexData) {
     fs.writeFileSync(individualPostPath, JSON.stringify(fullPostData, null, 2));
     console.log(`Saved full post to: ${individualPostPath}`);
 
-    // Copy the blog post template to the new post directory as index.html
-    const templateDestPath = path.join(postDirectory, 'index.html');
+    // Read the blog post template
+    let templateContent;
     try {
-      fs.copyFileSync(BLOG_POST_TEMPLATE_PATH, templateDestPath);
-      console.log(`Copied blog post template to: ${templateDestPath}`);
-    } catch (copyError) {
-      console.error(`Error copying blog post template for ${fullPostData.id}:`, copyError.message);
+      templateContent = fs.readFileSync(BLOG_POST_TEMPLATE_PATH, 'utf8');
+    } catch (readError) {
+      console.error(`Error reading blog post template: ${BLOG_POST_TEMPLATE_PATH}`, readError.message);
+      return indexData; // Skip this post if template can't be read
+    }
+
+    // Prepare data for replacements
+    const siteBaseUrl = 'https://helloemily.dev'; // Define base URL - ensure this is correct
+    const postUrl = `${siteBaseUrl}/blog/${fullPostData.id}/`;
+    let featuredImageUrl = fullPostData.featuredImage && fullPostData.featuredImage.trim() !== ''
+        ? fullPostData.featuredImage
+        : 'images/site-preview.jpg'; // Default image path relative to site root
+
+    // Ensure featuredImageUrl is absolute
+    if (!featuredImageUrl.startsWith('http') && !featuredImageUrl.startsWith('/')) {
+        featuredImageUrl = `/${featuredImageUrl}`; // Make it root relative if not already
+    }
+    if (!featuredImageUrl.startsWith('http')) {
+        featuredImageUrl = siteBaseUrl + featuredImageUrl; // Prepend base URL if not absolute
+    }
+    // Clean up potential double slashes from concatenation
+    featuredImageUrl = featuredImageUrl.replace(/([^:]\/)\/+/g, "$1");
+
+
+    // Perform replacements
+    let postHtmlContent = templateContent
+        .replace(/PAGE_TITLE_PLACEHOLDER/g, `${fullPostData.title} | Emily Anderson`)
+        .replace(/OG_TITLE_PLACEHOLDER/g, fullPostData.title)
+        .replace(/OG_URL_PLACEHOLDER/g, postUrl)
+        .replace(/OG_DESCRIPTION_PLACEHOLDER/g, fullPostData.shortDescription || 'A blog post by Emily Anderson.')
+        .replace(/OG_IMAGE_PLACEHOLDER/g, featuredImageUrl);
+
+    // Save the generated HTML to the new post directory as index.html
+    const outputHtmlPath = path.join(postDirectory, 'index.html');
+    try {
+      fs.writeFileSync(outputHtmlPath, postHtmlContent);
+      console.log(`Generated HTML for post ${fullPostData.id} to: ${outputHtmlPath}`);
+    } catch (writeError) {
+      console.error(`Error writing HTML for post ${fullPostData.id}:`, writeError.message);
       // Decide if this error should halt processing for this file or just be logged
-      // For now, we'll log and continue, but the post might not be viewable.
     }
 
     // Prepare metadata for the blog-index.json
