@@ -58,12 +58,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // Helper function to ensure image paths are root-relative or absolute
 function makePathRootRelative(path) {
     if (!path || typeof path !== 'string') return '';
-    // If it's an absolute URL (starts with http/https) or already root-relative (starts with /), return as is.
-    if (/^(https?:)?\/\//i.test(path) || path.startsWith('/')) {
+    // If it's an absolute URL (starts with http/https), return as is.
+    if (/^(https?:)?\/\//i.test(path)) {
         return path;
     }
-    // Otherwise, make it root-relative.
-    return '/' + path.replace(/^\.\//, ''); // Remove leading ./ if present
+    // Remove leading slashes and "./"
+    let cleanPath = path.replace(/^\/+/, '').replace(/^\.\//, '');
+    // Add a leading slash to make it root-relative
+    let rootRelativePath = '/' + cleanPath;
+    return rootRelativePath;
 }
 
 function displayBlogPost(post) {
@@ -228,29 +231,28 @@ function updateMetaTags(post) {
     const canonicalURL = `https://helloemily.dev/blog/${post.id}/`;
     const siteBaseUrl = 'https://helloemily.dev/'; // Define base URL
 
+function removeDuplicateSlashes(str) {
+  return str.replace(/\/\/+/g, '/');
+}
+
     // Determine the image to use for social sharing (prioritize featured)
-    let socialImage = post.featuredImage && post.featuredImage.trim() !== ''
-        ? post.featuredImage
+    let featuredImage = post.featuredImage && post.featuredImage.trim() !== ''
+        ? makePathRootRelative(post.featuredImage)
         : 'images/site-preview.jpg'; // Fallback directly to default if no featured image
 
-    // Ensure the social image URL is absolute
-    if (!socialImage.startsWith('http')) {
-        socialImage = siteBaseUrl + socialImage;
+    // Ensure the featured image URL is absolute
+    if (!featuredImage.startsWith('http')) {
+        featuredImage = siteBaseUrl + featuredImage;
     }
 
+    featuredImage = removeDuplicateSlashes(featuredImage); // Apply to the correct variable
 
     // Update Open Graph meta tags
+    console.log("featuredImage:", featuredImage);
     document.querySelector('meta[property="og:url"]').setAttribute('content', canonicalURL);
     document.querySelector('meta[property="og:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', post.shortDescription || 'Read this blog post by Emily Anderson.'); // Provide a fallback description
-    document.querySelector('meta[property="og:image"]').setAttribute('content', socialImage);
-
-
-    // Update Twitter meta tags
-    document.querySelector('meta[property="twitter:url"]').setAttribute('content', canonicalURL);
-    document.querySelector('meta[property="twitter:title"]').setAttribute('content', post.title);
-    document.querySelector('meta[property="twitter:description"]').setAttribute('content', post.shortDescription || 'Read this blog post by Emily Anderson.'); // Provide a fallback description
-    document.querySelector('meta[property="twitter:image"]').setAttribute('content', socialImage);
+    document.querySelector('meta[property="og:description"]').setAttribute('content', post.shortDescription || 'Read this blog post by Emily Anderson.');
+    document.querySelector('meta[property="og:image"]').setAttribute('content', featuredImage);
 
 }
 
