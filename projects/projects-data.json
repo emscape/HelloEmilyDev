@@ -21,7 +21,7 @@
       ],
       "githubUrl": "https://github.com/emscape/DapperFoxes",
       "liveUrl": "https://www.thedapperfoxes.com",
-      "blogPostUrl": "blog-post.html?id=building-thedapperfoxes",
+      "blogPostUrl": "/blog/building-thedapperfoxes/",
       "featured": true,
       "completionDate": "2025-04"
     },
@@ -59,7 +59,7 @@
       ],
       "githubUrl": "",
       "liveUrl": "https://www.emilysueanderson.com/io-puzzle-2025-solutions",
-      "blogPostUrl": "blog-post.html?id=solving-io-puzzles-2025",
+      "blogPostUrl": "/blog/solving-io-puzzles-2025/",
       "featured": false,
       "completionDate": "2025-03"
     },

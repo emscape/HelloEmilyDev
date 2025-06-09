@@ -11,6 +11,8 @@ This is a simple personal website built with HTML and CSS, hosted on GitHub Page
 - Responsive design
 - About section
 - Projects showcase
+- Presentations section
+- Blog section
 - Contact information
 
 ## Setup
