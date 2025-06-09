@@ -10,7 +10,7 @@ bannerImage: ""
 additionalImages: []
 ---
 
-When we set out to build our wedding website, we knew we wanted it to reflect *us*—not just the event, but the vibe. Something charming, a little cheeky, visually cohesive, and flexible enough to hold everything from heartfelt backstory to guest-uploaded chaos. Enter: **TheDapperFoxes.com**.
+When we set out to build our wedding website, we knew we wanted it to reflect *us*—not just the event, but the vibe. Something charming, a little cheeky, visually cohesive, and flexible enough to hold everything from heartfelt backstory to guest-uploaded chaos. Enter: **[TheDapperFoxes.com](https://www.thedapperfoxes.com)**.
 
 ### 🎨 The Aesthetic
 

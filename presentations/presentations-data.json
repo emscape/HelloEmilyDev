@@ -2,22 +2,22 @@
   {
     "pdfPath": "presentations/posted/A Journey Through The Cosmos_ My Visit to JPL.pdf",
     "thumbnail": "images/presentations/jpl-visit.png",
-    "relatedBlogPostUrl": "blog-post.html?id=jpl-ai-blog",
-    "longDescriptionMarkdown": "---\ntitle: \"A Journey Through the Cosmos: My First AI-Generated Slide Adventure 🚀\"\nauthor: Emily Anderson\ntags: [JPL, AI, Presentation, Space Exploration, NASA]\ndescription: \"Reflections on visiting NASA's Jet Propulsion Laboratory and using AI to create a presentation.\"\n---\n\nI recently had the opportunity to visit NASA’s Jet Propulsion Laboratory (JPL)—a behind-the-scenes glimpse into some of the most iconic space exploration missions of our time. From the Mars Yard and Mission Control to the Europa Clipper and Mars Sample Return plans, the experience was unforgettable.\n\nTo commemorate the trip, I put together a presentation using an AI slide generator—my first time leveraging generative tools to build a deck. While I added my own context and commentary throughout, the majority of the structure and visuals came straight from the AI. It turned out to be a fun experiment in letting technology help tell the story of... technology.\n\nCheck out the highlights from my visit, learn more about the incredible work happening at JPL, and follow along as I continue to explore how AI can streamline storytelling—on Earth and beyond. 🌌",
+    "relatedBlogPostUrl": "/blog/jpl-ai-blog/",
+    "longDescriptionMarkdown": "---\ntitle: \"A Journey Through the Cosmos: My First AI-Generated Slide Adventure 🚀\"\n---\n\nI had the incredible opportunity to visit NASA’s Jet Propulsion Laboratory (JPL) for a behind-the-scenes look at the missions shaping the future of space exploration. From the Mars Yard and Mission Control to the Europa Clipper and Mars Sample Return, it was a dream come true. To commemorate the experience, I created a slide deck using a generative AI tool—my first time experimenting with AI-powered storytelling. While I provided the voice and context, the structure and visuals were shaped by the AI. It was a fun and surprisingly effective way to blend personal narrative with emerging tech.",
     "cardMarkdownPath": "presentations/posted/jpl-visit-presentation.md"
   },
   {
     "pdfPath": "presentations/posted/Generative AI - GDG .pdf",
     "thumbnail": "images/presentations/getting-started-with-ai-featured.jpg",
-    "relatedBlogPostUrl": "/blog-post.html?slug=getting-started-with-ai",
+    "relatedBlogPostUrl": "/blog/getting-started-with-ai/",
     "cardMarkdownPath": "presentations/posted/generative-ai-gdg-card.md",
-    "longDescriptionMarkdown": "---\ntitle: \"Generative AI: Considerations for Use in Corporate Enterprises\"\ntags: [AI, Generative AI, GDG, Enterprise AI, Machine Learning, Security, Ethics]\n---\n\nPresented at GDG Twin Cities, this session explores the evolution of generative AI, practical industry applications, and critical security and ethical considerations enterprises must address."
+    "longDescriptionMarkdown": "---\ntitle: \"Generative AI: Considerations for Use in Corporate Enterprises\"\n---\n\nPresented at GDG Twin Cities, this talk dives into how generative AI is transforming the enterprise landscape. I explore its practical applications across industries, from content creation to automation, while unpacking the critical risks that come with implementation. Topics include model security, data privacy, ethical concerns, and long-term governance. The session serves as both a primer and a call-to-action for leaders navigating the evolving AI ecosystem. It also marked one of my earliest uses of generative tools to structure and design a presentation—an experiment in letting AI help explain itself."
   },
   {
     "pdfPath": "presentations/posted/ai-empathy-iwd.pdf",
     "thumbnail": "images/presentations/empathy-ai-featured.png",
     "cardMarkdownPath": "presentations/posted/empathy-ai-presentation-card.md",
     "relatedBlogPostUrl": null,
-    "longDescriptionMarkdown": "---\ntitle: \"Empathy & AI: Building Emotional Intelligence into Technology\"\ntags: [AI, Empathy, Ethics, Sentiment Analysis, Diversity, Human-Centered Design]\n---\n\nExplore how emotional nuance, inclusive design, and a social work lens can help build more empathetic AI systems. This talk delves into what happens when social work meets machine learning, covering why AI often misreads human emotion, real-world examples from emotional AI design, and strategies for building empathy into systems using inclusive datasets and user testing. Learn how emotionally intelligent AI can create more human-centered technology. (This presentation also marks a second experiment using generative AI for slide creation.)"
+    "longDescriptionMarkdown": "---\ntitle: \"Empathy & AI: Building Emotional Intelligence into Technology\"\n---\n\nWhat happens when you blend social work, machine learning, and a bit of heart? This session explores how inclusive design, emotional nuance, and user-centered research can be used to build more empathetic AI systems. I share real-world examples of where emotional AI gets it wrong—and where it gets it right—with insights on designing systems that better understand human context. This was my second experiment using AI to generate a slide deck, pairing personal insight with emerging tools to rethink how we teach machines to understand us."
   }
 ]
