@@ -29,3 +29,6 @@ blog-drafts/processed/
 
 # Planning documents
 plans/
+
+# Development documentation (internal process tracking)
+dev-docs/
