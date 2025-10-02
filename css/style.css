@@ -191,7 +191,7 @@ nav ul li a:hover::after {
 
 /* Hero Section */
 #hero {
-    background-image: url('/images/background-hero.jpg');
+    background-image: url('/images/new-google.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
