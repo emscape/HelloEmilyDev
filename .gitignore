@@ -1,6 +1,7 @@
 # Roo-specific files and directories
 .roo/
 memory-bank/
+.memory-bank/
 instructions/
 .roomodes
 PromptContext.md
@@ -18,3 +19,13 @@ coverage/
 # IDE
 .vscode/
 .idea/
+
+# Archived and Deprecated
+archive/
+deprecated/
+
+# Blog drafts (processed versions are duplicates)
+blog-drafts/processed/
+
+# Planning documents
+plans/
