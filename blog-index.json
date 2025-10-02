@@ -1,6 +1,20 @@
 {
   "posts": [
     {
+      "slug": "/blog/pygame-zero-getting-started/",
+      "title": "Pygame Zero — Getting Started",
+      "shortDescription": "Quick start guide to install Python and run your first Pygame Zero game.",
+      "date": "2025-09-24",
+      "tags": [
+        "python",
+        "pygame",
+        "gamedev",
+        "beginner"
+      ],
+      "featuredImage": "/images/blog/pygame-zero-getting-started/pygame-zero-getting-started.png",
+      "featured": false
+    },
+    {
       "slug": "/blog/augment-broke-my-site/",
       "title": "\"Augment\" Me Not: When AI 'Help' Trashed My Codebase",
       "shortDescription": "When an AI tool tried to 'optimize' my personal site, it added over 8,000 files, broke the build, and left me wondering if it thought it was helping. Here's how I cleaned up the mess—and what I'm doing differently next time.",
