@@ -1,253 +1,397 @@
 /**
- * Blog Content Parser for HelloEmily.dev
+ * Blog Content Parser for HelloEmily.dev - REFACTORED
+ * Functional programming approach with pure functions
  * Parses block-based content structure and renders different block types
  */
 
+import { escapeHtml, sanitizeUrl } from './utils/security.js';
+
+// ============================================================================
+// PURE FUNCTIONS - WebP Image Handling
+// ============================================================================
+
+/**
+ * Derives WebP source from image source
+ * Pure function
+ * 
+ * @param {string} baseSrc - Original image source
+ * @param {string|null} webpSrc - Explicit WebP source (optional)
+ * @returns {string|null} - WebP source or null
+ */
+const deriveWebPSource = (baseSrc, webpSrc = null) => {
+  if (webpSrc) return webpSrc;
+  if (!baseSrc) return null;
+  
+  // Only derive if baseSrc ends with .jpg, .jpeg, or .png
+  if (/\.(jpe?g|png)$/i.test(baseSrc)) {
+    return baseSrc.replace(/\.(jpe?g|png)$/i, '.webp');
+  }
+  
+  return null;
+};
+
+/**
+ * Generates WebP source HTML
+ * Pure function
+ * 
+ * @param {string|null} webpSrc - WebP source URL
+ * @returns {string} - HTML for WebP source tag
+ */
+const generateWebPSourceHTML = (webpSrc) => {
+  return webpSrc 
+    ? `<source srcset="${sanitizeUrl(webpSrc)}" type="image/webp">` 
+    : '';
+};
+
+/**
+ * Generates picture element HTML with WebP fallback
+ * Pure function
+ * 
+ * @param {string} baseSrc - Original image source
+ * @param {string} altText - Alt text for image
+ * @param {string|null} webpSrc - WebP source (optional)
+ * @returns {string} - HTML for picture element
+ */
+const generatePictureHTML = (baseSrc, altText, webpSrc = null) => {
+  const derivedWebP = deriveWebPSource(baseSrc, webpSrc);
+  const webpSourceHTML = generateWebPSourceHTML(derivedWebP);
+  
+  return `
+    <picture>
+      ${webpSourceHTML}
+      <img src="${sanitizeUrl(baseSrc)}" alt="${escapeHtml(altText)}" loading="lazy">
+    </picture>
+  `;
+};
+
+// ============================================================================
+// PURE FUNCTIONS - Block Renderers
+// ============================================================================
+
+/**
+ * Renders a text block
+ * Pure function
+ * 
+ * @param {Object} block - Text block data
+ * @returns {string} - HTML content
+ */
+const renderTextBlock = (block) => {
+  return `<div class="blog-text-block" data-animation="fade-up">${block.content}</div>`;
+};
+
+/**
+ * Renders an HTML block
+ * Pure function
+ * 
+ * @param {Object} block - HTML block data
+ * @returns {string} - HTML content
+ */
+const renderHtmlBlock = (block) => {
+  return `<div class="blog-html-block" data-animation="fade-up">${block.content}</div>`;
+};
+
+/**
+ * Generates CSS classes for image block
+ * Pure function
+ * 
+ * @param {Object} block - Image block data
+ * @returns {Object} - Object with sizeClass and positionClass
+ */
+const generateImageClasses = (block) => ({
+  sizeClass: block.size ? `image-size-${block.size}` : 'image-size-medium',
+  positionClass: block.position ? `image-position-${block.position}` : 'image-position-center'
+});
+
+/**
+ * Generates caption HTML
+ * Pure function
+ * 
+ * @param {string|null} caption - Caption text
+ * @returns {string} - HTML for caption
+ */
+const generateCaptionHTML = (caption) => {
+  return caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : '';
+};
+
+/**
+ * Renders an image block
+ * Pure function
+ * 
+ * @param {Object} block - Image block data
+ * @returns {string} - HTML content
+ */
+const renderImageBlock = (block) => {
+  const { sizeClass, positionClass } = generateImageClasses(block);
+  const captionHTML = generateCaptionHTML(block.caption);
+  const altText = block.alt || '';
+  const pictureHTML = generatePictureHTML(block.src, altText, block.webpSrc);
+  
+  return `
+    <figure class="blog-image-block ${sizeClass} ${positionClass}" data-animation="fade-in">
+      ${pictureHTML}
+      ${captionHTML}
+    </figure>
+  `;
+};
+
+/**
+ * Renders a single grid item
+ * Pure function
+ * 
+ * @param {Object} image - Image data
+ * @param {number} index - Image index for animation delay
+ * @returns {string} - HTML for grid item
+ */
+const renderGridItem = (image, index) => {
+  const captionHTML = generateCaptionHTML(image.caption);
+  const altText = image.alt || '';
+  const pictureHTML = generatePictureHTML(image.src, altText, image.webpSrc);
+  const animationDelay = index * 150;
+  
+  return `
+    <figure class="grid-item" data-animation="fade-in" data-animation-delay="${animationDelay}">
+      ${pictureHTML}
+      ${captionHTML}
+    </figure>
+  `;
+};
+
+/**
+ * Renders an image grid block
+ * Pure function
+ * 
+ * @param {Object} block - Image grid block data
+ * @returns {string} - HTML content
+ */
+const renderImageGridBlock = (block) => {
+  if (!block.images || !block.images.length) {
+    return '';
+  }
+
+  const layoutClass = block.layout ? `grid-layout-${block.layout}` : 'grid-layout-2-column';
+  const imagesHTML = block.images.map(renderGridItem).join('');
+
+  return `
+    <div class="blog-image-grid ${layoutClass}" data-animation="fade-in">
+      ${imagesHTML}
+    </div>
+  `;
+};
+
+/**
+ * Renders a quote block
+ * Pure function
+ * 
+ * @param {Object} block - Quote block data
+ * @returns {string} - HTML content
+ */
+const renderQuoteBlock = (block) => {
+  const attributionHTML = block.attribution 
+    ? `<cite>${escapeHtml(block.attribution)}</cite>` 
+    : '';
+  
+  return `
+    <blockquote class="blog-quote-block" data-animation="fade-in">
+      <p>${block.content}</p>
+      ${attributionHTML}
+    </blockquote>
+  `;
+};
+
+/**
+ * Renders a code block
+ * Pure function
+ * 
+ * @param {Object} block - Code block data
+ * @returns {string} - HTML content
+ */
+const renderCodeBlock = (block) => {
+  const language = block.language || 'javascript';
+  const escapedCode = escapeHtml(block.content);
+  
+  return `
+    <div class="blog-code-block" data-animation="fade-in">
+      <pre><code class="language-${escapeHtml(language)}">${escapedCode}</code></pre>
+    </div>
+  `;
+};
+
+/**
+ * Renders an embedded video
+ * Pure function
+ * 
+ * @param {string} embedUrl - Video embed URL
+ * @param {string|null} caption - Video caption
+ * @returns {string} - HTML content
+ */
+const renderEmbeddedVideo = (embedUrl, caption) => {
+  const captionHTML = caption ? `<p class="video-caption">${escapeHtml(caption)}</p>` : '';
+  
+  return `
+    <div class="blog-video-block" data-animation="fade-in">
+      <div class="video-container">
+        <iframe src="${sanitizeUrl(embedUrl)}" frameborder="0" allowfullscreen></iframe>
+      </div>
+      ${captionHTML}
+    </div>
+  `;
+};
+
+/**
+ * Renders a native video
+ * Pure function
+ * 
+ * @param {string} videoUrl - Video URL
+ * @param {string|null} poster - Poster image URL
+ * @param {string} videoType - Video MIME type
+ * @param {string|null} caption - Video caption
+ * @returns {string} - HTML content
+ */
+const renderNativeVideo = (videoUrl, poster, videoType, caption) => {
+  const posterAttr = poster ? `poster="${sanitizeUrl(poster)}"` : '';
+  const captionHTML = caption ? `<p class="video-caption">${escapeHtml(caption)}</p>` : '';
+  
+  return `
+    <div class="blog-video-block" data-animation="fade-in">
+      <video controls ${posterAttr}>
+        <source src="${sanitizeUrl(videoUrl)}" type="${escapeHtml(videoType || 'video/mp4')}">
+        Your browser does not support the video tag.
+      </video>
+      ${captionHTML}
+    </div>
+  `;
+};
+
+/**
+ * Renders a video block
+ * Pure function
+ * 
+ * @param {Object} block - Video block data
+ * @returns {string} - HTML content
+ */
+const renderVideoBlock = (block) => {
+  if (block.embedUrl) {
+    return renderEmbeddedVideo(block.embedUrl, block.caption);
+  } else if (block.videoUrl) {
+    return renderNativeVideo(block.videoUrl, block.poster, block.videoType, block.caption);
+  }
+  
+  return '';
+};
+
+// ============================================================================
+// PURE FUNCTIONS - Block Parsing
+// ============================================================================
+
+/**
+ * Block renderer registry
+ * Pure object (frozen)
+ */
+const BLOCK_RENDERERS = Object.freeze({
+  'text': renderTextBlock,
+  'html': renderHtmlBlock,
+  'image': renderImageBlock,
+  'image-grid': renderImageGridBlock,
+  'quote': renderQuoteBlock,
+  'code': renderCodeBlock,
+  'video': renderVideoBlock
+});
+
+/**
+ * Renders a single block
+ * Pure function
+ * 
+ * @param {Object} block - Block data
+ * @returns {string} - HTML content
+ */
+const renderBlock = (block) => {
+  const renderer = BLOCK_RENDERERS[block.type];
+  
+  if (renderer) {
+    return renderer(block);
+  } else {
+    console.warn(`Unknown block type: ${block.type}`);
+    return '';
+  }
+};
+
+/**
+ * Parses and renders content blocks
+ * Pure function
+ * 
+ * @param {Array<Object>} blocks - Array of content blocks
+ * @returns {string} - HTML content
+ */
+const parseBlocks = (blocks) => {
+  if (!blocks || !Array.isArray(blocks)) {
+    return '<p>No content available</p>';
+  }
+
+  return blocks.map(renderBlock).join('');
+};
+
+/**
+ * Parses legacy content format
+ * Pure function
+ * 
+ * @param {string} content - HTML content string
+ * @returns {Array<Object>} - Array of content blocks
+ */
+const parseLegacyContent = (content) => {
+  return [
+    {
+      type: 'text',
+      content: content
+    }
+  ];
+};
+
+// ============================================================================
+// CLASS WRAPPER (For Backward Compatibility)
+// ============================================================================
+
+/**
+ * BlogContentParser class
+ * Wrapper around pure functions for backward compatibility
+ */
 class BlogContentParser {
-    /**
-     * Initialize the parser
-     */
-    constructor() {
-        this.blockRenderers = {
-            'text': this.renderTextBlock,
-            'html': this.renderHtmlBlock, // Added HTML renderer
-            'image': this.renderImageBlock,
-            'image-grid': this.renderImageGridBlock,
-            'quote': this.renderQuoteBlock,
-            'code': this.renderCodeBlock,
-            'video': this.renderVideoBlock
-        };
-    }
+  constructor() {
+    // No state needed - all functions are pure
+  }
 
-    /**
-     * Parse and render content blocks
-     * @param {Array} blocks - Array of content blocks
-     * @returns {string} - HTML content
-     */
-    parseBlocks(blocks) {
-        if (!blocks || !Array.isArray(blocks)) {
-            return '<p>No content available</p>';
-        }
+  parseBlocks(blocks) {
+    return parseBlocks(blocks);
+  }
 
-        return blocks.map(block => {
-            const renderer = this.blockRenderers[block.type];
-            if (renderer) {
-                return renderer.call(this, block);
-            } else {
-                console.warn(`Unknown block type: ${block.type}`);
-                return '';
-            }
-        }).join('');
-    }
+  parseLegacyContent(content) {
+    return parseLegacyContent(content);
+  }
 
-    /**
-     * Render a text block
-     * @param {Object} block - Text block data
-     * @returns {string} - HTML content
-     */
-    renderTextBlock(block) {
-        // Add data-animation attribute for scroll reveal effect
-        return `<div class="blog-text-block" data-animation="fade-up">${block.content}</div>`;
-    }
-
-    /**
-     * Render an HTML block
-     * @param {Object} block - HTML block data
-     * @returns {string} - HTML content
-     */
-    renderHtmlBlock(block) {
-        // Directly return the HTML content, optionally wrap if needed for styling/animation
-        return `<div class="blog-html-block" data-animation="fade-up">${block.content}</div>`;
-    }
-
-    /**
-     * --- Image Rendering with WebP Fallback ---
-     * The image rendering functions (`renderImageBlock`, `renderImageGridBlock`)
-     * implement a <picture> element for modern image format support.
-     *
-     * WebP Source Logic:
-     * 1. Checks if an explicit `webpSrc` property exists in the image data object.
-     *    If yes, uses that path for the WebP <source> tag.
-     * 2. If `webpSrc` is not provided, it checks if the original `src` property
-     *    ends with a standard image extension (.jpg, .jpeg, .png, case-insensitive).
-     * 3. If it has a standard extension, it attempts to derive the WebP path by
-     *    replacing the original extension with `.webp`.
-     * 4. If the original `src` does not have a standard extension (e.g., CDN URL
-     *    without extension), the WebP <source> tag is skipped to avoid errors.
-     * 5. The original <img> tag is always included within the <picture> element
-     *    (or stands alone if WebP is skipped) as a fallback for older browsers
-     *    or if the WebP image fails to load. It retains the `loading="lazy"` attribute.
-     */
-
-    /**
-     * Render an image block
-     * @param {Object} block - Image block data
-     * @returns {string} - HTML content
-     */
-    renderImageBlock(block) {
-        const sizeClass = block.size ? `image-size-${block.size}` : 'image-size-medium';
-        const positionClass = block.position ? `image-position-${block.position}` : 'image-position-center';
-        const captionHtml = block.caption ? `<figcaption>${block.caption}</figcaption>` : '';
-        const altText = block.alt || '';
-        const baseSrc = block.src;
-
-        // --- WebP Source Logic ---
-        // Use explicit webpSrc if provided, otherwise try to derive from baseSrc.
-        // Only derive if baseSrc ends with .jpg or .png (case-insensitive).
-        let webpSrc = block.webpSrc || null;
-        if (!webpSrc && baseSrc && /\.(jpe?g|png)$/i.test(baseSrc)) {
-            webpSrc = baseSrc.replace(/\.(jpe?g|png)$/i, '.webp');
-        }
-
-        const webpSourceHtml = webpSrc
-            ? `<source srcset="${webpSrc}" type="image/webp">`
-            : '';
-        // --- End WebP Source Logic ---
-
-        return `
-            <figure class="blog-image-block ${sizeClass} ${positionClass}" data-animation="fade-in">
-                <picture>
-                    ${webpSourceHtml}
-                    <img src="${baseSrc}" alt="${altText}" loading="lazy">
-                </picture>
-                ${captionHtml}
-            </figure>
-        `;
-    }
-
-    /**
-     * Render an image grid block
-     * @param {Object} block - Image grid block data
-     * @returns {string} - HTML content
-     */
-    renderImageGridBlock(block) {
-        if (!block.images || !block.images.length) {
-            return '';
-        }
-
-        const layoutClass = block.layout ? `grid-layout-${block.layout}` : 'grid-layout-2-column';
-
-        const imagesHtml = block.images.map((image, index) => {
-            const captionHtml = image.caption ? `<figcaption>${image.caption}</figcaption>` : '';
-            const altText = image.alt || '';
-            const baseSrc = image.src;
-
-            // --- WebP Source Logic (same as renderImageBlock) ---
-            let webpSrc = image.webpSrc || null;
-            if (!webpSrc && baseSrc && /\.(jpe?g|png)$/i.test(baseSrc)) {
-                webpSrc = baseSrc.replace(/\.(jpe?g|png)$/i, '.webp');
-            }
-
-            const webpSourceHtml = webpSrc
-                ? `<source srcset="${webpSrc}" type="image/webp">`
-                : '';
-            // --- End WebP Source Logic ---
-
-            return `
-                <figure class="grid-item" data-animation="fade-in" data-animation-delay="${index * 150}">
-                    <picture>
-                        ${webpSourceHtml}
-                        <img src="${baseSrc}" alt="${altText}" loading="lazy">
-                    </picture>
-                    ${captionHtml}
-                </figure>
-            `;
-        }).join('');
-
-        return `
-            <div class="blog-image-grid ${layoutClass}" data-animation="fade-in">
-                ${imagesHtml}
-            </div>
-        `;
-    }
-
-    /**
-     * Render a quote block
-     * @param {Object} block - Quote block data
-     * @returns {string} - HTML content
-     */
-    renderQuoteBlock(block) {
-        const attributionHtml = block.attribution ? `<cite>${block.attribution}</cite>` : '';
-        
-        return `
-            <blockquote class="blog-quote-block" data-animation="fade-in">
-                <p>${block.content}</p>
-                ${attributionHtml}
-            </blockquote>
-        `;
-    }
-
-    /**
-     * Render a code block
-     * @param {Object} block - Code block data
-     * @returns {string} - HTML content
-     */
-    renderCodeBlock(block) {
-        const language = block.language || 'javascript';
-        
-        return `
-            <div class="blog-code-block" data-animation="fade-in">
-                <pre><code class="language-${language}">${this.escapeHtml(block.content)}</code></pre>
-            </div>
-        `;
-    }
-
-    /**
-     * Render a video block
-     * @param {Object} block - Video block data
-     * @returns {string} - HTML content
-     */
-    renderVideoBlock(block) {
-        if (block.embedUrl) {
-            return `
-                <div class="blog-video-block" data-animation="fade-in">
-                    <div class="video-container">
-                        <iframe src="${block.embedUrl}" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    ${block.caption ? `<p class="video-caption">${block.caption}</p>` : ''}
-                </div>
-            `;
-        } else if (block.videoUrl) {
-            return `
-                <div class="blog-video-block" data-animation="fade-in">
-                    <video controls ${block.poster ? `poster="${block.poster}"` : ''}>
-                        <source src="${block.videoUrl}" type="${block.videoType || 'video/mp4'}">
-                        Your browser does not support the video tag.
-                    </video>
-                    ${block.caption ? `<p class="video-caption">${block.caption}</p>` : ''}
-                </div>
-            `;
-        }
-        
-        return '';
-    }
-
-    /**
-     * Escape HTML special characters
-     * @param {string} html - HTML string to escape
-     * @returns {string} - Escaped HTML
-     */
-    escapeHtml(html) {
-        const div = document.createElement('div');
-        div.textContent = html;
-        return div.innerHTML;
-    }
-
-    /**
-     * Parse legacy content format
-     * @param {string} content - HTML content string
-     * @returns {Array} - Array of content blocks
-     */
-    parseLegacyContent(content) {
-        // Convert legacy HTML content to block format
-        return [
-            {
-                type: 'text',
-                content: content
-            }
-        ];
-    }
+  // Legacy method - delegates to utility
+  escapeHtml(html) {
+    return escapeHtml(html);
+  }
 }
 
-// Export the parser
+// ============================================================================
+// EXPORTS
+// ============================================================================
+
+// Export class for backward compatibility
 window.BlogContentParser = BlogContentParser;
+
+// Export pure functions for direct use
+export {
+  parseBlocks,
+  parseLegacyContent,
+  renderBlock,
+  renderTextBlock,
+  renderHtmlBlock,
+  renderImageBlock,
+  renderImageGridBlock,
+  renderQuoteBlock,
+  renderCodeBlock,
+  renderVideoBlock,
+  BLOCK_RENDERERS
+};
+

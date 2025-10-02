@@ -4,4 +4,17 @@ memory-bank/
 instructions/
 .roomodes
 PromptContext.md
-archive/
+
+# Node modules
+node_modules/
+
+# Backup files
+*-original-backup.js
+*-refactored.js
+
+# Test coverage
+coverage/
+
+# IDE
+.vscode/
+.idea/
