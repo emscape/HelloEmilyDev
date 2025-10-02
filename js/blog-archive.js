@@ -1,144 +1,323 @@
 /**
- * Blog archive script for HelloEmily.dev
+ * Blog archive script for HelloEmily.dev - REFACTORED
+ * Functional programming approach with pure functions
  * Loads and displays all blog posts from JSON
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Load blog index data from JSON file
-  fetch('./blog-index.json') // Changed path to blog-index.json
-    .then(response => response.json())
-    .then(data => {
-      displayBlogPosts(data.posts);
-    })
-    .catch(error => {
-      console.error('Error loading blog data:', error);
-      displayFallbackBlogPosts();
-    });
-    
-  // Set up event listeners for blog post filtering
-  setupBlogFilters();
-});
+import { escapeHtml, sanitizeUrl } from './utils/security.js';
+import { ErrorHandler, ErrorContext } from './utils/error-handler.js';
+import { formatDate } from './utils/date-formatter.js';
+import { sortByDate } from './utils/date-formatter.js';
+
+// ============================================================================
+// PURE FUNCTIONS - Data Transformation
+// ============================================================================
 
 /**
- * Displays all blog posts in the blog grid
- * @param {Array} posts - Array of blog post objects
+ * Filters out template/incomplete posts
+ * Pure function
+ * 
+ * @param {Array<Object>} posts - Array of post objects
+ * @returns {Array<Object>} - Filtered posts
  */
-function displayBlogPosts(posts) {
-  const blogContainer = document.querySelector('.blog-grid');
+const filterValidPosts = (posts) => {
+  return posts.filter(post => 
+    post.date !== 'YYYY-MM-DD' && post.author !== 'Your Name'
+  );
+};
+
+/**
+ * Sorts posts by date (newest first)
+ * Pure function
+ * 
+ * @param {Array<Object>} posts - Array of post objects
+ * @returns {Array<Object>} - Sorted posts
+ */
+const sortPostsByDate = (posts) => {
+  return sortByDate(posts, 'date', false);
+};
+
+/**
+ * Prepares posts for display (sort + filter)
+ * Pure function
+ * 
+ * @param {Array<Object>} posts - Raw posts array
+ * @returns {Array<Object>} - Prepared posts
+ */
+const preparePosts = (posts) => {
+  const sorted = sortPostsByDate(posts);
+  return filterValidPosts(sorted);
+};
+
+/**
+ * Generates tags HTML for a single post
+ * Pure function
+ * 
+ * @param {Array<string>} tags - Array of tag strings
+ * @returns {string} - HTML string for tags
+ */
+const generatePostTagsHTML = (tags) => {
+  if (!tags || !Array.isArray(tags)) return '';
   
-  if (blogContainer) {
-    // Clear any existing content
-    blogContainer.innerHTML = '';
-    
-    // Sort posts by date (newest first)
-    const sortedPosts = [...posts].sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    });
-    
-    // Filter out template posts or incomplete posts
-    const validPosts = sortedPosts.filter(post => {
-      return post.date !== 'YYYY-MM-DD' && post.author !== 'Your Name';
-    });
-    
-    // Create and append blog post cards
-    validPosts.forEach(post => {
-      const postCard = document.createElement('div');
-      postCard.className = 'blog-card';
-      if (post.featured) {
-        postCard.classList.add('featured');
-      }
-      
-      // Format date
-      const postDate = new Date(post.date);
-      const formattedDate = postDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-      
-      // Create tags HTML
-      const tagsHTML = post.tags
-        .map(tag => `<span class="blog-tag" data-tag="${tag.toLowerCase().replace(/\s+/g, '-')}">${tag}</span>`)
-        .join('');
-      
-      // Build card HTML (added featuredImage back)
-      postCard.innerHTML = `
-        ${post.featuredImage ? `<img src="${post.featuredImage}" alt="${post.title} Featured Image" class="blog-card-image">` : ''}
-        <div class="blog-card-content">
-          <div class="blog-meta">
-            <span class="blog-date">${formattedDate}</span>
-             ${post.featured ? '<span class="featured-tag">Featured</span>' : ''}
-          </div>
-          <h3>${post.title}</h3>
-          <p>${post.shortDescription || ''}</p> <!-- Added short description -->
-          <div class="blog-tags">
-            ${tagsHTML}
-          </div>
-          <a href="${post.slug}" class="btn blog-read-more">Read More</a>
-        </div>
-      `; // Use slug (which is now the full path) for link
-      
-      blogContainer.appendChild(postCard);
-    });
-    
-    // Extract all unique tags for filtering
-    populateTagFilters(validPosts);
-  }
-}
+  return tags
+    .map(tag => {
+      const tagSlug = escapeHtml(tag.toLowerCase().replace(/\s+/g, '-'));
+      const tagText = escapeHtml(tag);
+      return `<span class="blog-tag" data-tag="${tagSlug}">${tagText}</span>`;
+    })
+    .join('');
+};
 
 /**
- * Populates the tag filter dropdown with unique tags from all posts
- * @param {Array} posts - Array of blog post objects
+ * Generates WebP source path from image path
+ * Pure function
+ *
+ * @param {string} imagePath - Original image path
+ * @returns {string} - WebP path
  */
-function populateTagFilters(posts) {
-  const tagFilterContainer = document.querySelector('.blog-filter-tags');
-  if (!tagFilterContainer) return;
+const deriveWebPPath = (imagePath) => {
+  return imagePath.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+};
 
-  // Calculate tag frequencies
+/**
+ * Generates featured image HTML with WebP support
+ * Pure function
+ *
+ * @param {Object} post - Post object
+ * @returns {string} - HTML string for featured image
+ */
+const generateFeaturedImageHTML = (post) => {
+  if (!post.featuredImage) return '';
+
+  const webpPath = deriveWebPPath(post.featuredImage);
+
+  return `<picture>
+    <source srcset="${sanitizeUrl(webpPath)}" type="image/webp">
+    <img src="${sanitizeUrl(post.featuredImage)}"
+      alt="${escapeHtml(post.title)} Featured Image"
+      class="blog-card-image"
+      loading="lazy">
+  </picture>`;
+};
+
+/**
+ * Generates featured tag HTML
+ * Pure function
+ * 
+ * @param {boolean} isFeatured - Whether post is featured
+ * @returns {string} - HTML string for featured tag
+ */
+const generateFeaturedTagHTML = (isFeatured) => {
+  return isFeatured ? '<span class="featured-tag">Featured</span>' : '';
+};
+
+/**
+ * Generates blog card HTML
+ * Pure function
+ * 
+ * @param {Object} post - Post object
+ * @returns {string} - HTML string for blog card
+ */
+const generateBlogCardHTML = (post) => {
+  const formattedDate = formatDate(post.date);
+  const tagsHTML = generatePostTagsHTML(post.tags);
+  const featuredImageHTML = generateFeaturedImageHTML(post);
+  const featuredTagHTML = generateFeaturedTagHTML(post.featured);
+  
+  return `
+    ${featuredImageHTML}
+    <div class="blog-card-content">
+      <div class="blog-meta">
+        <span class="blog-date">${escapeHtml(formattedDate)}</span>
+        ${featuredTagHTML}
+      </div>
+      <h3>${escapeHtml(post.title)}</h3>
+      <p>${escapeHtml(post.shortDescription || '')}</p>
+      <div class="blog-tags">
+        ${tagsHTML}
+      </div>
+      <a href="${sanitizeUrl(post.slug)}" class="btn blog-read-more">Read More</a>
+    </div>
+  `;
+};
+
+/**
+ * Extracts all unique tags from posts
+ * Pure function
+ * 
+ * @param {Array<Object>} posts - Array of post objects
+ * @returns {Array<string>} - Array of unique tags
+ */
+const extractUniqueTags = (posts) => {
+  const tagSet = new Set();
+  posts.forEach(post => {
+    if (post.tags && Array.isArray(post.tags)) {
+      post.tags.forEach(tag => tagSet.add(tag));
+    }
+  });
+  return Array.from(tagSet);
+};
+
+/**
+ * Calculates tag frequencies
+ * Pure function
+ * 
+ * @param {Array<Object>} posts - Array of post objects
+ * @returns {Object} - Object with tag counts
+ */
+const calculateTagFrequencies = (posts) => {
   const tagCounts = {};
   posts.forEach(post => {
-    post.tags.forEach(tag => {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-    });
+    if (post.tags && Array.isArray(post.tags)) {
+      post.tags.forEach(tag => {
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    }
   });
+  return tagCounts;
+};
 
-  // Sort tags by frequency (descending), then alphabetically for ties
-  const sortedTags = Object.entries(tagCounts)
-    .sort(([, countA, tagA], [, countB, tagB]) => {
+/**
+ * Sorts tags by frequency (descending), then alphabetically
+ * Pure function
+ * 
+ * @param {Object} tagCounts - Object with tag counts
+ * @returns {Array<string>} - Sorted array of tags
+ */
+const sortTagsByFrequency = (tagCounts) => {
+  return Object.entries(tagCounts)
+    .sort(([tagA, countA], [tagB, countB]) => {
       if (countB !== countA) {
         return countB - countA;
       }
-      const tagAStr = String(tagA);
-      const tagBStr = String(tagB);
-      return tagAStr.localeCompare(tagBStr);
+      return tagA.localeCompare(tagB);
     })
     .map(([tag]) => tag);
-
-  // Start with the 'All' button
-  let tagsHTML = '<button class="tag-filter active" data-tag="all">All</button>';
-  
-  // Add a wrapper for all other tags
-  tagsHTML += '<div class="all-tags-wrapper">';
-  sortedTags.forEach(tag => {
-    const tagSlug = tag.toLowerCase().replace(/\s+/g, '-');
-    tagsHTML += `<button class="tag-filter" data-tag="${tagSlug}">${tag}</button>`;
-  });
-  tagsHTML += '</div>'; // Close wrapper
-  
-  // Add "See more" button after the wrapper, initially hidden
-  tagsHTML += '<button class="see-more-tags" data-state="more" style="display: none;">See more</button>';
-
-  tagFilterContainer.innerHTML = tagsHTML;
-
-  // Adjust visibility after tags are rendered
-  // Use setTimeout to ensure layout calculation happens after render
-  setTimeout(adjustVisibleTags, 0);
-}
+};
 
 /**
- * Adjusts the visibility of tags based on available width, showing only two rows initially.
+ * Generates tag filter buttons HTML
+ * Pure function
+ * 
+ * @param {Array<string>} sortedTags - Sorted array of tags
+ * @returns {string} - HTML string for tag filters
  */
-function adjustVisibleTags() {
+const generateTagFiltersHTML = (sortedTags) => {
+  let html = '<button class="tag-filter active" data-tag="all">All</button>';
+  html += '<div class="all-tags-wrapper">';
+  
+  sortedTags.forEach(tag => {
+    const tagSlug = escapeHtml(tag.toLowerCase().replace(/\s+/g, '-'));
+    const tagText = escapeHtml(tag);
+    html += `<button class="tag-filter" data-tag="${tagSlug}">${tagText}</button>`;
+  });
+  
+  html += '</div>';
+  html += '<button class="see-more-tags" data-state="more" style="display: none;">See more</button>';
+  
+  return html;
+};
+
+/**
+ * Checks if a blog card has a specific tag
+ * Pure function
+ * 
+ * @param {HTMLElement} card - Blog card element
+ * @param {string} tag - Tag to check for
+ * @returns {boolean} - Whether card has the tag
+ */
+const cardHasTag = (card, tag) => {
+  if (tag === 'all') return true;
+  
+  const cardTags = card.querySelectorAll('.blog-tag');
+  return Array.from(cardTags).some(cardTag => 
+    cardTag.getAttribute('data-tag') === tag
+  );
+};
+
+/**
+ * Debounce function
+ * Higher-order function
+ * 
+ * @param {Function} func - Function to debounce
+ * @param {number} wait - Wait time in ms
+ * @returns {Function} - Debounced function
+ */
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+// ============================================================================
+// IMPURE FUNCTIONS - Side Effects (DOM Manipulation)
+// ============================================================================
+
+/**
+ * Creates a blog card DOM element
+ * Impure function - DOM creation
+ * 
+ * @param {Object} post - Post object
+ * @returns {HTMLElement} - Blog card element
+ */
+const createBlogCardElement = (post) => {
+  const postCard = document.createElement('div');
+  postCard.className = 'blog-card';
+  if (post.featured) {
+    postCard.classList.add('featured');
+  }
+  postCard.innerHTML = generateBlogCardHTML(post);
+  return postCard;
+};
+
+/**
+ * Renders blog posts to container
+ * Impure function - DOM manipulation
+ * 
+ * @param {HTMLElement} container - Container element
+ * @param {Array<Object>} posts - Array of post objects
+ */
+const renderBlogPosts = (container, posts) => {
+  container.innerHTML = '';
+  const preparedPosts = preparePosts(posts);
+  
+  preparedPosts.forEach(post => {
+    const postCard = createBlogCardElement(post);
+    container.appendChild(postCard);
+  });
+  
+  return preparedPosts;
+};
+
+/**
+ * Renders tag filters to container
+ * Impure function - DOM manipulation
+ * 
+ * @param {HTMLElement} container - Tag filter container
+ * @param {Array<Object>} posts - Array of post objects
+ */
+const renderTagFilters = (container, posts) => {
+  const tagCounts = calculateTagFrequencies(posts);
+  const sortedTags = sortTagsByFrequency(tagCounts);
+  const filtersHTML = generateTagFiltersHTML(sortedTags);
+  
+  container.innerHTML = filtersHTML;
+  
+  // Adjust visibility after render
+  setTimeout(adjustVisibleTags, 0);
+};
+
+/**
+ * Adjusts visibility of tags (shows only two rows initially)
+ * Impure function - DOM manipulation
+ */
+const adjustVisibleTags = () => {
   const tagFilterContainer = document.querySelector('.blog-filter-tags');
   if (!tagFilterContainer) return;
   
@@ -147,14 +326,14 @@ function adjustVisibleTags() {
   const allTagButtons = tagsWrapper ? Array.from(tagsWrapper.querySelectorAll('.tag-filter')) : [];
 
   if (!tagsWrapper || !seeMoreButton || allTagButtons.length === 0) {
-    if (seeMoreButton) seeMoreButton.style.display = 'none'; // Hide if no tags
+    if (seeMoreButton) seeMoreButton.style.display = 'none';
     return;
   }
 
   // Reset styles to calculate natural layout
   tagsWrapper.style.maxHeight = '';
   tagsWrapper.style.overflow = '';
-  seeMoreButton.style.display = 'none'; // Hide button initially
+  seeMoreButton.style.display = 'none';
 
   const firstTag = allTagButtons[0];
   const firstTagOffsetTop = firstTag.offsetTop;
@@ -167,184 +346,175 @@ function adjustVisibleTags() {
       secondRowFound = true;
     }
     if (secondRowFound && tag.offsetTop > tag.previousElementSibling?.offsetTop && tag.offsetTop !== firstTagOffsetTop) {
-       // Check if this tag starts a new row *after* the second row started
-       const previousTag = tag.previousElementSibling;
-       if (previousTag && tag.offsetTop > previousTag.offsetTop) {
-           thirdRowOffsetTop = tag.offsetTop;
-           break; // Found the start of the third row
-       }
+      const previousTag = tag.previousElementSibling;
+      if (previousTag && tag.offsetTop > previousTag.offsetTop) {
+        thirdRowOffsetTop = tag.offsetTop;
+        break;
+      }
     }
   }
   
-  // Check if the container itself is taller than the start of the third row (handles wrapping)
   const containerScrollHeight = tagsWrapper.scrollHeight;
-  const containerClientHeight = tagsWrapper.clientHeight; // Height when not constrained
 
   if (thirdRowOffsetTop !== -1 && containerScrollHeight > (thirdRowOffsetTop - firstTagOffsetTop)) {
-    // Calculate height for two rows. Use the offsetTop of the start of the third row.
     const twoRowsHeight = thirdRowOffsetTop - firstTagOffsetTop;
-    
-    // Apply max-height and overflow
-    tagsWrapper.style.maxHeight = `${twoRowsHeight - 1}px`; // Subtract 1px to ensure cutoff
+    tagsWrapper.style.maxHeight = `${twoRowsHeight - 1}px`;
     tagsWrapper.style.overflow = 'hidden';
-    seeMoreButton.style.display = 'inline-block'; // Show the button
+    seeMoreButton.style.display = 'inline-block';
     seeMoreButton.textContent = 'See more';
     seeMoreButton.setAttribute('data-state', 'more');
   } else {
-    // All tags fit within two rows or less
     tagsWrapper.style.maxHeight = '';
     tagsWrapper.style.overflow = '';
-    seeMoreButton.style.display = 'none'; // Hide the button
+    seeMoreButton.style.display = 'none';
   }
-}
-
-
-/**
- * Sets up event listeners for blog filtering
- */
-// Debounce function
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-let isInitialLoad = true; // Flag to prevent immediate execution on load for resize
-
-function setupBlogFilters() {
-  const tagFilterContainer = document.querySelector('.blog-filter-tags');
-  if (!tagFilterContainer) return;
-
-  // --- Event Listener for Clicks ---
-  tagFilterContainer.addEventListener('click', function(e) {
-    // Handle tag filter clicks (applies to 'All' button and tags inside wrapper)
-    if (e.target.classList.contains('tag-filter')) {
-      const selectedTag = e.target.getAttribute('data-tag');
-      
-      // Update active state on ALL filter buttons (incl. 'All')
-      tagFilterContainer.querySelectorAll('.tag-filter').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      e.target.classList.add('active');
-      
-      // Filter blog posts
-      filterBlogPostsByTag(selectedTag);
-    }
-
-    // Handle "See more/less" clicks
-    if (e.target.classList.contains('see-more-tags')) {
-      const button = e.target;
-      const tagsWrapper = tagFilterContainer.querySelector('.all-tags-wrapper');
-      const currentState = button.getAttribute('data-state');
-
-      if (currentState === 'more') {
-        // Expand: Remove max-height and overflow
-        tagsWrapper.style.maxHeight = '';
-        tagsWrapper.style.overflow = '';
-        button.textContent = 'See less';
-        button.setAttribute('data-state', 'less');
-      } else {
-        // Collapse: Re-apply the two-row limit
-        adjustVisibleTags(); // Recalculate and apply the correct max-height
-        button.textContent = 'See more'; // adjustVisibleTags will set this if needed
-        button.setAttribute('data-state', 'more'); // adjustVisibleTags will set this if needed
-
-        // Optional: If active tag is now hidden, scroll it into view or switch to 'All'
-        const activeTag = tagsWrapper.querySelector('.tag-filter.active');
-        if (activeTag && tagsWrapper.scrollHeight > tagsWrapper.clientHeight) {
-           // Check if the active tag is actually hidden (offsetTop > wrapper visible height)
-           const wrapperRect = tagsWrapper.getBoundingClientRect();
-           const activeTagRect = activeTag.getBoundingClientRect();
-           if (activeTagRect.bottom > wrapperRect.bottom) {
-               // Option 1: Scroll active tag into view (might be slightly off due to overflow hidden)
-               // activeTag.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-               
-               // Option 2: Switch back to 'All' filter
-               const allButton = tagFilterContainer.querySelector('.tag-filter[data-tag="all"]');
-               if (allButton) {
-                   tagFilterContainer.querySelectorAll('.tag-filter').forEach(btn => btn.classList.remove('active'));
-                   allButton.classList.add('active');
-                   filterBlogPostsByTag('all');
-               }
-           }
-        }
-      }
-    }
-  });
-
-  // --- Event Listener for Resize ---
-  // Debounce the resize handler
-  const debouncedAdjustTags = debounce(adjustVisibleTags, 250);
-
-  window.addEventListener('resize', () => {
-      // Don't run immediately on load if adjustVisibleTags is already called
-      if (!isInitialLoad) {
-          debouncedAdjustTags();
-      }
-      isInitialLoad = false; // Set flag after first potential resize event
-  });
-
-  // Reset flag after initial setup allows resize to work
-  setTimeout(() => { isInitialLoad = false; }, 100);
-}
+};
 
 /**
- * Filters blog posts by selected tag
+ * Filters blog posts by tag
+ * Impure function - DOM manipulation
+ * 
  * @param {string} tag - Tag to filter by
  */
-function filterBlogPostsByTag(tag) {
+const filterBlogPostsByTag = (tag) => {
   const blogCards = document.querySelectorAll('.blog-card');
   
   blogCards.forEach(card => {
-    if (tag === 'all') {
-      card.style.display = 'block';
-    } else {
-      const cardTags = card.querySelectorAll('.blog-tag');
-      let hasTag = false;
-      
-      cardTags.forEach(cardTag => {
-        if (cardTag.getAttribute('data-tag') === tag) {
-          hasTag = true;
-        }
-      });
-      
-      card.style.display = hasTag ? 'block' : 'none';
-    }
+    const shouldShow = cardHasTag(card, tag);
+    card.style.display = shouldShow ? 'block' : 'none';
   });
-}
+};
 
-// Note: The openBlogPost function has been removed as we now use direct links to blog post pages
+// ============================================================================
+// EVENT HANDLERS
+// ============================================================================
 
 /**
- * Displays fallback blog posts if JSON loading fails
+ * Handles tag filter click
+ * Impure function - Event handler
+ * 
+ * @param {Event} e - Click event
+ * @param {HTMLElement} container - Tag filter container
  */
-function displayFallbackBlogPosts() {
-  const blogContainer = document.querySelector('.blog-grid');
+const handleTagFilterClick = (e, container) => {
+  if (!e.target.classList.contains('tag-filter')) return;
   
-  if (blogContainer) {
-    // Keep any existing content as fallback
-    if (blogContainer.children.length === 0) {
-      // Updated fallback content to match new structure
-      blogContainer.innerHTML = `
-        <div class="blog-card">
-          <div class="blog-card-content">
-            <div class="blog-meta">
-              <span class="blog-date">April 30, 2025</span>
-            </div>
-            <h3>Could not load blog posts</h3>
-            <p>Please try refreshing the page or check back later.</p>
-            <div class="blog-tags">
-              <span class="blog-tag">Error</span>
-            </div>
-          </div>
-        </div>
-      `;
+  const selectedTag = e.target.getAttribute('data-tag');
+  
+  // Update active state
+  container.querySelectorAll('.tag-filter').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  e.target.classList.add('active');
+  
+  // Filter posts
+  filterBlogPostsByTag(selectedTag);
+};
+
+/**
+ * Handles "See more/less" button click
+ * Impure function - Event handler
+ * 
+ * @param {Event} e - Click event
+ * @param {HTMLElement} container - Tag filter container
+ */
+const handleSeeMoreClick = (e, container) => {
+  if (!e.target.classList.contains('see-more-tags')) return;
+  
+  const button = e.target;
+  const tagsWrapper = container.querySelector('.all-tags-wrapper');
+  const currentState = button.getAttribute('data-state');
+
+  if (currentState === 'more') {
+    // Expand
+    tagsWrapper.style.maxHeight = '';
+    tagsWrapper.style.overflow = '';
+    button.textContent = 'See less';
+    button.setAttribute('data-state', 'less');
+  } else {
+    // Collapse
+    adjustVisibleTags();
+    
+    // Switch to 'All' if active tag is now hidden
+    const activeTag = tagsWrapper.querySelector('.tag-filter.active');
+    if (activeTag && tagsWrapper.scrollHeight > tagsWrapper.clientHeight) {
+      const wrapperRect = tagsWrapper.getBoundingClientRect();
+      const activeTagRect = activeTag.getBoundingClientRect();
+      if (activeTagRect.bottom > wrapperRect.bottom) {
+        const allButton = container.querySelector('.tag-filter[data-tag="all"]');
+        if (allButton) {
+          container.querySelectorAll('.tag-filter').forEach(btn => btn.classList.remove('active'));
+          allButton.classList.add('active');
+          filterBlogPostsByTag('all');
+        }
+      }
     }
   }
-}
+};
+
+/**
+ * Sets up event listeners for blog filtering
+ * Impure function - Event listener setup
+ */
+const setupBlogFilters = () => {
+  const tagFilterContainer = document.querySelector('.blog-filter-tags');
+  if (!tagFilterContainer) return;
+
+  // Click event listener
+  tagFilterContainer.addEventListener('click', (e) => {
+    handleTagFilterClick(e, tagFilterContainer);
+    handleSeeMoreClick(e, tagFilterContainer);
+  });
+
+  // Resize event listener with debounce
+  let isInitialLoad = true;
+  const debouncedAdjustTags = debounce(adjustVisibleTags, 250);
+
+  window.addEventListener('resize', () => {
+    if (!isInitialLoad) {
+      debouncedAdjustTags();
+    }
+    isInitialLoad = false;
+  });
+
+  setTimeout(() => { isInitialLoad = false; }, 100);
+};
+
+// ============================================================================
+// APPLICATION ENTRY POINT
+// ============================================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  const blogContainer = document.querySelector('.blog-grid');
+  const tagFilterContainer = document.querySelector('.blog-filter-tags');
+  const handleError = ErrorHandler.createBoundary(blogContainer, ErrorContext.FETCH);
+
+  fetch('./blog-index.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!data || !data.posts) {
+        throw new Error('Invalid blog data format');
+      }
+      
+      // Render posts and get prepared posts for tag filtering
+      const preparedPosts = renderBlogPosts(blogContainer, data.posts);
+      
+      // Render tag filters
+      if (tagFilterContainer) {
+        renderTagFilters(tagFilterContainer, preparedPosts);
+      }
+      
+      // Set up event listeners
+      setupBlogFilters();
+    })
+    .catch(error => {
+      ErrorHandler.log(error, ErrorContext.FETCH);
+      handleError(error, 'Unable to load blog posts. Please try again later.');
+    });
+});
+

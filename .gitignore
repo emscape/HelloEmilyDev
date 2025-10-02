@@ -1,7 +1,34 @@
 # Roo-specific files and directories
 .roo/
 memory-bank/
+.memory-bank/
 instructions/
 .roomodes
 PromptContext.md
+
+# Node modules
+node_modules/
+
+# Backup files
+*-original-backup.js
+*-refactored.js
+
+# Test coverage
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# Archived and Deprecated
 archive/
+deprecated/
+
+# Blog drafts (processed versions are duplicates)
+blog-drafts/processed/
+
+# Planning documents
+plans/
+
+# Development documentation (internal process tracking)
+dev-docs/
