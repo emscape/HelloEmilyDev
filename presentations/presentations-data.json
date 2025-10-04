@@ -1,5 +1,12 @@
 [
   {
+    "pdfPath": "presentations/posted/Building With Agentic AI.pptx",
+    "thumbnail": "images/presentations/empathy-ai-featured.jpg",
+    "relatedBlogPostUrl": null,
+    "cardMarkdownPath": "presentations/posted/building-with-agentic-ai-card.md",
+    "longDescriptionMarkdown": "---\ntitle: \"Building With Agentic AI\"\n---\n\nA comprehensive exploration of building applications with agentic AI systems. This presentation covers the fundamentals of AI agents, their capabilities, and practical approaches to integrating them into real-world applications. Topics include agent architecture, decision-making processes, tool usage, and best practices for development. The session provides both theoretical foundations and hands-on insights for developers and technologists looking to harness the power of autonomous AI systems."
+  },
+  {
     "pdfPath": "presentations/posted/A Journey Through The Cosmos_ My Visit to JPL.pdf",
     "thumbnail": "images/presentations/jpl-visit.png",
     "relatedBlogPostUrl": "/blog/jpl-ai-blog/",
