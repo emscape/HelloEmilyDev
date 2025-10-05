@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  const postJsonPath = `./post-data.json`;
+  const postJsonPath = `/blog/${postSlug}/post-data.json`;
   const container = document.querySelector('.blog-post-content-container');
   const handleError = ErrorHandler.createBoundary(container, ErrorContext.FETCH);
   
