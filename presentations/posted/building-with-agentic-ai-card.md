@@ -36,4 +36,4 @@ Developers, engineering leaders, and technologists interested in understanding h
 ---
 
 *Presented at Google Playa Vista - The Spruce Goose Hangar on August 22, 2025*
-*Presentation file: Building With Agentic AI.pptx*
+*Presentation file: Building With Agentic AI.pdf*
