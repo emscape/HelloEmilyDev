@@ -8,6 +8,34 @@ import { escapeHtml, sanitizeUrl } from './utils/security.js';
 import { ErrorHandler, ErrorContext } from './utils/error-handler.js';
 
 // ============================================================================
+// PURE FUNCTIONS - Page Detection and Limiting
+// ============================================================================
+
+/**
+ * Checks if current page is the index/main page
+ * Pure function
+ *
+ * @param {string} pathname - Window location pathname
+ * @returns {boolean} - True if index page
+ */
+const isIndexPage = (pathname) => {
+  const cleanedPath = pathname.replace(/^\/+|\/+$/g, '');
+  return cleanedPath === '' || cleanedPath === 'index.html';
+};
+
+/**
+ * Limits presentations for display based on page type
+ * Pure function
+ *
+ * @param {Array<Object>} presentations - Sorted presentations
+ * @param {string} pathname - Window location pathname
+ * @returns {Array<Object>} - Presentations to display
+ */
+const limitPresentationsForPage = (presentations, pathname) => {
+  return isIndexPage(pathname) ? presentations.slice(0, 3) : presentations;
+};
+
+// ============================================================================
 // PURE FUNCTIONS - Frontmatter Parsing
 // ============================================================================
 
@@ -304,8 +332,11 @@ const loadPresentations = async () => {
     // Parse presentations
     const validPresentations = parsePresentations(data);
 
+    // Limit presentations based on page type
+    const limitedPresentations = limitPresentationsForPage(validPresentations, window.location.pathname);
+
     // Render presentations
-    renderPresentations(presentationsList, validPresentations);
+    renderPresentations(presentationsList, limitedPresentations);
 
   } catch (error) {
     ErrorHandler.log(error, ErrorContext.FETCH);
@@ -324,6 +355,8 @@ document.addEventListener('DOMContentLoaded', loadPresentations);
 // ============================================================================
 
 export {
+  isIndexPage,
+  limitPresentationsForPage,
   parseFrontmatterAndBody,
   isValidPresentation,
   parsePresentation,
