@@ -11,6 +11,9 @@ const { marked } = require('marked');
 const { validateMarkdownFile } = require('./validate-blog-post');
 const { optimizeImage } = require('./optimize-images');
 
+// Import our new validation utilities
+const { validateBlogPost, validateJSON, sanitizeTitle } = require('./blog-validator.js');
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -153,11 +156,27 @@ function writeHtmlFile(postDir, postData, templateContent) {
     featuredImageUrl = SITE_BASE_URL + featuredImageUrl;
   }
   
+  // Validate and sanitize the post data before HTML generation
+  const validation = validateBlogPost(postData, postData.id);
+  if (!validation.isValid) {
+    console.log(`  ⚠️  Validation warnings for ${postData.id}:`);
+    validation.errors.forEach(error => console.log(`     • ${error}`));
+  }
+
+  // Sanitize title for safe HTML usage
+  const safeTitle = sanitizeTitle(postData.title);
+  const safeDescription = postData.shortDescription ?
+    sanitizeTitle(postData.shortDescription) : 'A blog post by Emily Anderson.';
+
+  if (safeTitle !== postData.title) {
+    console.log(`  🔧 Sanitized title: "${postData.title}" → "${safeTitle}"`);
+  }
+
   const html = templateContent
-    .replace(/PAGE_TITLE_PLACEHOLDER/g, `${postData.title} | Emily Anderson`)
-    .replace(/OG_TITLE_PLACEHOLDER/g, postData.title)
+    .replace(/PAGE_TITLE_PLACEHOLDER/g, `${safeTitle} | Emily Anderson`)
+    .replace(/OG_TITLE_PLACEHOLDER/g, safeTitle)
     .replace(/OG_URL_PLACEHOLDER/g, postUrl)
-    .replace(/OG_DESCRIPTION_PLACEHOLDER/g, postData.shortDescription || 'A blog post by Emily Anderson.')
+    .replace(/OG_DESCRIPTION_PLACEHOLDER/g, safeDescription)
     .replace(/OG_IMAGE_PLACEHOLDER/g, featuredImageUrl);
   
   const htmlPath = path.join(postDir, 'index.html');
