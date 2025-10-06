@@ -4,13 +4,20 @@
   "description": "This repository contains the source code for my personal website hosted at [HelloEmily.dev](https://HelloEmily.dev).",
   "main": "index.js",
   "scripts": {
+    "dev": "python -m http.server 8000",
+    "build": "npm run test && npm run lint",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "test:security": "vitest run tests/utils/security.test.js",
     "test:date": "vitest run tests/utils/date-formatter.test.js",
-    "test:parser": "vitest run tests/blog-content-parser.test.js"
+    "test:parser": "vitest run tests/blog-content-parser.test.js",
+    "lint": "echo 'ESLint not installed - run: npm install eslint --save-dev'",
+    "format": "echo 'Prettier not installed - run: npm install prettier --save-dev'",
+    "blog:process": "node scripts/process-blog-draft.js",
+    "blog:rebuild": "node scripts/rebuild-blog-index.js",
+    "images:optimize": "node scripts/optimize-images.js"
   },
   "repository": {
     "type": "git",
