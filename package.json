@@ -17,7 +17,14 @@
     "format": "echo 'Prettier not installed - run: npm install prettier --save-dev'",
     "blog:process": "node scripts/process-blog-draft.js",
     "blog:rebuild": "node scripts/rebuild-blog-index.js",
-    "images:optimize": "node scripts/optimize-images.js"
+    "blog:validate": "node scripts/validate-blog-posts.js",
+    "blog:repair": "node scripts/repair-blog-posts.js",
+    "blog:repair:preview": "node scripts/repair-blog-posts.js --dry-run",
+    "blog:safe-process": "npm run blog:validate && npm run blog:repair && npm run blog:validate",
+    "blog:full-rebuild": "npm run blog:rebuild && npm run blog:validate && npm run blog:repair",
+    "blog:pre-commit": "node scripts/pre-commit-blog-check.js",
+    "images:optimize": "node scripts/optimize-images.js",
+    "validate": "npm run blog:validate && npm run test"
   },
   "repository": {
     "type": "git",
