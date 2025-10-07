@@ -36,13 +36,32 @@ const limitPresentationsForPage = (presentations, pathname) => {
 };
 
 // ============================================================================
+// PURE FUNCTIONS - Path Adjustment
+// ============================================================================
+
+/**
+ * Adjusts path based on current page location
+ * Pure function
+ *
+ * @param {string} path - Original path
+ * @returns {string} - Adjusted path
+ */
+const adjustPath = (path) => {
+  if (!path) return '';
+
+  // If we're in the /pages/ directory, go up one level
+  const isInPagesDirectory = window.location.pathname.includes('/pages/');
+  return isInPagesDirectory ? `../${path}` : path;
+};
+
+// ============================================================================
 // PURE FUNCTIONS - Frontmatter Parsing
 // ============================================================================
 
 /**
  * Extracts frontmatter from markdown text
  * Pure function
- * 
+ *
  * @param {string} mdText - Markdown text with frontmatter
  * @returns {Object} - Object with frontmatter and body
  */
@@ -93,7 +112,7 @@ const isValidPresentation = (presentation) => {
 /**
  * Parses presentation data
  * Pure function
- * 
+ *
  * @param {Object} presentation - Raw presentation object
  * @returns {Object|null} - Parsed presentation or null if invalid
  */
@@ -110,8 +129,8 @@ const parsePresentation = (presentation) => {
       title: parsed.frontmatter.title || 'Untitled Presentation',
       descriptionHTML: parsed.body || '<p>Description not available.</p>',
       tags: parsed.frontmatter.tags || [],
-      thumbnail: presentation.thumbnail,
-      pdfPath: presentation.pdfPath,
+      thumbnail: adjustPath(presentation.thumbnail),
+      pdfPath: adjustPath(presentation.pdfPath),
       relatedBlogPostUrl: presentation.relatedBlogPostUrl
     };
   } catch (error) {
@@ -287,21 +306,6 @@ const renderPresentations = (container, presentations) => {
     const presentationItem = createPresentationItem(presentation);
     container.appendChild(presentationItem);
   });
-};
-
-/**
- * Adjusts path based on current page location
- * Pure function
- *
- * @param {string} path - Original path
- * @returns {string} - Adjusted path
- */
-const adjustPath = (path) => {
-  if (!path) return '';
-
-  // If we're in the /pages/ directory, go up one level
-  const isInPagesDirectory = window.location.pathname.includes('/pages/');
-  return isInPagesDirectory ? `../${path}` : path;
 };
 
 /**
