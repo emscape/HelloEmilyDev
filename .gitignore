@@ -58,3 +58,15 @@ logs/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Personal documents
+*.pdf
+resume/*.pdf
+cv/
+
+# Design process files (keep final assets only)
+images/design-inspiration/
+images/mockups/
+images/wireframes/
+**/inspiration/
+**/mockups/
