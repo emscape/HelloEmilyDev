@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   // Load blog index data from JSON file
-  fetch('./blog-index.json') // Changed path to blog-index.json
+  fetch('./data/blog-index.json')
     .then(response => response.json())
     .then(data => {
       displayBlogPosts(data.posts);
@@ -100,7 +100,7 @@ function displayFallbackBlogPosts() {
             <div class="blog-tags">
               <span class="blog-tag">Error</span>
             </div>
-            <a href="blog-archive.html" class="btn blog-read-more">View Archive</a>
+            <a href="pages/blog-archive.html" class="btn blog-read-more">View Archive</a>
           </div>
         </div>
       `;

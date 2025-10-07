@@ -1,5 +1,6 @@
-# Roo-specific files and directories
+# AI development files and directories
 .roo/
+.augment/
 memory-bank/
 .memory-bank/
 instructions/

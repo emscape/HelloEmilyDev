@@ -290,13 +290,29 @@ const renderPresentations = (container, presentations) => {
 };
 
 /**
+ * Adjusts path based on current page location
+ * Pure function
+ *
+ * @param {string} path - Original path
+ * @returns {string} - Adjusted path
+ */
+const adjustPath = (path) => {
+  if (!path) return '';
+
+  // If we're in the /pages/ directory, go up one level
+  const isInPagesDirectory = window.location.pathname.includes('/pages/');
+  return isInPagesDirectory ? `../${path}` : path;
+};
+
+/**
  * Fetches presentation data from JSON
  * Impure function - Network I/O
- * 
+ *
  * @returns {Promise<Array<Object>>} - Promise resolving to presentations array
  */
 const fetchPresentationData = async () => {
-  const response = await fetch('../presentations/presentations-data.json');
+  const dataPath = adjustPath('presentations/presentations-data.json');
+  const response = await fetch(dataPath);
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);

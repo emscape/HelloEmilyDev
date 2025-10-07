@@ -489,7 +489,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const tagFilterContainer = document.querySelector('.blog-filter-tags');
   const handleError = ErrorHandler.createBoundary(blogContainer, ErrorContext.FETCH);
 
-  fetch('./blog-index.json')
+  // Adjust path based on current page location
+  const isInPagesDirectory = window.location.pathname.includes('/pages/');
+  const dataPath = isInPagesDirectory ? '../data/blog-index.json' : './data/blog-index.json';
+
+  fetch(dataPath)
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

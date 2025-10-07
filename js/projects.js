@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
           viewMoreContainer.style.gridColumn = '1 / -1';
           
           const viewMoreLink = document.createElement('a');
-          viewMoreLink.href = './projects.html';
+          viewMoreLink.href = './pages/projects.html';
           viewMoreLink.className = 'btn';
           viewMoreLink.textContent = 'View More Projects';
           

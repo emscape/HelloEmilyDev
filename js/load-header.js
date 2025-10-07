@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const headerPath = '/header.html';
+    const headerPath = '/pages/header.html';
 
     fetch(headerPath)
         .then(response => {

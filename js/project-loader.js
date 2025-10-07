@@ -83,19 +83,36 @@ const generateTechnologyTagsHTML = (technologies) => {
 };
 
 /**
+ * Adjusts image path based on current page location
+ * Pure function
+ *
+ * @param {string} imagePath - Original image path
+ * @returns {string} - Adjusted image path
+ */
+const adjustImagePath = (imagePath) => {
+  if (!imagePath) return '';
+
+  // If we're in the /pages/ directory, go up one level
+  const isInPagesDirectory = window.location.pathname.includes('/pages/');
+  return isInPagesDirectory ? `../${imagePath}` : imagePath;
+};
+
+/**
  * Generates featured image HTML
  * Pure function
- * 
+ *
  * @param {string|null} featuredImage - Featured image URL
  * @param {string} title - Project title for alt text
  * @returns {string} - HTML for featured image
  */
 const generateFeaturedImageHTML = (featuredImage, title) => {
   if (!featuredImage) return '';
-  
+
+  const adjustedPath = adjustImagePath(featuredImage);
+
   return `<div class="project-image">
-    <img src="${sanitizeUrl(featuredImage)}" 
-         alt="${escapeHtml(title)}" 
+    <img src="${sanitizeUrl(adjustedPath)}"
+         alt="${escapeHtml(title)}"
          loading="lazy">
   </div>`;
 };
@@ -260,7 +277,8 @@ const renderProjects = (container, projects) => {
  * @returns {Promise<Object>} - Promise resolving to project data
  */
 const fetchProjectData = async () => {
-  const response = await fetch('./projects/projects-data.json');
+  const dataPath = adjustImagePath('projects/projects-data.json');
+  const response = await fetch(dataPath);
   
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
