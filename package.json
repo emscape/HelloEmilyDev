@@ -16,6 +16,7 @@
     "lint": "echo 'ESLint not installed - run: npm install eslint --save-dev'",
     "format": "echo 'Prettier not installed - run: npm install prettier --save-dev'",
     "blog:process": "node scripts/process-blog-draft.js",
+    "blog:update": "node scripts/update-blog-post.js",
     "blog:rebuild": "node scripts/rebuild-blog-index.js",
     "blog:validate": "node scripts/validate-blog-posts.js",
     "blog:repair": "node scripts/repair-blog-posts.js",
@@ -24,6 +25,7 @@
     "blog:full-rebuild": "npm run blog:rebuild && npm run blog:validate && npm run blog:repair",
     "blog:pre-commit": "node scripts/pre-commit-blog-check.js",
     "images:optimize": "node scripts/optimize-images.js",
+    "projects:add": "python scripts/add-new-project.py",
     "validate": "npm run blog:validate && npm run test"
   },
   "repository": {

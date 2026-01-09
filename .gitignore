@@ -28,6 +28,9 @@ deprecated/
 # Blog drafts (all drafts and processing artifacts)
 blog-drafts/
 
+# Documentation (internal notes and audits)
+docs/
+
 # Planning documents
 plans/
 

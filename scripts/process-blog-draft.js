@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 const { marked } = require('marked');
+const readline = require('readline');
 const { validateMarkdownFile } = require('./validate-blog-post');
 const { optimizeImage } = require('./optimize-images');
 
@@ -22,8 +23,8 @@ const PATHS = {
   draftsNew: path.join(__dirname, '..', 'blog-drafts', 'new'),
   draftsProcessed: path.join(__dirname, '..', 'blog-drafts', 'processed'),
   blog: path.join(__dirname, '..', 'blog'),
-  blogIndex: path.join(__dirname, '..', 'blog-index.json'),
-  template: path.join(__dirname, '..', 'blog-post-template.html')
+  blogIndex: path.join(__dirname, '..', 'data', 'blog-index.json'),
+  template: path.join(__dirname, '..', 'blog-drafts', 'new', 'blog-post-template.html')
 };
 
 const SITE_BASE_URL = 'https://helloemily.dev';
@@ -109,6 +110,44 @@ function createIndexEntry(postData) {
     featuredImage: postData.featuredImage,
     featured: postData.featured
   };
+}
+
+// ============================================================================
+// APPROVAL SYSTEM
+// ============================================================================
+
+/**
+ * Prompt user for proofreading approval
+ * @param {Object} postData - Post data for preview
+ * @returns {Promise<boolean>} - True if approved, false if rejected
+ */
+function promptForApproval(postData) {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    console.log('\n' + '═'.repeat(60));
+    console.log('📋 PROOFREADING REQUIRED');
+    console.log('═'.repeat(60));
+    console.log(`\nTitle: ${postData.title}`);
+    console.log(`Date: ${postData.date}`);
+    console.log(`Featured: ${postData.featured ? '✓ Yes' : '✗ No'}`);
+    console.log(`Tags: ${postData.tags.join(', ')}`);
+    console.log(`\nShort Description:\n${postData.shortDescription}`);
+    console.log('\n' + '─'.repeat(60));
+    console.log('First 300 characters of content:');
+    console.log('─'.repeat(60));
+    const preview = postData.content.replace(/<[^>]*>/g, '').substring(0, 300);
+    console.log(preview + (postData.content.length > 300 ? '...' : ''));
+    console.log('─'.repeat(60));
+
+    rl.question('\n✅ Approve and publish this post? (yes/no): ', (answer) => {
+      rl.close();
+      resolve(answer.toLowerCase() === 'yes' || answer.toLowerCase() === 'y');
+    });
+  });
 }
 
 // ============================================================================
@@ -247,10 +286,16 @@ function updateBlogIndex(newEntry) {
  * @param {Object} options - Processing options
  */
 async function processBlogDraft(filename, options = {}) {
-  const { skipValidation = false, skipOptimization = false } = options;
+  const { skipValidation = false, skipOptimization = false, skipApproval = false } = options;
 
   console.log(`\nProcessing: ${filename}`);
   console.log('─'.repeat(60));
+
+  // Track created resources for rollback on failure
+  const createdResources = {
+    postDir: null,
+    indexUpdated: false
+  };
 
   try {
     // 0. Validate markdown file
@@ -288,11 +333,28 @@ async function processBlogDraft(filename, options = {}) {
     // 3. Create post data
     const postData = createPostData(metadata, contentHtml, slug);
     
+    // 3.5 PROOFREADING STEP - Request approval before publishing
+    if (!skipApproval) {
+      const approved = await promptForApproval(postData);
+      if (!approved) {
+        console.log('\n❌ Post rejected. Not publishing. File remains in blog-drafts/new for editing.\n');
+        return;
+      }
+      console.log('\n✅ Post approved for publishing\n');
+    } else {
+      console.log('  ⊘ Skipping approval (--skip-approval)');
+    }
+    
     // 4. Create post directory
     const postDir = path.join(PATHS.blog, slug);
-    if (!fs.existsSync(postDir)) {
+    const postDirExists = fs.existsSync(postDir);
+    
+    if (!postDirExists) {
       fs.mkdirSync(postDir, { recursive: true });
+      createdResources.postDir = postDir;
       console.log(`  ✓ Created directory: ${postDir}`);
+    } else {
+      throw new Error(`Post directory already exists: ${postDir}. Please delete it or use a different slug.`);
     }
     
     // 5. Write post-data.json
@@ -320,6 +382,7 @@ async function processBlogDraft(filename, options = {}) {
     // 8. Update blog index
     const indexEntry = createIndexEntry(postData);
     updateBlogIndex(indexEntry);
+    createdResources.indexUpdated = true;
 
     // 9. Move markdown to processed
     moveToProcessed(sourcePath, filename);
@@ -330,6 +393,28 @@ async function processBlogDraft(filename, options = {}) {
     
   } catch (error) {
     console.error(`\n❌ Error processing ${filename}:`, error.message);
+    
+    // Rollback on failure
+    console.log('\n🔄 Rolling back changes...');
+    
+    if (createdResources.postDir && fs.existsSync(createdResources.postDir)) {
+      fs.rmSync(createdResources.postDir, { recursive: true, force: true });
+      console.log(`  ✓ Removed directory: ${createdResources.postDir}`);
+    }
+    
+    if (createdResources.indexUpdated) {
+      try {
+        const slug = path.basename(createdResources.postDir, '');
+        const indexData = JSON.parse(fs.readFileSync(PATHS.blogIndex, 'utf8'));
+        indexData.posts = indexData.posts.filter(p => p.slug !== `/blog/${slug}/`);
+        fs.writeFileSync(PATHS.blogIndex, JSON.stringify(indexData, null, 2));
+        console.log(`  ✓ Removed entry from blog-index.json`);
+      } catch (rollbackError) {
+        console.warn(`  ⚠️  Could not rollback blog index: ${rollbackError.message}`);
+      }
+    }
+    
+    console.log('✅ Rollback complete\n');
     throw error;
   }
 }
@@ -342,17 +427,19 @@ if (require.main === module) {
   const filename = process.argv[2];
 
   if (!filename) {
-    console.error('Usage: node process-blog-draft.js <filename.md> [--skip-validation] [--skip-optimization]');
+    console.error('Usage: node process-blog-draft.js <filename.md> [--skip-validation] [--skip-optimization] [--skip-approval]');
     console.error('Example: node process-blog-draft.js my-post.md');
     console.error('Options:');
     console.error('  --skip-validation    Skip validation step');
     console.error('  --skip-optimization  Skip image optimization');
+    console.error('  --skip-approval      Skip proofreading approval (auto-approve)');
     process.exit(1);
   }
 
   const options = {
     skipValidation: process.argv.includes('--skip-validation'),
-    skipOptimization: process.argv.includes('--skip-optimization')
+    skipOptimization: process.argv.includes('--skip-optimization'),
+    skipApproval: process.argv.includes('--skip-approval')
   };
 
   processBlogDraft(filename, options).catch(error => {

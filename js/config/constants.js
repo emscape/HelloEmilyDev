@@ -236,9 +236,9 @@ export const FEATURES = Object.freeze({
   // Enabled features
   LAZY_LOADING: true,
   ANIMATIONS: true,
-  DARK_MODE: false, // TODO: Implement dark mode
+  DARK_MODE: false, // Future feature: implement dark mode UI
   COMMENTS: false, // Disqus disabled
-  ANALYTICS: false, // TODO: Add analytics
+  ANALYTICS: false, // Future feature: add analytics integration
   
   // Experimental features
   VIRTUAL_SCROLLING: false,

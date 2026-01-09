@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAGE_TITLE_PLACEHOLDER</title>
+    <!-- Standard Meta Tags -->
+    <meta name="description" content="OG_DESCRIPTION_PLACEHOLDER"> <!-- Also used for general description -->
+    <meta name="author" content="Emily Anderson">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23008080%22>E</text></svg>">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="OG_URL_PLACEHOLDER">
+    <meta property="og:title" content="OG_TITLE_PLACEHOLDER">
+    <meta property="og:description" content="OG_DESCRIPTION_PLACEHOLDER">
+    <meta property="og:image" content="OG_IMAGE_PLACEHOLDER">
+
+
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjust if you have a different main CSS file -->
+    <link rel="stylesheet" href="/css/blog-post.css"> <!-- Specific CSS for blog posts -->
+    <!-- Add other global CSS files if necessary -->
+</head>
+<body>
+    <header id="header-placeholder"></header>
+
+    <main>
+        <section class="blog-post-container">
+            <div class="blog-post-content-container">
+                <!-- Blog post content will be loaded here by js/blog-post.js -->
+                <p>Loading post...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Your site footer content -->
+        <p>&copy; <span id="current-year"></span> Emily Anderson. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/load-header.js"></script>
+    <script type="module" src="/js/blog-content-parser.js"></script>
+    <script type="module" src="/js/blog-post.js"></script>
+    <script>
+        // Simple script for current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

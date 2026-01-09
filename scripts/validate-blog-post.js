@@ -19,10 +19,11 @@ const yaml = require('js-yaml');
 const PATHS = {
   blog: path.join(__dirname, '..', 'blog'),
   images: path.join(__dirname, '..', 'images'),
-  blogIndex: path.join(__dirname, '..', 'blog-index.json')
+  blogIndex: path.join(__dirname, '..', 'data', 'blog-index.json')
 };
 
 // Valid tags (from existing posts) - case-insensitive
+// To add new tags: add them to this set and the ALLOWED_TAGS_REFERENCE below
 const VALID_TAGS = new Set([
   'AI', 'Python', 'python', 'JavaScript', 'javascript', 'Web Development', 'Tutorial',
   'Beginner', 'beginner', 'GameDev', 'gamedev', 'Pygame', 'pygame',
@@ -31,8 +32,20 @@ const VALID_TAGS = new Set([
   'Wedding', 'Design', 'Ethics', 'Personal', 'JPL', 'Space', 'Knitting',
   'Patterns', 'Security', 'Privacy', 'Case Study', 'Wix', 'Puzzles',
   'Google I/O', 'Documentation', 'Technical Writing', 'Women in Tech',
-  'Diversity', 'Inclusion'
+  'Diversity', 'Inclusion', 'Education', 'Safety', 'Offline AI'
 ]);
+
+// ALLOWED_TAGS_REFERENCE - organized by category for easier management
+// Update VALID_TAGS set above when adding new tags here
+const ALLOWED_TAGS_REFERENCE = {
+  technology: ['AI', 'JavaScript', 'Python', 'Web Development', 'Developer Tools', 'VS Code', 'Offline AI'],
+  content: ['Tutorial', 'Documentation', 'Technical Writing'],
+  audience: ['Beginner', 'Women in Tech'],
+  topics: ['GameDev', 'Pygame', 'Design', 'Ethics', 'Security', 'Privacy', 'Patterns', 'Debugging', 'Education', 'Safety'],
+  projects: ['Side Projects', 'Wedding', 'Case Study', 'JPL', 'Space', 'Knitting', 'Wix', 'Puzzles'],
+  tools: ['Augment', 'Google I/O'],
+  personal: ['Emotional Labor', 'Tech Humor', 'Personal', 'Diversity', 'Inclusion']
+};
 
 // ============================================================================
 // VALIDATION FUNCTIONS

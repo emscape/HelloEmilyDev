@@ -49,13 +49,19 @@ npm run blog:validate
 npm run blog:repair
 
 # Process blog drafts
-node scripts/process-blog-draft.js your-post.md
+npm run blog:process your-post.md
+
+# Update published blog post
+npm run blog:update your-post.md
 
 # Optimize images
-node scripts/optimize-images.js path/to/images/
+npm run images:optimize path/to/images/
 ```
 
+## Documentation
 
+- [Blog Tags Guide](docs/BLOG_TAGS_GUIDE.md) - Guidelines for managing blog post tags
+- [Codebase Audit](docs/CODEBASE_AUDIT.md) - Code quality review and recommendations
 
 ## Testing
 

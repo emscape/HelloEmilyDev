@@ -494,13 +494,15 @@
     padding: 15px 0;
     border-top: 1px solid var(--light-accent); /* Optional: a subtle separator */
     border-bottom: 1px solid var(--light-accent); /* Optional: a subtle separator */
+    min-height: auto;
+    height: auto;
 }
 
 .share-button {
     display: inline-flex; /* To align icon and potential text */
     align-items: center;
     justify-content: center;
-    padding: 10px 15px;
+    padding: 8px;
     border-radius: var(--border-radius);
     text-decoration: none;
     color: var(--primary-dark); /* Default text color */
@@ -518,7 +520,6 @@
 .share-button svg {
     width: 20px; /* Adjust icon size */
     height: 20px; /* Adjust icon size */
-    margin-right: 8px; /* Space between icon and text, if text is visible */
 }
 
 /* Visually hide the text but keep it for screen readers */
