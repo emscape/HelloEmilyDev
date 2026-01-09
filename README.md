@@ -54,6 +54,9 @@ npm run blog:process your-post.md
 # Update published blog post
 npm run blog:update your-post.md
 
+# Process presentation drafts
+npm run presentations:process your-presentation.md
+
 # Optimize images
 npm run images:optimize path/to/images/
 ```

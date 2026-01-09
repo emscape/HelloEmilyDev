@@ -25,6 +25,7 @@
     "blog:full-rebuild": "npm run blog:rebuild && npm run blog:validate && npm run blog:repair",
     "blog:pre-commit": "node scripts/pre-commit-blog-check.js",
     "images:optimize": "node scripts/optimize-images.js",
+    "presentations:process": "node scripts/process-presentation-draft.js",
     "projects:add": "python scripts/add-new-project.py",
     "validate": "npm run blog:validate && npm run test"
   },

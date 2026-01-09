@@ -131,7 +131,8 @@ const parsePresentation = (presentation) => {
       tags: parsed.frontmatter.tags || [],
       thumbnail: adjustPath(presentation.thumbnail),
       pdfPath: adjustPath(presentation.pdfPath),
-      relatedBlogPostUrl: presentation.relatedBlogPostUrl
+      relatedBlogPostUrl: presentation.relatedBlogPostUrl,
+      order: presentation.order
     };
   } catch (error) {
     console.error(`Error parsing presentation (${presentation.title || 'N/A'}):`, error);
@@ -144,12 +145,18 @@ const parsePresentation = (presentation) => {
  * Pure function
  * 
  * @param {Array<Object>} presentations - Array of raw presentations
- * @returns {Array<Object>} - Array of parsed presentations
+ * @returns {Array<Object>} - Array of parsed presentations (sorted by order field)
  */
 const parsePresentations = (presentations) => {
   return presentations
     .map(parsePresentation)
-    .filter(p => p !== null);
+    .filter(p => p !== null)
+    .sort((a, b) => {
+      // Sort by order field if present, otherwise maintain insertion order
+      const aOrder = a.order !== undefined ? a.order : Infinity;
+      const bOrder = b.order !== undefined ? b.order : Infinity;
+      return aOrder - bOrder;
+    });
 };
 
 // ============================================================================
