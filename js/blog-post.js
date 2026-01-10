@@ -249,6 +249,32 @@ const injectInlineImage = (contentDiv, imageSrc, altText) => {
 };
 
 /**
+ * Updates share button hrefs in engagement section
+ * Impure function - DOM manipulation
+ * 
+ * @param {Object} shareUrls - Share URLs object
+ */
+const updateEngagementShareButtons = (shareUrls) => {
+  // Update Bluesky button in engagement section
+  const blueskyButton = document.querySelector('.engagement-section .share-button[aria-label*="Bluesky"]');
+  if (blueskyButton) {
+    blueskyButton.href = shareUrls.bluesky;
+  }
+  
+  // Update Facebook button in engagement section
+  const facebookButton = document.querySelector('.engagement-section .share-button[aria-label*="Facebook"]');
+  if (facebookButton) {
+    facebookButton.href = shareUrls.facebook;
+  }
+  
+  // Update LinkedIn button in engagement section
+  const linkedinButton = document.querySelector('.engagement-section .share-button[aria-label*="LinkedIn"]');
+  if (linkedinButton) {
+    linkedinButton.href = shareUrls.linkedin;
+  }
+};
+
+/**
  * Updates share button hrefs
  * Impure function - DOM manipulation
  * 
@@ -300,7 +326,6 @@ const renderBlogPost = (container, post, contentParser) => {
   const parsedContent = parsePostContent(post.content, contentParser);
   const galleryHTML = generateGalleryHTML(post.additionalImages, post.title);
   const postHTML = generatePostHTML(formattedPost, parsedContent, tagsHTML, galleryHTML);
-  const shareButtonsHTML = generateShareButtonsHTML();
   
   // Side effect: Update DOM
   container.innerHTML = postHTML;
@@ -311,13 +336,9 @@ const renderBlogPost = (container, post, contentParser) => {
     injectInlineImage(contentDiv, formattedPost.inlineImageSrc, post.title);
   }
   
-  // Side effect: Add share buttons
-  const articleElement = container.querySelector('article.blog-post');
-  if (articleElement) {
-    articleElement.insertAdjacentHTML('beforeend', shareButtonsHTML);
-    const shareUrls = generateShareUrls(post);
-    updateShareButtons(shareUrls);
-  }
+  // Side effect: Update share buttons (now in engagement section HTML)
+  const shareUrls = generateShareUrls(post);
+  updateEngagementShareButtons(shareUrls);
   
   // Side effect: Update meta tags
   const metaValues = generateMetaTagValues(post);
@@ -342,6 +363,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const container = document.querySelector('.blog-post-content-container');
   const handleError = ErrorHandler.createBoundary(container, ErrorContext.FETCH);
   
+  // Store postSlug globally for comments system
+  window.currentPostId = postSlug;
+  
   fetch(postJsonPath)
     .then(response => {
       if (!response.ok) {
@@ -356,6 +380,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const contentParser = new BlogContentParser();
       renderBlogPost(container, post, contentParser);
+      
+      // Initialize comments system after post is rendered
+      if (typeof initBlogComments === 'function') {
+        initBlogComments(postSlug);
+      }
     })
     .catch(error => {
       ErrorHandler.log(error, ErrorContext.FETCH);

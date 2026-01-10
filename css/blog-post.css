@@ -524,18 +524,21 @@
 
 /* Visually hide the text but keep it for screen readers */
 .share-button span {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    white-space: nowrap; /* Optional: ensures text doesn't wrap if it somehow becomes visible */
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap; /* Optional: ensures text doesn't wrap if it somehow becomes visible */
 }
 
-/* Specific button styling if needed - can be adjusted later with SVGs */
+/* For engagement section share buttons, show the text */
+.engagement-section .share-button span {
+  display: none;
+}/* Specific button styling if needed - can be adjusted later with SVGs */
 .share-button.bluesky:hover {
     background-color: #0077ff; /* Example Bluesky color */
 }

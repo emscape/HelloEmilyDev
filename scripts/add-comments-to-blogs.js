@@ -1,37 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Humans Have Ideas. AIs Do Execution. I've Decided. | Emily Anderson</title>
-    <!-- Standard Meta Tags -->
-    <meta name="description" content="Why I've decided to let AIs handle the grunt work while I focus on creativity, strategy, and innovation."> <!-- Also used for general description -->
-    <meta name="author" content="Emily Anderson">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23008080%22>E</text></svg>">
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://helloemily.dev/blog/humans-have-ideas/">
-    <meta property="og:title" content="Humans Have Ideas. AIs Do Execution. I've Decided.">
-    <meta property="og:description" content="Why I've decided to let AIs handle the grunt work while I focus on creativity, strategy, and innovation.">
-    <meta property="og:image" content="https://helloemily.dev/images/blog/humans-have-ideas/humans-have-ideas-featured.png">
+/**
+ * Script to add comments system to all blog posts
+ * Usage: node scripts/add-comments-to-blogs.js
+ */
 
+const fs = require('fs-extra');
+const path = require('path');
 
-    <link rel="stylesheet" href="/css/style.css"> <!-- Adjust if you have a different main CSS file -->
-    <link rel="stylesheet" href="/css/blog-post.css">
-    <link rel="stylesheet" href="/css/comments.css"> <!-- Comments and likes styles --> <!-- Specific CSS for blog posts -->
-    <!-- Add other global CSS files if necessary -->
-</head>
-<body>
-    <header id="header-placeholder"></header>
+const BLOG_DIR = path.join(__dirname, '../blog');
 
-    <main>
-        <section class="blog-post-container">
-            <div class="blog-post-content-container">
-                <!-- Blog post content will be loaded here by js/blog-post.js -->
-                <p>Loading post...</p>
-            </div>
-        </section>
-        
+// Comments HTML snippet to add
+const COMMENTS_HTML = `        
         <!-- Engagement Section (Likes + Share) -->
         <section class="engagement-section">
             <div class="engagement-group">
@@ -46,10 +24,10 @@
                     <a href="https://bsky.app/intent/compose?text=Check%20out%20this%20blog%20post%20by%20%40emscape" class="share-button" aria-label="Share on Bluesky" target="_blank" rel="noopener noreferrer">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"></path></svg>
                     </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://helloemily.dev/blog/humans-have-ideas/" class="share-button" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://helloemily.dev/blog/SLUG/" class="share-button" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a6 6 0 00-6 6v3H7v4h2v8h4v-8h3l1-4h-4V8a1 1 0 011-1h3z"></path></svg>
                     </a>
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://helloemily.dev/blog/humans-have-ideas/" class="share-button" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://helloemily.dev/blog/SLUG/" class="share-button" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg>
                     </a>
                 </div>
@@ -92,18 +70,11 @@
                     <div class="comments-list"></div>
                 </div>
             </div>
-        </section>
-    </main>
+        </section>`;
 
-    <footer>
-        <!-- Your site footer content -->
-        <p>&copy; <span id="current-year"></span> Emily Anderson. All rights reserved.</p>
-    </footer>
+const CSS_LINK = '    <link rel="stylesheet" href="/css/comments.css"> <!-- Comments and likes styles -->';
 
-    <script src="/js/load-header.js"></script>
-    <script type="module" src="/js/blog-content-parser.js"></script>
-    <script type="module" src="/js/blog-post.js"></script>
-    <script src="/js/blog-comments.js"></script>
+const SCRIPT_SNIPPET = `    <script src="/js/blog-comments.js"></script>
     <script>
         // Simple script for current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -114,6 +85,64 @@
                 initBlogComments(window.currentPostId);
             }
         });
-    </script>
-    </body>
-</html>
+    </script>`;
+
+async function updateBlogPost(filePath) {
+  try {
+    let content = await fs.readFile(filePath, 'utf8');
+    
+    // Extract the blog slug from the directory path
+    const blogSlug = path.basename(path.dirname(filePath));
+
+    // Check if already has comments
+    if (content.includes('blog-comments-section')) {
+      console.log(`⚠️  Skipping ${blogSlug} - already has comments`);
+      return;
+    }
+
+    // Add CSS link if not present
+    if (!content.includes('comments.css')) {
+      const cssRegex = /(<link rel="stylesheet"[^>]*blog-post\.css"[^>]*>)/;
+      content = content.replace(cssRegex, `$1\n${CSS_LINK}`);
+    }
+
+    // Replace SLUG placeholders with actual blog slug
+    let commentsHtml = COMMENTS_HTML.replace(/\/blog\/SLUG\//g, `/blog/${blogSlug}/`);
+
+    // Add comments HTML after closing </section>, before </main>
+    const mainRegex = /(<\/section>)(\s*)(<\/main>)/;
+    if (mainRegex.test(content)) {
+      content = content.replace(mainRegex, `$1\n${commentsHtml}\n    </main>`);
+    }
+
+    // Update scripts section
+    const scriptRegex = /(<script[^>]*blog-post\.js[^>]*><\/script>)([\s\S]*?)(<\/body>)/;
+    content = content.replace(scriptRegex, `$1\n${SCRIPT_SNIPPET}\n    $3`);
+
+    // Write updated content
+    await fs.writeFile(filePath, content, 'utf8');
+    console.log(`✅ Updated ${path.basename(path.dirname(filePath))}`);
+  } catch (error) {
+    console.error(`❌ Error updating ${filePath}:`, error.message);
+  }
+}
+
+async function main() {
+  try {
+    const blogDirs = await fs.readdir(BLOG_DIR);
+
+    for (const dir of blogDirs) {
+      const indexPath = path.join(BLOG_DIR, dir, 'index.html');
+      if (await fs.pathExists(indexPath)) {
+        await updateBlogPost(indexPath);
+      }
+    }
+
+    console.log('\n✅ Comments system added to all blog posts!');
+  } catch (error) {
+    console.error('❌ Error:', error);
+    process.exit(1);
+  }
+}
+
+main();
