@@ -5,20 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAGE_TITLE_PLACEHOLDER</title>
     <!-- Standard Meta Tags -->
-    <meta name="description" content="OG_DESCRIPTION_PLACEHOLDER"> <!-- Also used for general description -->
+    <meta name="description" content="OG_DESCRIPTION_PLACEHOLDER">
     <meta name="author" content="Emily Anderson">
+    <meta id="canonical-link" rel="canonical" href="CANONICAL_URL_PLACEHOLDER">
+    <!-- JSON-LD Article Schema - Will be dynamically updated -->
+    <script type="application/ld+json" id="article-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "PAGE_TITLE_PLACEHOLDER",
+      "description": "OG_DESCRIPTION_PLACEHOLDER",
+      "image": "OG_IMAGE_PLACEHOLDER",
+      "author": {
+        "@type": "Person",
+        "name": "Emily Anderson",
+        "url": "https://helloemily.dev/"
+      },
+      "datePublished": "DATE_PUBLISHED_PLACEHOLDER",
+      "dateModified": "DATE_MODIFIED_PLACEHOLDER"
+    }
+    </script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23008080%22>E</text></svg>">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="OG_URL_PLACEHOLDER">
-    <meta property="og:title" content="OG_TITLE_PLACEHOLDER">
-    <meta property="og:description" content="OG_DESCRIPTION_PLACEHOLDER">
-    <meta property="og:image" content="OG_IMAGE_PLACEHOLDER">
+    <meta id="og-url" property="og:url" content="CANONICAL_URL_PLACEHOLDER">
+    <meta id="og-title" property="og:title" content="OG_TITLE_PLACEHOLDER">
+    <meta id="og-description" property="og:description" content="OG_DESCRIPTION_PLACEHOLDER">
+    <meta id="og-image" property="og:image" content="OG_IMAGE_PLACEHOLDER">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta id="og-image-width" property="og:image:width" content="1200">
+    <meta id="og-image-height" property="og:image:height" content="630">
+    <meta property="og:site_name" content="Emily Anderson">
+    <meta property="og:locale" content="en_US">
+    <meta id="og-published" property="article:published_time" content="DATE_PUBLISHED_PLACEHOLDER">
+    <meta id="og-author" property="article:author" content="Emily Anderson">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta id="twitter-url" property="twitter:url" content="CANONICAL_URL_PLACEHOLDER">
+    <meta id="twitter-title" property="twitter:title" content="OG_TITLE_PLACEHOLDER">
+    <meta id="twitter-description" property="twitter:description" content="OG_DESCRIPTION_PLACEHOLDER">
+    <meta id="twitter-image" property="twitter:image" content="OG_IMAGE_PLACEHOLDER">
+    <meta name="twitter:creator" content="@emscape">
 
 
-    <link rel="stylesheet" href="/css/style.css"> <!-- Adjust if you have a different main CSS file -->
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/blog-post.css">
-    <link rel="stylesheet" href="/css/comments.css"> <!-- Comments and likes styles --> <!-- Specific CSS for blog posts -->
+    <link rel="stylesheet" href="/css/comments.css">
     <!-- Add other global CSS files if necessary -->
 </head>
 <body>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Homepage -->
+  <url>
+    <loc>https://helloemily.dev/</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://helloemily.dev/pages/blog-archive.html</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/pages/projects.html</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/pages/presentations.html</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/pages/resume.html</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/pages/contact.html</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://helloemily.dev/blog/spark-site-studio/</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/spark-site-studio/SparkSiteStudio.png</image:loc>
+      <image:title>Spark Site Studio</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/pygame-zero-getting-started/</loc>
+    <lastmod>2025-09-24</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/pygame-zero-getting-started/pygame-zero-getting-started.png</image:loc>
+      <image:title>Pygame Zero Getting Started</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/building-with-agentic-ai/</loc>
+    <lastmod>2025-08-22</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/presentations/building-with-agentic-ai-featured.png</image:loc>
+      <image:title>Building With Agentic AI</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/augment-broke-my-site/</loc>
+    <lastmod>2025-05-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/augment-broke-my-site/augment-broke-my-site.png</image:loc>
+      <image:title>Augment Broke My Site</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/ai-project-manager/</loc>
+    <lastmod>2025-05-06</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/ai-project-manager/ai-project-manager.png</image:loc>
+      <image:title>AI Project Manager</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/building-thedapperfoxes/</loc>
+    <lastmod>2025-04-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/building-thedapperfoxes/building-thedapperfoxes-featured-image.png</image:loc>
+      <image:title>Building TheDapperFoxes</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/go-to-the-store-and-buy-bread/</loc>
+    <lastmod>2025-04-14</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/go-to-the-store-and-buy-bread/go-to-the-store-and-buy-bread-featured.jpg</image:loc>
+      <image:title>Go to the Store and Buy Bread</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/ai-guardrails/</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/ai-guardrails/ai-guardrails-featured.jpg</image:loc>
+      <image:title>AI Guardrails</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/humans-have-ideas/</loc>
+    <lastmod>2025-03-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/humans-have-ideas/humans-have-ideas-featured.png</image:loc>
+      <image:title>Humans Have Ideas</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/ethics-and-ai/</loc>
+    <lastmod>2025-03-10</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/ethics-and-ai/ethics-and-ai-featured.jpg</image:loc>
+      <image:title>Ethics and AI</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/sean-website-case-study/</loc>
+    <lastmod>2025-03-10</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/sean-website-case-study/sean-website-case-study-featured.jpg</image:loc>
+      <image:title>Sean Website Case Study</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/personal-ai/</loc>
+    <lastmod>2025-03-08</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/personal-ai/personal-ai-featured.jpg</image:loc>
+      <image:title>Personal AI</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/solving-io-puzzles-2025/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/solving-io-puzzles-2025/solving-io-puzzles-2025-featured.jpg</image:loc>
+      <image:title>Solving I/O Puzzles 2025</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/knitting-tech/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/knitting-tech/knitting-tech-featured.jpg</image:loc>
+      <image:title>Knitting and Technology</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/women-in-tech/</loc>
+    <lastmod>2024-08-15</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/women-in-tech/women-in-tech-featured.jpg</image:loc>
+      <image:title>Women in Tech</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/technical-documentation-tips/</loc>
+    <lastmod>2024-06-27</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/technical-documentation-tips/technical-documentation-tips-featured.jpg</image:loc>
+      <image:title>Technical Documentation Tips</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/jpl-ai-blog/</loc>
+    <lastmod>2023-09-28</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/jpl-ai-blog/jpl-ai-blog-featured.png</image:loc>
+      <image:title>JPL AI Blog</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://helloemily.dev/blog/getting-started-with-ai/</loc>
+    <lastmod>2023-09-08</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://helloemily.dev/images/blog/getting-started-with-ai/getting-started-with-ai-featured.jpg</image:loc>
+      <image:title>Getting Started with AI</image:title>
+    </image:image>
+  </url>
+</urlset>

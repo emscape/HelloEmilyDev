@@ -1,0 +1,48 @@
+# robots.txt - SEO Configuration for helloemily.dev
+# For more information, see https://developers.google.com/search/docs/beginner/how-search-works
+
+# Allow all bots to crawl the site
+User-agent: *
+Allow: /
+
+# Specific rules
+Allow: /blog/
+Allow: /pages/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /data/
+
+# Disallow private/meta content
+Disallow: /blog-drafts/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /node_modules/
+Disallow: /tests/
+Disallow: /.env
+Disallow: /.env.local
+Disallow: /.env.local.example
+
+# Sitemap location
+Sitemap: https://helloemily.dev/sitemap.xml
+
+# Crawl delay (optional - be polite to search engines)
+# Crawl-delay: 1
+
+# For Google specifically
+User-agent: Googlebot
+Allow: /
+
+# For Bing
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /

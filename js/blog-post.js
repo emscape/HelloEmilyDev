@@ -8,6 +8,7 @@ import { escapeHtml, sanitizeUrl } from './utils/security.js';
 import { ErrorHandler, ErrorContext } from './utils/error-handler.js';
 import { formatDate } from './utils/date-formatter.js';
 import { makePathRootRelative } from './utils/path-utils.js';
+import { updateBlogPostMetaTags, performSEOAudit } from './seo-utilities.js';
 
 // ============================================================================
 // PURE FUNCTIONS - Data Transformation
@@ -381,9 +382,25 @@ document.addEventListener('DOMContentLoaded', function() {
       const contentParser = new BlogContentParser();
       renderBlogPost(container, post, contentParser);
       
+      // Update meta tags and schema for SEO using seo-utilities
+      updateBlogPostMetaTags({
+        title: post.title,
+        shortDescription: post.shortDescription,
+        slug: `/blog/${postSlug}/`,
+        date: post.date,
+        featuredImage: post.featuredImage,
+        tags: post.tags
+      });
+      
       // Initialize comments system after post is rendered
       if (typeof initBlogComments === 'function') {
         initBlogComments(postSlug);
+      }
+      
+      // Optional: Run SEO audit in development (comment out in production)
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.log('🔍 Running SEO audit...');
+        performSEOAudit();
       }
     })
     .catch(error => {
