@@ -6,6 +6,7 @@ memory-bank/
 instructions/
 .roomodes
 PromptContext.md
+.github/
 
 # Node modules
 node_modules/
@@ -64,6 +65,7 @@ logs/
 
 # Personal documents
 *.pdf
+!presentations/posted/*.pdf
 resume/*.pdf
 cv/
 
