@@ -1,0 +1,29 @@
+# SparkSite Studio – Copilot Instructions
+
+- **Repo Layout**: `playground/site-builder-agent` (VS Code extension + local AI assets), `sparksitestudio-frontend` (Next.js 15 App Router UI), `api` (Express parent dashboard API); keep changes scoped to the relevant surface.
+- **Extension Entry Points**: `src/extension.ts` wires the chat webview, registers commands, and controls settings; `src/router.ts` interprets kid requests by prioritising remote LLM ➜ Sparky Jr. ➜ Ollama ➜ rules.
+- **Tool Safety Layer**: All automated file ops must go through `Tools` (`src/tools.ts`). These helpers enforce playground-only writes, length caps (≤4000 chars), and human-facing confirmations.
+- **Path Policy**: `Policy.validatePath` blocks anything outside `playground/` and disallows dotfiles; never bypass it. New tools must respect the same guardrails.
+- **Activity Logging**: `ActivityLogger` (JSONL + summaries under `playground/logs/`) records every request, tool run, and content block. When adding tools, log success/fail states so teacher reports stay accurate.
+- **Routing Behaviour**: `Router.route` checks a phrase map (`preview on web` ➜ `open_preview`), then LLM outputs, then deterministic keyword matches. Maintain this order so real-time AI integrations stay optional.
+- **Fallback Brain**: `HomeBrainPack/models/responses.json` provides 50+ regex-driven responses when AI is offline. Expand patterns there rather than hard-coding inside the router.
+- **System Prompts**: `prompts/router_system.txt` governs every LLM router; update examples + allowlist whenever tool signatures change.
+- **Sparky Jr. Stack**: `HomeBrainPack/sparky-jr-server.js` hosts the local model on port 11435, logging to `sparky-jr-detailed.jsonl` and Supabase. Start scripts live in `HomeBrainPack/*.bat`. Keep responses under 200 chars to avoid policy blocks.
+- **Remote LLM**: `routeWithRemoteLLM` is scaffolded but currently returns `null`; if you implement it, obey the strict schema + latency budget (`timeoutMs` default 3000).
+- **Ollama Integration**: `llmAdapter.ts` ensures URLs stay localhost-only; when adjusting models, update VS Code settings defaults (`spark.ollamaModel`) and keep thought/summary word limits.
+- **Educational UX**: `Tools.write_text` auto-generates kid-friendly explanations via `CodeExplainer`. Large content or unsafe phrases trigger `Policy.validateContent`; reuse that filter for new generators.
+- **UI Messaging**: Webview UI lives in `media/main.js`; status badges reflect router mode (`rules`, `local_llm`, `ollama`). Match any backend changes with frontend state updates to avoid confusing students.
+- **Extension Build Flow**: From `playground/site-builder-agent/` run `npm install`, `npm run compile`, and `npm run package` (requires `@vscode/vsce`). `npm run setup` bootstraps first-time devs.
+- **Installer Tooling**: Windows installer scripts sit in `playground/site-builder-agent/installer/`; `build_installer.py` packages the VSIX + Sparky assets. Maintain ASCII-only content in these scripts.
+- **Automation First**: Prefer running scripted builds (like `python installer/build_installer.py`) yourself; only ask the user to perform manual steps if automation fails or needs confirmation.
+- **Autonomy**: Continue with planned actions without waiting for user confirmation unless input or credentials are required.
+- **Frontend Conventions**: `sparksitestudio-frontend` uses Next 15/App Router + Tailwind 4. Run `npm run dev` (turbopack) or `npm run build` before deploying to Vercel. Shared UI primitives live under `src/components/`.
+- **API Service**: `api/server.js` is a single Express app persisting parents in `parents.json`. Security middleware (Helmet, rate limiting, JWT) is already configured—keep new routes inside `/api/parent/*` and reuse `authenticateToken` for protection.
+- **Testing Hooks**: There’s no automated test suite; rely on `test-*.js` scripts in `playground/site-builder-agent/` for Sparky connectivity and manual QA checklists in `docs/QA.md`.
+- **Logs & Reports**: Teachers export activity reports via the `sparksite-studio.generateReport` command, which pulls from `ActivityLogger`. Preserve JSON structure if you modify logging.
+- **Firewalls Gotchas**: Networking issues with Sparky Jr. are tracked in `STATUS-AND-ISSUES.md`; respect the documented troubleshooting steps (ports 11435/11436, firewall allowances) when changing startup behaviour.
+- **Deployment Targets**: Frontend auto-deploys to Vercel, API to Railway, extension + installer to `dist/`. Keep configuration secrets out of the repo; `.env.example` documents expected keys.
+- **Commit Playbook**: Follow Conventional Commits (`<type>(<scope>): <subject>` ≤50 chars) when scripting commits; see `.github/agent-instructions/copilot-commit-message-instructions.md` for scope ideas and body/footer rules.
+- **Review Expectations**: When asked for reviews, use the severity ladder from `.github/agent-instructions/copilot-review-instructions.md` (P0–P3) and focus feedback on security, correctness, and educational UX impacts first.
+- **Functional/TDD Mandates**: Repository-wide prompt files in `.github/agent-instructions/functional-programming-guidelines.md` require functional patterns and TDD/BDD+DRY discipline; follow those checklists before writing implementation code or tests.
+- **AI Panel Check-ins**: When you need deeper critique on plans or code, consult the MCP Ketema AI Panel (`ai-panel` server) using the provided adherence/critique/debug tools.

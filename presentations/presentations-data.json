@@ -1,6 +1,6 @@
 [
   {
-    "pdfPath": "presentations/posted/Building With Agentic AI.pdf",
+    "pdfPath": "presentations/posted/Building-With-Agentic-AI.pdf",
     "thumbnail": "images/presentations/building-with-agentic-ai-featured.png",
     "relatedBlogPostUrl": "/blog/building-with-agentic-ai/",
     "cardMarkdownPath": "presentations/posted/building-with-agentic-ai-card.md",
@@ -8,7 +8,7 @@
     "order": 0
   },
   {
-    "pdfPath": "presentations/posted/A Journey Through The Cosmos_ My Visit to JPL.pdf",
+    "pdfPath": "presentations/posted/A-Journey-Through-The-Cosmos--My-Visit-to-JPL.pdf",
     "thumbnail": "images/presentations/jpl-visit.png",
     "relatedBlogPostUrl": "/blog/jpl-ai-blog/",
     "longDescriptionMarkdown": "---\ntitle: \"A Journey Through the Cosmos: My First AI-Generated Slide Adventure 🚀\"\n---\n\nI had the incredible opportunity to visit NASA’s Jet Propulsion Laboratory (JPL) for a behind-the-scenes look at the missions shaping the future of space exploration. From the Mars Yard and Mission Control to the Europa Clipper and Mars Sample Return, it was a dream come true. To commemorate the experience, I created a slide deck using a generative AI tool—my first time experimenting with AI-powered storytelling. While I provided the voice and context, the structure and visuals were shaped by the AI. It was a fun and surprisingly effective way to blend personal narrative with emerging tech.",
@@ -16,7 +16,7 @@
     "order": 3
   },
   {
-    "pdfPath": "presentations/posted/Generative AI - GDG .pdf",
+    "pdfPath": "presentations/posted/Generative-AI-GDG.pdf",
     "thumbnail": "images/presentations/getting-started-with-ai-featured.jpg",
     "relatedBlogPostUrl": "/blog/getting-started-with-ai/",
     "cardMarkdownPath": "presentations/posted/generative-ai-gdg-card.md",
