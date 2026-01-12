@@ -227,6 +227,38 @@ export const updateOrganizationSchema = () => {
 };
 
 /**
+ * Generates descriptive alt text based on page context
+ * Useful for improving images that have missing or weak alt text
+ * @param {string} imageName - File name of the image
+ * @param {string} pageTitle - Title of the page/post
+ * @param {number} position - Position of image on page
+ * @returns {string} - Suggested alt text
+ */
+export const generateAltText = (imageName, pageTitle, position = 1) => {
+  // Extract file name without extension
+  const baseName = imageName.split('/').pop().replace(/\.[^/.]+$/, '');
+  
+  // Convert kebab-case or snake_case to readable text
+  const readableName = baseName
+    .replace(/[-_]/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .toLowerCase();
+
+  // If position is 1 and name suggests it's featured/hero, use special format
+  if (position === 1 && /featured|hero|cover|banner|main/.test(readableName)) {
+    return `Featured image: ${pageTitle}`;
+  }
+
+  // For gallery images
+  if (/gallery|carousel|slide/.test(readableName) || position > 1) {
+    return `${pageTitle} - ${readableName} (image ${position})`;
+  }
+
+  // For inline images
+  return `${pageTitle} - ${readableName}`;
+};
+
+/**
  * Validates heading hierarchy on a page
  * Returns warnings if issues are found
  */
@@ -275,31 +307,72 @@ export const validateHeadingHierarchy = () => {
 
 /**
  * Validates image alt text
- * Returns warnings if images are missing alt text
+ * Returns warnings if images are missing alt text or have poor descriptions
+ * @returns {Array} Array of issues found
  */
 export const validateImageAltText = () => {
   const images = document.querySelectorAll('img');
-  const warnings = [];
+  const issues = [];
+  const passed = [];
 
   images.forEach((img, index) => {
     const src = img.src || img.getAttribute('src') || 'unknown';
+    const alt = img.alt ? img.alt.trim() : '';
+    const fileName = src.split('/').pop() || 'unknown';
     
-    if (!img.alt || img.alt.trim() === '') {
-      warnings.push(`Image ${index + 1} missing alt text: ${src}`);
+    // Check for missing alt text
+    if (!alt) {
+      issues.push({
+        type: 'missing',
+        image: index + 1,
+        src: src,
+        message: `Image ${index + 1} missing alt text: ${fileName}`
+      });
+      return;
     }
 
-    if (img.alt && img.alt.length > 125) {
-      warnings.push(`Image ${index + 1} alt text too long (${img.alt.length} chars): ${src}`);
+    // Check for weak alt text (too generic)
+    const weakPatterns = /^image|^photo|^pic|^picture|^img[0-9]*$|^[a-z0-9_\-\.]+\.(jpg|png|gif|webp)$/i;
+    if (weakPatterns.test(alt)) {
+      issues.push({
+        type: 'weak',
+        image: index + 1,
+        src: src,
+        message: `Image ${index + 1} has generic alt text: "${alt}"`
+      });
+      return;
     }
+
+    // Check for alt text that's too long (best practice: ≤125 chars)
+    if (alt.length > 125) {
+      issues.push({
+        type: 'toolong',
+        image: index + 1,
+        src: src,
+        message: `Image ${index + 1} alt text too long (${alt.length} chars): "${alt.substring(0, 50)}..."`
+      });
+      return;
+    }
+
+    // Alt text is good
+    passed.push({
+      image: index + 1,
+      alt: alt,
+      length: alt.length
+    });
   });
 
-  if (warnings.length === 0) {
-    console.log('✓ All images have proper alt text');
-  } else {
-    console.warn('Image alt text issues:', warnings);
+  // Log results with formatting
+  if (issues.length === 0 && passed.length > 0) {
+    console.log(`✓ All ${passed.length} images have proper alt text`);
+  } else if (issues.length > 0) {
+    console.warn(`⚠ Image alt text issues found (${issues.length}/${images.length}):`);
+    issues.forEach(issue => {
+      console.warn(`  [${issue.type.toUpperCase()}] ${issue.message}`);
+    });
   }
 
-  return warnings;
+  return issues;
 };
 
 /**
@@ -365,6 +438,7 @@ export default {
   updateBlogPostMetaTags,
   updateAuthorSchema,
   updateOrganizationSchema,
+  generateAltText,
   validateHeadingHierarchy,
   validateImageAltText,
   validateInternalLinks,

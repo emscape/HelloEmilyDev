@@ -238,7 +238,8 @@ const injectInlineImage = (contentDiv, imageSrc, altText) => {
 
   const imgElement = document.createElement('img');
   imgElement.src = imageSrc;
-  imgElement.alt = altText;
+  // Ensure alt text is descriptive and not empty (accessibility best practice)
+  imgElement.alt = altText && altText.trim() ? altText : 'Featured image for this blog post';
   imgElement.classList.add('blog-post-inline-image');
   imgElement.loading = 'lazy';
 
