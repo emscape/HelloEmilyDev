@@ -391,6 +391,24 @@ async function processBlogDraft(filename, options = {}) {
     console.log(`✅ Successfully processed: ${postData.title}`);
     console.log(`   URL: /blog/${slug}/\n`);
     
+    // 10. Optional: Submit to Google for indexing
+    const submitToGoogle = process.argv.includes('--index');
+    if (submitToGoogle) {
+      console.log('📝 Submitting to Google Indexing API...');
+      const indexingScript = path.join(__dirname, 'google-indexing-api.js');
+      const postUrl = `https://helloemily.dev/blog/${slug}/`;
+      
+      try {
+        const { execSync } = require('child_process');
+        execSync(`node "${indexingScript}" "${postUrl}"`, { stdio: 'inherit' });
+        console.log('✓ Successfully submitted to Google\n');
+      } catch (error) {
+        console.log(`⚠️  Failed to submit to Google: ${error.message}\n`);
+        console.log('You can manually index this post later with:');
+        console.log(`  node scripts/google-indexing-api.js "https://helloemily.dev/blog/${slug}/"\n`);
+      }
+    }
+    
   } catch (error) {
     console.error(`\n❌ Error processing ${filename}:`, error.message);
     
@@ -427,12 +445,13 @@ if (require.main === module) {
   const filename = process.argv[2];
 
   if (!filename) {
-    console.error('Usage: node process-blog-draft.js <filename.md> [--skip-validation] [--skip-optimization] [--skip-approval]');
+    console.error('Usage: node process-blog-draft.js <filename.md> [options]');
     console.error('Example: node process-blog-draft.js my-post.md');
     console.error('Options:');
     console.error('  --skip-validation    Skip validation step');
     console.error('  --skip-optimization  Skip image optimization');
     console.error('  --skip-approval      Skip proofreading approval (auto-approve)');
+    console.error('  --index              Submit to Google Indexing API after publishing');
     process.exit(1);
   }
 

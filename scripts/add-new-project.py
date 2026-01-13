@@ -208,6 +208,21 @@ def main():
         print("Warning: The project data was updated, but the input file could not be archived.")
         # Don't exit, but the user should be aware.
 
+    # 8. Optional: Submit to Google for indexing
+    if '--index' in sys.argv:
+        print("\n📝 Submitting to Google Indexing API...")
+        project_url = f"https://helloemily.dev/projects/{project_id}/"
+        indexing_script = os.path.join(os.path.dirname(__file__), 'google-indexing-api.js')
+        
+        try:
+            import subprocess
+            subprocess.run(['node', indexing_script, project_url], check=True)
+            print("✓ Successfully submitted to Google\n")
+        except Exception as e:
+            print(f"⚠️  Failed to submit to Google: {e}\n")
+            print("You can manually index this project later with:")
+            print(f"  node scripts/google-indexing-api.js \"{project_url}\"\n")
+
     print(f"--- Project addition process complete for '{new_project['title']}' ---")
 
 

@@ -286,6 +286,24 @@ async function processPresentationDraft(filename, skipApproval = false) {
     console.log(`✅ Successfully published presentation: ${metadata.title}`);
     console.log(`   Added to presentations index`);
     
+    // 8. Optional: Submit to Google for indexing
+    const submitToGoogle = process.argv.includes('--index');
+    if (submitToGoogle) {
+      console.log('\n📝 Submitting to Google Indexing API...');
+      const indexingScript = path.join(__dirname, 'google-indexing-api.js');
+      const presentationUrl = `https://helloemily.dev/presentations/${slug}/`;
+      
+      try {
+        const { execSync } = require('child_process');
+        execSync(`node "${indexingScript}" "${presentationUrl}"`, { stdio: 'inherit' });
+        console.log('✓ Successfully submitted to Google\n');
+      } catch (error) {
+        console.log(`⚠️  Failed to submit to Google: ${error.message}\n`);
+        console.log('You can manually index this presentation later with:');
+        console.log(`  node scripts/google-indexing-api.js "https://helloemily.dev/presentations/${slug}/"\n`);
+      }
+    }
+    
   } catch (error) {
     console.error(`\n❌ Error processing presentation: ${error.message}`);
     
@@ -319,6 +337,7 @@ Arguments:
 Example:
   npm run presentations:process my-presentation.md
   npm run presentations:process my-presentation.md --skip-approval
+  npm run presentations:process my-presentation.md --index
 
 Expected markdown format:
   ---
@@ -330,6 +349,10 @@ Expected markdown format:
   ---
   
   Long description in markdown format...
+
+Options:
+  --skip-approval      Skip the approval step (auto-approve)
+  --index              Submit to Google Indexing API after publishing
 
 Notes:
   - The 'order' field is optional and controls sort position (lower numbers first)
