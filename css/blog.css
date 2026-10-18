@@ -222,7 +222,7 @@
 
 .blog-tag:hover { /* From first definition */
     background-color: var(--accent-color);
-    color: #fff;
+    color: var(--dark-color);
 }
 
 .blog-read-more { /* Consistent in both definitions */

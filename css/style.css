@@ -6,8 +6,8 @@
 }
 
 :root {
-    --primary-color: #00B5B8; /* Vibrant Turquoise */
-    --primary-dark: #007A7C; /* Darker Turquoise */
+    --primary-color: #007A7C; /* Turquoise (4.5:1+ on light backgrounds) */
+    --primary-dark: #005F61; /* Darker Turquoise */
     --secondary-color: #FF8C42; /* Orange - complementary to teal */
     --accent-color: #4ECDC4; /* Light Teal */
     --dark-color: #0A2E36; /* Deep Teal-Black */
@@ -654,4 +654,22 @@ footer p {
 
 main {
   padding-top: 80px; 
+}
+
+/* Pages that set their own header offset */
+main.page-main {
+    padding-top: 0;
+}
+
+/* Text for screen readers only */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
