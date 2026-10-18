@@ -40,6 +40,7 @@
 </head>
 <body>
     <div id="header-placeholder"></div>
+    <main class="page-main">
 
     <section id="blog-post-container" style="padding-top: 150px;">
         <div class="container">
@@ -52,8 +53,9 @@
             
             <!-- Likes Section -->
             <div class="likes-button-container" style="margin-top: 2rem; border-top: 1px solid #e5e7eb; padding-top: 2rem;">
-                <button class="likes-button" aria-label="Like this post">
-                    <span class="likes-icon">❤️</span>
+                <button class="likes-button">
+                    <span class="visually-hidden">Like this post. Likes:</span>
+                    <span class="likes-icon" aria-hidden="true">❤️</span>
                     <span class="likes-count">0</span>
                 </button>
             </div>
@@ -101,6 +103,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <footer>
         <div class="container">

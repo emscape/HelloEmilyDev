@@ -20,8 +20,9 @@ export function createLikesButton(postSlug) {
   container.id = `likes-button-${postSlug}`;
   container.className = 'likes-button-container';
   container.innerHTML = `
-    <button class="likes-button" aria-label="Like this post">
-      <span class="likes-icon">♥</span>
+    <button class="likes-button">
+      <span class="visually-hidden">Like this post. Likes:</span>
+      <span class="likes-icon" aria-hidden="true">♥</span>
       <span class="likes-count">0</span>
     </button>
   `;

@@ -481,7 +481,7 @@
 
 .blog-tag:hover {
     background-color: var(--accent-color);
-    color: #fff;
+    color: var(--dark-color);
 }
 /* Share Buttons Styling */
 .share-buttons-container {
@@ -513,7 +513,7 @@
 
 .share-button:hover {
     background-color: var(--accent-color);
-    color: #fff;
+    color: var(--dark-color);
     transform: translateY(-2px);
 }
 

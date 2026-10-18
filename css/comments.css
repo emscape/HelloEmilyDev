@@ -5,7 +5,7 @@
 .blog-comments-section {
   margin-top: 2rem;
   padding: 2rem 1rem;
-  border-top: 2px solid var(--primary-color, #00B5B8);
+  border-top: 2px solid var(--primary-color, #007A7C);
   background: var(--bg-light, #ffffff);
 }
 
@@ -31,7 +31,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color, #00B5B8), var(--secondary-color, #0088CC));
+  background: linear-gradient(90deg, var(--primary-color, #007A7C), var(--secondary-color, #0088CC));
   border-radius: 3px;
 }
 
@@ -84,7 +84,7 @@
 .form-group input[type="email"]:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-color, #00B5B8);
+  border-color: var(--primary-color, #007A7C);
   box-shadow: 0 0 0 3px rgba(0, 181, 184, 0.1);
 }
 
@@ -117,7 +117,7 @@
 }
 
 .btn-primary {
-  background: var(--primary-color, #00B5B8);
+  background: var(--primary-color, #007A7C);
   color: white;
 }
 
@@ -205,7 +205,7 @@
 }
 
 .comment:hover {
-  border-color: var(--primary-color, #00B5B8);
+  border-color: var(--primary-color, #007A7C);
   box-shadow: 0 2px 4px rgba(0, 181, 184, 0.1);
 }
 
@@ -215,7 +215,7 @@
 
 .comment-reply {
   margin-left: 1rem;
-  border-left: 3px solid var(--primary-color, #00B5B8);
+  border-left: 3px solid var(--primary-color, #007A7C);
   background: white;
 }
 
@@ -299,12 +299,12 @@
   border-radius: var(--border-radius, 4px);
   cursor: pointer;
   transition: all 0.2s;
-  color: var(--primary-dark, #008080);
+  color: var(--primary-dark, #005F61);
   text-decoration: none;
 }
 
 .share-button:hover {
-  background: var(--primary-color, #00B5B8);
+  background: var(--primary-color, #007A7C);
   color: white;
   transform: translateY(-2px);
 }
@@ -334,18 +334,18 @@
   border-radius: var(--border-radius, 4px);
   cursor: pointer;
   transition: all 0.2s;
-  color: var(--primary-dark, #008080);
+  color: var(--primary-dark, #005F61);
   text-decoration: none;
 }
 
 .likes-button:hover:not(:disabled) {
-  background: var(--primary-color, #00B5B8);
+  background: var(--primary-color, #007A7C);
   color: white;
   transform: translateY(-2px);
 }
 
 .likes-button.liked {
-  background: var(--primary-color, #00B5B8);
+  background: var(--primary-color, #007A7C);
   color: white;
 }
 
@@ -364,7 +364,7 @@
   transition: transform 0.2s;
   width: 20px;
   height: 20px;
-  color: var(--primary-dark, #008080);
+  color: var(--primary-dark, #005F61);
 }
 
 .likes-button .likes-count {
@@ -433,6 +433,6 @@
 .btn:focus-visible,
 .form-group input:focus-visible,
 .form-group textarea:focus-visible {
-  outline: 2px solid var(--primary-color, #00B5B8);
+  outline: 2px solid var(--primary-color, #007A7C);
   outline-offset: 2px;
 }
