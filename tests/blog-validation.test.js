@@ -191,9 +191,7 @@ describe('Blog Validation', () => {
           `${post.postId}: ${post.error}`
         ).join('\n');
         
-        expect(invalidPosts).toHaveLength(0, 
-          `Found blog posts with invalid JSON:\n${errorMessages}`
-        );
+        expect(invalidPosts, `Found blog posts with invalid JSON:\n${errorMessages}`).toHaveLength(0);
       }
     });
 
@@ -216,9 +214,7 @@ describe('Blog Validation', () => {
           `${post.postId}:\n  - ${post.errors.join('\n  - ')}`
         ).join('\n\n');
         
-        expect(invalidPosts).toHaveLength(0,
-          `Found blog posts with validation errors:\n\n${errorMessages}`
-        );
+        expect(invalidPosts, `Found blog posts with validation errors:\n\n${errorMessages}`).toHaveLength(0);
       }
     });
 
@@ -233,9 +229,7 @@ describe('Blog Validation', () => {
         }
       }
 
-      expect(missingHtml).toHaveLength(0,
-        `Found blog posts missing HTML files: ${missingHtml.join(', ')}`
-      );
+      expect(missingHtml, `Found blog posts missing HTML files: ${missingHtml.join(', ')}`).toHaveLength(0);
     });
 
     it('should have titles that match between JSON and HTML', () => {
@@ -269,10 +263,26 @@ describe('Blog Validation', () => {
           `${mismatch.postId}:\n  JSON: "${mismatch.jsonTitle}"\n  HTML: "${mismatch.htmlTitle}"`
         ).join('\n\n');
         
-        expect(titleMismatches).toHaveLength(0,
-          `Found title mismatches between JSON and HTML:\n\n${errorMessages}`
-        );
+        expect(titleMismatches, `Found title mismatches between JSON and HTML:\n\n${errorMessages}`).toHaveLength(0);
       }
+    });
+
+    it('should not contain unfilled template placeholders in published HTML', () => {
+      const validPosts = blogPosts.filter(post => !post.error);
+      const unfilled = [];
+
+      for (const { postId } of validPosts) {
+        const htmlPath = path.join('./blog', postId, 'index.html');
+
+        if (fs.existsSync(htmlPath)) {
+          const placeholders = fs.readFileSync(htmlPath, 'utf8').match(/\b[A-Z_]+_PLACEHOLDER\b/g);
+          if (placeholders) {
+            unfilled.push(`${postId}: ${[...new Set(placeholders)].join(', ')}`);
+          }
+        }
+      }
+
+      expect(unfilled, `Found unfilled placeholders:\n${unfilled.join('\n')}`).toHaveLength(0);
     });
   });
 });

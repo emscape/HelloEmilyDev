@@ -6,7 +6,6 @@ memory-bank/
 instructions/
 .roomodes
 PromptContext.md
-.github/
 
 # Node modules
 node_modules/
@@ -62,6 +61,12 @@ logs/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Secrets and credentials
+secrets/
+*.pem
+*.p8
+*.key
 
 # Personal documents
 *.pdf
