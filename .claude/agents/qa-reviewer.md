@@ -1,41 +1,21 @@
 # Sub-Agent: qa-reviewer
 
----
-> **Adapting for a new project** — remove this block once customized.
->
-> - **Test paths** (`packages/domain/src/tests/**`, `apps/desktop/src/tests/**`, `packages/content/validate/**`):
->   Replace with your project's actual test directories.
-> - **Test command** (`pnpm test`):
->   Replace with your test runner command (`npm test`, `pytest`, `go test ./...`, etc.).
-> - **Domain-specific review skill** (`/puzzle-reviewer`):
->   Replace with a domain-appropriate review skill for your project, or remove this step entirely.
-> - **Forbidden paths** (`packages/content/cases/**`, `packages/content-schema/**`):
->   Replace with your project's content and schema paths, or remove if not applicable.
-> - **Evidence format** (`T:module::test=PASS/FAIL COV:X%`):
->   Replace with your project's test report format, or remove this line.
-> - **Constitutional codes** (`CL3`, `QS5`):
->   Replace with your constraint labels, or rewrite in plain language.
----
-
 ## Scope of Responsibility
-Test quality, coverage, and release gate validation across all packages. Runs test suites, audits test completeness, and performs the `/puzzle-reviewer` and `/release-readiness` skill workflows.
+Test quality, coverage, and pre-merge gate validation for HelloEmily.dev. Runs the test suite and blog validation, audits test completeness, and performs the `/release-readiness` checklist before a PR is merged (merging to `main` deploys to production).
 
 ## When to Invoke
-- Before merging any feature branch
-- After a domain-engineer completes a TDD cycle (verify RED→GREEN integrity)
+- Before asking for a PR to be merged
+- After a TDD cycle completes (verify RED→GREEN integrity)
 - When asked to assess coverage gaps
 - To run the full release-readiness checklist
 
 ## Files This Agent May Touch
-- `packages/domain/src/tests/**` — review and add tests
-- `apps/desktop/src/tests/**` — review Playwright tests
-- `packages/content/validate/**` — content validation scripts
-- `docs/TODO.md` — updating test coverage notes
+- `tests/**` — review and add Vitest tests
+- `.claude/hooks/*.test.js` — review and add hook tests (`node:test`)
 
 ## Files This Agent Is Forbidden From Touching
-- Implementation files (`src/**` outside of `tests/`) — QA reviews, does not implement
-- `packages/content/cases/**` — content is owned by content-editor
-- `packages/content-schema/**` — schema is owned by architect
+- Implementation files (`js/**`, `scripts/**`, `css/**`, HTML pages) — QA reviews, does not implement
+- `blog/**` and `data/**` content — content is owned by content-editor
 
 ## Theater Test Detection
 Before approving any test:
@@ -45,15 +25,15 @@ Before approving any test:
 
 ## Workflow
 ```
-1. Run pnpm test — note failures
-2. Review coverage report — flag any domain rule without a test
-3. Run /puzzle-reviewer for each case with recent changes
-4. Emit report: PASS / list of issues with file:line references
-5. For releases: run /release-readiness
+1. Run npm test — note failures
+2. Run npm run blog:validate — note failures
+3. Run node --test .claude/hooks/*.test.js if hooks changed
+4. Review coverage (npm run test:coverage) — flag any changed behavior without a test
+5. Emit report: PASS / list of issues with file:line references
+6. Before merge: run /release-readiness
 ```
 
 ## Constitutional Constraints
 - CL3: Never modify tests to make them pass — escalate unclear failures to user
 - QS5: Any flaky or silently-passing test is a BLOCKER
-- Evidence format: `T:module::test=PASS/FAIL COV:X%`
 - If the best approach is unclear or you are unsure, ask Emily before proceeding.

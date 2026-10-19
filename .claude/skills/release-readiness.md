@@ -1,55 +1,43 @@
 # Skill: release-readiness
 
 ## Purpose
-Validate that the application is in a shippable state before tagging a release or building a distributable.
+Validate that a branch is safe to merge. HelloEmily.dev has no release builds or tags: every merge to `main` is deployed straight to production by `.github/workflows/static.yml` (GitHub Pages), so the merge itself is the release.
 
 ## When to Use
-- Before tagging a release version (`git tag vX.Y.Z`)
-- Before running `tauri build` for distribution
-- After completing a phase milestone
-
-## Inputs Required
-- `target_platform`: `windows` | `all` (default: `windows`)
-- `release_type`: `alpha` | `beta` | `stable`
+- Before asking for a PR to be merged
+- After finishing a cleanup phase or feature branch
 
 ## Output Expectations
-A release readiness checklist with PASS/FAIL per gate:
+A readiness checklist with PASS/FAIL per gate:
 
 ### Gate 1: Test Suite
-- [ ] All Vitest unit tests pass (`pnpm test`)
-- [ ] No skipped tests without documented reason
-- [ ] Domain coverage ≥ 80%
+- [ ] `npm test` passes (Vitest)
+- [ ] No skipped tests without a documented reason
+- [ ] If `.claude/hooks/` changed: `node --test .claude/hooks/*.test.js` passes
 
-### Gate 2: TypeScript
-- [ ] `pnpm typecheck` exits 0 across all packages
-- [ ] No `any` types introduced without comment
+### Gate 2: Content Validation
+- [ ] `npm run blog:validate` passes
+- [ ] Any new or renamed page or post is listed in `sitemap.xml`
+- [ ] New posts appear in `data/blog-index.json`
 
-### Gate 3: Content Validation
-- [ ] All cases pass schema validation
-- [ ] No unreferenced evidence IDs
-- [ ] No forward-reference unlock conditions
+### Gate 3: Visual Check
+- [ ] Visual changes checked on a local server (`py -m http.server 8000`, then http://localhost:8000/)
+- [ ] No console errors on the changed pages
 
-### Gate 4: Architecture
-- [ ] No boundary violations (run `/refactor-boundary-check`)
-- [ ] No business logic in UI components
-- [ ] No hardcoded story content in React
+### Gate 4: Accessibility
+- [ ] Colour, landmark or heading changes re-checked with Oobee (`OOBEE_DISABLE_TELEMETRY=1 npx @govtechsg/oobee -c 2 -u http://localhost:8000/ -b 1`)
+- [ ] Text contrast stays at 4.5:1 or above
 
-### Gate 5: Build
-- [ ] `pnpm build` exits 0
-- [ ] Tauri build succeeds (Windows target)
-- [ ] No console errors in production build
-
-### Gate 6: Content Completeness
-- [ ] At least one complete, playable case exists
-- [ ] All puzzle unlock paths are reachable
+### Gate 5: Deploy Workflow
+- [ ] If `.github/workflows/static.yml` changed: it still uploads the site and excludes internal files (`.claude/`, `CLAUDE.md`)
+- [ ] After merge: the Pages deploy run succeeded (`gh run list --workflow static.yml --limit 1`) — the workflow only runs on `main`, so PRs have no check to wait for
 
 ## Constraints
-- ALL gates must PASS for `stable` release
-- Gates 1-4 must PASS for `alpha`/`beta`
+- ALL gates must PASS before a merge is requested
 - Never ship with known silent failures (QS5)
-- Do not tag a release mid-feature-branch — merge to `main` first
+- PRs are merged on GitHub by Emily, never from the assistant
 
 ## Example Invocation
 ```
-/release-readiness target_platform=windows release_type=alpha
+/release-readiness
 ```

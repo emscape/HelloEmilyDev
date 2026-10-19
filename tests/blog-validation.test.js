@@ -275,7 +275,7 @@ describe('Blog Validation', () => {
         const htmlPath = path.join('./blog', postId, 'index.html');
 
         if (fs.existsSync(htmlPath)) {
-          const placeholders = fs.readFileSync(htmlPath, 'utf8').match(/\b[A-Z_]+_PLACEHOLDER\b/g);
+          const placeholders = fs.readFileSync(htmlPath, 'utf8').match(/\b[A-Z0-9_]+_PLACEHOLDER\b/g);
           if (placeholders) {
             unfilled.push(`${postId}: ${[...new Set(placeholders)].join(', ')}`);
           }

@@ -54,7 +54,7 @@
   },
   "push_audit": {
     "enabled": true,
-    "_comment": "Before any git push, audits staged (or HEAD~1, or the empty tree for a root commit) diff for: hardcoded secrets (BLOCK), debug statements, commented-out code, missing tests, lockfile drift. Reports PASS/BLOCK with per-finding severity.",
+    "_comment": "Before any git push, audits the staged diff (or, if nothing is staged, every commit the push will send: vs. the upstream, else the remote default branch, else HEAD~1, else the empty tree for a root commit) for: hardcoded secrets (BLOCK), debug statements, commented-out code, missing tests, lockfile drift. Reports PASS/BLOCK with per-finding severity.",
     "_checks": {
       "secrets": "HIGH — blocks push. Detects API keys, passwords, tokens, private keys in added lines.",
       "debug_statements": "MEDIUM — console.log, debugger, pprint in non-test files.",
@@ -74,7 +74,7 @@
     "new_run_timeout_seconds": 60,
     "_new_run_timeout_note": "How long to wait for a run matching the just-pushed commit SHA to even appear in `gh run list`.",
     "completion_timeout_seconds": 180,
-    "_completion_timeout_note": "Currently unenforced — check-ci-status-after-push.js uses `gh run watch` for this phase, which blocks until the run finishes with no timeout flag of its own. Left here as a documented intent for a future implementer, not a working setting."
+    "_completion_timeout_note": "How long `gh run watch` may wait for the matched run to finish before it is killed and the hook reports the result as unknown (exit 1)."
   },
   "merge_guard": {
     "enabled": true,

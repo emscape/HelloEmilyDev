@@ -1,6 +1,6 @@
 // check-branch-delete-guard.test.js
 // Behavioral tests for the pure extraction logic in
-// check-branch-delete-guard.js — run with `node --test .claude/hooks/`.
+// check-branch-delete-guard.js — run with `node --test .claude/hooks/*.test.js`.
 //
 // check-branch-delete-guard.js only runs its stdin-driven hook lifecycle
 // when executed directly (`require.main === module`), so it's safe to

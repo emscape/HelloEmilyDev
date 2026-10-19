@@ -11,9 +11,9 @@ All behavior is controlled by **`config.json`** — no project logic is hardcode
 | File | Purpose |
 |---|---|
 | `config.json` | All project-specific configuration lives here |
-| `check-arch-boundary.js` | PreToolUse: block file writes that violate package rules |
+| `check-arch-boundary.mjs` | PreToolUse: block file writes that violate package rules |
 | `check-dep-guard.js` | PreToolUse: warn on dependency installs |
-| `check-script-exists.js` | PreToolUse: warn/block when an npm run script doesn't exist; detect no-op commands |
+| `check-script-exists.mjs` | PreToolUse: warn/block when an npm run script doesn't exist; detect no-op commands |
 | `check-env-guard.js` | PreToolUse: block reads of `.env` files |
 | `check-bash-description.js` | PreToolUse: block Bash calls without a description |
 | `check-commit-message.js` | PreToolUse: block `git commit` commands that do not include WHY/EXPECTED |
@@ -21,14 +21,14 @@ All behavior is controlled by **`config.json`** — no project logic is hardcode
 | `check-git-push-audit.js` | PreToolUse: audit a `git push` diff for secrets (blocks), debug statements, commented-out code, lockfile drift, missing tests |
 | `check-branch-delete-guard.js` | PreToolUse: block `git push --delete`/`:branch` when an open PR still bases off that branch |
 | `check-search-command.js` | PreToolUse: nudge (or block) raw shell `grep`/`find`/`cat`/`head`/`tail` in favor of dedicated search/read tools |
-| `validate-content.js` | PostToolUse: run validation after watched files change |
-| `check-empty-tests.js` | PostToolUse: fail when test files have empty blocks or no assertions |
-| `check-todo-format.js` | PostToolUse: warn/block on non-conforming TODO comment format |
+| `validate-content.mjs` | PostToolUse: run validation after watched files change |
+| `check-empty-tests.mjs` | PostToolUse: fail when test files have empty blocks or no assertions |
+| `check-todo-format.mjs` | PostToolUse: warn/block on non-conforming TODO comment format |
 | `check-ci-status-after-push.js` | PostToolUse: after a push, block until the matching GitHub Actions run completes and report the real result |
 | `session-start.sh` | UserPromptSubmit: thin wrapper that invokes session-start.cjs |
 | `session-start.cjs` | Reads config.json (via `__dirname`, not a shell-resolved path) and prints the project orientation banner |
 | `hooks.json` | Human-readable reference copy of the settings.json hooks block |
-| `check-branch-delete-guard.test.js`, `check-merge-guard.test.js` | Behavioral tests for the pure detection/extraction logic each guard exports — run with `node --test .claude/hooks/` |
+| `*.test.js` (branch-delete, merge, commit-message, push-audit, CI-status guards) | Behavioral tests for the pure detection/extraction logic each guard exports — run with `node --test .claude/hooks/*.test.js` |
 
 The actual hook registration lives in **`.claude/settings.json`**, not `hooks.json`.
 
@@ -73,14 +73,14 @@ Merge the `hooks` block from `hooks.json` into your project's `.claude/settings.
     "PreToolUse": [
       {
         "matcher": "Write|Edit|MultiEdit",
-        "hooks": [{ "type": "command", "command": "node .claude/hooks/check-arch-boundary.js" }]
+        "hooks": [{ "type": "command", "command": "node .claude/hooks/check-arch-boundary.mjs" }]
       },
       {
         "matcher": "Bash",
         "hooks": [
           { "type": "command", "command": "node .claude/hooks/check-bash-description.js" },
           { "type": "command", "command": "node .claude/hooks/check-dep-guard.js" },
-          { "type": "command", "command": "node .claude/hooks/check-script-exists.js" },
+          { "type": "command", "command": "node .claude/hooks/check-script-exists.mjs" },
           { "type": "command", "command": "node .claude/hooks/check-commit-message.js" },
           { "type": "command", "command": "node .claude/hooks/check-merge-guard.js" },
           { "type": "command", "command": "node .claude/hooks/check-git-push-audit.js" },
@@ -97,9 +97,9 @@ Merge the `hooks` block from `hooks.json` into your project's `.claude/settings.
       {
         "matcher": "Write|Edit|MultiEdit",
         "hooks": [
-          { "type": "command", "command": "node .claude/hooks/validate-content.js" },
-          { "type": "command", "command": "node .claude/hooks/check-empty-tests.js" },
-          { "type": "command", "command": "node .claude/hooks/check-todo-format.js" }
+          { "type": "command", "command": "node .claude/hooks/validate-content.mjs" },
+          { "type": "command", "command": "node .claude/hooks/check-empty-tests.mjs" },
+          { "type": "command", "command": "node .claude/hooks/check-todo-format.mjs" }
         ]
       },
       {
@@ -551,11 +551,11 @@ Claude Code invokes each registered command when the matching tool is used.
 
 ## Known Limitations
 
-- `check-arch-boundary.js` checks imports in the **content being written**, not the full file on disk. It won't catch pre-existing violations.
+- `check-arch-boundary.mjs` checks imports in the **content being written**, not the full file on disk. It won't catch pre-existing violations.
 - `forbidden_content_pattern` is a simple regex heuristic — it can produce false positives in test files or comments.
 - `session-start.cjs` uses CJS `require(...)` to read config.json. If your Node version requires `--input-type=module` for `.cjs` (unusual), switch it to `JSON.parse(readFileSync(...))`.
 - Hooks run in the **project root** working directory. Relative paths in `validate_command` are resolved from there.
-- **Mixed module system**: `check-branch-delete-guard.js`, `check-ci-status-after-push.js`, `check-env-guard.js`, `check-git-push-audit.js`, and `check-merge-guard.js` are CommonJS (`require`); `check-dep-guard.js` and `check-search-command.js` were converted to CommonJS too (see changelog below). `check-arch-boundary.js`, `check-empty-tests.js`, `check-script-exists.js`, `check-todo-format.js`, and `validate-content.js` still use ESM `import` and will throw `Cannot use import statement outside a module` in a consuming project that has no `package.json` at all, or one without `"type": "module"` — which is the plain-scripts/non-npm case this template is otherwise meant to support out of the box. Either add a `package.json` with `"type": "module"` next to `.claude/hooks/`, or convert the file to `require(...)` the same way `check-dep-guard.js` was.
+- **Mixed module system**: `check-branch-delete-guard.js`, `check-ci-status-after-push.js`, `check-env-guard.js`, `check-git-push-audit.js`, and `check-merge-guard.js` are CommonJS (`require`); `check-dep-guard.js` and `check-search-command.js` were converted to CommonJS too (see changelog below). `check-arch-boundary.mjs`, `check-empty-tests.mjs`, `check-script-exists.mjs`, `check-todo-format.mjs`, and `validate-content.mjs` still use ESM `import` and will throw `Cannot use import statement outside a module` in a consuming project that has no `package.json` at all, or one without `"type": "module"` — which is the plain-scripts/non-npm case this template is otherwise meant to support out of the box. Either add a `package.json` with `"type": "module"` next to `.claude/hooks/`, or convert the file to `require(...)` the same way `check-dep-guard.js` was.
 
 ---
 
@@ -564,7 +564,7 @@ Claude Code invokes each registered command when the matching tool is used.
 | Item | Reason |
 |---|---|
 | `check-arch-boundary.sh` | Duplicate of the JS hook; used nonexistent env vars (`$CLAUDE_TOOL_INPUT_FILE_PATH`) instead of stdin |
-| `validate-content.sh` | Replaced by `validate-content.js`; hardcoded `pnpm` and `packages/content` |
+| `validate-content.sh` | Replaced by `validate-content.mjs`; hardcoded `pnpm` and `packages/content` |
 | Inline dep-guard bash in hooks.json | Extracted to `check-dep-guard.js`; hardcoded `npm/yarn/pnpm` only |
 | Hardcoded project references | All paths, commands, and names moved to `config.json` |
 | CL1/CL4/QS5 internal rule codes | Replaced with generic, readable messages |

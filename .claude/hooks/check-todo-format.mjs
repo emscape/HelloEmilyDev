@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * check-todo-format.js
+ * check-todo-format.mjs
  * Hook type : PostToolUse — Write | Edit | MultiEdit
  * Purpose   : Enforce a consistent TODO comment format. Bare "TODO" comments
  *             with no owner or description are invisible technical debt.

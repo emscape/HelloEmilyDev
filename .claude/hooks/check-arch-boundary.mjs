@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * check-arch-boundary.js
+ * check-arch-boundary.mjs
  * Hook type : PreToolUse — Write | Edit | MultiEdit
  * Purpose   : Enforce package boundary rules defined in config.json.
  *             Exits 2 (block) on violation so Claude Code sees the message

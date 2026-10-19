@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/check-arch-boundary.js"
+            "command": "node .claude/hooks/check-arch-boundary.mjs"
           }
         ]
       },
@@ -23,7 +23,7 @@
           },
           {
             "type": "command",
-            "command": "node .claude/hooks/check-script-exists.js"
+            "command": "node .claude/hooks/check-script-exists.mjs"
           },
           {
             "type": "command",
@@ -63,15 +63,15 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/validate-content.js"
+            "command": "node .claude/hooks/validate-content.mjs"
           },
           {
             "type": "command",
-            "command": "node .claude/hooks/check-empty-tests.js"
+            "command": "node .claude/hooks/check-empty-tests.mjs"
           },
           {
             "type": "command",
-            "command": "node .claude/hooks/check-todo-format.js"
+            "command": "node .claude/hooks/check-todo-format.mjs"
           }
         ]
       },

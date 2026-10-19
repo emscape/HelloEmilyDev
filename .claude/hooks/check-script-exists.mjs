@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * check-script-exists.js
+ * check-script-exists.mjs
  * Hook type : PreToolUse — Bash
  * Purpose   : Two checks combined:
  *

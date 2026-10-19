@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * check-empty-tests.js
+ * check-empty-tests.mjs
  * Hook type : PostToolUse — Write | Edit | MultiEdit
  * Purpose   : Detect theater testing — empty describe/it blocks that pass
  *             without asserting anything. Fails loudly when found.

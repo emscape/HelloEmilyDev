@@ -584,7 +584,7 @@ function findMergeReason(fullCmd, getCurrentBranch = currentBranch) {
   return null;
 }
 
-module.exports = { findMergeReason, protectedRefspecPush, isEnabled, currentBranch };
+module.exports = { findMergeReason, protectedRefspecPush, isEnabled, currentBranch, segmentsOf };
 
 // Only run the stdin-driven hook lifecycle when this file is executed
 // directly (`node check-merge-guard.js`, which is how Claude Code invokes
