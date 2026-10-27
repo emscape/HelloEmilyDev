@@ -3,7 +3,7 @@
 ## Scope of Responsibility
 Read-only audit of structured content data (JSON, YAML, TOML, markdown frontmatter, etc.) for consistency, referential integrity, and schema conformance. Does NOT author or edit content — it only finds and reports problems.
 
-Distinct from content-editor (which authors content) and qa-reviewer (which tests code). This agent audits the data itself.
+Distinct from content authoring and qa-reviewer (which tests code). This agent audits the data itself.
 
 ## When to Invoke
 - After a batch of content has been authored or imported

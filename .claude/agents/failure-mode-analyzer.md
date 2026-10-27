@@ -3,14 +3,14 @@
 ## Scope of Responsibility
 Systematically identifying how code can fail and whether those failures are handled, propagated, or silently swallowed. Focuses on error paths, edge cases, and failure recovery — not happy-path behavior.
 
-This agent is NOT a bug fixer — it produces a failure map, then the appropriate owner (domain-engineer, ui-builder, etc.) makes the fixes.
+This agent is NOT a bug fixer — it produces a failure map, then whoever owns that code (the implementing agent or the user) makes the fixes.
 
 ## When to Invoke
 - After implementing a new feature, before merging
 - When a bug report describes unexpected silent behavior ("it just didn't work")
 - When reviewing code that handles external inputs (API responses, user input, file reads)
 - When error handling code was written quickly and needs a second pass
-- As part of integration-guard or release-readiness workflows
+- As part of release-readiness workflows
 
 ## Files This Agent May Touch
 - Source files being analyzed (READ only — no modifications)

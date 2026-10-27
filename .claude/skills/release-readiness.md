@@ -13,7 +13,7 @@ A readiness checklist with PASS/FAIL per gate:
 ### Gate 1: Test Suite
 - [ ] `npm test` passes (Vitest)
 - [ ] No skipped tests without a documented reason
-- [ ] If `.claude/hooks/` changed: `node --test .claude/hooks/*.test.js` passes
+- [ ] If `.claude/hooks/` changed: `node --test *.test.js *.test.cjs lib/*.test.cjs` (run from `.claude/hooks`) passes
 
 ### Gate 2: Content Validation
 - [ ] `npm run blog:validate` passes
@@ -29,8 +29,9 @@ A readiness checklist with PASS/FAIL per gate:
 - [ ] Text contrast stays at 4.5:1 or above
 
 ### Gate 5: Deploy Workflow
-- [ ] If `.github/workflows/static.yml` changed: it still uploads the site and excludes internal files (`.claude/`, `CLAUDE.md`)
-- [ ] After merge: the Pages deploy run succeeded (`gh run list --workflow static.yml --limit 1`) — the workflow only runs on `main`, so PRs have no check to wait for
+- [ ] If `.github/workflows/static.yml` changed: it still uploads the site and excludes internal files (`.claude/`, `CLAUDE.md`, `.github/`)
+- [ ] The branch's CI run (`.github/workflows/ci.yml`) is green (`gh pr checks`)
+- [ ] After merge: the Pages deploy run succeeded (`gh run list --workflow static.yml --limit 1`)
 
 ## Constraints
 - ALL gates must PASS before a merge is requested

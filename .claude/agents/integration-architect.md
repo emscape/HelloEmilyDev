@@ -10,7 +10,6 @@ Distinct from `architect` (which designs overall structure) — this agent is sp
 - When an integration is failing at runtime and the cause is unclear
 - When replacing a stub/mock with a real implementation
 - After two agents have worked independently and their outputs need to merge
-- When the `/integration-guard` skill surfaces a gap that requires design work
 
 ## Files This Agent May Touch
 - Interface/contract definition files (type files, protocol buffers, OpenAPI specs, etc.)

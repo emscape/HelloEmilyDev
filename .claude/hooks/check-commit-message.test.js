@@ -1,12 +1,16 @@
 // check-commit-message.test.js
 // Behavioral tests for the commit-message guard's detection logic — run
 // with `node --test .claude/hooks/*.test.js`.
+//
+// check-commit-message.js only runs its stdin-driven hook lifecycle when
+// executed directly (`require.main === module`), so requiring it here is
+// safe.
 
 'use strict';
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { findUnmarkedCommit } = require('./check-commit-message.js');
+const { findUnmarkedCommit, commitVerdict } = require('./check-commit-message.js');
 
 const GOOD = 'git commit -m "Fix thing\n\nWHY:\n- reason\n\nEXPECTED:\n- outcome"';
 
@@ -46,8 +50,24 @@ test('findUnmarkedCommit', async (t) => {
     assert.notEqual(findUnmarkedCommit('echo "WHY: EXPECTED:" && git commit -m "nope"'), null);
   });
 
-  await t.test('ignores commands that only mention git commit inside a quoted string', () => {
-    assert.equal(findUnmarkedCommit('echo "run git commit later"'), null);
+  await t.test('blocks a commit run with git -C <dir>', () => {
+    assert.notEqual(findUnmarkedCommit('git -C /repo commit -m "nope"'), null);
+  });
+
+  await t.test('blocks a commit run with other git global options', () => {
+    assert.notEqual(findUnmarkedCommit('git --git-dir=/repo/.git -c user.name=x commit -m "nope"'), null);
+  });
+
+  await t.test('blocks a commit run through an absolute path to git', () => {
+    assert.notEqual(findUnmarkedCommit('/usr/bin/git commit -m "nope"'), null);
+  });
+
+  await t.test('blocks a commit wrapped in bash -c', () => {
+    assert.notEqual(findUnmarkedCommit('bash -c "git commit -m nope"'), null);
+  });
+
+  await t.test('allows a well-formed commit run with git -C <dir>', () => {
+    assert.equal(findUnmarkedCommit(GOOD.replace('git commit', 'git -C /repo commit')), null);
   });
 
   await t.test('allows a commit whose message is fed through a heredoc on stdin', () => {
@@ -69,7 +89,45 @@ test('findUnmarkedCommit', async (t) => {
     assert.notEqual(findUnmarkedCommit(cmd), null);
   });
 
+  await t.test('ignores commands that only mention git commit inside a quoted string', () => {
+    assert.equal(findUnmarkedCommit('echo "run git commit later"'), null);
+  });
+
   await t.test('ignores non-commit git commands', () => {
     assert.equal(findUnmarkedCommit('git status && git log -1'), null);
+  });
+
+  await t.test('uses the configured markers instead of the defaults', () => {
+    assert.equal(findUnmarkedCommit('git commit -m "x\n\nRefs: #1"', ['Refs:']), null);
+    assert.notEqual(findUnmarkedCommit(GOOD, ['Refs:']), null);
+  });
+});
+
+test('commitVerdict', async (t) => {
+  const BAD = 'git commit -m "nope"';
+
+  await t.test('blocks a non-compliant commit when on_violation is block', () => {
+    assert.equal(commitVerdict(BAD, { enabled: true, on_violation: 'block' }).action, 'block');
+  });
+
+  await t.test('only warns for a non-compliant commit when on_violation is warn', () => {
+    assert.equal(commitVerdict(BAD, { enabled: true, on_violation: 'warn' }).action, 'warn');
+  });
+
+  await t.test('blocks by default when on_violation is unset', () => {
+    assert.equal(commitVerdict(BAD, {}).action, 'block');
+  });
+
+  await t.test('allows everything when the guard is disabled', () => {
+    assert.equal(commitVerdict(BAD, { enabled: false, on_violation: 'block' }).action, 'allow');
+  });
+
+  await t.test('allows a compliant commit regardless of on_violation', () => {
+    assert.equal(commitVerdict(GOOD, { on_violation: 'block' }).action, 'allow');
+  });
+
+  await t.test('names the missing markers from required_markers', () => {
+    const v = commitVerdict('git commit -m "x\n\nWHY:\n- y"', { required_markers: ['WHY:', 'EXPECTED:'] });
+    assert.deepEqual(v.missing, ['EXPECTED:']);
   });
 });

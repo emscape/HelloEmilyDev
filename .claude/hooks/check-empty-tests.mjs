@@ -19,8 +19,10 @@
 import { readFileSync } from 'fs';
 import { resolve, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
+const { loadHookConfig } = createRequire(import.meta.url)('./lib/hook-config.cjs');
 const CONFIG_PATH = resolve(SCRIPT_DIR, 'config.json');
 
 function log(msg) {
@@ -30,7 +32,7 @@ function log(msg) {
 // ── Load config ───────────────────────────────────────────────────────────
 let config;
 try {
-  config = JSON.parse(readFileSync(CONFIG_PATH, 'utf8'));
+  config = loadHookConfig({ hooksDir: SCRIPT_DIR });
 } catch {
   log(`WARN: config.json not found at ${CONFIG_PATH} — skipping empty test check`);
   process.exit(0);
@@ -71,10 +73,19 @@ process.stdin.on('end', () => {
   }
 
   const filePath = (payload?.tool_input?.file_path ?? '').replace(/\\/g, '/');
-  const content  = payload?.tool_input?.content ?? '';
+  if (!filePath || !isTestFile(basename(filePath))) process.exit(0);
 
-  if (!filePath || !content) process.exit(0);
-  if (!isTestFile(basename(filePath))) process.exit(0);
+  // Write sends the whole file as `content`; Edit and MultiEdit send only
+  // replacement fields, so read the file as it stands after the edit.
+  let content = payload?.tool_input?.content ?? '';
+  if (!content) {
+    try {
+      content = readFileSync(filePath, 'utf8');
+    } catch {
+      process.exit(0);
+    }
+  }
+  if (!content) process.exit(0);
 
   log(`Checking test file: ${filePath}`);
 

@@ -20,7 +20,7 @@ The bar is: **"Will this cause a noticeable problem with real data?"** — not t
 ## Files This Agent Is Forbidden From Touching
 - Content/data files
 - Build configuration (unless the issue is a build performance issue explicitly in scope)
-- Any file where the change would alter observable business behavior (escalate to domain-engineer)
+- Any file where the change would alter observable business behavior (escalate to the user)
 
 ## Typical Invocation Scenarios
 1. **Collection processing**: "This function iterates over 10,000 documents on every keystroke — flag it"

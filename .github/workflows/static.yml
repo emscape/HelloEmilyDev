@@ -34,8 +34,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Remove internal AI-assistant config from the site
-        # Repo-only files (agent instructions, hooks, skills) — not part of the site.
-        run: rm -rf .claude CLAUDE.md
+        # Repo-only files (agent instructions, hooks, skills, Copilot
+        # chatmodes and instructions, workflows) — not part of the site.
+        run: rm -rf .claude CLAUDE.md .github
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
