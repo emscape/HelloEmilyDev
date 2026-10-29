@@ -272,6 +272,45 @@ test('check-arch-boundary.mjs reads the project override (README: arch_rules)', 
       assert.notEqual(r.stderr.trim(), '', msg('arch override stderr', 'README stderr shows violation', 'non-empty stderr', r.stderr, 'Explain the violation.'));
     });
   });
+
+  // Edit/MultiEdit carry replacement fields, not the file, and this hook runs
+  // before the edit lands, so the file on disk is still the old version.
+  const original = 'export const x = 1;\n';
+  const forbidden = "import { Button } from 'apps/ui/button';\n";
+  function sourceIn(dir) {
+    const file = path.join(dir, 'packages', 'core', 'a.ts');
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, original);
+    return file;
+  }
+  await t.test('Edit adding a forbidden import: blocked with exit 2', () => {
+    withProject(override, (p, c) => {
+      const edit = { tool_name: 'Edit', tool_input: { file_path: sourceIn(p), old_string: original, new_string: forbidden + original } };
+      const r = runHookRaw('check-arch-boundary.mjs', p, c, edit);
+      assert.equal(r.status, 2, msg('arch edit', 'Edit payloads have no content field', 'exit 2', `${r.status} ${r.stderr}`, 'Apply old_string -> new_string to the current file and check the result.'));
+    });
+  });
+  await t.test('MultiEdit adding a forbidden import: blocked with exit 2', () => {
+    withProject(override, (p, c) => {
+      const edits = [{ old_string: 'x = 1', new_string: 'x = 2' }, { old_string: 'export', new_string: forbidden + 'export' }];
+      const r = runHookRaw('check-arch-boundary.mjs', p, c, { tool_name: 'MultiEdit', tool_input: { file_path: sourceIn(p), edits } });
+      assert.equal(r.status, 2, msg('arch multiedit', 'MultiEdit applies edits in order', 'exit 2', `${r.status} ${r.stderr}`, 'Apply each edit in sequence and check the result.'));
+    });
+  });
+  await t.test('Edit with no forbidden import: allowed with exit 0', () => {
+    withProject(override, (p, c) => {
+      const edit = { tool_name: 'Edit', tool_input: { file_path: sourceIn(p), old_string: 'x = 1', new_string: 'x = 2' } };
+      const r = runHookRaw('check-arch-boundary.mjs', p, c, edit);
+      assert.equal(r.status, 0, msg('arch benign edit', 'Only violations block', 'exit 0', `${r.status} ${r.stderr}`, 'A clean edit must pass.'));
+    });
+  });
+  await t.test('Edit whose old_string is not in the file: new_string is still checked', () => {
+    withProject(override, (p, c) => {
+      const edit = { tool_name: 'Edit', tool_input: { file_path: sourceIn(p), old_string: 'not present', new_string: forbidden } };
+      const r = runHookRaw('check-arch-boundary.mjs', p, c, edit);
+      assert.equal(r.status, 2, msg('arch unmatched edit', 'The added text must not escape the check', 'exit 2', `${r.status} ${r.stderr}`, 'Fall back to checking new_string.'));
+    });
+  });
 });
 
 test('check-empty-tests.mjs reads the project override (README: empty_test_guard)', async (t) => {
@@ -293,6 +332,25 @@ test('check-empty-tests.mjs reads the project override (README: empty_test_guard
       const edit = { tool_name: 'Edit', tool_input: { file_path, old_string: 'x', new_string: 'y' } };
       const r = runHookRaw('check-empty-tests.mjs', p, c, edit);
       assert.equal(r.status, 1, msg('empty-tests edit', 'Edit/MultiEdit carry no full content', 'exit 1', `${r.status} ${r.stderr}`, 'After an edit, read the file from file_path when tool_input.content is absent.'));
+    });
+  });
+  function writePayload(dir, body) {
+    const file = path.join(dir, 'node.test.js');
+    fs.writeFileSync(file, body);
+    return { tool_name: 'Write', tool_input: { file_path: file, content: body } };
+  }
+  await t.test('Node assert methods count as assertions: exit 0', () => {
+    const body = "test('adds', () => {\n  assert.equal(add(1, 2), 3);\n  assert.strict.deepEqual([1], [1]);\n});\n";
+    withProject(undefined, (p, c) => {
+      const r = runHookRaw('check-empty-tests.mjs', p, c, writePayload(p, body));
+      assert.equal(r.status, 0, msg('empty-tests node assert', 'assert.equal(...) is a real assertion', 'exit 0', `${r.status} ${r.stderr}`, 'Recognize assert.<method>(...) as well as assert(...).'));
+    });
+  });
+  await t.test('test block with no assertion call at all: still exit 1', () => {
+    const body = "test('runs', () => {\n  const assertion = add(1, 2);\n});\n";
+    withProject(undefined, (p, c) => {
+      const r = runHookRaw('check-empty-tests.mjs', p, c, writePayload(p, body));
+      assert.equal(r.status, 1, msg('empty-tests no assert', 'A file with no assertion calls is theater', 'exit 1', `${r.status} ${r.stderr}`, 'Only an assert/expect call counts, not an identifier that starts with assert.'));
     });
   });
   await t.test('override enabled=false: silent, exit 0', () => {
@@ -325,6 +383,24 @@ test('check-todo-format.mjs reads the project override (README: todo_format)', a
       const r = runHookRaw('check-todo-format.mjs', p, c, payload);
       assert.equal(r.status, 0, msg('todo warn exit', 'README on_violation warn exits 0', 'exit 0', r.status, 'Warn mode never fails.'));
       assert.notEqual(r.stderr.trim(), '', msg('todo warn stderr', 'README', 'non-empty stderr', r.stderr, 'Warn mode prints.'));
+    });
+  });
+  // PostToolUse: after an Edit, the file on disk is the edited version.
+  function editOf(dir, body) {
+    const file = path.join(dir, 'b.js');
+    fs.writeFileSync(file, body);
+    return { tool_name: 'Edit', tool_input: { file_path: file, old_string: 'x', new_string: 'y' } };
+  }
+  await t.test('Edit payload (no content field): bare TODO in the edited file blocks with exit 1', () => {
+    withProject({ todo_format: { enabled: true, on_violation: 'block' } }, (p, c) => {
+      const r = runHookRaw('check-todo-format.mjs', p, c, editOf(p, 'const y = 1;\n// TODO fix this later\n'));
+      assert.equal(r.status, 1, msg('todo edit', 'Edit/MultiEdit carry no full content', 'exit 1', `${r.status} ${r.stderr}`, 'Read the file from file_path when tool_input.content is absent.'));
+    });
+  });
+  await t.test('Edit payload with a conforming TODO: exit 0', () => {
+    withProject({ todo_format: { enabled: true, on_violation: 'block' } }, (p, c) => {
+      const r = runHookRaw('check-todo-format.mjs', p, c, editOf(p, 'const y = 1;\n// TODO(owner): fix this later\n'));
+      assert.equal(r.status, 0, msg('todo edit ok', 'Conforming TODOs pass', 'exit 0', `${r.status} ${r.stderr}`, 'Only bare TODOs are violations.'));
     });
   });
 });

@@ -25,7 +25,7 @@ All behavior is controlled by **`config.json`** — no project logic is hardcode
 | `check-search-command.js` | PreToolUse: nudge (or block) raw shell `grep`/`find`/`cat`/`head`/`tail` in favor of dedicated search/read tools |
 | `validate-content.mjs` | PostToolUse: run validation after watched files change |
 | `check-empty-tests.mjs` | PostToolUse: fail when test files have empty blocks or no assertions (Write content, or the file on disk after Edit/MultiEdit) |
-| `check-todo-format.mjs` | PostToolUse: warn/block on non-conforming TODO comment format |
+| `check-todo-format.mjs` | PostToolUse: warn/block on non-conforming TODO comment format (Write content, or the file on disk after Edit/MultiEdit) |
 | `check-ci-status-after-push.js` | PostToolUse: after a push, block until the matching GitHub Actions run completes and report the real result |
 | `session-start.sh` | Optional manual wrapper that invokes session-start.cjs (no longer registered in hooks.json) |
 | `session-start.cjs` | SessionStart: loads config through `lib/hook-config.cjs` and prints the project orientation banner (project name defaults to the project directory basename) |
@@ -632,10 +632,10 @@ Claude Code invokes each registered command when the matching tool is used.
 
 ## Known Limitations
 
-- `check-arch-boundary.mjs` checks imports in the **content being written**, not the full file on disk. It won't catch pre-existing violations.
+- `check-arch-boundary.mjs` checks the file **as it will be after the write**: Write content, or for Edit/MultiEdit the current file with the replacements applied. Any edit to a file that already has a violation is therefore blocked until the violation is fixed, while files that aren't touched are never checked.
 - `forbidden_content_pattern` is a simple regex heuristic — it can produce false positives in test files or comments.
 - Hooks run in the **project root** working directory. Relative paths in `validate_command` are resolved from there.
-- **Mixed module system**: `check-branch-delete-guard.js`, `check-ci-status-after-push.js`, `check-env-guard.js`, `check-git-push-audit.js`, and `check-merge-guard.js` are CommonJS (`require`); `check-dep-guard.js` and `check-search-command.js` were converted to CommonJS too (see changelog below). `check-arch-boundary.mjs`, `check-empty-tests.mjs`, `check-script-exists.mjs`, `check-todo-format.mjs`, and `validate-content.mjs` still use ESM `import`. On Node v22.7+ they run without any `package.json`, because Node detects the module syntax. On older Node they throw `Cannot use import statement outside a module` unless a `package.json` with `"type": "module"` sits next to `.claude/hooks/`, or the file is converted to `require(...)` the same way `check-dep-guard.js` was.
+- **Mixed module system**: `check-branch-delete-guard.js`, `check-ci-status-after-push.js`, `check-env-guard.js`, `check-git-push-audit.js`, and `check-merge-guard.js` are CommonJS (`require`); `check-dep-guard.js` and `check-search-command.js` were converted to CommonJS too (see changelog below). `check-arch-boundary.mjs`, `check-empty-tests.mjs`, `check-script-exists.mjs`, `check-todo-format.mjs`, and `validate-content.mjs` use ESM `import`, so they carry the `.mjs` extension: Node then loads them as ESM whatever the nearest `package.json` `"type"` says. As `.js` files they would crash in a project whose `package.json` has `"type": "commonjs"`.
 
 ---
 

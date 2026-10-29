@@ -120,8 +120,10 @@ process.stdin.on('end', () => {
   }
 
   // ── Check for describe with no assertions anywhere inside ────────────────
-  // Heuristic: test file with zero expect/assert calls is theater
-  const hasAssertions = /\b(?:expect|assert)\s*\(/.test(content);
+  // Heuristic: test file with zero expect/assert calls is theater. Method
+  // forms count too: assert.equal(...), assert.strict.deepEqual(...),
+  // expect.assertions(...).
+  const hasAssertions = /\b(?:expect|assert)(?:\.\w+)*\s*\(/.test(content);
   const hasTestBlocks = /\b(?:it|test)\s*\(/.test(content);
   if (hasTestBlocks && !hasAssertions) {
     violations.push('Test file contains test blocks but NO expect/assert calls — this is a theater test file');

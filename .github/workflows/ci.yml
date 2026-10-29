@@ -1,9 +1,12 @@
-# Tests every pushed branch, so PRs get checks before merge (static.yml only
-# deploys main and runs no tests).
+# Tests every pushed branch and every pull request, so PRs get checks before
+# merge (static.yml only deploys main and runs no tests). push covers the
+# post-push CI hook; pull_request covers PRs from forks, which push nothing
+# to this repository.
 name: CI
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 permissions:
