@@ -288,9 +288,39 @@ function runHook() {
       process.stdout.write(JSON.stringify({ continue: false, stopReason: report }));
       process.exit(2);
     }
+    // `git diff` can exit 0 with a blob it needs missing from the object
+    // store (seen with git 2.56 on Linux, where 2.51 on Windows fails), so
+    // the exit code alone can't prove the patch is complete. Every blob the
+    // diff reads is checked first. Submodule entries (mode 160000) name
+    // commits in another repository, so they are skipped.
+    function blobsMissing(range) {
+      const raw = readGit(['diff', ...range, '--raw', '--no-abbrev'], 'the changed objects');
+      const oids = [];
+      for (const line of raw.split('\n')) {
+        const m = line.match(/^:(\d+) (\d+) ([0-9a-f]+) ([0-9a-f]+) /);
+        if (!m) continue;
+        if (m[1] !== '160000' && !/^0+$/.test(m[3])) oids.push(m[3]);
+        if (m[2] !== '160000' && !/^0+$/.test(m[4])) oids.push(m[4]);
+      }
+      if (!oids.length) return false;
+      try {
+        const out = execFileSync('git', ['cat-file', '--batch-check'], { cwd: repoDir, input: oids.join('\n') + '\n', encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
+        return / missing$/m.test(out);
+      } catch {
+        return true;
+      }
+    }
     function addDiff(label, range) {
-      const files = readGit(['diff', ...range, '--name-only'], `the ${label} changes`).trim();
-      if (files) parts.push({ label, files, text: readGit(['diff', ...range], `the ${label} changes`) });
+      const what = `the ${label} changes`;
+      const files = readGit(['diff', ...range, '--name-only'], what).trim();
+      if (!files) return;
+      if (blobsMissing(range)) {
+        const report = `PRE-PUSH AUDIT: Could not read ${what} (an object \`git diff ${range.join(' ')}\` needs is missing in ${repoDir}), so they cannot be audited.`;
+        process.stderr.write(report + '\n');
+        process.stdout.write(JSON.stringify({ continue: false, stopReason: report }));
+        process.exit(2);
+      }
+      parts.push({ label, files, text: readGit(['diff', ...range], what) });
     }
 
     addDiff('staged', ['--staged']);
