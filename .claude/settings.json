@@ -1,0 +1,106 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "_purpose": "Block file writes that violate architecture rules defined in config.json (arch_rules)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-arch-boundary.mjs"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "_purpose": "Require description (bash_description_guard) + warn on dependency installs (dep_guard) + validate npm run scripts exist (script_guard) + enforce commit message structure (commit_guard) + pre-push diff audit (push_audit) + block deleting a branch an open PR still bases off (branch_delete_guard) + unconditionally block PR/protected-branch merges (merge_guard) + nudge away from raw grep/find/cat/head/tail (search_guard)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-bash-description.js"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-dep-guard.js"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-script-exists.mjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-commit-message.js"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-merge-guard.js"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-git-push-audit.js"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-branch-delete-guard.js"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-search-command.js"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "_purpose": "Block reads of .env files (env_guard)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-env-guard.js"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "_purpose": "Content validation (content_watch) + theater test detection (empty_test_guard) + TODO format (todo_format)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/validate-content.mjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-empty-tests.mjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-todo-format.mjs"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "_purpose": "After a real git push, block until the matching GitHub Actions run completes and report the real result (ci_status_check) — a local test pass is not proof of a green remote run",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/check-ci-status-after-push.js"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "_purpose": "Print project orientation banner once when a session starts",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/session-start.cjs"
+          }
+        ]
+      }
+    ]
+  }
+}

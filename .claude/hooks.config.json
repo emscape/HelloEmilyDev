@@ -1,0 +1,27 @@
+{
+  "project_name": "HelloEmily.dev",
+  "session_start": {
+    "custom_notes": [
+      "Static site on GitHub Pages: merging to main deploys to production",
+      "Shared header lives in pages/header.html (injected by js/load-header.js)",
+      "Blog posts: blog/<slug>/post-data.json; run npm run blog:validate after editing",
+      "Design tokens: :root in css/style.css; keep text contrast at 4.5:1 or above"
+    ]
+  },
+  "content_watch": {
+    "enabled": true,
+    "path_pattern": "blog/",
+    "file_extensions": [".json"],
+    "validate_command": "npm run blog:validate"
+  },
+  "script_guard": {
+    "enabled": true
+  },
+  "commit_guard": {
+    "enabled": true,
+    "on_violation": "block"
+  },
+  "commands": {
+    "test": "npm test"
+  }
+}

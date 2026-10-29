@@ -1,0 +1,39 @@
+# Tests every pushed branch, so PRs get checks before merge (static.yml only
+# deploys main and runs no tests).
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Blog validation
+        run: npm run blog:validate
+      - name: Hook tests
+        # Some hook tests create commits in temporary repositories.
+        run: |
+          git config --global user.name "CI"
+          git config --global user.email "ci@example.invalid"
+          cd .claude/hooks
+          node --test *.test.js *.test.cjs lib/*.test.cjs
