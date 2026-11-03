@@ -2,7 +2,7 @@
   "posts": [
     {
       "slug": "/blog/spark-site-studio/",
-      "title": "Spark Site Studio:What I Learned Building Offline-Safe AI Tools for Kids",
+      "title": "Spark Site Studio: What I Learned Building Offline-Safe AI Tools for Kids",
       "shortDescription": "Practical lessons from building a safety-first, AI-assisted web development environment for young learners under real device and infrastructure constraints",
       "date": "2026-01-09",
       "tags": [
