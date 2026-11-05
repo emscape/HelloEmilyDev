@@ -55,15 +55,16 @@ const limitProjectsForPage = (projects, pathname) => {
 };
 
 /**
- * Prepares projects for display (sort + limit)
+ * Prepares projects for display (drop hidden + sort + limit)
  * Pure function
- * 
+ *
  * @param {Array<Object>} projects - Raw projects array
  * @param {string} pathname - Window location pathname
  * @returns {Array<Object>} - Prepared projects
  */
 const prepareProjects = (projects, pathname) => {
-  const sorted = sortProjects(projects);
+  const visible = projects.filter(project => project.hidden !== true);
+  const sorted = sortProjects(visible);
   return limitProjectsForPage(sorted, pathname);
 };
 
