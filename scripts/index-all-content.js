@@ -64,6 +64,17 @@ function getBlogPostUrls() {
 }
 
 /**
+ * Map project entries to their URLs, skipping hidden ones (they are not
+ * listed on the site, matching js/project-loader.js)
+ */
+function projectUrls(projects) {
+  return projects.filter(project => project.hidden !== true).map(project => {
+    // Projects use 'id' not 'slug'
+    return `${SITE_BASE_URL}/projects/${project.id}/`;
+  });
+}
+
+/**
  * Get all project URLs
  */
 function getProjectUrls() {
@@ -74,10 +85,7 @@ function getProjectUrls() {
     }
 
     const projectsData = JSON.parse(fs.readFileSync(PATHS.projectsData, 'utf8'));
-    return (projectsData.projects || []).map(project => {
-      // Projects use 'id' not 'slug'
-      return `${SITE_BASE_URL}/projects/${project.id}/`;
-    });
+    return projectUrls(projectsData.projects || []);
   } catch (error) {
     console.error('Error reading projects data:', error.message);
     return [];
@@ -251,7 +259,12 @@ async function main() {
   }
 }
 
-main().catch(error => {
-  console.error('Fatal error:', error.message);
-  process.exit(1);
-});
+module.exports = { projectUrls };
+
+// Only submit when run directly, not when require()'d from a test.
+if (require.main === module) {
+  main().catch(error => {
+    console.error('Fatal error:', error.message);
+    process.exit(1);
+  });
+}
