@@ -455,6 +455,13 @@ test('check-git-push-audit.js reads the project override (README: push_audit)', 
 test('check-commit-message.js reads the project override (README: commit_guard)', async (t) => {
   const BAD = bash('git commit -m "no sections"');
 
+  await t.test('no override: the shared default blocks', () => {
+    withProject(undefined, (p, c) => {
+      const r = runHook('check-commit-message.js', p, c, BAD);
+      assert.equal(r.status, 2, msg('commit guard default', 'commit_guard defaults to enabled + block', 'exit 2', `${r.status} ${r.stderr}`, 'A registered guard must keep blocking unless a project opts out.'));
+    });
+  });
+
   await t.test('override enabled + on_violation=block: blocks', () => {
     withProject({ commit_guard: { enabled: true, on_violation: 'block' } }, (p, c) => {
       const r = runHook('check-commit-message.js', p, c, BAD);
