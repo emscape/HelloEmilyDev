@@ -12,7 +12,7 @@ All behavior is controlled by **`config.json`** — no project logic is hardcode
 |---|---|
 | `config.json` | Shared defaults for the config-aware hooks; two hooks ignore it (see "Hooks that ignore config") (per-project overrides: `<project>/.claude/hooks.config.json`, see "Project-local overrides") |
 | `lib/hook-config.cjs` | Shared loader: reads `config.json` from the hooks directory and merges the optional project-local override over it |
-| `lib/git-command.cjs` | Shared command parser for the git/gh guards (merge, branch-delete, push-audit, CI status): quote-aware segment splitting, env/sudo/`bash -c` unwrapping, path-qualified binaries, git/gh global options such as `git -C "<dir>"`, `$(...)`/backtick substitutions and `( ... )` subshells parsed as commands of their own, and the working directory each command runs in, tracked through `cd`/`pushd` and `git -C` (unknown for `cd "$VAR"`, `cd -` and the like) |
+| `lib/git-command.cjs` | Shared command parser for the git/gh guards (merge, branch-delete, push-audit, CI status): quote-aware segment splitting, env/sudo/`xargs` prefix stripping, `bash -c`/`eval` unwrapping, path-qualified binaries, git/gh global options such as `git -C "<dir>"`, `$(...)`/backtick substitutions and `( ... )` subshells parsed as commands of their own, and the working directory each command runs in, tracked through `cd`/`pushd` and `git -C` (unknown for `cd "$VAR"`, `cd -` and the like) |
 | `check-arch-boundary.mjs` | PreToolUse: block file writes that violate package rules |
 | `check-dep-guard.js` | PreToolUse: warn on dependency installs |
 | `check-script-exists.mjs` | PreToolUse: warn/block when an npm run script doesn't exist; detect no-op commands |
@@ -20,17 +20,19 @@ All behavior is controlled by **`config.json`** — no project logic is hardcode
 | `check-bash-description.js` | PreToolUse: block Bash calls without a description |
 | `check-commit-message.js` | PreToolUse: warn/block each `git commit` (chained, `git -C`, path-qualified, `bash -c`, heredoc-fed) whose message lacks the required markers (default WHY/EXPECTED) |
 | `check-merge-guard.js` | PreToolUse: unconditionally block `gh pr merge`, a merge-REST `PUT`, a local `git merge` on master/main, or a push that lands commits directly on master/main |
-| `check-git-push-audit.js` | PreToolUse: audit a `git push` diff for secrets (blocks), debug statements, commented-out code, lockfile drift, missing tests |
+| `check-git-push-audit.js` | PreToolUse: audit a `git push` diff for secrets (blocks), debug statements, commented-out code, lockfile drift, missing tests. A push that only deletes remote branches sends no commits and is skipped |
 | `check-branch-delete-guard.js` | PreToolUse: block `git push --delete`/`:branch` when an open PR still bases off that branch |
 | `check-search-command.js` | PreToolUse: nudge (or block) raw shell `grep`/`find`/`cat`/`head`/`tail` in favor of dedicated search/read tools |
 | `validate-content.mjs` | PostToolUse: run validation after watched files change |
 | `check-empty-tests.mjs` | PostToolUse: fail when test files have empty blocks or no assertions (Write content, or the file on disk after Edit/MultiEdit) |
 | `check-todo-format.mjs` | PostToolUse: warn/block on non-conforming TODO comment format (Write content, or the file on disk after Edit/MultiEdit) |
 | `check-ci-status-after-push.js` | PostToolUse: after a push, block until the matching GitHub Actions run completes and report the real result |
+| `check-agent-routing.js` | UserPromptSubmit, opt-in (not registered by default): add a workflow reminder to the conversation when a prompt matches a route's keywords; see "Optional: agent routing reminders" |
 | `session-start.sh` | Optional manual wrapper that invokes session-start.cjs (no longer registered in hooks.json) |
 | `session-start.cjs` | SessionStart: loads config through `lib/hook-config.cjs` and prints the project orientation banner (project name defaults to the project directory basename) |
 | `hooks.json` | Human-readable reference copy of the settings.json hooks block |
-| `check-branch-delete-guard.test.js`, `check-merge-guard.test.js`, `check-git-push-audit.test.js`, `check-ci-status-after-push.test.js`, `check-commit-message.test.js`, `check-search-command.test.js`, `lib/git-command.test.cjs` | Behavioral tests for each guard's detection/extraction logic, plus lifecycle tests that run the hook on stdin JSON (the push audit against throwaway git repos) |
+| `check-branch-delete-guard.test.js`, `check-merge-guard.test.js`, `check-git-push-audit.test.js`, `check-ci-status-after-push.test.js`, `check-commit-message.test.js`, `check-env-guard.test.js`, `check-search-command.test.js`, `check-script-exists.test.js`, `check-agent-routing.test.js`, `lib/git-command.test.cjs`, `lib/git-command-wrappers.test.cjs` | Behavioral tests for each guard's detection/extraction logic, plus lifecycle tests that run the hook on stdin JSON (the push audit against throwaway git repos) |
+| `check-merge-guard.hook.test.js` | Runtime tests: run `check-merge-guard.js` with stdin JSON and assert the exit code for `eval`/`xargs`-wrapped merges and pushes, so a parser gap shows up as a hook that lets the command run |
 | `hook-config-integration.test.cjs`, `lib/hook-config.test.cjs` | Tests for the config loader, project-local overrides and hook registration |
 
 Run every test from the hooks directory with `node --test *.test.js *.test.cjs lib/*.test.cjs`. A bare
@@ -63,7 +65,7 @@ keys you want to change (see "Project-local overrides" below). Available keys:
 - `script_guard` — set `enabled: true` to validate npm run scripts before they run
 - `bash_description_guard` — requires terminal command explanations; always on when registered (the hook does not read this setting yet)
 - `env_guard` — blocks `.env` reads; always on when registered (the hook does not read this setting)
-- `commit_guard` — set `enabled: true` to require WHY/EXPECTED (or your `required_markers`) in git commit messages; `on_violation` picks warn or block
+- `commit_guard` — enabled by default in block mode, requires WHY/EXPECTED (or your `required_markers`) in git commit messages; `on_violation` picks warn or block
 - `merge_guard` — enabled by default, unconditionally blocks any command that merges a PR or lands commits on master/main
 - `push_audit` — enabled by default, blocks pushes whose diff contains hardcoded secrets
 - `branch_delete_guard` — enabled by default, blocks deleting a branch a stacked PR still bases off (requires `gh`)
@@ -123,6 +125,19 @@ Merge the `hooks` block from `hooks.json` into your project's `.claude/settings.
     ]
   }
 }
+```
+
+#### Optional: agent routing reminders
+
+`check-agent-routing.js` isn't in the block above: its default keywords (`plan`, `error`, `build`, ...) match most prompts. To use
+it, tailor the keywords and reminders in its `ROUTES` table to the project, then add:
+
+```json
+"UserPromptSubmit": [
+  {
+    "hooks": [{ "type": "command", "command": "node .claude/hooks/check-agent-routing.js" }]
+  }
+]
 ```
 
 ### 4. Verify
@@ -229,8 +244,8 @@ Block reads of `.env` files:
 ```
 
 No fields beyond `enabled`, and `check-env-guard.js` does not read config at all, so the block is
-unconditional today and the `enabled` flag has no effect. Blocks (exit 2) any `Read` call whose file path matches `.env` or
-`.env.*`. Environment files carry secrets and must never be read into context.
+unconditional today and the `enabled` flag has no effect. Blocks (exit 2) any `Read` call whose file name matches `.env` or
+`.env.*`, compared case-insensitively (`.ENV` opens the same file on Windows and macOS). Environment files carry secrets and must never be read into context.
 
 ---
 
@@ -451,8 +466,8 @@ Validate npm run scripts before they execute:
 }
 ```
 
-- `package_json_paths` — list of package.json files to check for script names (extend for monorepos)
-- `on_missing` — `"warn"` prints to stderr and exits 0; `"block"` exits 1 and stops the command
+- `package_json_paths` — list of package.json files to check for script names, relative to the project directory (`CLAUDE_PROJECT_DIR`); extend for monorepos
+- `on_missing` — `"warn"` prints to stderr and exits 0; `"block"` exits 2 and stops the command
 - Also detects trivial no-op commands (`true`, `exit 0`, empty echo) regardless of `enabled`
 
 ---
@@ -463,9 +478,9 @@ Require WHY/EXPECTED sections in every commit message:
 
 ```json
 "commit_guard": {
-  "enabled": false,
+  "enabled": true,
   "required_markers": ["WHY:", "EXPECTED:"],
-  "on_violation": "warn"
+  "on_violation": "block"
 }
 ```
 
@@ -475,7 +490,8 @@ Require WHY/EXPECTED sections in every commit message:
 Every `git commit` in a Bash call is checked on its own — chained commands, `git -C <dir>` and
 other git global options, a path-qualified `git`, and `bash -c "..."` wrappers — and a heredoc
 message body (`git commit -F - <<'EOF'`) counts as part of its commit. Markers in a different
-command of the chain don't count.
+command of the chain don't count. If the shared config can't be read, the defaults apply and the
+guard blocks.
 
 ---
 
@@ -635,7 +651,8 @@ Claude Code invokes each registered command when the matching tool is used.
 - `check-arch-boundary.mjs` checks the file **as it will be after the write**: Write content, or for Edit/MultiEdit the current file with the replacements applied. Any edit to a file that already has a violation is therefore blocked until the violation is fixed, while files that aren't touched are never checked.
 - `forbidden_content_pattern` is a simple regex heuristic — it can produce false positives in test files or comments.
 - Hooks run in the **project root** working directory. Relative paths in `validate_command` are resolved from there.
-- **Mixed module system**: `check-branch-delete-guard.js`, `check-ci-status-after-push.js`, `check-env-guard.js`, `check-git-push-audit.js`, and `check-merge-guard.js` are CommonJS (`require`); `check-dep-guard.js` and `check-search-command.js` were converted to CommonJS too (see changelog below). `check-arch-boundary.mjs`, `check-empty-tests.mjs`, `check-script-exists.mjs`, `check-todo-format.mjs`, and `validate-content.mjs` use ESM `import`, so they carry the `.mjs` extension: Node then loads them as ESM whatever the nearest `package.json` `"type"` says. As `.js` files they would crash in a project whose `package.json` has `"type": "commonjs"`.
+- **Mixed module system**: `check-branch-delete-guard.js`, `check-ci-status-after-push.js`, `check-env-guard.js`, `check-git-push-audit.js`, and `check-merge-guard.js` are CommonJS (`require`); `check-dep-guard.js` and `check-search-command.js` were converted to CommonJS too (see changelog below). `check-arch-boundary.mjs`, `check-empty-tests.mjs`, `check-script-exists.mjs`, `check-todo-format.mjs`, and `validate-content.mjs` use ESM `import`, so they carry the `.mjs` extension: Node then loads them as ESM whatever the nearest `package.json` `"type"` says. As `.js` files they would crash in a project whose `package.json` has `"type": "commonjs"`, which turns off Node's module-syntax detection.
+- **Shell indirection the guards cannot see**: `eval` and `xargs` are unwrapped, but a command built at run time (`eval "$CMD"`, `$CMD`), a script that pushes internally, and `xargs` long options that take a separate value beyond `--max-args`, `--max-procs`, `--max-lines`, `--max-chars`, `--delimiter`, `--eof` and `--arg-file` are not detected. Also undetected: an `xargs` option value that is itself quoted and contains a space (`xargs -E"a b" git push`), and a quoted command word that contains a space other than a path to `git`/`gh`. Refs piped in on stdin are not known to the audit, so `git branch --list | xargs git push origin` audits `HEAD~1..HEAD`; only the `{}` placeholder form (`xargs -I{} git push origin {}`) is detected and blocked, because its ref cannot be resolved. `eval` runs in the current shell, so a `cd` inside it carries to later commands, unlike `bash -c`, whose `cd` does not.
 
 ---
 
@@ -652,6 +669,17 @@ Claude Code invokes each registered command when the matching tool is used.
 
 ## Changelog
 
+- Fixes ported from a project's adoption of this template:
+  - The five ESM hooks are renamed to `.mjs`, since as `.js` they crash under `"type": "commonjs"`.
+  - `check-commit-message.js` reads `commit_guard`: `enabled`, `required_markers` and `on_violation`, with block on by default. It also checks every `git commit` in a chain, wrapper or heredoc.
+  - `check-git-push-audit.js` honors `push_audit.enabled`. Before trusting `git diff`, it also checks that every blob the diff needs exists, because `git diff` can exit 0 with a blob missing.
+  - `check-ci-status-after-push.js` kills `gh run watch` at `completion_timeout_seconds`.
+  - `check-arch-boundary.mjs` applies Edit/MultiEdit replacements to the current file before checking it.
+  - `check-empty-tests.mjs` and `check-todo-format.mjs` read the file from disk after an Edit/MultiEdit, and `assert.<method>(...)` now counts as an assertion.
+  - `check-env-guard.js` compares file names case-insensitively.
+  - The adversarial-coder, constitutional-fix and test-driven-development skills no longer commit without the user's approval. `test-driven-development/Skill.md` is renamed to `SKILL.md`.
+
+- `eval` and `xargs` wrappers are now seen through by the git/gh guards. `eval "git push origin main"` is analyzed like `bash -c`, and `xargs [options] git push ...` (including clustered short options such as `-rt`, `-rn1` and `-0I{}`, and attached long options) exposes the inner command, so neither form is a silent bypass of the merge, branch-delete, push-audit or CI-status guards. `eval` runs all of its arguments after quote removal (`eval "git push" origin +main` keeps the refspec), and a quoted or backslash-escaped command word or wrapper option (`"eval"`, `'sudo'`, `g\it`, `xargs '-r'`) is matched by its unquoted spelling. An unquoted Windows path such as `C:\Git\bin\git.exe` keeps its backslashes as separators. ANSI-C quoting (`eval $'git push origin main'`) and backslash-newline line continuations are unquoted the way the shell does it, `xargs.exe` is recognised, and xargs `-R`, `-J` and `-S` take a separate value.
 - Command parsing for the git/gh guards moved into `lib/git-command.cjs`. `check-branch-delete-guard.js`, `check-ci-status-after-push.js`, and `check-git-push-audit.js` previously recognized only a subset of the push forms `check-merge-guard.js` handled, so `sudo git push`, `/usr/bin/git push`, and `git -C <dir> push` skipped them. All four now share one parser. Option values are matched as whole shell words, so `git -C "C:\Work Tree" push origin main` is no longer cut off at the space, and prefixes are stripped before shell wrappers are unwrapped, so `env bash -c "gh pr merge 27"` is caught.
 - `check-git-push-audit.js` generic secret floors restored to 8 characters (credentials) and 4 (passwords), from 20 and 12. Test fixtures that trip them use the existing trailing `// nosecret` marker.
 

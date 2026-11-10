@@ -1,6 +1,6 @@
 // check-commit-message.test.js
 // Behavioral tests for the commit-message guard's detection logic — run
-// with `node --test .claude/hooks/*.test.js`.
+// with `node --test *.test.js *.test.cjs lib/*.test.cjs` from the hooks directory.
 //
 // check-commit-message.js only runs its stdin-driven hook lifecycle when
 // executed directly (`require.main === module`), so requiring it here is
